@@ -4,7 +4,6 @@ const ctx = canvas.getContext('2d');
 let particlesArray;
 let animationFrameId;
 
-// Resize handling
 function resizeCanvas() {
     const parent = canvas.parentElement;
     canvas.width = parent.clientWidth;
@@ -30,13 +29,12 @@ canvas.addEventListener('mouseleave', () => {
     mouse.y = null;
 });
 
-// Click "Burst"
 canvas.addEventListener('click', (event) => {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
     for (let i = 0; i < 6; i++) {
-        particlesArray.push(new Particle(x, y, (Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, Math.random() * 3 + 2, '#ffffff'));
+        particlesArray.push(new Particle(x, y, (Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, Math.random() * 3 + 2, '#0f172a')); // Dark Navy Sparks
     }
 });
 
@@ -57,22 +55,16 @@ class Particle {
 
     draw() {
         ctx.beginPath();
-        // Star/Diamond shape
         ctx.moveTo(this.x, this.y - this.size);
         ctx.lineTo(this.x + this.size, this.y);
         ctx.lineTo(this.x, this.y + this.size);
         ctx.lineTo(this.x - this.size, this.y);
         ctx.closePath();
 
-        ctx.globalAlpha = 0.5 + Math.sin(this.angle) * 0.5;
+        ctx.globalAlpha = 0.5 + Math.sin(this.angle) * 0.4;
         ctx.fillStyle = this.color;
 
-        // localized glow
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = this.color;
-        ctx.fill();
-
-        ctx.shadowBlur = 0;
+        ctx.fill(); // No shadowBlur for clean print look? Or slight shadow?
         ctx.globalAlpha = 1;
     }
 
@@ -83,7 +75,6 @@ class Particle {
         if (Math.abs(this.directionX) > 0.5) this.directionX *= 0.96;
         if (Math.abs(this.directionY) > 0.5) this.directionY *= 0.96;
 
-        // Mouse interaction
         if (mouse.x != null) {
             let dx = mouse.x - this.x;
             let dy = mouse.y - this.y;
@@ -108,21 +99,17 @@ function init() {
     particlesArray = [];
     let numberOfParticles = (canvas.height * canvas.width) / 6000;
 
-    // OFF-WHITE / CREAM PALETTE (No Yellow, No Blue)
-    // Pure White, Silver, Platinum, very light Grey
-    const colors = ['#ffffff', '#f8fafc', '#e2e8f0', '#cbd5e1'];
+    // DARK NAVY PALETTE for Cream Background
+    // Slate-900, Slate-700, Blue-900
+    const colors = ['#0f172a', '#334155', '#1e3a8a'];
 
     for (let i = 0; i < numberOfParticles; i++) {
         let size = (Math.random() * 2) + 1;
         let x = Math.random() * canvas.width;
         let y = Math.random() * canvas.height;
-
-        // Graceful float
         let directionX = (Math.random() * 0.4) - 0.2;
         let directionY = (Math.random() * 0.4) - 0.2;
-
         let color = colors[Math.floor(Math.random() * colors.length)];
-
         particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
     }
 }
@@ -137,8 +124,8 @@ function connect() {
             if (distance < 10000) {
                 let opacity = 1 - (distance / 10000);
 
-                // White lines
-                ctx.strokeStyle = "rgba(255,255,255," + (opacity * 0.15) + ")";
+                // Dark Navy lines (Slate-800)
+                ctx.strokeStyle = "rgba(30, 41, 59," + (opacity * 0.15) + ")";
 
                 ctx.lineWidth = 1;
                 ctx.beginPath();
