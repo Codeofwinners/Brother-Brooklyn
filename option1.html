@@ -40,15 +40,27 @@
         video,
         video:focus,
         video:active,
-        video:hover {
+        video:hover,
+        video:focus-visible,
+        video:focus-within {
             outline: none !important;
             border: none !important;
             box-shadow: none !important;
             -webkit-tap-highlight-color: transparent !important;
+            -webkit-appearance: none !important;
         }
 
-        video::-webkit-media-controls {
+        video::-webkit-media-controls,
+        video::-webkit-media-controls-enclosure,
+        video::-webkit-media-controls-panel {
             outline: none !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        video::-webkit-media-controls-enclosure {
+            border-radius: 0.5rem !important;
+            overflow: hidden !important;
         }
     </style>
 </head>
