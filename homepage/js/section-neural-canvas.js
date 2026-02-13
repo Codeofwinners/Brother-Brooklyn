@@ -34,7 +34,10 @@ canvas.addEventListener('click', (event) => {
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
     for (let i = 0; i < 6; i++) {
-        particlesArray.push(new Particle(x, y, (Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, Math.random() * 3 + 2, '#0f172a')); // Dark Navy Sparks
+        // Burst with colorful sparks
+        const sparkColors = ['#7c3aed', '#d97706', '#0891b2'];
+        let color = sparkColors[Math.floor(Math.random() * sparkColors.length)];
+        particlesArray.push(new Particle(x, y, (Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, Math.random() * 3 + 2, color));
     }
 });
 
@@ -49,7 +52,6 @@ class Particle {
         this.color = color;
         this.angle = Math.random() * 6.2;
         this.blinkSpeed = 0.005 + Math.random() * 0.01;
-        this.opacity = Math.random();
         this.friction = 0.98;
     }
 
@@ -61,10 +63,10 @@ class Particle {
         ctx.lineTo(this.x - this.size, this.y);
         ctx.closePath();
 
-        ctx.globalAlpha = 0.5 + Math.sin(this.angle) * 0.4;
+        ctx.globalAlpha = 0.6 + Math.sin(this.angle) * 0.4;
         ctx.fillStyle = this.color;
 
-        ctx.fill(); // No shadowBlur for clean print look? Or slight shadow?
+        ctx.fill();
         ctx.globalAlpha = 1;
     }
 
@@ -99,12 +101,12 @@ function init() {
     particlesArray = [];
     let numberOfParticles = (canvas.height * canvas.width) / 6000;
 
-    // DARK NAVY PALETTE for Cream Background
-    // Slate-900, Slate-700, Blue-900
-    const colors = ['#0f172a', '#334155', '#1e3a8a'];
+    // VIBRANT DEEP COLORS for Cream Background
+    // Deep Violet, Teal, Royal Blue, Amber/Gold
+    const colors = ['#7c3aed', '#0891b2', '#2563eb', '#d97706'];
 
     for (let i = 0; i < numberOfParticles; i++) {
-        let size = (Math.random() * 2) + 1;
+        let size = (Math.random() * 2.5) + 1.5; // Slightly larger to POP
         let x = Math.random() * canvas.width;
         let y = Math.random() * canvas.height;
         let directionX = (Math.random() * 0.4) - 0.2;
@@ -124,8 +126,8 @@ function connect() {
             if (distance < 10000) {
                 let opacity = 1 - (distance / 10000);
 
-                // Dark Navy lines (Slate-800)
-                ctx.strokeStyle = "rgba(30, 41, 59," + (opacity * 0.15) + ")";
+                // Light Grey Lines (Black with low opacity)
+                ctx.strokeStyle = "rgba(0, 0, 0," + (opacity * 0.08) + ")";
 
                 ctx.lineWidth = 1;
                 ctx.beginPath();
