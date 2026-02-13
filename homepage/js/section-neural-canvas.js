@@ -18,7 +18,7 @@ resizeCanvas();
 let mouse = {
     x: null,
     y: null,
-    radius: (canvas.height / 80) * (canvas.width / 80)
+    radius: (canvas.height / 60) * (canvas.width / 60)
 }
 
 canvas.addEventListener('mousemove', (event) => {
@@ -34,7 +34,7 @@ canvas.addEventListener('mouseleave', () => {
 
 window.addEventListener('resize', () => {
     resizeCanvas();
-    mouse.radius = (canvas.height / 80) * (canvas.width / 80);
+    mouse.radius = (canvas.height / 60) * (canvas.width / 60);
     init();
 });
 
@@ -46,15 +46,23 @@ class Particle {
         this.directionX = directionX;
         this.directionY = directionY;
         this.size = size;
+        this.baseSize = size;
         this.color = color;
+        this.angle = Math.random() * Math.PI * 2; // For pulsing
     }
 
     // Method to draw individual particle
     draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-        ctx.fillStyle = '#308ce8'; // Primary Brand Blue
+        ctx.fillStyle = this.color;
+
+        // Glow effect
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
+
         ctx.fill();
+        ctx.shadowBlur = 0; // Reset
     }
 
     // Check particle position, check mouse position, move the particle, draw the particle
@@ -65,6 +73,10 @@ class Particle {
         if (this.y > canvas.height || this.y < 0) {
             this.directionY = -this.directionY;
         }
+
+        // Pulse size
+        this.angle += 0.05;
+        this.size = this.baseSize + Math.sin(this.angle) * 0.5;
 
         // check collision detection - mouse position / particle position
         // Only if mouse is on canvas
@@ -98,14 +110,21 @@ class Particle {
 function init() {
     particlesArray = [];
     // Adjust density: fewer particles for smaller area
-    let numberOfParticles = (canvas.height * canvas.width) / 10000;
+    let numberOfParticles = (canvas.height * canvas.width) / 9000;
+
+    // Neuro colors: Cyan, Purple, Blue
+    const colors = ['#00e5ff', '#bd00ff', '#308ce8'];
+
     for (let i = 0; i < numberOfParticles; i++) {
-        let size = (Math.random() * 2) + 1;
+        let size = (Math.random() * 2.5) + 1; // Slightly larger max size
         let x = (Math.random() * ((canvas.width - size * 2) - (size * 2)) + size * 2);
         let y = (Math.random() * ((canvas.height - size * 2) - (size * 2)) + size * 2);
-        let directionX = (Math.random() * 0.4) - 0.2;
-        let directionY = (Math.random() * 0.4) - 0.2;
-        let color = '#308ce8';
+
+        // Faster movement for "alive" feel
+        let directionX = (Math.random() * 1) - 0.5;
+        let directionY = (Math.random() * 1) - 0.5;
+
+        let color = colors[Math.floor(Math.random() * colors.length)];
 
         particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
     }
@@ -119,9 +138,20 @@ function connect() {
             let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
                 + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
             if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                opacityValue = 1 - (distance / 15000);
-                // Draw lighter blue lines for "synapses"
-                ctx.strokeStyle = 'rgba(48, 140, 232,' + opacityValue + ')';
+                opacityValue = 1 - (distance / 18000);
+
+                // Use the color of particle A for the line
+                ctx.strokeStyle = particlesArray[a].color.replace(')', `, ${opacityValue})`).replace('rgb', 'rgba').replace('#', '');
+
+                // Quick hex to rgba conversion for lines
+                const hex = particlesArray[a].color;
+                if (hex.startsWith('#')) {
+                    const r = parseInt(hex.slice(1, 3), 16);
+                    const g = parseInt(hex.slice(3, 5), 16);
+                    const b = parseInt(hex.slice(5, 7), 16);
+                    ctx.strokeStyle = `rgba(${r},${g},${b},${opacityValue})`;
+                }
+
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -136,6 +166,9 @@ function connect() {
 function animate() {
     animationFrameId = requestAnimationFrame(animate);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Slight additive blending for neon vibe
+    // ctx.globalCompositeOperation = 'screen'; 
 
     for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
