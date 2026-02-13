@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Free Course: The Superpower at Home — Brother Brooklyn Academy</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#308ce8",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .lesson-card {
+            transition: all 0.3s ease;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .quiz-option {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .quiz-option:hover {
+            border-color: #308ce8;
+            background: rgba(48, 140, 232, 0.05);
+        }
+
+        .quiz-option.selected {
+            border-color: #308ce8;
+            background: rgba(48, 140, 232, 0.1);
+        }
+
+        .quiz-option.correct {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .quiz-option.wrong {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .progress-step.active {
+            background: #308ce8;
+            color: white;
+        }
+
+        .progress-step.completed {
+            background: #22c55e;
+            color: white;
+        }
+
+        .lesson-section {
+            display: none;
+        }
+
+        .lesson-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(48, 140, 232, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(48, 140, 232, 0.6);
+            }
+        }
+
+        .glow-pulse {
+            animation: pulse-glow 2s ease infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light font-display antialiased min-h-screen">
+    <!-- Top Navigation -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 px-4 md:px-8 py-3">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="option1.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <div
+                    class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-primary/30">
+                    B
+                </div>
+                <span class="font-bold text-slate-900">Brother Brooklyn <span
+                        class="text-slate-400 font-normal">Academy</span></span>
+            </a>
+            <div class="flex items-center gap-3">
+                <span
+                    class="hidden sm:inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                    FREE COURSE
+                </span>
+                <a href="option1.html"
+                    class="text-sm text-slate-500 hover:text-primary transition-colors flex items-center gap-1">
+                    <span class="material-icons-outlined text-base">arrow_back</span>
+                    Back to Academy
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Course Hero -->
+    <section class="relative bg-slate-900 overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] animate-pulse"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] animate-pulse"
+                style="animation-delay: 1s;"></div>
+        </div>
+        <div class="relative z-10 max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
+            <div class="flex flex-col lg:flex-row items-center gap-10">
+                <div class="flex-1 space-y-6">
+                    <div class="flex flex-wrap items-center gap-3">
+                        <span
+                            class="inline-flex items-center gap-2 px-3 py-1 bg-green-500/20 border border-green-500/30 rounded-full text-xs font-bold text-green-400 uppercase tracking-wider">
+                            <span class="material-icons-outlined text-sm">lock_open</span>
+                            Free Course
+                        </span>
+                        <span
+                            class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/10 rounded-full text-xs font-medium text-slate-300">
+                            <span class="material-icons-outlined text-sm">schedule</span>
+                            15 min read
+                        </span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1]">
+                        Defense Wins<br>
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Championships.</span>
+                    </h1>
+                    <p class="text-xl text-slate-300 font-light leading-relaxed max-w-lg">
+                        The <strong class="text-white">"Superpower at Home"</strong> Brief: A Parent & Caregiver Guide
+                        to stopping violence by understanding the brain.
+                    </p>
+                    <div class="flex items-center gap-4 pt-2">
+                        <img alt="Brother Brooklyn" class="w-12 h-12 rounded-full border-2 border-white/20 object-cover"
+                            src="https://bayareaweb.design/brother-brooklyn/onboarding/uploads/2026-02-11_225606/headshots/2BE_383_1124_3316717001_2_2.jpg" />
+                        <div>
+                            <p class="text-white font-semibold">Brother Brooklyn</p>
+                            <p class="text-slate-400 text-sm">Neuro-Theologian • Rodney Coley</p>
+                        </div>
+                    </div>
+                    <button onclick="startCourse()"
+                        class="px-8 py-4 bg-primary hover:bg-blue-600 text-white font-bold rounded-xl transition-all shadow-[0_10px_20px_-10px_rgba(48,140,232,0.5)] hover:-translate-y-1 flex items-center gap-2 text-lg glow-pulse">
+                        Start the Course
+                        <span class="material-icons-outlined">play_arrow</span>
+                    </button>
+                </div>
+                <div class="hidden lg:block w-80">
+                    <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 space-y-4">
+                        <h3 class="text-white font-bold text-lg">What You'll Learn</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <span class="material-icons-outlined text-red-400 text-lg mt-0.5">shield_moon</span>
+                                <p class="text-slate-300 text-sm">Why homes get stuck in "Survival Mode"</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="material-icons-outlined text-blue-400 text-lg mt-0.5">people</span>
+                                <p class="text-slate-300 text-sm">The Mirror Neuron Effect on children</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="material-icons-outlined text-green-400 text-lg mt-0.5">science</span>
+                                <p class="text-slate-300 text-sm">How to balance brain chemistry at home</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span
+                                    class="material-icons-outlined text-purple-400 text-lg mt-0.5">record_voice_over</span>
+                                <p class="text-slate-300 text-sm">A new language for your family</p>
+                            </div>
+                        </div>
+                        <div class="border-t border-white/10 pt-4 mt-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-slate-400">Includes</span>
+                                <span class="text-white font-semibold">4 Lessons + Quiz</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Progress Bar -->
+    <div id="course-progress" class="bg-white border-b border-slate-200 sticky top-[53px] z-40 hidden">
+        <div class="max-w-6xl mx-auto px-4 md:px-8 py-3">
+            <div class="flex items-center gap-2 md:gap-4 overflow-x-auto">
+                <button onclick="goToSection(0)"
+                    class="progress-step active flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-slate-100 text-slate-500 transition-all">
+                    <span
+                        class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] bg-current/20">1</span>
+                    <span class="hidden sm:inline">Survival Home</span>
+                </button>
+                <div class="w-6 h-0.5 bg-slate-200 flex-shrink-0"></div>
+                <button onclick="goToSection(1)"
+                    class="progress-step flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-slate-100 text-slate-500 transition-all">
+                    <span
+                        class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] bg-current/20">2</span>
+                    <span class="hidden sm:inline">Mirror Effect</span>
+                </button>
+                <div class="w-6 h-0.5 bg-slate-200 flex-shrink-0"></div>
+                <button onclick="goToSection(2)"
+                    class="progress-step flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-slate-100 text-slate-500 transition-all">
+                    <span
+                        class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] bg-current/20">3</span>
+                    <span class="hidden sm:inline">Chemical Support</span>
+                </button>
+                <div class="w-6 h-0.5 bg-slate-200 flex-shrink-0"></div>
+                <button onclick="goToSection(3)"
+                    class="progress-step flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-slate-100 text-slate-500 transition-all">
+                    <span
+                        class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] bg-current/20">4</span>
+                    <span class="hidden sm:inline">New Language</span>
+                </button>
+                <div class="w-6 h-0.5 bg-slate-200 flex-shrink-0"></div>
+                <button onclick="goToSection(4)"
+                    class="progress-step flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-slate-100 text-slate-500 transition-all">
+                    <span class="material-icons-outlined text-sm">quiz</span>
+                    <span class="hidden sm:inline">Quiz</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Content -->
+    <div id="course-content" class="max-w-4xl mx-auto px-4 md:px-8 py-10 space-y-8 hidden">
+
+        <!-- Intro -->
+        <div class="bg-blue-50 border border-blue-100 rounded-xl p-6 md:p-8 fade-in">
+            <div class="flex items-start gap-4">
+                <span class="material-icons-outlined text-primary text-3xl mt-1">info</span>
+                <div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-2">Why This Matters</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        To stop the violence in Oakland, we need the <strong>whole house on the same frequency</strong>.
+                        If a young person is trying to "upgrade their brain" but the home environment is stuck in
+                        "survival mode," the old roads stay paved.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed mt-3">
+                        This guide helps families understand that the behavior they see at the kitchen table is often
+                        just <strong class="text-primary">biology in disguise</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- LESSON 1 -->
+        <section id="lesson-1" class="lesson-section active fade-in">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <!-- Lesson Header -->
+                <div class="bg-gradient-to-r from-red-500 to-orange-500 p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full">LESSON 1</span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+                        <span class="material-icons-outlined text-3xl">shield_moon</span>
+                        Understanding the "Survival Home"
+                    </h2>
+                </div>
+                <!-- Lesson Body -->
+                <div class="p-6 md:p-8 space-y-8">
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        Living in high-stress areas of Oakland means the whole family might be soaked in <strong
+                            class="text-slate-900">Cortisol</strong>.
+                    </p>
+
+                    <!-- The Symptom -->
+                    <div class="bg-red-50 border-l-4 border-red-400 rounded-r-xl p-5">
+                        <h4 class="font-bold text-red-800 flex items-center gap-2 mb-2">
+                            <span class="material-icons-outlined">warning</span>
+                            The Symptom
+                        </h4>
+                        <p class="text-red-700">Short tempers, constant arguing, or "shutting down" (the
+                            <strong>Freeze</strong>).</p>
+                    </div>
+
+                    <!-- The Neuro-Truth -->
+                    <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-xl p-5">
+                        <h4 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
+                            <span class="material-icons-outlined">psychology</span>
+                            The Neuro-Truth
+                        </h4>
+                        <p class="text-blue-700">This isn't just "attitude." It's <strong>Hypervigilance</strong>. When
+                            the brain feels unsafe outside, it struggles to turn the "Alarm" (the
+                            <strong>Amygdala</strong>) off inside.</p>
+                    </div>
+
+                    <!-- The Support -->
+                    <div class="bg-green-50 border-l-4 border-green-400 rounded-r-xl p-5">
+                        <h4 class="font-bold text-green-800 flex items-center gap-2 mb-2">
+                            <span class="material-icons-outlined">favorite</span>
+                            The Support
+                        </h4>
+                        <p class="text-green-700">Don't take the "attitude" personally. It's a <strong>chemical
+                                spike</strong>.</p>
+                    </div>
+
+                    <!-- Key Takeaway -->
+                    <div class="bg-slate-900 rounded-xl p-6 text-center">
+                        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Key Takeaway</p>
+                        <p class="text-white text-lg font-medium italic">"When the brain feels unsafe outside, the Alarm
+                            stays locked ON inside."</p>
+                    </div>
+
+                    <div class="flex justify-end pt-4">
+                        <button onclick="nextSection()"
+                            class="px-8 py-3 bg-primary hover:bg-blue-600 text-white font-bold rounded-xl transition-all hover:-translate-y-1 flex items-center gap-2 shadow-md">
+                            Next: The Mirror Effect
+                            <span class="material-icons-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 2 -->
+        <section id="lesson-2" class="lesson-section fade-in">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-500 to-cyan-500 p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full">LESSON 2</span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+                        <span class="material-icons-outlined text-3xl">people</span>
+                        The "Mirror Neuron" Effect
+                    </h2>
+                </div>
+                <div class="p-6 md:p-8 space-y-8">
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        Children and young adults are <strong class="text-slate-900">"Biological Mirrors."</strong> They
+                        don't do what you say; they do what you <strong>do</strong>.
+                    </p>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-400 rounded-r-xl p-5">
+                        <h4 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
+                            <span class="material-icons-outlined">science</span>
+                            The Science
+                        </h4>
+                        <p class="text-blue-700">Your <strong>Mirror Neurons</strong> are always watching. If you react
+                            to stress with shouting, their brain "copy-pastes" that as the only way to handle pressure.
+                        </p>
+                    </div>
+
+                    <div class="bg-green-50 border-l-4 border-green-400 rounded-r-xl p-5">
+                        <h4 class="font-bold text-green-800 flex items-center gap-2 mb-2">
+                            <span class="material-icons-outlined">favorite</span>
+                            The Support
+                        </h4>
+                        <p class="text-green-700">Model the <strong>"Circuit Breaker."</strong> When things get heated,
+                            say:</p>
+                        <blockquote
+                            class="mt-3 bg-white rounded-lg p-4 border border-green-200 text-green-800 italic font-medium">
+                            "I'm feeling a Cortisol spike right now. I'm going to take my 4-4-4 breaths so my 'Common
+                            Sense' can stay in charge."
+                        </blockquote>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-xl p-6 text-center">
+                        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Key Takeaway</p>
+                        <p class="text-white text-lg font-medium italic">"They don't do what you say — they do what you
+                            DO."</p>
+                    </div>
+
+                    <div class="flex justify-between pt-4">
+                        <button onclick="prevSection()"
+                            class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all flex items-center gap-2">
+                            <span class="material-icons-outlined">arrow_back</span>
+                            Previous
+                        </button>
+                        <button onclick="nextSection()"
+                            class="px-8 py-3 bg-primary hover:bg-blue-600 text-white font-bold rounded-xl transition-all hover:-translate-y-1 flex items-center gap-2 shadow-md">
+                            Next: Chemical Support
+                            <span class="material-icons-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 3 -->
+        <section id="lesson-3" class="lesson-section fade-in">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-gradient-to-r from-green-500 to-emerald-500 p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full">LESSON 3</span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+                        <span class="material-icons-outlined text-3xl">science</span>
+                        Feeding the "Superpower"
+                    </h2>
+                </div>
+                <div class="p-6 md:p-8 space-y-8">
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        You can help balance your child's brain chemistry <strong class="text-slate-900">without a
+                            doctor's visit</strong>:
+                    </p>
+
+                    <!-- 3 Chemical Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 text-center">
+                            <div
+                                class="w-14 h-14 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-3">
+                                <span class="material-icons-outlined text-amber-600 text-2xl">emoji_events</span>
+                            </div>
+                            <h4 class="font-bold text-amber-800 mb-1">Serotonin</h4>
+                            <p class="text-xs text-amber-600 font-semibold uppercase tracking-wider mb-2">Status /
+                                Belonging</p>
+                            <p class="text-sm text-amber-700">Give them genuine "Status" at home. Praise their
+                                <strong>effort</strong>, not just results. Let them know they're a vital part of the
+                                "Family Tribe."</p>
+                        </div>
+                        <div class="bg-pink-50 border border-pink-200 rounded-xl p-5 text-center">
+                            <div
+                                class="w-14 h-14 mx-auto bg-pink-100 rounded-full flex items-center justify-center mb-3">
+                                <span class="material-icons-outlined text-pink-600 text-2xl">favorite</span>
+                            </div>
+                            <h4 class="font-bold text-pink-800 mb-1">Oxytocin</h4>
+                            <p class="text-xs text-pink-600 font-semibold uppercase tracking-wider mb-2">Bonding /
+                                Safety</p>
+                            <p class="text-sm text-pink-700">Physical safety and emotional warmth lower stress. A
+                                <strong>"no-judgment" conversation</strong> for 5 minutes a day flushes out a day's
+                                street cortisol.</p>
+                        </div>
+                        <div class="bg-sky-50 border border-sky-200 rounded-xl p-5 text-center">
+                            <div
+                                class="w-14 h-14 mx-auto bg-sky-100 rounded-full flex items-center justify-center mb-3">
+                                <span class="material-icons-outlined text-sky-600 text-2xl">bolt</span>
+                            </div>
+                            <h4 class="font-bold text-sky-800 mb-1">Dopamine</h4>
+                            <p class="text-xs text-sky-600 font-semibold uppercase tracking-wider mb-2">Motivation</p>
+                            <p class="text-sm text-sky-700">Celebrate the <strong>"Micro-Wins."</strong> If they walked
+                                away from a fight, that's a championship win for their brain.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-xl p-6 text-center">
+                        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Key Takeaway</p>
+                        <p class="text-white text-lg font-medium italic">"Every micro-win is a championship win for the
+                            brain."</p>
+                    </div>
+
+                    <div class="flex justify-between pt-4">
+                        <button onclick="prevSection()"
+                            class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all flex items-center gap-2">
+                            <span class="material-icons-outlined">arrow_back</span>
+                            Previous
+                        </button>
+                        <button onclick="nextSection()"
+                            class="px-8 py-3 bg-primary hover:bg-blue-600 text-white font-bold rounded-xl transition-all hover:-translate-y-1 flex items-center gap-2 shadow-md">
+                            Next: New Language
+                            <span class="material-icons-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LESSON 4 -->
+        <section id="lesson-4" class="lesson-section fade-in">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-gradient-to-r from-purple-500 to-pink-500 p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full">LESSON 4</span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+                        <span class="material-icons-outlined text-3xl">record_voice_over</span>
+                        Home Vocabulary: The New Language
+                    </h2>
+                </div>
+                <div class="p-6 md:p-8 space-y-8">
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        Instead of <strong class="text-slate-900">"Why are you acting out?"</strong>, try these
+                        <strong>Neuro-Questions</strong>:
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="bg-purple-50 border border-purple-200 rounded-xl p-5 flex items-start gap-4">
+                            <span class="material-icons-outlined text-purple-500 text-2xl mt-0.5">chat_bubble</span>
+                            <p class="text-purple-800 text-lg font-medium italic">"Is your <strong>Lizard Brain</strong>
+                                (Amygdala) talking to me right now, or is it <strong>YOU</strong> (PFC)?"</p>
+                        </div>
+                        <div class="bg-purple-50 border border-purple-200 rounded-xl p-5 flex items-start gap-4">
+                            <span class="material-icons-outlined text-purple-500 text-2xl mt-0.5">chat_bubble</span>
+                            <p class="text-purple-800 text-lg font-medium italic">"Do you need a minute to <strong>flush
+                                    the Cortisol</strong> before we talk?"</p>
+                        </div>
+                        <div class="bg-purple-50 border border-purple-200 rounded-xl p-5 flex items-start gap-4">
+                            <span class="material-icons-outlined text-purple-500 text-2xl mt-0.5">chat_bubble</span>
+                            <p class="text-purple-800 text-lg font-medium italic">"What <strong>New Road</strong> are
+                                you trying to build today? How can I help you pave it?"</p>
+                        </div>
+                    </div>
+
+                    <!-- Family Pledge -->
+                    <div class="relative bg-slate-900 rounded-2xl p-8 md:p-10 overflow-hidden text-center">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 via-purple-900/40 to-primary/20">
+                        </div>
+                        <div class="absolute inset-0 opacity-10"
+                            style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;">
+                        </div>
+                        <div class="relative z-10 max-w-2xl mx-auto">
+                            <span class="material-icons-outlined text-white/30 text-5xl mb-4 block">fingerprint</span>
+                            <span class="text-primary font-bold tracking-widest uppercase text-xs mb-4 block">The Family
+                                Pledge</span>
+                            <h3 class="text-xl md:text-2xl font-display font-medium text-white leading-relaxed mb-4">
+                                "In this house, we don't let the streets run our biology. We protect our peace, we
+                                practice our breathing, and we support each other's Superpower."
+                            </h3>
+                            <p class="text-slate-400 text-sm">We are building a new story for Oakland, starting right
+                                here.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between pt-4">
+                        <button onclick="prevSection()"
+                            class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all flex items-center gap-2">
+                            <span class="material-icons-outlined">arrow_back</span>
+                            Previous
+                        </button>
+                        <button onclick="nextSection()"
+                            class="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl transition-all hover:-translate-y-1 flex items-center gap-2 shadow-md">
+                            Take the Quiz
+                            <span class="material-icons-outlined">quiz</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIZ SECTION -->
+        <section id="lesson-quiz" class="lesson-section fade-in">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-gradient-to-r from-slate-800 to-slate-900 p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span
+                            class="bg-primary/30 text-white text-xs font-bold px-3 py-1 rounded-full border border-primary/50">KNOWLEDGE
+                            CHECK</span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+                        <span class="material-icons-outlined text-3xl">quiz</span>
+                        Test Your Knowledge
+                    </h2>
+                    <p class="text-slate-400 mt-2">5 questions to lock in what you learned.</p>
+                </div>
+                <div class="p-6 md:p-8" id="quiz-container">
+                    <!-- Quiz questions loaded by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPLETION SECTION -->
+        <section id="lesson-complete" class="lesson-section fade-in">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden text-center p-8 md:p-16">
+                <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="material-icons-outlined text-green-600 text-5xl">school</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Course Complete! 🎉</h2>
+                <p class="text-lg text-slate-600 max-w-lg mx-auto mb-2">You scored <strong id="final-score"
+                        class="text-primary">0/5</strong></p>
+                <p class="text-slate-500 max-w-lg mx-auto mb-8">You now understand the neuroscience behind family
+                    behavior. Share this knowledge — every home you reach is a step toward closing the Neuro-Economic
+                    Gap.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="option1.html"
+                        class="px-8 py-3 bg-primary hover:bg-blue-600 text-white font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+                        <span class="material-icons-outlined">home</span>
+                        Back to Academy
+                    </a>
+                    <button onclick="location.reload()"
+                        class="px-8 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all flex items-center justify-center gap-2">
+                        <span class="material-icons-outlined">replay</span>
+                        Retake Course
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 px-6 mt-12">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-slate-500 text-xs">© 2026 Brother Brooklyn (Rodney Coley). All rights reserved.</p>
+            <a href="option1.html" class="text-primary text-sm font-medium hover:underline">Back to Academy →</a>
+        </div>
+    </footer>
+
+    <script>
+        let currentSection = 0;
+        const sections = ['lesson-1', 'lesson-2', 'lesson-3', 'lesson-4', 'lesson-quiz'];
+
+        const quizData = [
+            {
+                q: "What chemical floods the body in a high-stress 'Survival Home'?",
+                options: ["Dopamine", "Cortisol", "Serotonin", "Oxytocin"],
+                answer: 1
+            },
+            {
+                q: "What brain structure acts as the 'Alarm' that stays locked ON?",
+                options: ["Prefrontal Cortex", "Hippocampus", "Amygdala", "Cerebellum"],
+                answer: 2
+            },
+            {
+                q: "Mirror Neurons cause children to do what?",
+                options: ["Follow written rules", "Copy what adults DO, not what they say", "Ignore stress signals", "Sleep more deeply"],
+                answer: 1
+            },
+            {
+                q: "Which brain chemical is boosted by celebrating 'Micro-Wins'?",
+                options: ["Cortisol", "Oxytocin", "Serotonin", "Dopamine"],
+                answer: 3
+            },
+            {
+                q: "What does Brother Brooklyn call the technique of pausing and breathing during stress?",
+                options: ["The Power Nap", "The Circuit Breaker", "The Brain Dump", "The Quick Fix"],
+                answer: 1
+            }
+        ];
+
+        let quizAnswers = {};
+        let quizSubmitted = false;
+
+        function startCourse() {
+            document.getElementById('course-progress').classList.remove('hidden');
+            document.getElementById('course-content').classList.remove('hidden');
+            document.getElementById('course-content').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function goToSection(index) {
+            // Hide all
+            document.querySelectorAll('.lesson-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.progress-step').forEach((s, i) => {
+                s.classList.remove('active');
+                if (i < index) s.classList.add('completed');
+                else s.classList.remove('completed');
+            });
+
+            currentSection = index;
+
+            if (index < sections.length) {
+                document.getElementById(sections[index]).classList.add('active');
+                document.querySelectorAll('.progress-step')[index].classList.add('active');
+            } else {
+                // Completion
+                document.getElementById('lesson-complete').classList.add('active');
+            }
+
+            // Load quiz if needed
+            if (index === 4 && !document.getElementById('quiz-container').innerHTML.trim()) {
+                renderQuiz();
+            }
+
+            window.scrollTo({ top: document.getElementById('course-content').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function nextSection() {
+            if (currentSection < sections.length) {
+                goToSection(currentSection + 1);
+            }
+        }
+
+        function prevSection() {
+            if (currentSection > 0) {
+                goToSection(currentSection - 1);
+            }
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            let html = '<div class="space-y-8">';
+            quizData.forEach((q, qi) => {
+                html += `
+                    <div class="quiz-question" id="qq-${qi}">
+                        <p class="font-bold text-slate-900 text-lg mb-4">${qi + 1}. ${q.q}</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                `;
+                q.options.forEach((opt, oi) => {
+                    html += `
+                        <div class="quiz-option border-2 border-slate-200 rounded-xl p-4 flex items-center gap-3" onclick="selectAnswer(${qi}, ${oi})" id="qo-${qi}-${oi}">
+                            <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-sm font-bold text-slate-500 flex-shrink-0">${String.fromCharCode(65 + oi)}</span>
+                            <span class="text-slate-700 font-medium">${opt}</span>
+                        </div>
+                    `;
+                });
+                html += '</div></div>';
+            });
+            html += `
+                <div class="pt-6 flex justify-between items-center">
+                    <button onclick="prevSection()" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all flex items-center gap-2">
+                        <span class="material-icons-outlined">arrow_back</span>
+                        Previous
+                    </button>
+                    <button onclick="submitQuiz()" id="submit-quiz-btn" class="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl transition-all hover:-translate-y-1 flex items-center gap-2 shadow-md disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Submit Answers
+                        <span class="material-icons-outlined">check_circle</span>
+                    </button>
+                </div>
+            `;
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function selectAnswer(qi, oi) {
+            if (quizSubmitted) return;
+            // Deselect previous
+            document.querySelectorAll(`[id^="qo-${qi}"]`).forEach(el => el.classList.remove('selected'));
+            // Select new
+            document.getElementById(`qo-${qi}-${oi}`).classList.add('selected');
+            quizAnswers[qi] = oi;
+
+            // Enable submit if all answered
+            if (Object.keys(quizAnswers).length === quizData.length) {
+                document.getElementById('submit-quiz-btn').disabled = false;
+            }
+        }
+
+        function submitQuiz() {
+            if (quizSubmitted) return;
+            quizSubmitted = true;
+            let score = 0;
+            quizData.forEach((q, qi) => {
+                const selected = quizAnswers[qi];
+                if (selected === q.answer) {
+                    document.getElementById(`qo-${qi}-${selected}`).classList.add('correct');
+                    score++;
+                } else {
+                    document.getElementById(`qo-${qi}-${selected}`).classList.add('wrong');
+                    document.getElementById(`qo-${qi}-${q.answer}`).classList.add('correct');
+                }
+            });
+            document.getElementById('final-score').textContent = `${score}/${quizData.length}`;
+
+            // Replace submit with continue
+            const btn = document.getElementById('submit-quiz-btn');
+            btn.textContent = '';
+            btn.innerHTML = `See Results <span class="material-icons-outlined">arrow_forward</span>`;
+            btn.onclick = () => {
+                document.querySelectorAll('.lesson-section').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.progress-step').forEach(s => s.classList.add('completed'));
+                document.getElementById('lesson-complete').classList.add('active');
+                window.scrollTo({ top: document.getElementById('course-content').offsetTop - 100, behavior: 'smooth' });
+            };
+            btn.disabled = false;
+        }
+    </script>
+</body>
+
+</html>
