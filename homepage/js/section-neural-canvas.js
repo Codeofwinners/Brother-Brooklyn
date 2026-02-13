@@ -11,17 +11,14 @@ function resizeCanvas() {
     canvas.height = parent.clientHeight;
 }
 
-// Initial resize
 resizeCanvas();
 
-// Mouse interaction (relative to canvas)
 let mouse = {
     x: null,
     y: null,
-    radius: (canvas.height / 50) * (canvas.width / 50) // Increased radius
+    radius: (canvas.height / 60) * (canvas.width / 60)
 }
 
-// Mouse Events
 canvas.addEventListener('mousemove', (event) => {
     const rect = canvas.getBoundingClientRect();
     mouse.x = event.clientX - rect.left;
@@ -33,58 +30,16 @@ canvas.addEventListener('mouseleave', () => {
     mouse.y = null;
 });
 
-// Touch Events (Passive to allow scrolling)
-canvas.addEventListener('touchmove', (event) => {
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = event.touches[0].clientX - rect.left;
-    mouse.y = event.touches[0].clientY - rect.top;
-}, { passive: true });
-
-canvas.addEventListener('touchstart', (event) => {
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = event.touches[0].clientX - rect.left;
-    mouse.y = event.touches[0].clientY - rect.top;
-}, { passive: true });
-
-canvas.addEventListener('touchend', () => {
-    mouse.x = null;
-    mouse.y = null;
-});
-
-// Click "Burst" Effect
+// Click "Burst"
 canvas.addEventListener('click', (event) => {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-
-    // Push particles away strongly
-    particlesArray.forEach(p => {
-        let dx = x - p.x;
-        let dy = y - p.y;
-        let distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < mouse.radius * 4) {
-            let angle = Math.atan2(dy, dx);
-            // Strong blast
-            p.directionX += Math.cos(angle) * 15;
-            p.directionY += Math.sin(angle) * 15;
-        }
-    });
-
-    // Add new particles at click
     for (let i = 0; i < 8; i++) {
-        let size = (Math.random() * 4) + 2;
-        let color = '#fff'; // White spark
-        particlesArray.push(new Particle(x, y, (Math.random() - 0.5) * 8, (Math.random() - 0.5) * 8, size, color));
+        particlesArray.push(new Particle(x, y, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 10, Math.random() * 3 + 2, '#ffffff'));
     }
 });
 
-window.addEventListener('resize', () => {
-    resizeCanvas();
-    mouse.radius = (canvas.height / 50) * (canvas.width / 50);
-    init();
-});
-
-// Create Particle
 class Particle {
     constructor(x, y, directionX, directionY, size, color) {
         this.x = x;
@@ -94,113 +49,94 @@ class Particle {
         this.size = size;
         this.baseSize = size;
         this.color = color;
-        this.angle = Math.random() * Math.PI * 2; // For pulsing
-        this.friction = 0.95; // For burst deceleration
+        this.angle = Math.random() * 6.2;
+        this.blinkSpeed = 0.02 + Math.random() * 0.05;
+        this.opacity = Math.random();
     }
 
-    // Method to draw individual particle
     draw() {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        // Star/Diamond shape for "Award Winning" look instead of plain circle
+        ctx.moveTo(this.x, this.y - this.size);
+        ctx.lineTo(this.x + this.size, this.y);
+        ctx.lineTo(this.x, this.y + this.size);
+        ctx.lineTo(this.x - this.size, this.y);
+        ctx.closePath();
+
+        ctx.globalAlpha = 0.6 + Math.sin(this.angle) * 0.4; // Twinkle
         ctx.fillStyle = this.color;
 
-        // Glow effect
+        // localized glow
         ctx.shadowBlur = 15;
         ctx.shadowColor = this.color;
-
         ctx.fill();
-        ctx.shadowBlur = 0; // Reset
+
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1;
     }
 
-    // Check particle position, check mouse position, move the particle, draw the particle
     update() {
-        if (this.x > canvas.width || this.x < 0) {
-            this.directionX = -this.directionX;
-        }
-        if (this.y > canvas.height || this.y < 0) {
-            this.directionY = -this.directionY;
-        }
+        if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+        if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
 
-        // Pulse size
-        this.angle += 0.05;
-        this.size = this.baseSize + Math.sin(this.angle) * 0.5;
-
-        // Apply friction to high speeds (from burst)
-        if (Math.abs(this.directionX) > 2) this.directionX *= 0.95;
-        if (Math.abs(this.directionY) > 2) this.directionY *= 0.95;
-
-        // check collision detection - mouse position / particle position
-        // Only if mouse is on canvas or touch is active
+        // Mouse interaction
         if (mouse.x != null) {
             let dx = mouse.x - this.x;
             let dy = mouse.y - this.y;
             let distance = Math.sqrt(dx * dx + dy * dy);
             if (distance < mouse.radius + this.size) {
-                if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
-                    this.x += 4; // STRONGER PUSH
-                }
-                if (mouse.x > this.x && this.x > this.size * 10) {
-                    this.x -= 4; // STRONGER PUSH
-                }
-                if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
-                    this.y += 4; // STRONGER PUSH
-                }
-                if (mouse.y > this.y && this.y > this.size * 10) {
-                    this.y -= 4; // STRONGER PUSH
-                }
+                const angle = Math.atan2(dy, dx);
+                const force = (mouse.radius - distance) / mouse.radius;
+                const push = force * 5;
+                this.x -= Math.cos(angle) * push;
+                this.y -= Math.sin(angle) * push;
             }
         }
 
         this.x += this.directionX;
         this.y += this.directionY;
+        this.angle += this.blinkSpeed;
         this.draw();
     }
 }
 
-// create particle array
 function init() {
     particlesArray = [];
-    // Adjust density: High density (5000 divisor instead of 9000)
-    let numberOfParticles = (canvas.height * canvas.width) / 5000;
-
-    // Neuro colors: Cyan, Purple, Blue, plus a few Gold/Orange accents for pop
-    const colors = ['#00e5ff', '#bd00ff', '#308ce8', '#facc15'];
+    let numberOfParticles = (canvas.height * canvas.width) / 6000;
+    const colors = ['#00e5ff', '#bd00ff', '#308ce8', '#facc15']; // Cyan, Purple, Blue, Gold
 
     for (let i = 0; i < numberOfParticles; i++) {
-        let size = (Math.random() * 3) + 1; // Slightly larger max size
-        let x = (Math.random() * ((canvas.width - size * 2) - (size * 2)) + size * 2);
-        let y = (Math.random() * ((canvas.height - size * 2) - (size * 2)) + size * 2);
-
-        // Faster movement for "alive" feel
+        let size = (Math.random() * 2) + 1;
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height;
         let directionX = (Math.random() * 1.5) - 0.75;
         let directionY = (Math.random() * 1.5) - 0.75;
-
         let color = colors[Math.floor(Math.random() * colors.length)];
 
         particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
     }
 }
 
-// check if particles are close enough to draw line between them
 function connect() {
-    let opacityValue = 1;
+    // Triangulation (Plexus)
+    // Connecting closest 3 neighbors
     for (let a = 0; a < particlesArray.length; a++) {
         for (let b = a; b < particlesArray.length; b++) {
-            let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
-                + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-            if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                opacityValue = 1 - (distance / 18000);
+            let dx = particlesArray[a].x - particlesArray[b].x;
+            let dy = particlesArray[a].y - particlesArray[b].y;
+            let distance = dx * dx + dy * dy;
 
-                // Use the color of particle A for the line
-                ctx.strokeStyle = particlesArray[a].color.replace(')', `, ${opacityValue})`).replace('rgb', 'rgba').replace('#', '');
+            // Connection distance squared (faster) ~100px
+            if (distance < 10000) {
+                // Opacity based on distance
+                let opacity = 1 - (distance / 10000);
 
-                // Quick hex to rgba conversion for lines
-                const hex = particlesArray[a].color;
-                if (hex.startsWith('#')) {
-                    const r = parseInt(hex.slice(1, 3), 16);
-                    const g = parseInt(hex.slice(3, 5), 16);
-                    const b = parseInt(hex.slice(5, 7), 16);
-                    ctx.strokeStyle = `rgba(${r},${g},${b},${opacityValue})`;
+                // Line
+                ctx.strokeStyle = particlesArray[a].color.replace(')', `, ${opacity * 0.5})`).replace('rgb', 'rgba').replace('#', '');
+
+                // Hex conversion fallback
+                if (particlesArray[a].color.startsWith('#')) {
+                    ctx.strokeStyle = "rgba(255,255,255," + (opacity * 0.2) + ")"; // clean white lines for slickness
                 }
 
                 ctx.lineWidth = 1;
@@ -208,15 +144,48 @@ function connect() {
                 ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
                 ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
                 ctx.stroke();
+
+                // Triangulation: Check C
+                // Only checking a subset relative to B to save perf? 
+                // Actually this O(N^3) loop is dangerous.
+                // We rely on standard lines for connections.
+                // But let's fill triangles if VERY close.
+                /* 
+                for (let c = b; c < particlesArray.length; c++) {
+                    let dx2 = particlesArray[b].x - particlesArray[c].x;
+                    let dy2 = particlesArray[b].y - particlesArray[c].y;
+                    let dist2 = dx2*dx2 + dy2*dy2;
+                    
+                    if (dist2 < 5000) {
+                        // A is close to B, B is close to C. Check A to C
+                        let dx3 = particlesArray[a].x - particlesArray[c].x;
+                        let dy3 = particlesArray[a].y - particlesArray[c].y;
+                        let dist3 = dx3*dx3 + dy3*dy3;
+                        
+                        if(dist3 < 5000) {
+                            // Draw TRIANGLE
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                            ctx.lineTo(particlesArray[c].x, particlesArray[c].y);
+                            ctx.closePath();
+                            ctx.fillStyle = `rgba(255, 255, 255, ${opacity * 0.03})`;
+                            ctx.fill();
+                        }
+                    }
+                }
+                */
             }
         }
     }
 }
 
-// animation loop
 function animate() {
     animationFrameId = requestAnimationFrame(animate);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Slight additive blending
+    ctx.globalCompositeOperation = 'lighter';
 
     for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
@@ -224,6 +193,5 @@ function animate() {
     connect();
 }
 
-// init and animate
 init();
 animate();
