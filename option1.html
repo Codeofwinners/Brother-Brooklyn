@@ -186,11 +186,16 @@
                     </h2>
                     <!-- Mobile Video (Below H1) -->
                     <div class="block md:hidden w-full my-6 relative z-10 group">
-                        <video poster="homepage/assets/video-thumb-23s.png"
+                        <video id="mobile-hero-video" poster="homepage/assets/video-thumb-23s.png"
                             src="https://cdn.field59.com/WJRT/1664988309-6d31c9c2505b7f059839e3a96a3c30c52f5cdb3a_fl9-720p.mp4"
-                            controls playsinline
-                            class="rounded-lg w-full object-cover aspect-video bg-transparent !shadow-none !border-none !outline-none !ring-0 focus:!ring-0"
+                            playsinline class="rounded-lg w-full object-cover aspect-video bg-white"
                             style="outline: none !important; border: none !important; box-shadow: none !important;"></video>
+                        <button onclick="playHeroVideo('mobile-hero-video', this)"
+                            class="absolute inset-0 flex items-center justify-center bg-black/20 rounded-lg cursor-pointer transition-opacity hover:bg-black/30">
+                            <span class="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fa-solid fa-play text-slate-800 text-lg ml-1"></i>
+                            </span>
+                        </button>
                         <div
                             class="absolute top-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-1 rounded border border-white/10 pointer-events-none">
                             Credit: <a
@@ -235,11 +240,17 @@
                     </div>
                 </div>
                 <div class="hidden md:block w-full md:w-1/3 relative z-10 group">
-                    <div class="relative rounded-lg overflow-hidden bg-transparent">
-                        <video poster="homepage/assets/video-thumb-23s.png"
+                    <div class="relative rounded-lg overflow-hidden bg-white">
+                        <video id="desktop-hero-video" poster="homepage/assets/video-thumb-23s.png"
                             src="https://cdn.field59.com/WJRT/1664988309-6d31c9c2505b7f059839e3a96a3c30c52f5cdb3a_fl9-720p.mp4"
-                            controls class="w-full h-auto !shadow-none !border-none !outline-none !ring-0 focus:!ring-0"
+                            class="w-full h-auto"
                             style="outline: none !important; border: none !important; box-shadow: none !important;"></video>
+                        <button onclick="playHeroVideo('desktop-hero-video', this)"
+                            class="absolute inset-0 flex items-center justify-center bg-black/20 rounded-lg cursor-pointer transition-opacity hover:bg-black/30">
+                            <span class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fa-solid fa-play text-slate-800 text-xl ml-1"></i>
+                            </span>
+                        </button>
                         <div
                             class="absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white text-xs px-2.5 py-1.5 rounded border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                             Credit: <a
@@ -653,6 +664,16 @@
             } else {
                 sidebar.classList.add('-translate-x-full');
                 overlay.classList.add('hidden');
+            }
+        }
+    </script>
+    <script>
+        function playHeroVideo(videoId, btn) {
+            const video = document.getElementById(videoId);
+            if (video) {
+                video.setAttribute('controls', '');
+                video.play();
+                btn.style.display = 'none';
             }
         }
     </script>
