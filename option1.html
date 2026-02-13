@@ -14,6 +14,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
         tailwind.config = {
@@ -183,9 +186,26 @@
                                 class="hover:text-primary pointer-events-auto underline">ABC12</a>
                         </div>
                     </div>
-                    <p class="text-lg text-slate-700 max-w-xl">
-                        My life's work is the intersection of Neuroscience, STEM, and Faith. I help youth and leaders
-                        reprogram their minds to overcome struggle and close the Neuro-Economic Gap.
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-50 text-purple-700 rounded-full text-xs font-semibold border border-purple-100">
+                            <i class="fa-solid fa-brain"></i> Neuroscience
+                        </span>
+                        <span
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-50 text-sky-700 rounded-full text-xs font-semibold border border-sky-100">
+                            <i class="fa-solid fa-microchip"></i> STEM
+                        </span>
+                        <span
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-700 rounded-full text-xs font-semibold border border-amber-100">
+                            <i class="fa-solid fa-hands-praying"></i> Faith
+                        </span>
+                    </div>
+                    <p class="text-base text-slate-600 max-w-xl leading-relaxed">
+                        <i class="fa-solid fa-quote-left text-primary/30 mr-1"></i>
+                        I help youth and leaders <strong class="text-slate-800">reprogram their minds</strong> to
+                        overcome struggle
+                        and close the <strong class="text-slate-800">Neuro-Economic Gap</strong>.
+                        <i class="fa-solid fa-quote-right text-primary/30 ml-1"></i>
                     </p>
                     <div class="flex flex-row gap-2 pt-2 w-full">
                         <a href="course-superpower.html"
