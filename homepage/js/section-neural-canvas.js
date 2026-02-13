@@ -18,7 +18,7 @@ resizeCanvas();
 let mouse = {
     x: null,
     y: null,
-    radius: (canvas.height / 60) * (canvas.width / 60)
+    radius: (canvas.height / 50) * (canvas.width / 50) // Increased radius
 }
 
 // Mouse Events
@@ -62,24 +62,25 @@ canvas.addEventListener('click', (event) => {
         let dx = x - p.x;
         let dy = y - p.y;
         let distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < mouse.radius * 3) {
+        if (distance < mouse.radius * 4) {
             let angle = Math.atan2(dy, dx);
-            p.directionX -= Math.cos(angle) * 5;
-            p.directionY -= Math.sin(angle) * 5;
+            // Strong blast
+            p.directionX += Math.cos(angle) * 15;
+            p.directionY += Math.sin(angle) * 15;
         }
     });
 
     // Add new particles at click
-    for (let i = 0; i < 5; i++) {
-        let size = (Math.random() * 3) + 1;
+    for (let i = 0; i < 8; i++) {
+        let size = (Math.random() * 4) + 2;
         let color = '#fff'; // White spark
-        particlesArray.push(new Particle(x, y, (Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4, size, color));
+        particlesArray.push(new Particle(x, y, (Math.random() - 0.5) * 8, (Math.random() - 0.5) * 8, size, color));
     }
 });
 
 window.addEventListener('resize', () => {
     resizeCanvas();
-    mouse.radius = (canvas.height / 60) * (canvas.width / 60);
+    mouse.radius = (canvas.height / 50) * (canvas.width / 50);
     init();
 });
 
@@ -94,6 +95,7 @@ class Particle {
         this.baseSize = size;
         this.color = color;
         this.angle = Math.random() * Math.PI * 2; // For pulsing
+        this.friction = 0.95; // For burst deceleration
     }
 
     // Method to draw individual particle
@@ -103,7 +105,7 @@ class Particle {
         ctx.fillStyle = this.color;
 
         // Glow effect
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 15;
         ctx.shadowColor = this.color;
 
         ctx.fill();
@@ -123,6 +125,10 @@ class Particle {
         this.angle += 0.05;
         this.size = this.baseSize + Math.sin(this.angle) * 0.5;
 
+        // Apply friction to high speeds (from burst)
+        if (Math.abs(this.directionX) > 2) this.directionX *= 0.95;
+        if (Math.abs(this.directionY) > 2) this.directionY *= 0.95;
+
         // check collision detection - mouse position / particle position
         // Only if mouse is on canvas or touch is active
         if (mouse.x != null) {
@@ -131,16 +137,16 @@ class Particle {
             let distance = Math.sqrt(dx * dx + dy * dy);
             if (distance < mouse.radius + this.size) {
                 if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
-                    this.x += 2;
+                    this.x += 4; // STRONGER PUSH
                 }
                 if (mouse.x > this.x && this.x > this.size * 10) {
-                    this.x -= 2;
+                    this.x -= 4; // STRONGER PUSH
                 }
                 if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
-                    this.y += 2;
+                    this.y += 4; // STRONGER PUSH
                 }
                 if (mouse.y > this.y && this.y > this.size * 10) {
-                    this.y -= 2;
+                    this.y -= 4; // STRONGER PUSH
                 }
             }
         }
@@ -154,20 +160,20 @@ class Particle {
 // create particle array
 function init() {
     particlesArray = [];
-    // Adjust density: fewer particles for smaller area
-    let numberOfParticles = (canvas.height * canvas.width) / 9000;
+    // Adjust density: High density (5000 divisor instead of 9000)
+    let numberOfParticles = (canvas.height * canvas.width) / 5000;
 
-    // Neuro colors: Cyan, Purple, Blue
-    const colors = ['#00e5ff', '#bd00ff', '#308ce8'];
+    // Neuro colors: Cyan, Purple, Blue, plus a few Gold/Orange accents for pop
+    const colors = ['#00e5ff', '#bd00ff', '#308ce8', '#facc15'];
 
     for (let i = 0; i < numberOfParticles; i++) {
-        let size = (Math.random() * 2.5) + 1; // Slightly larger max size
+        let size = (Math.random() * 3) + 1; // Slightly larger max size
         let x = (Math.random() * ((canvas.width - size * 2) - (size * 2)) + size * 2);
         let y = (Math.random() * ((canvas.height - size * 2) - (size * 2)) + size * 2);
 
         // Faster movement for "alive" feel
-        let directionX = (Math.random() * 1) - 0.5;
-        let directionY = (Math.random() * 1) - 0.5;
+        let directionX = (Math.random() * 1.5) - 0.75;
+        let directionY = (Math.random() * 1.5) - 0.75;
 
         let color = colors[Math.floor(Math.random() * colors.length)];
 
@@ -211,9 +217,6 @@ function connect() {
 function animate() {
     animationFrameId = requestAnimationFrame(animate);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Slight additive blending for neon vibe
-    // ctx.globalCompositeOperation = 'screen'; 
 
     for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
