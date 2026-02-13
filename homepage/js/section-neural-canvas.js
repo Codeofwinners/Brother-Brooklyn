@@ -36,7 +36,6 @@ canvas.addEventListener('click', (event) => {
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
     for (let i = 0; i < 6; i++) {
-        // Burst particles are faster
         particlesArray.push(new Particle(x, y, (Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, Math.random() * 3 + 2, '#ffffff'));
     }
 });
@@ -51,9 +50,9 @@ class Particle {
         this.baseSize = size;
         this.color = color;
         this.angle = Math.random() * 6.2;
-        this.blinkSpeed = 0.005 + Math.random() * 0.01; // Slower blink
+        this.blinkSpeed = 0.005 + Math.random() * 0.01;
         this.opacity = Math.random();
-        this.friction = 0.98; // Friction for burst particles
+        this.friction = 0.98;
     }
 
     draw() {
@@ -65,7 +64,7 @@ class Particle {
         ctx.lineTo(this.x - this.size, this.y);
         ctx.closePath();
 
-        ctx.globalAlpha = 0.5 + Math.sin(this.angle) * 0.5; // Smooth Twinkle (0 to 1)
+        ctx.globalAlpha = 0.5 + Math.sin(this.angle) * 0.5;
         ctx.fillStyle = this.color;
 
         // localized glow
@@ -81,15 +80,8 @@ class Particle {
         if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
         if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
 
-        // Apply friction if moving fast (from burst or interaction)
         if (Math.abs(this.directionX) > 0.5) this.directionX *= 0.96;
         if (Math.abs(this.directionY) > 0.5) this.directionY *= 0.96;
-
-        // Minimum speed check (keep them floating)
-        /*
-        if (Math.abs(this.directionX) < 0.1 && Math.random() > 0.5) this.directionX += (Math.random()-0.5)*0.01;
-        if (Math.abs(this.directionY) < 0.1 && Math.random() > 0.5) this.directionY += (Math.random()-0.5)*0.01;
-        */
 
         // Mouse interaction
         if (mouse.x != null) {
@@ -99,7 +91,7 @@ class Particle {
             if (distance < mouse.radius + this.size) {
                 const angle = Math.atan2(dy, dx);
                 const force = (mouse.radius - distance) / mouse.radius;
-                const push = force * 2; // Gentler push
+                const push = force * 2;
                 this.x -= Math.cos(angle) * push;
                 this.y -= Math.sin(angle) * push;
             }
@@ -115,14 +107,17 @@ class Particle {
 function init() {
     particlesArray = [];
     let numberOfParticles = (canvas.height * canvas.width) / 6000;
-    const colors = ['#00e5ff', '#bd00ff', '#308ce8', '#facc15'];
+
+    // OFF-WHITE / CREAM PALETTE (No Yellow, No Blue)
+    // Pure White, Silver, Platinum, very light Grey
+    const colors = ['#ffffff', '#f8fafc', '#e2e8f0', '#cbd5e1'];
 
     for (let i = 0; i < numberOfParticles; i++) {
         let size = (Math.random() * 2) + 1;
         let x = Math.random() * canvas.width;
         let y = Math.random() * canvas.height;
 
-        // GRACEFUL SPEED: Very slow float
+        // Graceful float
         let directionX = (Math.random() * 0.4) - 0.2;
         let directionY = (Math.random() * 0.4) - 0.2;
 
@@ -142,11 +137,8 @@ function connect() {
             if (distance < 10000) {
                 let opacity = 1 - (distance / 10000);
 
-                ctx.strokeStyle = particlesArray[a].color.replace(')', `, ${opacity * 0.4})`).replace('rgb', 'rgba').replace('#', '');
-
-                if (particlesArray[a].color.startsWith('#')) {
-                    ctx.strokeStyle = "rgba(255,255,255," + (opacity * 0.15) + ")";
-                }
+                // White lines
+                ctx.strokeStyle = "rgba(255,255,255," + (opacity * 0.15) + ")";
 
                 ctx.lineWidth = 1;
                 ctx.beginPath();
@@ -161,8 +153,6 @@ function connect() {
 function animate() {
     animationFrameId = requestAnimationFrame(animate);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    //ctx.globalCompositeOperation = 'lighter';
 
     for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
