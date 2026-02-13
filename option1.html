@@ -135,7 +135,7 @@
         <div class="px-2 py-6 md:p-8 max-w-7xl mx-auto space-y-8">
             <!-- Welcome Hero -->
             <section
-                class="bg-white rounded-xl p-4 md:p-10 flex flex-col md:flex-row items-center gap-8 border border-stone-100 relative overflow-hidden shadow-2xl shadow-stone-200/50">
+                class="bg-white rounded-xl p-4 md:p-10 flex flex-col md:flex-row items-center gap-8 border border-white relative overflow-hidden shadow-2xl shadow-stone-200/50">
                 <!-- Warm Glows (Subtle) -->
                 <div class="absolute -top-24 -right-24 w-96 h-96 bg-orange-200/20 rounded-full blur-3xl animate-pulse">
                 </div>
@@ -158,7 +158,8 @@
                         <video poster="homepage/assets/video-thumb-23s.png"
                             src="https://cdn.field59.com/WJRT/1664988309-6d31c9c2505b7f059839e3a96a3c30c52f5cdb3a_fl9-720p.mp4"
                             controls playsinline
-                            class="rounded-lg w-full object-cover aspect-video bg-black !shadow-none !border-none !outline-none !ring-0 focus:!ring-0"></video>
+                            class="rounded-lg w-full object-cover aspect-video bg-transparent !shadow-none !border-none !outline-none !ring-0 focus:!ring-0"
+                            style="outline: none !important; border: none !important; box-shadow: none !important;"></video>
                         <div
                             class="absolute top-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-1 rounded border border-white/10 pointer-events-none">
                             Credit: <a
@@ -186,11 +187,11 @@
                     </div>
                 </div>
                 <div class="hidden md:block w-full md:w-1/3 relative z-10 group">
-                    <div class="relative rounded-lg overflow-hidden bg-black">
+                    <div class="relative rounded-lg overflow-hidden bg-transparent">
                         <video poster="homepage/assets/video-thumb-23s.png"
                             src="https://cdn.field59.com/WJRT/1664988309-6d31c9c2505b7f059839e3a96a3c30c52f5cdb3a_fl9-720p.mp4"
-                            controls
-                            class="w-full h-auto !shadow-none !border-none !outline-none !ring-0 focus:!ring-0"></video>
+                            controls class="w-full h-auto !shadow-none !border-none !outline-none !ring-0 focus:!ring-0"
+                            style="outline: none !important; border: none !important; box-shadow: none !important;"></video>
                         <div
                             class="absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white text-xs px-2.5 py-1.5 rounded border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                             Credit: <a
