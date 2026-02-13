@@ -1,0 +1,121 @@
+Brother Brooklyn Author Deep Research for SEO and Website Onboarding
+Background and positioning
+Brother Brooklyn’s public-facing identity spans three intersecting lanes: (a) faith- and mindset-centered personal transformation, (b) “neuroeducation” as a practical bridge between brain science and behavior, and (c) STEM/robotics-oriented learning pathways—especially for youth and underserved communities. This “brain + belief + future skills” blend is a differentiator, but it also creates messaging complexity that the current web footprint does not fully organize or convert. [1]
+On the record, he is identified as entity["people","Rodney Coley","author neuroeducator"], and multiple sources describe him as a U.S. veteran and retired robotics/robotic engineer bringing decades of experience in community development and educational work. [2]
+His professional education-facing positioning is especially clear in his biography on entity["organization","Wimee","childrens learning brand"]: he is framed as a neuroeducation strategist and youth workforce innovator who leads “Neuro‑STEM programming” that introduces children to robotics, AI, automation, and emerging technologies through brain-based learning pathways. [3]
+Separately, an event program bio (Michigan Black Summit) describes him as integrating a STEM component into “Inner Man Education Mindset University programs,” and explicitly connects his book to “guidance and inspiration towards a growth mindset,” while also describing more than 20 years of prison ministry experience and a focus on challenges faced by marginalized communities (including African American and BIPOC populations). [4]
+For media and story-led authority (important for podcasts, speaking, and conversion), he has already been positioned publicly as someone sharing a redemption arc—Brooklyn roots, time in the Navy, addiction/despair, and a later turning point toward purpose, faith, and “rewiring” patterns of thought. [5]
+Website and platform inventory
+Below is the most direct, verifiable map of current owned/controlled web properties and top third‑party listings. Some social profiles (notably LinkedIn/Instagram) are partially accessible due to platform restrictions, and TikTok cannot be directly crawled in this environment; the list therefore prioritizes sources that can be validated via accessible pages. [6]
+The primary owned site appears to be entity["organization","Spirit Man Speaks","wellness coaching brand"]. It contains (1) a services section describing spiritual consulting, body consulting, and 1:1 “mental stimulation & coaching,” (2) a blog feed with posts dating back to 2018 and with the most recent visible posts dated 2022, and (3) a contact section that includes an office location in entity["city","Whitehall","Michigan, US"] and a phone number. [7]
+The site also includes an external “Shop” flow that routes buyers to a MyBookOrders-hosted product page for his flagship title, which lists publication metadata (paperback, 274 pages, publication date in 2022, entity["company","Xulon Press","christian publisher"] as publisher). [8]
+For the flagship book itself, the most accessible canonical listing with structured metadata is entity["company","Apple Books","ebook platform, apple"], which shows 274 pages and a release date in May 2022, with the seller/publisher labeled as Xulon Press. [9] The entity["company","Xulon Press","christian publisher"] bookstore listing also supplies category positioning (Religion/Inspirational; Science/Neuroscience; Psychology/Neuropsychology) and a publisher-written summary emphasizing subconscious patterns, belief/love framing, and intentional behavioral change. [10]
+A second (newer) book property is visible through Amazon international snippets: “Brother Brooklyn Presents Wimee The Robot’s Brain Adventure…,” attributed to “Rod (Brother Brooklyn) Coley,” with a publication date shown as June 17, 2025 in at least one Amazon storefront preview. Because Amazon product pages were intermittently unavailable to open directly, this detail should be revalidated during onboarding by checking the live product page and ISBN/ASIN metadata. [11]
+A major adjacent “authority halo” comes from his association with entity["organization","Wimee","childrens learning brand"] and its media ecosystem. The Wimee “About” page states the brand is “nationally recognized” and “seen on PBS stations across the country.” [12] The official entity["tv_show","Wimee’s Words","pbs childrens program"] page on entity["organization","PBS","us public broadcaster"] describes the show as a creativity-driven children’s program presented by the entity["organization","Michigan Learning Channel","pbs partner network"] and presented by Detroit PBS. [13] Wimee also has a forthcoming product line, entity["organization","Wimee AI","child speech ai product"], described as a “COMING SOON” tool for speech-language pathologists and parents to support speech and language development. [14]
+A long-form third-party profile (Every Child Thrives, powered by the entity["organization","W. K. Kellogg Foundation","philanthropic foundation"]) contains additional distribution/credibility claims around Wimee’s growth and PBS reach and describes Wimee-related programming and partnerships in libraries/schools; this can be leveraged as an “earned media” trust signal. [15]
+For “audio credibility,” he has an accessible podcast episode landing page on entity["podcast","Keep The Change","personal development podcast"] (host site run by entity["people","Bart Nollenberger","podcast host"]) and mirrored on entity["company","Amazon Music","audio streaming, amazon"]. Both pages explicitly point listeners to Spirit Man Speaks as his website and list social connection links. [5]
+Finally, there is a YouTube channel presence in search results for “Brother Brooklyn,” but the channel page could not be reliably opened due to throttling. This should be verified during onboarding (channel handle, branding, links, and whether the channel is positioned for neuroeducation vs. personal story vs. Wimee/STEM). [16]
+Current-site SEO and UX diagnosis
+The current entity["organization","Spirit Man Speaks","wellness coaching brand"] site communicates the “Body, Mind, Spirit” triad and lists service categories (spiritual consulting, body consulting, and mental coaching). However, it reads more like a scrolling brochure and less like a modern conversion funnel: there is no clear primary CTA path for the three most likely customer intents (book → speaker → coaching). [17]
+A visible technical/UX issue is present on the homepage: an “Instagram feed” widget is failing, showing an error message (“No feed found”). Even if only visible to administrators in some contexts, it signals brittle integrations and can surface during demos or certain cache states; it also indicates that social proof and visual content blocks are not reliably rendering. [17]
+Content recency is a second constraint. The site’s blog index shows the most prominent posts dated 2022, 2020, and 2018. In competitive “brain-based learning / coaching / speaker” spaces, freshness is not automatically required, but sustained publishing strongly increases topical authority, internal linking depth, long‑tail keyword capture, and inbound link potential—especially if the content is aligned with real audience questions. [18]
+Commerce is split across domains. The site’s “Shop” routes to an external MyBookOrders hosted page. This can be acceptable operationally, but it tends to reduce SEO value and conversion continuity because product content, schema, and analytics attribution become fragmented. (At minimum, the main site should still host a rich “Book” landing page with previews, reviews/testimonials, press, FAQ, and strong internal links, even if checkout happens elsewhere.) [19]
+From a technical SEO standpoint, any new build must explicitly prioritize performance and mobile usability. Google’s documentation notes that Core Web Vitals relate to real‑world user experience, are recommended for “success with Search,” and are used by ranking systems as part of page experience considerations. [20] This matters directly for a “high visual UI/UX” goal because heavy imagery and animation often degrade INP/LCP/CLS unless managed carefully. [21]
+A brand‑specific SEO risk is name ambiguity. “Brother Brooklyn” competes in the broader web ecosystem with many unrelated “Brooklyn” entities and entertainment/news results, which can crowd branded search. The remedy is not keyword stuffing; it’s clearer entity signals: a well-structured “profile” page, consistent naming (real name + stage name), and structured data linking to known profiles using “sameAs,” which Google explicitly says it can use generally for understanding entities. [22]
+A practical onboarding approach for a rebuild should therefore include a disciplined migration and indexing plan. Google recommends permanent server-side redirects (301/308) in URL changes, and provides a dedicated “site move” process to reduce negative impact. [23]
+Competitor landscape
+Because Brother Brooklyn straddles multiple niches, “competitors” should be defined in three layers: (1) direct service competitors (neuroeducation/brain-based learning speakers and consultants), (2) adjacent program competitors (neuroscience coaching and certification ecosystems), and (3) attention competitors (high‑authority personalities who dominate “rewire your brain” and “neuroplasticity” searches).
+In brain-based learning for educators, a highly visible competitor brand is entity["company","Jensen Learning","brain based teaching company"], which positions itself around “brain-based teaching strategies” and professional development rooted in classroom application. Their site has deep topical breadth (events, books, training, and multiple related properties), which typically yields stronger search coverage than a small brochure site. [24] Another education-facing competitor ecosystem is entity["organization","REVELATIONS IN EDUCATION","neuroscience in education firm"], whose positioning is explicitly about “exploring neuroscience in education,” with testimonial-led credibility—again indicating a mature content and authority system. [25]
+In the “neuroscience coaching” lane, multiple training/certification brands compete for high-intent searches like “neuroscience coach certification” and “neuro coaching.” Examples include entity["organization","The Neuro Coaching Academy","neuro coaching training org"] and entity["organization","Neuroscience for Coaches","neuroscience coach certification site"], which are built primarily as program funnels and therefore tend to have strong conversion UX, abundant landing pages, and paid search/affiliate exposure. [26] A similar adjacent competitor is entity["organization","The Neuroscience School","applied neuroscience for coaches"], also organized around certification and long-form curriculum pages. [27]
+In the “mass attention” bracket, a set of well-known personalities and brands compete for the same mental real estate as any “rewire your brain” author/speaker. entity["known_celebrity","Andrew Huberman","neuroscientist podcaster"] and his entity["podcast","Huberman Lab","health and neuroscience podcast"] have extensive topic coverage and strong on-site SEO infrastructure. [28] entity["known_celebrity","Joe Dispenza","author speaker personal change"] similarly positions around “the science of personal change,” supported by a robust content and events engine. [29] entity["known_celebrity","Daniel Amen","psychiatrist brain health"] and entity["company","Amen Clinics","brain health clinic network"] occupy a large share of “brain health” queries via clinic locations, media presence, and consumer education pages. [30] (Note: Amen’s work is debated in parts of the medical community; that debate itself increases visibility but also creates reputational complexity.) [31]
+The practical conclusion for SEO onboarding is that ranking broadly for generic terms like “neuroscience” is not the fastest win. The fastest wins come from (a) branded SERP dominance, (b) tight niche domination around “neuroeducation + STEM + youth/workforce” and “faith + neuroscience + transformation,” and (c) local/regional authority where he actually works and speaks. [32]
+Keyword strategy and content plan
+A good keyword plan should mirror the way his authority is actually constructed across sources: (1) faith + transformation storytelling, (2) neuroeducation as applied learning science, and (3) STEM/robotics/AI futures for youth. [33]
+A baseline definitional anchor: “Neuroeducation” is commonly described as an interdisciplinary field combining neuroscience, psychology, cognitive science, and education to understand learning in context. That definition is broad enough to support both educator-facing content and parent/community-facing content. [34]
+From an SEO architecture perspective, the rebuild should be organized around a small number of “pillar” pages (high-authority hubs) that each spawn clusters of supporting posts. This also supports a high-visual UI/UX approach: pillar pages can be visually rich but still structured, while supporting posts can be lighter/faster and optimized for long-tail queries. Performance and crawlability requirements remain the constraint: images should be high quality but paired with descriptive alt text and placed near relevant text, consistent with Google’s image SEO guidance. [35]
+A practical keyword cluster approach:
+Branded and entity-lock keywords (must win these first): “Brother Brooklyn,” “Rodney Coley,” “Rod Coley neuroeducation,” “Spirit Man Speaks,” plus the exact titles entity["book","Lessons From the School of Hardknocks","Brother Brooklyn 2022"] and “Wimee The Robot’s Brain Adventure.” [36]
+Speaker and workshop intent keywords (high-conversion): “neuroeducation speaker,” “brain-based learning keynote,” “brain health speaker,” “STEM motivation speaker,” “addiction recovery speaker,” “faith-based motivational speaker,” “mindset speaker for schools,” “youth workforce speaker.” The goal is not to chase every term, but to create a dedicated “Speaking” page with selectable talk titles, audience outcomes, and a calendar/booking CTA, then publish 10–20 supporting articles keyed to those talk themes. [37]
+Neuroeducation and educator keywords (authority building): “brain-based learning strategies,” “neuroeducation in the classroom,” “how the brain learns,” “emotional literacy for students,” “SEL and brain science.” This cluster can be made highly defensible by publishing short, practice-oriented guides (classroom routines, parent prompts, youth mentoring frameworks) instead of abstract neuroscience summaries. [38]
+Neuro‑STEM / robotics / AI keywords (differentiator): “Neuro‑STEM,” “robotics and learning,” “AI for kids programs,” “STEM pipeline underserved communities,” “youth workforce innovation,” “robotics curriculum brain-based learning.” These map directly to how his Wimee bio describes his work (robotics, AI, automation through brain-based pathways), and to the Michigan Black Summit bio describing STEM as a key part of his curriculum. [2]
+Faith + renewal framing keywords (brand voice): “renew your mind,” “subconscious behavior patterns,” “faith and transformation,” “self-love and healing,” “spiritual growth mindset.” These terms are explicitly present in the themes of his book descriptions and podcast positioning. [39]
+Structurally, the new site should implement an “About / Profile” page that acts as the canonical identity node: real name + stage name, credentials (veteran; retired robotics engineer), core mission, and explicit “sameAs” links to social profiles. Google provides structured data patterns for profile pages and indicates it can use sameAs in understanding entities. [40]
+Influencers, podcasts, and UGC partnership targets
+The best outreach strategy is to treat podcasts and UGC as a distribution system for the three pillars above: “story (transformation), science (neuroeducation), and skills (Neuro‑STEM).” [33]
+He already has a proven podcast appearance on entity["podcast","Keep The Change","personal development podcast"] (September 2023 episode page), which can be repackaged into a “Featured In” media kit. That media kit should live on the new website and be designed to convert: 30‑second bio, 2‑minute bio, camera-ready photos, talk titles, and 6–10 “question prompts” for hosts. [5]
+For larger “science + practical tools” podcasts, realistic target tiers include:
+Tier one (aspirational, high reach): entity["podcast","Huberman Lab","health and neuroscience podcast"] (strong fit for brain-based tools and behavior change framing) and entity["podcast","Hidden Brain","behavioral science podcast"] (fit for subconscious patterns and identity/choice narratives). [41]
+Tier two (high alignment, more accessible booking): entity["podcast","The Dr. Leaf Show","neuroscience and mental health podcast"] (neuroplasticity + mind management + faith-adjacent audiences) and entity["podcast","Kwik Brain with Jim Kwik","brain performance podcast"] (learning and cognitive performance, especially if pitched around “recode your mind” metaphors tied to robotics). [42]
+Tier three (education niche; strong for speaking and program sales): entity["podcast","The Learning Scientists Podcast","evidence based learning podcast"], which explicitly targets teachers, students, and parents with evidence-based practice—well-aligned with the “neuroeducation for the people” positioning. [43]
+For culturally specific mental wellness ecosystems (useful if Brother Brooklyn’s focus includes Black men’s brain health, BIPOC leadership, and community change), entity["podcast","Therapy for Black Girls","mental health podcast"] is a relevant model of a large, culturally anchored mental health platform with a podcast and YouTube distribution; even if the audience is not perfectly overlapping, it is a strong example of how to package clinical concepts into accessible, shareable content. [44]
+UGC strategy should be designed to work even without celebrity influencers. The Wimee ecosystem provides a template: Wimee content is purpose-built for libraries/schools/parents and has PBS distribution; similarly, Brother Brooklyn can build “Brain Nuggets” into a repeatable, community-driven short-form format (60–120 seconds) that educators and mentors can duet/remix with real classroom/community use cases. [45]
+Two partnership vectors are immediately available from existing ecosystems:
+Wimee’s literacy initiative explicitly states it is “teaming up with” entity["athlete","Nate Boyer","u.s. veteran and athlete"] for “One Country, One Book.” Even if that initiative is Wimee-owned, the association indicates an existing network of partners that can be expanded into co-branded appearances and content collaborations. [46]
+The Wimee system’s presence on entity["organization","YouTube","video platform"] and its entity["organization","PBS","us public broadcaster"] affiliation suggest a “credible family” of educational collaborators (libraries, children’s museums, PBS affiliates). This can be leveraged for local/regional speaking bookings, school district PD days, and community STEM events—each of which becomes a content asset (photos, short clips, testimonials) for SEO and conversion. [45]
+
+[1] [2] [3] [32] [37] Brother Brooklyn Bio — Wimee.tv
+https://wimee.tv/brother-brooklyn-bio
+[4] https://www.thinktankmediaus.com/uploads/8/8/9/3/8893683/michigan_black_summit_2025_program.pdf
+https://www.thinktankmediaus.com/uploads/8/8/9/3/8893683/michigan_black_summit_2025_program.pdf
+[5] [33] https://bartnollenberger.com/keep-the-change-podcast/lessons-from-the-school-of-hardknocksa2chs65e6tspfn8-s6n5d-fz6n4-4bgx8-anrjc-bs6rn-2tn8s-rzzdm-97bkb-kfl5h-he6l3-fpjzt
+https://bartnollenberger.com/keep-the-change-podcast/lessons-from-the-school-of-hardknocksa2chs65e6tspfn8-s6n5d-fz6n4-4bgx8-anrjc-bs6rn-2tn8s-rzzdm-97bkb-kfl5h-he6l3-fpjzt
+[6] [7] [17] [36] Spirit Man Speaks – Spirit Man Speaks
+https://spiritmanspeaks.com/
+[8] [19]  MyBookOrders.com 
+https://secure.mybookorders.com/mbo_index.php?Orderpage=3897
+[9] https://books.apple.com/us/book/lessons-from-the-school-of-hardknocks/id6445463165
+https://books.apple.com/us/book/lessons-from-the-school-of-hardknocks/id6445463165
+[10] [39] Author Brother Brooklyn - Christian Publisher Xulon Press
+https://www.xulonpress.com/bookstore/bookdetail.php?PB_ISBN=9781662845413
+[11] Brother Brooklyn Presents Wimee The Robot's Brain Adventure ...
+https://www.amazon.sg/Brother-Brooklyn-Presents-Robots-Adventure/dp/B0FDWSL66H?utm_source=chatgpt.com
+[12] About — Wimee.tv
+https://wimee.tv/about
+[13] [45] https://www.pbs.org/show/wimees-words/
+https://www.pbs.org/show/wimees-words/
+[14] https://wimee.tv/wimee-ai
+https://wimee.tv/wimee-ai
+[15] https://everychildthrives.com/meet-wimee/
+https://everychildthrives.com/meet-wimee/
+[16] Brother Brooklyn
+https://www.youtube.com/channel/UCuu88XvHwSfwQnH502IMO0g?utm_source=chatgpt.com
+[18] Blog – Spirit Man Speaks
+https://spiritmanspeaks.com/blog/
+[20] https://developers.google.com/search/docs/appearance/core-web-vitals
+https://developers.google.com/search/docs/appearance/core-web-vitals
+[21] https://developers.google.com/search/blog/2023/05/introducing-inp
+https://developers.google.com/search/blog/2023/05/introducing-inp
+[22] https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data
+https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data
+[23] https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes
+https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes
+[24] https://www.jensenlearning.com/
+https://www.jensenlearning.com/
+[25] https://revelationsineducation.com/
+https://revelationsineducation.com/
+[26] https://theneurocoaching.academy/
+https://theneurocoaching.academy/
+[27] https://neuroscienceschool.com/coachu/
+https://neuroscienceschool.com/coachu/
+[28] [41] https://www.hubermanlab.com/podcast
+https://www.hubermanlab.com/podcast
+[29] https://drjoedispenza.com/
+https://drjoedispenza.com/
+[30] https://danielamenmd.com/
+https://danielamenmd.com/
+[31] https://en.wikipedia.org/wiki/Daniel_Amen
+https://en.wikipedia.org/wiki/Daniel_Amen
+[34] [38] https://www.waldenu.edu/news-and-events/what-is-neuroeducation
+https://www.waldenu.edu/news-and-events/what-is-neuroeducation
+[35] https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+[40] https://developers.google.com/search/docs/appearance/structured-data/profile-page
+https://developers.google.com/search/docs/appearance/structured-data/profile-page
+[42] https://drleaf.com/?srsltid=AfmBOopKNWpSjtSCdU_Wdd2vbZvquh8BzY9RJaWwAQHGDu8dg0AVpFIN
+https://drleaf.com/?srsltid=AfmBOopKNWpSjtSCdU_Wdd2vbZvquh8BzY9RJaWwAQHGDu8dg0AVpFIN
+[43] https://www.learningscientists.org/podcast-episodes
+https://www.learningscientists.org/podcast-episodes
+[44] https://therapyforblackgirls.com/podcast/
+https://therapyforblackgirls.com/podcast/
+[46] https://wimee.tv/
+https://wimee.tv/

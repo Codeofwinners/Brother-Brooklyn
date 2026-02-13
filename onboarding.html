@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brother Brooklyn — Client Onboarding | bayareaweb.design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #0a0a0a;
+  --black-light: #111111;
+  --black-card: #161616;
+  --black-elevated: #1c1c1c;
+  --gold: #3A6B8C;
+  --gold-dim: #2C5570;
+  --gold-bright: #5A9BBF;
+  --gold-glow: rgba(58, 107, 140, 0.15);
+  --gold-glow-strong: rgba(58, 107, 140, 0.3);
+  --white: #f5f0e8;
+  --white-dim: #c4bfb4;
+  --gray: #6b6560;
+  --gray-dark: #3a3632;
+  --red-subtle: #c0392b;
+  --green-subtle: #27ae60;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  font-size: 16px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--black);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-bright));
+  z-index: 9999;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 12px var(--gold-glow-strong);
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(20px);
+  background: rgba(10, 10, 10, 0.7);
+  border-bottom: 1px solid rgba(58, 107, 140, 0.08);
+  transition: transform 0.4s ease;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+.nav-logo span { color: var(--white-dim); font-weight: 400; }
+.nav-status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-status .dot {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ===== GRAIN OVERLAY ===== */
+.grain {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding-top: 100px;
+}
+.hero .container {
+  max-width: 1100px;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100%;
+  background: radial-gradient(ellipse at 20% 50%, rgba(58, 107, 140, 0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(58, 107, 140, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s 0.3s forwards;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 900;
+  line-height: 1.02;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s 0.5s forwards;
+}
+.hero-title .gold { color: var(--gold); }
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3.5vw, 32px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--white-dim);
+  margin-bottom: 48px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s 0.7s forwards;
+}
+.hero-intro {
+  font-size: 18px;
+  color: var(--white-dim);
+  max-width: 720px;
+  line-height: 1.8;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s 0.9s forwards;
+}
+.hero-intro strong { color: var(--white); font-weight: 500; }
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 0.8s 1.4s forwards;
+}
+.hero-scroll span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gray);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.hero-scroll .line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scroll-line 2s infinite;
+}
+@keyframes scroll-line {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== SECTION ===== */
+.section {
+  padding: 120px 0;
+  position: relative;
+}
+.section-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--gold);
+  margin-bottom: 48px;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.section-divider.visible {
+  opacity: 1;
+  transform: scaleX(1);
+}
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+.section-heading .gold { color: var(--gold); }
+
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ===== FINDINGS CARDS ===== */
+.findings-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 32px;
+}
+.finding-card {
+  background: var(--black-card);
+  border: 1px solid rgba(58, 107, 140, 0.1);
+  border-radius: 12px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+.finding-card:hover {
+  border-color: rgba(58, 107, 140, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+.finding-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--gold);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.finding-card:hover::before { opacity: 1; }
+.finding-card .tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.finding-card p {
+  font-size: 15px;
+  color: var(--white-dim);
+  line-height: 1.7;
+}
+.finding-card p strong { color: var(--white); }
+
+/* ===== TIMELINE / PHASES ===== */
+.timeline {
+  position: relative;
+  margin-top: 48px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--gold-dim), transparent);
+}
+.phase {
+  position: relative;
+  padding-left: 72px;
+  padding-bottom: 64px;
+}
+.phase:last-child { padding-bottom: 0; }
+.phase-marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  background: var(--black-card);
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--gold);
+  z-index: 2;
+  transition: all 0.4s ease;
+}
+.phase:hover .phase-marker {
+  background: var(--gold);
+  color: var(--black);
+  box-shadow: 0 0 24px var(--gold-glow-strong);
+}
+.phase-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.phase-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.phase-desc {
+  color: var(--white-dim);
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+.phase-items {
+  list-style: none;
+}
+.phase-items li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  color: var(--white-dim);
+  font-size: 14px;
+}
+.phase-items li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  background: var(--gold-dim);
+  border-radius: 50%;
+}
+
+/* ===== CALLOUT BOX ===== */
+.callout {
+  background: linear-gradient(135deg, rgba(58, 107, 140, 0.08), rgba(58, 107, 140, 0.03));
+  border: 1px solid rgba(58, 107, 140, 0.2);
+  border-radius: 12px;
+  padding: 32px;
+  margin: 40px 0;
+  position: relative;
+  overflow: hidden;
+}
+.callout::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright), var(--gold));
+}
+.callout p {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--white);
+}
+.callout .gold { color: var(--gold); font-weight: 700; font-style: normal; }
+
+/* ===== HANDLED FOR YOU CARDS ===== */
+.handled-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 32px;
+}
+@media (max-width: 640px) {
+  .handled-grid { grid-template-columns: 1fr; }
+}
+.handled-card {
+  background: var(--black-card);
+  border: 1px solid rgba(58, 107, 140, 0.1);
+  border-radius: 16px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.handled-card .icon {
+  width: 48px;
+  height: 48px;
+  background: var(--gold-glow);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.handled-card h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.handled-card p {
+  color: var(--white-dim);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.handled-card .badge {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold);
+  background: var(--gold-glow);
+  padding: 6px 14px;
+  border-radius: 100px;
+  letter-spacing: 1px;
+}
+
+/* ===== FORM STYLES ===== */
+.form-section {
+  margin-bottom: 64px;
+}
+.form-section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.form-section-number {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--gold);
+  opacity: 0.3;
+  line-height: 1;
+}
+.form-section-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+}
+.form-section-desc {
+  color: var(--white-dim);
+  font-size: 15px;
+  margin-bottom: 24px;
+  padding-left: 52px;
+}
+.priority-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(58, 107, 140, 0.12);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  animation: priority-glow 2s infinite;
+}
+@keyframes priority-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(58, 107, 140, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(58, 107, 140, 0.4); }
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+.form-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--white-dim);
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+.form-label .optional {
+  color: var(--gray);
+  font-weight: 400;
+}
+.form-input {
+  width: 100%;
+  background: var(--black-elevated);
+  border: 1px solid var(--gray-dark);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--white);
+  outline: none;
+  transition: all 0.3s ease;
+}
+.form-input::placeholder {
+  color: var(--gray);
+}
+.form-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-glow), 0 0 20px rgba(58, 107, 140, 0.08);
+}
+.form-input:not(:placeholder-shown) {
+  border-color: rgba(58, 107, 140, 0.3);
+}
+textarea.form-input {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Input with icon */
+.input-with-icon {
+  position: relative;
+}
+.input-with-icon .icon-prefix {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray);
+  font-size: 16px;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+.input-with-icon .form-input {
+  padding-left: 42px;
+}
+.input-with-icon .form-input:focus ~ .icon-prefix,
+.input-with-icon .form-input:not(:placeholder-shown) ~ .icon-prefix {
+  color: var(--gold);
+}
+
+/* Checkbox group */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+@media (max-width: 500px) {
+  .checkbox-grid { grid-template-columns: 1fr; }
+}
+.checkbox-item {
+  position: relative;
+}
+.checkbox-item input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.checkbox-item label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--black-elevated);
+  border: 1px solid var(--gray-dark);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  color: var(--white-dim);
+}
+.checkbox-item label:hover {
+  border-color: rgba(58, 107, 140, 0.3);
+  background: rgba(58, 107, 140, 0.03);
+}
+.checkbox-item input:checked + label {
+  border-color: var(--gold);
+  background: rgba(58, 107, 140, 0.06);
+  color: var(--white);
+}
+.checkbox-item .check-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--gray-dark);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+.checkbox-item input:checked + label .check-box {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.checkbox-item input:checked + label .check-box::after {
+  content: '';
+  width: 6px;
+  height: 10px;
+  border: solid var(--black);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translateY(-1px);
+}
+
+/* Social media fields */
+.social-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 500px) {
+  .social-grid { grid-template-columns: 1fr; }
+}
+
+/* Alert box */
+.alert-box {
+  display: flex;
+  gap: 14px;
+  padding: 20px;
+  background: rgba(58, 107, 140, 0.06);
+  border: 1px solid rgba(58, 107, 140, 0.15);
+  border-radius: 10px;
+  margin: 20px 0;
+}
+.alert-box .alert-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.alert-box p {
+  font-size: 14px;
+  color: var(--white-dim);
+  line-height: 1.6;
+}
+.alert-box p strong { color: var(--white); }
+
+/* Asset checklist */
+.asset-list {
+  list-style: none;
+  margin-top: 16px;
+}
+.asset-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--black-elevated);
+  border: 1px solid var(--gray-dark);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.asset-list li:hover {
+  border-color: rgba(58, 107, 140, 0.3);
+}
+.asset-list li.checked {
+  border-color: var(--gold);
+  background: rgba(58, 107, 140, 0.04);
+}
+.asset-check {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--gray-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+.asset-list li.checked .asset-check {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.asset-list li.checked .asset-check::after {
+  content: '';
+  width: 6px;
+  height: 10px;
+  border: solid var(--black);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translateY(-1px);
+}
+.asset-info {
+  flex: 1;
+}
+.asset-info .name {
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--white);
+}
+.asset-info .desc {
+  font-size: 13px;
+  color: var(--gray);
+  margin-top: 2px;
+}
+
+/* ===== SUMMARY CHECKLIST ===== */
+.summary-list {
+  list-style: none;
+  counter-reset: summary;
+  margin-top: 32px;
+}
+.summary-list li {
+  counter-increment: summary;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.summary-list li::before {
+  content: counter(summary);
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--gold);
+  opacity: 0.4;
+  min-width: 28px;
+  line-height: 1.2;
+}
+.summary-list li strong { color: var(--white); font-weight: 600; }
+.summary-list li span { color: var(--white-dim); font-size: 15px; }
+
+/* ===== SUBMIT ===== */
+.submit-section {
+  text-align: center;
+  padding: 80px 0 40px;
+}
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 48px;
+  background: var(--gold);
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(58, 107, 140, 0.3), 0 0 60px rgba(58, 107, 140, 0.15);
+}
+.submit-btn:active {
+  transform: translateY(0);
+}
+.submit-btn .arrow {
+  transition: transform 0.3s ease;
+}
+.submit-btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* ===== CLOSING ===== */
+.closing {
+  text-align: center;
+  padding: 80px 0 120px;
+  position: relative;
+}
+.closing::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 300px;
+  background: radial-gradient(ellipse at 50% 100%, rgba(58, 107, 140, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.closing-quote {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3.5vw, 28px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--white);
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+.closing-quote .gold { color: var(--gold); font-weight: 700; font-style: normal; }
+.closing-signature {
+  margin-top: 32px;
+}
+.closing-signature .name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+}
+.closing-signature .site {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--gold);
+  margin-top: 4px;
+}
+.closing-divider {
+  width: 40px;
+  height: 2px;
+  background: var(--gold);
+  margin: 24px auto;
+}
+
+/* ===== FORM COMPLETION COUNTER ===== */
+.form-progress {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--black-card);
+  border: 1px solid rgba(58, 107, 140, 0.2);
+  border-radius: 16px;
+  padding: 16px 20px;
+  z-index: 998;
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s ease;
+  transform: translateY(100px);
+  opacity: 0;
+}
+.form-progress.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+.form-progress-ring {
+  position: relative;
+  width: 44px;
+  height: 44px;
+}
+.form-progress-ring svg {
+  transform: rotate(-90deg);
+}
+.form-progress-ring circle {
+  fill: none;
+  stroke-width: 3;
+}
+.form-progress-ring .bg {
+  stroke: var(--gray-dark);
+}
+.form-progress-ring .fill {
+  stroke: var(--gold);
+  stroke-dasharray: 113;
+  stroke-dashoffset: 113;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.form-progress-text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--white-dim);
+  line-height: 1.4;
+}
+.form-progress-text strong {
+  color: var(--gold);
+  font-size: 14px;
+  display: block;
+}
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  background: var(--black-card);
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: 14px 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--white);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transform: translateX(120%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast.show { transform: translateX(0); }
+.toast .toast-icon { font-size: 18px; }
+
+/* ===== FILE UPLOAD CARDS ===== */
+.upload-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+@media (max-width: 640px) {
+  .upload-grid { grid-template-columns: 1fr; }
+}
+.upload-card {
+  background: var(--black-elevated);
+  border: 2px dashed var(--gray-dark);
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.upload-card:hover {
+  border-color: var(--gold);
+  background: rgba(58, 107, 140, 0.03);
+}
+.upload-card.has-files {
+  border-color: var(--gold);
+  border-style: solid;
+  background: rgba(58, 107, 140, 0.06);
+}
+.upload-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.upload-label {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.upload-desc {
+  font-size: 13px;
+  color: var(--gray);
+  margin-bottom: 16px;
+}
+.upload-btn {
+  display: inline-block;
+  padding: 10px 24px;
+  background: var(--gold);
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.upload-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px var(--gold-glow-strong);
+}
+.upload-input {
+  display: none;
+}
+.upload-filenames {
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold);
+  line-height: 1.6;
+  word-break: break-all;
+}
+
+/* ===== SUBMIT SPINNER ===== */
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(10, 10, 10, 0.3);
+  border-top-color: var(--black);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  vertical-align: middle;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav { padding: 16px 20px; }
+  .section { padding: 80px 0; }
+  .timeline::before { left: 20px; }
+  .phase { padding-left: 60px; }
+  .phase-marker { width: 42px; height: 42px; font-size: 16px; }
+  .handled-grid { grid-template-columns: 1fr; }
+  .form-section-desc { padding-left: 0; }
+  .form-progress { bottom: 16px; right: 16px; padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Grain Overlay -->
+<div class="grain"></div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-logo">bayareaweb<span>.design</span></div>
+  <div class="nav-status">
+    <div class="dot"></div>
+    Onboarding Active
+  </div>
+</nav>
+
+<!-- Form Progress Widget -->
+<div class="form-progress" id="formProgress">
+  <div class="form-progress-ring">
+    <svg width="44" height="44" viewBox="0 0 40 40">
+      <circle class="bg" cx="20" cy="20" r="18" />
+      <circle class="fill" id="progressRing" cx="20" cy="20" r="18" />
+    </svg>
+  </div>
+  <div class="form-progress-text">
+    <strong id="progressPercent">0%</strong>
+    fields completed
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <span class="toast-icon"></span>
+  <span id="toastMsg"></span>
+</div>
+
+<form id="onboardingForm" autocomplete="off" enctype="multipart/form-data">
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">SEO Web Development &amp; Digital Strategy &mdash; February 2026</div>
+    <h1 class="hero-title">
+      Let's build your<br><span class="gold">digital empire.</span>
+    </h1>
+    <p class="hero-subtitle">Brother Brooklyn &times; BKX Studios</p>
+    <div class="hero-intro">
+      <p>Hey Brother Brooklyn &mdash; great connecting on Upwork. I've already started researching your brand, your book <strong>Lessons From The School Of Hard Knocks</strong>, and the competitive landscape in your space.</p>
+      <br>
+      <p>What I'm bringing to the table is a <strong>full SEO web development build</strong> &mdash; a custom website engineered to rank for your target keywords, a content strategy to drive organic traffic, link building to establish your authority, and a social media &amp; UGC pipeline to push book sales. This page walks you through my process and collects what I need from you to get started.</p>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="line"></div>
+  </div>
+</section>
+
+<!-- ===== INITIAL FINDINGS ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-divider reveal"></div>
+    <div class="section-eyebrow reveal">Initial Research</div>
+    <h2 class="section-heading reveal reveal-delay-1">
+      What I've found <span class="gold">so far.</span>
+    </h2>
+    <p class="reveal reveal-delay-2" style="color: var(--white-dim); margin-bottom: 8px;">From an SEO perspective, here's the honest assessment after my first research pass. There are clear opportunity gaps &mdash; and I'm here to help you identify them, close them, and implement the strategy to get you ranking:</p>
+
+    <div class="findings-grid">
+      <div class="finding-card reveal reveal-delay-1">
+        <div class="tag">SEO Gap: Keywords</div>
+        <p>Right now there's <strong>no targeted keyword strategy</strong> behind your online presence. Your book sits at a powerful intersection I'd call <strong>&ldquo;Neuro-Theology&rdquo;</strong> &mdash; blending neuroscience, subconscious reprogramming, and Christian faith &mdash; but none of your current listings are optimized for those terms. People are searching for this exact content and <strong>not finding you</strong>. That's the gap I'm here to close.</p>
+      </div>
+      <div class="finding-card reveal reveal-delay-2">
+        <div class="tag">SEO Gap: Link Building</div>
+        <p>There's <strong>zero backlink strategy</strong> in place. No authority sites are linking to your content, which means Google has no reason to rank you above competitors. I'll build a link-building plan &mdash; guest posts, podcast features, directory listings, and press mentions &mdash; to start generating the <strong>authority signals</strong> Google needs to push you up in search results.</p>
+      </div>
+      <div class="finding-card reveal reveal-delay-3">
+        <div class="tag">SEO Gap: Social &amp; UGC</div>
+        <p>There's no <strong>social media content engine or UGC (User Generated Content) strategy</strong> driving traffic back to your brand. In 2026, platforms like TikTok and Instagram are where books sell &mdash; #ChristianBookTok alone is massive. I'll set up a content pipeline: quote graphics from your book, short-form video clips, influencer partnerships, and a UGC campaign to get real people talking about your work.</p>
+      </div>
+      <div class="finding-card reveal reveal-delay-4">
+        <div class="tag">Platform Optimization</div>
+        <p>Your presence is scattered across <strong>Barnes &amp; Noble, Amazon, Xulon Press, and eBay</strong>. Those listings are live but they're generic &mdash; they don't capture YOUR brand or story. I'll help you <strong>optimize the SEO content on each of those platforms</strong> &mdash; better titles, descriptions, keywords, and metadata so they actually rank and convert. We maximize what you already have while building your own home base.</p>
+      </div>
+      <div class="finding-card reveal reveal-delay-4">
+        <div class="tag">Brand Opportunity</div>
+        <p>There's a strong branding opportunity around the <strong>&ldquo;Brother Brooklyn&rdquo;</strong> identity. Your radio appearances give us <strong>local SEO wins</strong>, and the brand name gives us <strong>national appeal</strong>. My job is to help you <strong>identify these opportunity gaps, build the strategy to close them, and execute the implementation</strong> from start to finish.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE PROCESS ===== -->
+<section class="section" style="background: var(--black-light);">
+  <div class="container">
+    <div class="section-divider reveal"></div>
+    <div class="section-eyebrow reveal">The Process</div>
+    <h2 class="section-heading reveal reveal-delay-1">
+      How this <span class="gold">works.</span>
+    </h2>
+    <p class="reveal reveal-delay-2" style="color: var(--white-dim); max-width: 600px;">This isn't a &ldquo;throw up a website and hope for the best&rdquo; situation. What you're paying for is the <strong style="color: var(--white);">strategy, the expertise, and the execution</strong> of a real game plan. Here's the process:</p>
+
+    <div class="timeline">
+      <div class="phase reveal">
+        <div class="phase-marker">1</div>
+        <div class="phase-label">Phase 1</div>
+        <div class="phase-title">The Blueprint <span style="color: var(--gold);">(3&ndash;5 Hours Deep Work)</span></div>
+        <p class="phase-desc">Once I have your info and design inspiration, I'll begin building your custom strategy blueprint. This is the foundation everything else is built on.</p>
+        <ul class="phase-items">
+          <li>Full competitor analysis &mdash; SEO rankings, keywords, content gaps</li>
+          <li>Identify the gaps in your market that we need to close</li>
+          <li>Build your keyword strategy and content roadmap</li>
+          <li>Map out site structure, pages, and conversion funnel</li>
+          <li>Set up GA4, Search Console, Google Business Profile, Tag Manager &mdash; all under your email</li>
+        </ul>
+      </div>
+      <div class="phase reveal">
+        <div class="phase-marker">2</div>
+        <div class="phase-label">Phase 2</div>
+        <div class="phase-title">Trello Board <span style="color: var(--gold);">Setup</span></div>
+        <p class="phase-desc">I'll build a shared Trello board so we stay on the same page throughout the entire build.</p>
+        <ul class="phase-items">
+          <li>Every task, milestone, and deliverable &mdash; organized by phase</li>
+          <li>Clear status tracking so you always know where we are</li>
+          <li>Content calendar for social media and blog posts</li>
+          <li>Influencer outreach pipeline and tracking</li>
+          <li>SEO implementation checklist</li>
+        </ul>
+      </div>
+      <div class="phase reveal">
+        <div class="phase-marker">3</div>
+        <div class="phase-label">Phase 3</div>
+        <div class="phase-title">Strategy Review <span style="color: var(--gold);">(Together)</span></div>
+        <p class="phase-desc">We'll schedule a call to go over the full strategy together. I'll walk you through everything before we build.</p>
+        <ul class="phase-items">
+          <li>Competitor analysis findings &mdash; what I learned, where the opportunities are</li>
+          <li>Keyword strategy &mdash; exactly what we're targeting and why</li>
+          <li>Site plan &mdash; pages, layout, conversion flow</li>
+          <li>Content and influencer roadmap &mdash; what gets published, when, where</li>
+        </ul>
+      </div>
+      <div class="phase reveal">
+        <div class="phase-marker">4</div>
+        <div class="phase-label">Phase 4</div>
+        <div class="phase-title">Execute &mdash; <span style="color: var(--gold);">Build, Launch, Grow</span></div>
+        <p class="phase-desc">Once we're aligned, we go live. Three simultaneous strategies:</p>
+        <ul class="phase-items">
+          <li><strong style="color: var(--white);">UGC via Influencers</strong> &mdash; fastest way to push book sales. Weeks, not months.</li>
+          <li><strong style="color: var(--white);">SEO Content</strong> &mdash; long game. Free organic traffic from Google for years. 3&ndash;6 month ramp.</li>
+          <li><strong style="color: var(--white);">Social Media NOW</strong> &mdash; quote graphics, video clips, stitches. Already extracting from your book PDF.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <p>&ldquo;This blueprint is the most important part of the entire project. It's the difference between <span class="gold">guessing and knowing</span>. Every decision after this &mdash; design, content, SEO, influencer outreach &mdash; will be driven by this strategy. <span class="gold">This is what you're paying for: my experience in knowing exactly what to build and why.</span>&rdquo;</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTENT & SOCIAL STRATEGY ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-divider reveal"></div>
+    <div class="section-eyebrow reveal">Content Strategy</div>
+    <h2 class="section-heading reveal reveal-delay-1">
+      Your book is a <span class="gold">content goldmine.</span>
+    </h2>
+    <p class="reveal reveal-delay-2" style="color: var(--white-dim); max-width: 640px; margin-bottom: 32px;">I've already received the PDF of <strong style="color: var(--white);">Lessons From The School Of Hard Knocks</strong> and I'm extracting quotes from it. Here's the strategy for turning your book into a content engine across Instagram and TikTok:</p>
+
+    <div class="findings-grid">
+      <div class="finding-card reveal reveal-delay-1">
+        <div class="tag">Instagram Strategy</div>
+        <p>I'll pull <strong>high-impact quotes directly from your book</strong> and turn them into branded quote graphics &mdash; dark backgrounds, clean typography, your name and brand on every one. These get posted consistently to build authority and recognition. Think of it as <strong>free advertising for the book</strong> every single day. Your followers see the wisdom, they want the full thing, they buy.</p>
+      </div>
+      <div class="finding-card reveal reveal-delay-2">
+        <div class="tag">TikTok Strategy</div>
+        <p><strong>#ChristianBookTok is massive right now</strong> and your &ldquo;Neuro-Theology&rdquo; angle is perfect for it. The play: short-form videos of you reading or reacting to your own quotes, &ldquo;Stitch&rdquo; responses to viral videos about struggle and faith, and <strong>highlight clips of key book pages</strong> set to trending audio. This is the fastest way to reach new readers &mdash; weeks, not months.</p>
+      </div>
+      <div class="finding-card reveal reveal-delay-3">
+        <div class="tag">Quote Extraction</div>
+        <p>I'm going through your book and pulling out the <strong>most shareable, hard-hitting lines</strong> &mdash; the ones that stop someone mid-scroll. These become the foundation for all social content: quote cards, video hooks, captions, and blog headers. One book gives us <strong>months of content</strong> across every platform.</p>
+      </div>
+      <div class="finding-card reveal reveal-delay-4">
+        <div class="tag">UGC Campaign</div>
+        <p>Beyond your own content, we'll launch a <strong>User Generated Content campaign</strong> &mdash; getting real readers and micro-influencers to post about your book. Influencer partnerships, book reviews on camera, the <strong>#HardKnockGraduate challenge</strong> &mdash; all designed to create organic buzz that drives sales without paying for ads.</p>
+      </div>
+    </div>
+
+    <div class="callout reveal" style="margin-top: 40px;">
+      <p>&ldquo;Your book already has the content. My job is to <span class="gold">extract it, package it, and distribute it</span> across the platforms where your audience is already spending their time. Every quote is a piece of marketing that <span class="gold">works for you 24/7</span>.&rdquo;</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BILLING & START DATE ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-divider reveal"></div>
+    <div class="section-eyebrow reveal">Billing &amp; Timeline</div>
+    <h2 class="section-heading reveal reveal-delay-1">
+      Starting <span class="gold">February 13th.</span>
+    </h2>
+    <p class="reveal reveal-delay-2" style="color: var(--white-dim); max-width: 640px; margin-bottom: 32px;">I see you want to kick things off on the 13th &mdash; let's do it. Here's how the billing side works so there are no surprises:</p>
+
+    <div class="findings-grid">
+      <div class="finding-card reveal reveal-delay-1">
+        <div class="tag">How It Works</div>
+        <p>This is an <strong>hourly contract through Upwork</strong>. Upwork's Work Diary automatically tracks my hours in real time &mdash; you can see exactly when I'm working, what I'm working on, and for how long. <strong>Full transparency, no guesswork.</strong></p>
+      </div>
+      <div class="finding-card reveal reveal-delay-2">
+        <div class="tag">Weekly Payouts</div>
+        <p>Upwork processes payments on a <strong>weekly billing cycle</strong>. At the end of each work week, the tracked hours are billed automatically and paid out. You'll receive a detailed breakdown of every hour logged.</p>
+      </div>
+      <div class="finding-card reveal reveal-delay-3">
+        <div class="tag">Hour Estimates</div>
+        <p>Before I start any phase, I'll give you a <strong>clear estimate of how many hours it will take</strong>. No surprises. As we move through each milestone, I'll keep you updated on hours used and hours remaining so you always know where we stand.</p>
+      </div>
+    </div>
+
+    <div class="callout reveal" style="margin-top: 40px;">
+      <p>&ldquo;I keep everything <span class="gold">transparent</span>. You'll always know what I'm working on, how long it's taking, and what's coming next. I'll provide hour estimates upfront for each phase so you can <span class="gold">plan and budget accordingly</span>.&rdquo;</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT I'M HANDLING ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-divider reveal"></div>
+    <div class="section-eyebrow reveal">Already Handled</div>
+    <h2 class="section-heading reveal reveal-delay-1">
+      What I'm taking care of <span class="gold">for you.</span>
+    </h2>
+
+    <div class="handled-grid">
+      <div class="handled-card reveal reveal-delay-1">
+        <div class="icon">&#127760;</div>
+        <h3>Domain Strategy</h3>
+        <p>You already have <strong style="color: var(--gold);">bklynsohk.com</strong> &mdash; your Shopify store with the merch line. That's a great start and we're going to keep that running. But here's why I recommend we <strong style="color: var(--white);">also secure a brand-focused domain</strong> that ties everything together:</p>
+        <p style="margin-top: 12px;"><strong style="color: var(--white);">bklynsohk.com</strong> works for merch, but it doesn't tell Google or your audience that you're an <strong style="color: var(--white);">author, speaker, and thought leader</strong>. When someone searches &ldquo;Brother Brooklyn&rdquo; or &ldquo;Lessons From The School Of Hard Knocks,&rdquo; you need a home base that represents the full brand &mdash; the book, the merch, the content, the story. One hub that connects everything:</p>
+        <ul style="list-style: none; margin-top: 12px;">
+          <li style="padding: 8px 0; color: var(--white-dim); font-size: 14px;">&#10003; <strong style="color: var(--white);">Brand SEO</strong> &mdash; Google associates &ldquo;Brother Brooklyn&rdquo; with YOUR site, not Amazon or B&amp;N</li>
+          <li style="padding: 8px 0; color: var(--white-dim); font-size: 14px;">&#10003; <strong style="color: var(--white);">Audience ownership</strong> &mdash; capture emails, build a list, own the relationship with your readers</li>
+          <li style="padding: 8px 0; color: var(--white-dim); font-size: 14px;">&#10003; <strong style="color: var(--white);">Entity unification</strong> &mdash; consolidates &ldquo;Brother Brooklyn&rdquo; + &ldquo;BKX Studios&rdquo; + &ldquo;bklynsohk.com&rdquo; into one authority signal for Google</li>
+          <li style="padding: 8px 0; color: var(--white-dim); font-size: 14px;">&#10003; <strong style="color: var(--white);">Scalability</strong> &mdash; book, courses, merch, coaching, podcast &mdash; all under one roof</li>
+        </ul>
+        <p style="margin-top: 16px;"><strong style="color: var(--white);">The play:</strong> We keep bklynsohk.com for your merch store and link it from the new main site. The new domain becomes the hub &mdash; the authority site that ranks, converts, and represents the full Brother Brooklyn brand. I'd also help you optimize the SEO on bklynsohk.com so it performs better on its own.</p>
+        <p style="margin-top: 16px; font-weight: 500; color: var(--white);">Recommended domains for the main brand site:</p>
+        <ul style="list-style: none; margin-top: 12px;">
+          <li style="padding: 10px 0; border-bottom: 1px solid rgba(58, 107, 140, 0.1); color: var(--white); font-weight: 500;">&#8226; <strong style="color: var(--gold);">BrotherBrooklyn.com</strong> &mdash; short, memorable, strongest for brand SEO</li>
+          <li style="padding: 10px 0; border-bottom: 1px solid rgba(58, 107, 140, 0.1); color: var(--white); font-weight: 500;">&#8226; <strong style="color: var(--gold);">BrotherBrooklynAuthor.com</strong> &mdash; backup if .com is taken, clear positioning as an author</li>
+          <li style="padding: 10px 0; border-bottom: 1px solid rgba(58, 107, 140, 0.1); color: var(--white); font-weight: 500;">&#8226; <strong style="color: var(--gold);">BKXStudios.com</strong> &mdash; works if you want to lead with the studio brand</li>
+        </ul>
+        <p style="margin-top: 14px; font-size: 14px; color: var(--white-dim);">I'll check availability and secure whichever one we go with &mdash; registered under your name, you own it fully.</p>
+        <span class="badge">Recommended Strategy</span>
+      </div>
+      <div class="handled-card reveal reveal-delay-2">
+        <div class="icon">&#9889;</div>
+        <h3>Free Hosting + Custom Email</h3>
+        <p>You're going on my hosting at <strong style="color: var(--white);">zero cost</strong>. Full cPanel access. Plus a custom professional email &mdash; something like <strong style="color: var(--gold);">contact@brotherbrooklyn.com</strong>. All included.</p>
+        <span class="badge">Zero Hosting Fees</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT I NEED FROM YOU ===== -->
+<section class="section" style="background: var(--black-light);">
+  <div class="container">
+    <div class="section-divider reveal"></div>
+    <div class="section-eyebrow reveal">Your Turn</div>
+    <h2 class="section-heading reveal reveal-delay-1">
+      What I need <span class="gold">from you.</span>
+    </h2>
+    <p class="reveal reveal-delay-2" style="color: var(--white-dim); margin-bottom: 12px;">The sooner I get this, the sooner I can start building the blueprint. Fill out what you can &mdash; every field gets us closer to launch.</p>
+    <p class="reveal reveal-delay-2" style="color: var(--gray); font-size: 13px; margin-bottom: 48px;"><span style="color: var(--gold);">*</span> = required to submit</p>
+
+    <!-- 1. ABOUT YOU -->
+    <div class="form-section reveal">
+      <div class="form-section-header">
+        <div class="form-section-number">01</div>
+        <div class="form-section-title">Quick Details <span style="color: var(--gold);">*</span></div>
+      </div>
+      <p class="form-section-desc">Just a few things I need before setting up accounts and getting started.</p>
+
+      <div class="form-group">
+        <label class="form-label">Full Legal Name <span style="color: var(--gold);">*</span></label>
+        <p style="font-size: 13px; color: var(--gray); margin-bottom: 10px;">I'll use this to register social media accounts, domain, Google Business Profile, etc.</p>
+        <input type="text" name="full_name" class="form-input tracked" placeholder="First and last name" data-field="fullname">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Gmail Address <span style="color: var(--gold);">*</span></label>
+        <p style="font-size: 13px; color: var(--gray); margin-bottom: 10px;">For GA4, Search Console, Trello, Google Business Profile, and Tag Manager. You'll own all accounts &mdash; I manage as admin.</p>
+        <div class="input-with-icon">
+          <input type="email" name="client_email" class="form-input tracked" placeholder="your.email@gmail.com" data-field="email">
+          <span class="icon-prefix">&#9993;</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Current Hosting &amp; Domain Situation</label>
+        <p style="font-size: 13px; color: var(--gray); margin-bottom: 10px;">I see you have <strong>bklynsohk.com</strong> on Shopify. Do you know who manages your hosting? Do you want to keep it, or are you open to migrating everything under one roof?</p>
+        <textarea name="hosting_info" class="form-input tracked" placeholder="e.g. I have Shopify for bklynsohk.com, not sure about hosting details... / I'd be open to consolidating everything..." rows="3" data-field="hosting"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Anything else I should know? <span class="optional">(optional)</span></label>
+        <p style="font-size: 13px; color: var(--gray); margin-bottom: 10px;">Upcoming events, deadlines, partnerships, anything relevant to the project.</p>
+        <textarea name="additional_info" class="form-input tracked" placeholder="e.g. I have a speaking event in March, working on a second book..." rows="3" data-field="additional"></textarea>
+      </div>
+    </div>
+
+    <!-- 2. DESIGN INSPIRATION -->
+    <div class="form-section reveal">
+      <div class="priority-badge">&#9733; #1 Priority</div>
+      <div class="form-section-header">
+        <div class="form-section-number">02</div>
+        <div class="form-section-title">Design Inspiration <span style="color: var(--gold);">*</span></div>
+      </div>
+      <p class="form-section-desc">Share 3 websites you love the look and feel of &mdash; any niche, any industry. They don't need to be competitors. Just sites where you thought &ldquo;I want mine to feel like THAT.&rdquo; I'll handle the competitor research on my end &mdash; that's what the blueprint phase is for.</p>
+
+      <div class="form-group">
+        <div class="input-with-icon">
+          <input type="url" name="website_1" class="form-input tracked" placeholder="https://example.com" data-field="website">
+          <span class="icon-prefix">&#128279;</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-with-icon">
+          <input type="url" name="website_2" class="form-input tracked" placeholder="https://example.com" data-field="website">
+          <span class="icon-prefix">&#128279;</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-with-icon">
+          <input type="url" name="website_3" class="form-input tracked" placeholder="https://example.com" data-field="website">
+          <span class="icon-prefix">&#128279;</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px; padding: 16px 20px; background: rgba(58, 107, 140, 0.08); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0;">
+        <p style="color: var(--white-dim); font-size: 14px; margin: 0; line-height: 1.6;"><strong style="color: var(--gold);">I'll identify your competition.</strong> Competitor analysis &mdash; SEO rankings, keyword gaps, content strategies, conversion funnels &mdash; is my job. That's what the blueprint phase is built for. You just focus on design inspiration here.</p>
+      </div>
+    </div>
+
+    <!-- 3. GOALS -->
+    <div class="form-section reveal">
+      <div class="form-section-header">
+        <div class="form-section-number">03</div>
+        <div class="form-section-title">Your Goals <span style="color: var(--gold);">*</span></div>
+      </div>
+      <p class="form-section-desc">What does success look like for you in the next 6&ndash;12 months? Select all that apply:</p>
+      <div class="checkbox-grid">
+        <div class="checkbox-item">
+          <input type="checkbox" id="goal-sales" name="goals[]" value="More book sales" class="tracked" data-field="goal">
+          <label for="goal-sales"><span class="check-box"></span> More book sales</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="goal-speaking" name="goals[]" value="Speaking engagements" class="tracked" data-field="goal">
+          <label for="goal-speaking"><span class="check-box"></span> Speaking engagements</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="goal-course" name="goals[]" value="Online course" class="tracked" data-field="goal">
+          <label for="goal-course"><span class="check-box"></span> Online course</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="goal-merch" name="goals[]" value="Merchandise" class="tracked" data-field="goal">
+          <label for="goal-merch"><span class="check-box"></span> Merchandise</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="goal-podcast" name="goals[]" value="Podcast" class="tracked" data-field="goal">
+          <label for="goal-podcast"><span class="check-box"></span> Podcast</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="goal-book2" name="goals[]" value="Second book" class="tracked" data-field="goal">
+          <label for="goal-book2"><span class="check-box"></span> Second book</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="goal-audiobook" name="goals[]" value="Audiobook" class="tracked" data-field="goal">
+          <label for="goal-audiobook"><span class="check-box"></span> Audiobook</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="goal-coaching" name="goals[]" value="1-on-1 coaching" class="tracked" data-field="goal">
+          <label for="goal-coaching"><span class="check-box"></span> 1-on-1 coaching</label>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top: 20px;">
+        <label class="form-label">Anything else on your mind? <span class="optional">(optional)</span></label>
+        <textarea name="other_goals" class="form-input tracked" placeholder="Other goals, ideas, vision for BKX Studios..." rows="3" data-field="other"></textarea>
+      </div>
+    </div>
+
+    <!-- 4. SOCIAL MEDIA -->
+    <div class="form-section reveal">
+      <div class="form-section-header">
+        <div class="form-section-number">04</div>
+        <div class="form-section-title">Social Media Links</div>
+      </div>
+      <p class="form-section-desc">Send me every profile you have. If a field is blank, that tells me we need to set it up.</p>
+
+      <div class="alert-box">
+        <span class="alert-icon">&#9888;&#65039;</span>
+        <p><strong>TikTok and Instagram are non-negotiable</strong> for selling books in 2026. #ChristianBookTok is a massive driver right now and your &ldquo;Neuro-Theology&rdquo; content is perfect for it. If you're not on these yet, <strong>I'll set them up for you</strong>.</p>
+      </div>
+
+      <div class="social-grid">
+        <div class="form-group">
+          <label class="form-label">Instagram</label>
+          <div class="input-with-icon">
+            <input type="url" name="social_instagram" class="form-input tracked" placeholder="https://instagram.com/..." data-field="social">
+            <span class="icon-prefix">&#128247;</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">TikTok</label>
+          <div class="input-with-icon">
+            <input type="url" name="social_tiktok" class="form-input tracked" placeholder="https://tiktok.com/@..." data-field="social">
+            <span class="icon-prefix">&#127909;</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">YouTube</label>
+          <div class="input-with-icon">
+            <input type="url" name="social_youtube" class="form-input tracked" placeholder="https://youtube.com/..." data-field="social">
+            <span class="icon-prefix">&#9654;</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Facebook</label>
+          <div class="input-with-icon">
+            <input type="url" name="social_facebook" class="form-input tracked" placeholder="https://facebook.com/..." data-field="social">
+            <span class="icon-prefix">&#128101;</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Twitter / X</label>
+          <div class="input-with-icon">
+            <input type="url" name="social_twitter" class="form-input tracked" placeholder="https://x.com/..." data-field="social">
+            <span class="icon-prefix">&#128172;</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">LinkedIn</label>
+          <div class="input-with-icon">
+            <input type="url" name="social_linkedin" class="form-input tracked" placeholder="https://linkedin.com/in/..." data-field="social">
+            <span class="icon-prefix">&#128188;</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert-box" style="margin-top: 24px; border-color: rgba(58, 107, 140, 0.1);">
+        <span class="alert-icon">&#127911;</span>
+        <p>Also consider signing up for <strong>podcast directories</strong> (Apple Podcasts, Spotify for Podcasters) even without your own show &mdash; being listed and guesting on other shows is a massive authority builder.</p>
+      </div>
+    </div>
+
+    <!-- 5. VISUAL ASSETS -->
+    <div class="form-section reveal">
+      <div class="form-section-header">
+        <div class="form-section-number">05</div>
+        <div class="form-section-title">Visual Assets</div>
+      </div>
+      <p class="form-section-desc">Upload what you have. Anything you don't have yet, we'll figure out together.</p>
+
+      <div class="upload-grid">
+        <div class="upload-card">
+          <div class="upload-icon">&#128247;</div>
+          <div class="upload-label">Professional Headshots</div>
+          <div class="upload-desc">Multiple poses/looks if possible</div>
+          <label class="upload-btn" for="upload-headshots">
+            <span class="upload-btn-text">Choose Files</span>
+            <input type="file" id="upload-headshots" name="headshots[]" multiple accept="image/*,.pdf,.ai,.svg" class="upload-input tracked" data-field="asset" onchange="handleUpload(this)">
+          </label>
+          <div class="upload-filenames" id="files-headshots"></div>
+        </div>
+
+        <div class="upload-card">
+          <div class="upload-icon">&#127908;</div>
+          <div class="upload-label">Event / Speaking Photos</div>
+          <div class="upload-desc">Anything from events, radio appearances, etc.</div>
+          <label class="upload-btn" for="upload-events">
+            <span class="upload-btn-text">Choose Files</span>
+            <input type="file" id="upload-events" name="events[]" multiple accept="image/*,.pdf" class="upload-input tracked" data-field="asset" onchange="handleUpload(this)">
+          </label>
+          <div class="upload-filenames" id="files-events"></div>
+        </div>
+
+        <div class="upload-card">
+          <div class="upload-icon">&#128214;</div>
+          <div class="upload-label">Book Cover (High Resolution)</div>
+          <div class="upload-desc">Highest quality file you have</div>
+          <label class="upload-btn" for="upload-bookcover">
+            <span class="upload-btn-text">Choose Files</span>
+            <input type="file" id="upload-bookcover" name="bookcover[]" multiple accept="image/*,.pdf,.ai,.svg,.psd" class="upload-input tracked" data-field="asset" onchange="handleUpload(this)">
+          </label>
+          <div class="upload-filenames" id="files-bookcover"></div>
+        </div>
+
+        <div class="upload-card">
+          <div class="upload-icon">&#127912;</div>
+          <div class="upload-label">BKX Studios Logo</div>
+          <div class="upload-desc">Vector (SVG/AI) or high-res PNG if available</div>
+          <label class="upload-btn" for="upload-logo">
+            <span class="upload-btn-text">Choose Files</span>
+            <input type="file" id="upload-logo" name="logo[]" multiple accept="image/*,.pdf,.ai,.svg,.psd,.eps" class="upload-input tracked" data-field="asset" onchange="handleUpload(this)">
+          </label>
+          <div class="upload-filenames" id="files-logo"></div>
+        </div>
+      </div>
+
+      <div style="margin-top: 28px; padding: 28px; background: var(--black-card); border: 1px solid rgba(58, 107, 140, 0.15); border-radius: 12px;">
+        <div class="form-label" style="font-size: 15px; color: var(--white); font-weight: 600; margin-bottom: 4px;">Already have files in the cloud?</div>
+        <p style="font-size: 13px; color: var(--gray); margin-bottom: 16px;">Paste a Google Drive or Dropbox link below &mdash; works just as well as uploading directly.</p>
+        <div class="form-group" style="margin-bottom: 0;">
+          <div class="input-with-icon">
+            <input type="url" name="asset_link" class="form-input tracked" placeholder="https://drive.google.com/... or https://dropbox.com/..." data-field="asset">
+            <span class="icon-prefix">&#128279;</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert-box" style="margin-top: 20px;">
+        <span class="alert-icon">&#128248;</span>
+        <p>If you don't have professional photos yet, I'd strongly recommend scheduling a shoot. The visual style we're going for &mdash; <strong>dark, high-contrast, cinematic &ldquo;Gritty Luxury&rdquo;</strong> &mdash; requires strong imagery.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== SUMMARY ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-divider reveal"></div>
+    <div class="section-eyebrow reveal">Quick Summary</div>
+    <h2 class="section-heading reveal reveal-delay-1">
+      Action items <span class="gold">at a glance.</span>
+    </h2>
+    <ol class="summary-list reveal reveal-delay-2">
+      <li><span><strong>Your name and Gmail</strong> &mdash; so I can set up all your accounts</span></li>
+      <li><span><strong>3 websites you love the look of</strong> &mdash; I'll handle the competitor research myself</span></li>
+      <li><span><strong>Your goals</strong> &mdash; what success looks like for the next 6&ndash;12 months</span></li>
+      <li><span><strong>All your social media links</strong> &mdash; and flag which platforms you're not on yet</span></li>
+      <li><span><strong>Headshots, photos, logos</strong> &mdash; anything visual you have</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== SUBMIT ===== -->
+<div class="submit-section">
+  <button type="submit" class="submit-btn">
+    Submit Onboarding Info
+    <span class="arrow">&rarr;</span>
+  </button>
+</div>
+
+<!-- ===== CLOSING ===== -->
+<section class="closing">
+  <div class="container">
+    <div class="closing-divider"></div>
+    <p class="closing-quote reveal">
+      Once I have this info and we kick off the contract on Upwork, I'll get straight to work on the blueprint. Upwork tracks every hour so you'll always know exactly what you're paying for. After that, we'll set up the Trello board, review the strategy together, and then we build. <span class="gold">Ready when you are.</span>
+    </p>
+    <p class="closing-quote reveal reveal-delay-1" style="font-size: clamp(18px, 3vw, 24px);">
+      Let's build something <span class="gold">special.</span>
+    </p>
+    <div class="closing-signature reveal reveal-delay-2">
+      <div class="name">Jesus Sanchez</div>
+      <div class="site">bayareaweb.design</div>
+    </div>
+  </div>
+</section>
+
+</form>
+
+<script>
+// ===== SCROLL REVEAL =====
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== PROGRESS BAR =====
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById('progressBar').style.width = scrollPercent + '%';
+});
+
+// ===== FILE UPLOAD HANDLER =====
+function handleUpload(input) {
+  const card = input.closest('.upload-card');
+  const id = input.id.replace('upload-', 'files-');
+  const display = document.getElementById(id);
+
+  if (input.files.length > 0) {
+    card.classList.add('has-files');
+    const names = Array.from(input.files).map(f => f.name);
+    display.textContent = names.join(', ');
+    input.closest('.upload-btn').querySelector('.upload-btn-text').textContent = 'Change Files';
+  } else {
+    card.classList.remove('has-files');
+    display.textContent = '';
+    input.closest('.upload-btn').querySelector('.upload-btn-text').textContent = 'Choose Files';
+  }
+  updateProgress();
+}
+
+// ===== FORM PROGRESS TRACKING =====
+const formProgressEl = document.getElementById('formProgress');
+const progressRing = document.getElementById('progressRing');
+const progressPercent = document.getElementById('progressPercent');
+let formVisible = false;
+
+function updateProgress() {
+  const checkboxes = document.querySelectorAll('.checkbox-item input.tracked');
+  let filled = 0;
+  let total = 0;
+
+  const fullname = document.querySelector('[data-field="fullname"]');
+  if (fullname && fullname.value.trim()) filled++;
+  total++;
+
+  const websites = document.querySelectorAll('[data-field="website"]');
+  const websitesFilled = Array.from(websites).filter(i => i.value.trim()).length;
+  if (websitesFilled > 0) filled++;
+  total++;
+
+  const email = document.querySelector('[data-field="email"]');
+  if (email && email.value.trim()) filled++;
+  total++;
+
+  const goalsChecked = Array.from(checkboxes).some(c => c.checked);
+  if (goalsChecked) filled++;
+  total++;
+
+  const socials = document.querySelectorAll('[data-field="social"]');
+  const socialsFilled = Array.from(socials).filter(i => i.value.trim()).length;
+  if (socialsFilled > 0) filled++;
+  total++;
+
+  const uploads = document.querySelectorAll('.upload-card.has-files');
+  if (uploads.length > 0) filled++;
+  total++;
+
+  const pct = Math.round((filled / total) * 100);
+  const circumference = 2 * Math.PI * 18;
+  const offset = circumference - (pct / 100) * circumference;
+
+  progressRing.style.strokeDashoffset = offset;
+  progressPercent.textContent = pct + '%';
+}
+
+// Show form progress widget when scrolled to form section
+const formObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      formProgressEl.classList.add('visible');
+      formVisible = true;
+    } else if (formVisible && entry.boundingClientRect.top > 0) {
+      formProgressEl.classList.remove('visible');
+    }
+  });
+}, { threshold: 0.05 });
+
+document.querySelectorAll('section[style*="background: var(--black-light)"]').forEach(s => {
+  formObserver.observe(s);
+});
+
+// Listen for input changes
+document.querySelectorAll('.tracked').forEach(el => {
+  el.addEventListener('input', updateProgress);
+  el.addEventListener('change', updateProgress);
+});
+
+// ===== TOAST =====
+function showToast(icon, msg) {
+  const toast = document.getElementById('toast');
+  const toastMsg = document.getElementById('toastMsg');
+  toast.querySelector('.toast-icon').innerHTML = icon;
+  toastMsg.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+// ===== FORM SUBMIT =====
+document.getElementById('onboardingForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const btn = document.querySelector('.submit-btn');
+  const originalHTML = btn.innerHTML;
+
+  // ===== VALIDATION (only truly required fields) =====
+  const errors = [];
+
+  // Full name required *
+  const fullnameVal = document.querySelector('[data-field="fullname"]').value.trim();
+  if (!fullnameVal) errors.push('Your full name');
+
+  // Email required *
+  const emailVal = document.querySelector('[data-field="email"]').value.trim();
+  if (!emailVal) errors.push('Your Gmail address');
+
+  // At least 1 website *
+  const websitesFilled = Array.from(document.querySelectorAll('[data-field="website"]')).filter(i => i.value.trim()).length;
+  if (websitesFilled === 0) errors.push('At least 1 website you like');
+
+  // At least 1 goal *
+  const goalsChecked = Array.from(document.querySelectorAll('.checkbox-item input[type="checkbox"]:checked')).length;
+  if (goalsChecked === 0) errors.push('At least 1 goal selected');
+
+  if (errors.length > 0) {
+    showToast('&#9888;', 'Missing: ' + errors.join(', '));
+    // Scroll to first empty required section
+    const firstEmpty = document.querySelector('.form-section');
+    if (firstEmpty) firstEmpty.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  // Disable button and show loading
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Sending...';
+  btn.style.opacity = '0.7';
+
+  // Collect form data
+  const formData = new FormData(this);
+
+  // Send to PHP handler
+  fetch('submit.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      showToast('&#10004;', 'Onboarding info sent successfully!');
+      btn.innerHTML = '&#10004; Submitted Successfully!';
+      btn.style.background = '#27ae60';
+      btn.style.opacity = '1';
+
+      // Scroll to closing
+      document.querySelector('.closing').scrollIntoView({ behavior: 'smooth' });
+
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 5000);
+    } else {
+      showToast('&#10060;', data.message || 'Something went wrong. Please try again.');
+      btn.innerHTML = originalHTML;
+      btn.style.opacity = '1';
+      btn.disabled = false;
+    }
+  })
+  .catch(err => {
+    console.error('Submit error:', err);
+    showToast('&#10060;', 'Network error. Please try again.');
+    btn.innerHTML = originalHTML;
+    btn.style.opacity = '1';
+    btn.disabled = false;
+  });
+});
+
+// Initial progress update
+updateProgress();
+</script>
+
+</body>
+</html>
