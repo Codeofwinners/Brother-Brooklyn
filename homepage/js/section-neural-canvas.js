@@ -21,6 +21,7 @@ let mouse = {
     radius: (canvas.height / 60) * (canvas.width / 60)
 }
 
+// Mouse Events
 canvas.addEventListener('mousemove', (event) => {
     const rect = canvas.getBoundingClientRect();
     mouse.x = event.clientX - rect.left;
@@ -30,6 +31,50 @@ canvas.addEventListener('mousemove', (event) => {
 canvas.addEventListener('mouseleave', () => {
     mouse.x = null;
     mouse.y = null;
+});
+
+// Touch Events (Passive to allow scrolling)
+canvas.addEventListener('touchmove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = event.touches[0].clientX - rect.left;
+    mouse.y = event.touches[0].clientY - rect.top;
+}, { passive: true });
+
+canvas.addEventListener('touchstart', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = event.touches[0].clientX - rect.left;
+    mouse.y = event.touches[0].clientY - rect.top;
+}, { passive: true });
+
+canvas.addEventListener('touchend', () => {
+    mouse.x = null;
+    mouse.y = null;
+});
+
+// Click "Burst" Effect
+canvas.addEventListener('click', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    // Push particles away strongly
+    particlesArray.forEach(p => {
+        let dx = x - p.x;
+        let dy = y - p.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < mouse.radius * 3) {
+            let angle = Math.atan2(dy, dx);
+            p.directionX -= Math.cos(angle) * 5;
+            p.directionY -= Math.sin(angle) * 5;
+        }
+    });
+
+    // Add new particles at click
+    for (let i = 0; i < 5; i++) {
+        let size = (Math.random() * 3) + 1;
+        let color = '#fff'; // White spark
+        particlesArray.push(new Particle(x, y, (Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4, size, color));
+    }
 });
 
 window.addEventListener('resize', () => {
@@ -79,7 +124,7 @@ class Particle {
         this.size = this.baseSize + Math.sin(this.angle) * 0.5;
 
         // check collision detection - mouse position / particle position
-        // Only if mouse is on canvas
+        // Only if mouse is on canvas or touch is active
         if (mouse.x != null) {
             let dx = mouse.x - this.x;
             let dy = mouse.y - this.y;
