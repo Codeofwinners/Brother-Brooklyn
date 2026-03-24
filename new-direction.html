@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>BrainBot by Inner Man Education | Neuroeducation & Brain Training for Youth</title>
+    <meta name="description" content="Master how the brain works with BrainBot. A neuroscience-powered AI mentor for youth and parents teaching neuroplasticity, resilience, and leadership. Founded by Rod Coley.">
+    <meta name="keywords" content="BrainBot, neuroeducation, how the brain works, neuroscience education for youth, neuroplasticity training, mindset education, brain training for kids, mental resilience program, AI learning tool, Inner Man Education, brain health education, leadership development neuroscience">
+    <meta name="author" content="Inner Man Education">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0B1120', // Deep Navy
+                            primary: '#0F172A', // Slate 900
+                            accent: '#2DD4BF', // Teal 400
+                            warm: '#F59E0B', // Amber 500
+                            surface: '#1E293B', // Slate 800
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hero-glow {
+            background: radial-gradient(circle at center, rgba(45, 212, 191, 0.15) 0%, rgba(11, 17, 32, 0) 70%);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #2DD4BF, #60A5FA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-slate-300 font-sans antialiased selection:bg-brand-accent selection:text-brand-dark">
+
+    <nav class="fixed w-full z-50 bg-brand-dark/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-brain text-brand-accent text-2xl"></i>
+                    <span class="font-display font-bold text-xl text-white tracking-tight">Inner Man <span class="text-brand-accent">Education</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#problem" class="hover:text-brand-accent transition">Why BrainBot?</a>
+                    <a href="#how-it-works" class="hover:text-brand-accent transition">How It Works</a>
+                    <a href="#founder" class="hover:text-brand-accent transition">Our Founder</a>
+                </div>
+                <div>
+                    <a href="#" class="bg-brand-accent hover:bg-teal-400 text-brand-dark font-bold py-2.5 px-6 rounded-full transition shadow-lg shadow-brand-accent/20">
+                        Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full hero-glow pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 mb-8">
+                <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+                <span class="text-xs font-semibold tracking-wide text-brand-accent uppercase">Veteran Owned & Neuroscience Backed</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight mb-6">
+                The Owner’s Manual <br>
+                <span class="text-gradient">Your Brain Never Came With.</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                You aren't broken. You just weren't taught how the machinery works. 
+                Join <strong>BrainBot</strong> to master neuroplasticity, build resilience, and rewire your mind using real science—taught by a mentor who’s been there.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#" class="bg-brand-accent hover:bg-teal-400 text-brand-dark text-lg font-bold py-4 px-8 rounded-full transition shadow-xl shadow-brand-accent/25 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-rocket"></i> Launch BrainBot Free
+                </a>
+                <a href="#how-it-works" class="bg-slate-800 hover:bg-slate-700 text-white text-lg font-semibold py-4 px-8 rounded-full border border-slate-700 transition flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-circle-play"></i> See How It Works
+                </a>
+            </div>
+
+            <div class="mt-16 pt-8 border-t border-slate-800/50 flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition duration-500">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-flask text-slate-400"></i>
+                    <span class="text-sm font-semibold">Duke University Research Collab</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-slate-400"></i>
+                    <span class="text-sm font-semibold">Veteran Founded</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-users text-slate-400"></i>
+                    <span class="text-sm font-semibold">Community Focused</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="problem" class="py-20 bg-brand-primary">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-6">Let’s be honest. Life feels harder than it needs to.</h2>
+            <p class="text-lg text-slate-400 mb-12">
+                Anxiety, stress, feeling "stuck"—it’s not a character flaw. It’s biology. 
+                Most education teaches you <em>what</em> to learn, but never <strong>how your brain actually learns</strong>. 
+                Without understanding your own operating system, you're flying blind.
+            </p>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden">
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-brand-accent/10 rounded-full blur-3xl"></div>
+
+                <div class="w-full md:w-1/2">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop" alt="AI Neural Network Visualization" class="w-full h-full object-cover opacity-80 hover:scale-105 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-brand-accent text-brand-dark text-xs font-bold px-2 py-1 rounded">AI POWERED</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">Meet <span class="text-brand-accent">BrainBot</span></h3>
+                    <p class="text-slate-300 mb-6 leading-relaxed">
+                        BrainBot isn't just another generic AI. Think of it as the wise, older mentor you always wished you had—backed by a supercomputer. 
+                    </p>
+                    <p class="text-slate-300 mb-8 leading-relaxed">
+                        It’s a <strong>neuroeducation tool</strong> designed to teach you the specific mechanics of your mind. We strip away the confusing medical jargon and give you the practical "how-to" guides for neuroplasticity, emotional regulation, and critical thinking.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-brand-accent"></i>
+                            <span>Real Neuroscience, no fluff.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-brand-accent"></i>
+                            <span>Protect yourself from manipulation.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-brand-accent"></i>
+                            <span>Build unbreakable inner strength.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-brand-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white">Skills Schools Don't Teach</h2>
+                <p class="mt-4 text-slate-400">Everything you need to level up your mental game.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-slate-800/40 border border-slate-700 p-8 rounded-2xl hover:bg-slate-800/60 transition group">
+                    <div class="w-12 h-12 bg-brand-accent/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 transition">
+                        <i class="fa-solid fa-network-wired text-brand-accent text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Neuroplasticity Training</h3>
+                    <p class="text-slate-400 text-sm">Learn how to physically rewire your brain to break bad habits and form powerful new ones.</p>
+                </div>
+                
+                <div class="bg-slate-800/40 border border-slate-700 p-8 rounded-2xl hover:bg-slate-800/60 transition group">
+                    <div class="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-500/20 transition">
+                        <i class="fa-solid fa-shield-cat text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Mental Resilience</h3>
+                    <p class="text-slate-400 text-sm">Bounce back from failure faster. Turn setbacks into data points, not identity crises.</p>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-700 p-8 rounded-2xl hover:bg-slate-800/60 transition group">
+                    <div class="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-purple-500/20 transition">
+                        <i class="fa-solid fa-lightbulb text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Critical Thinking</h3>
+                    <p class="text-slate-400 text-sm">In an age of fake news and algorithms, learn to think for yourself and analyze information clearly.</p>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-700 p-8 rounded-2xl hover:bg-slate-800/60 transition group">
+                    <div class="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-green-500/20 transition">
+                        <i class="fa-solid fa-heart-pulse text-green-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Brain Health</h3>
+                    <p class="text-slate-400 text-sm">Practical steps for sleep, nutrition, and focus to keep your hardware running at peak performance.</p>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-700 p-8 rounded-2xl hover:bg-slate-800/60 transition group">
+                    <div class="w-12 h-12 bg-brand-warm/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-warm/20 transition">
+                        <i class="fa-solid fa-crown text-brand-warm text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Leadership Mindset</h3>
+                    <p class="text-slate-400 text-sm">True leadership starts internally. Master yourself so you can effectively lead your community.</p>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-700 p-8 rounded-2xl hover:bg-slate-800/60 transition group">
+                    <div class="w-12 h-12 bg-rose-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-rose-500/20 transition">
+                        <i class="fa-solid fa-robot text-rose-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">AI & The Future</h3>
+                    <p class="text-slate-400 text-sm">Don't fear the future—prepare for it. Learn how to leverage technology without being used by it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="py-20 bg-brand-primary border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white">How We Build Better Brains</h2>
+                <p class="mt-4 text-slate-400">Simple steps to massive results.</p>
+            </div>
+
+            <div class="relative">
+                <div class="hidden lg:block absolute top-12 left-0 w-full h-0.5 bg-slate-700"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="relative pt-8 text-center group">
+                        <div class="w-10 h-10 mx-auto bg-brand-dark border-2 border-brand-accent text-brand-accent rounded-full flex items-center justify-center font-bold text-lg mb-6 relative z-10 group-hover:scale-110 transition">1</div>
+                        <h4 class="text-xl font-bold text-white mb-2">Sign Up Free</h4>
+                        <p class="text-slate-400 text-sm">Create your profile to access BrainBot. No credit card required to start learning.</p>
+                    </div>
+
+                    <div class="relative pt-8 text-center group">
+                        <div class="w-10 h-10 mx-auto bg-brand-dark border-2 border-slate-600 text-slate-400 rounded-full flex items-center justify-center font-bold text-lg mb-6 relative z-10 group-hover:border-brand-accent group-hover:text-brand-accent transition">2</div>
+                        <h4 class="text-xl font-bold text-white mb-2">Assess & Learn</h4>
+                        <p class="text-slate-400 text-sm">Chat with BrainBot to understand your current mindset and knowledge gaps.</p>
+                    </div>
+
+                    <div class="relative pt-8 text-center group">
+                        <div class="w-10 h-10 mx-auto bg-brand-dark border-2 border-slate-600 text-slate-400 rounded-full flex items-center justify-center font-bold text-lg mb-6 relative z-10 group-hover:border-brand-accent group-hover:text-brand-accent transition">3</div>
+                        <h4 class="text-xl font-bold text-white mb-2">Daily Rewiring</h4>
+                        <p class="text-slate-400 text-sm">Complete short, bite-sized neuro-drills designed to build new neural pathways.</p>
+                    </div>
+
+                    <div class="relative pt-8 text-center group">
+                        <div class="w-10 h-10 mx-auto bg-brand-dark border-2 border-slate-600 text-slate-400 rounded-full flex items-center justify-center font-bold text-lg mb-6 relative z-10 group-hover:border-brand-accent group-hover:text-brand-accent transition">4</div>
+                        <h4 class="text-xl font-bold text-white mb-2">Level Up</h4>
+                        <p class="text-slate-400 text-sm">Apply your new skills in the real world. Better leadership, better focus, better life.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="founder" class="py-20 bg-brand-dark">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="w-full lg:w-1/3">
+                    <div class="relative rounded-2xl overflow-hidden shadow-xl border-2 border-slate-700 bg-slate-800">
+                         <img src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?q=80&w=800&auto=format&fit=crop" alt="Rodney Coley Portrait" class="w-full h-auto object-cover grayscale hover:grayscale-0 transition duration-500">
+                    </div>
+                </div>
+                <div class="w-full lg:w-2/3">
+                    <h4 class="text-brand-accent font-bold tracking-wide uppercase text-sm mb-2">The Founder</h4>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-6">"I built the tool I wish I had growing up."</h2>
+                    <div class="space-y-6 text-lg text-slate-300">
+                        <p>
+                            Hi, I’m <strong>Rodney Coley</strong>. Most people know me as a retired aerospace engineer and roboticist. I spent years designing complex systems for the U.S. government and the private sector.
+                        </p>
+                        <p>
+                            But my most important mission is this.
+                        </p>
+                        <p>
+                            I saw too many young people—especially in our underserved communities—struggling not because they lacked potential, but because they lacked the proper <em>mental programming</em>. As a veteran and a father, I knew I had to do something.
+                        </p>
+                        <p>
+                            I created Inner Man Education and BrainBot to bridge that gap. To take high-level neuroscience out of the lab and put it directly into your hands. I want you to have the tools to define your own future.
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-slate-800 flex items-center gap-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Duke_University_logo.svg/2560px-Duke_University_logo.svg.png" alt="Duke University Logo" class="h-8 opacity-50 bg-white p-1 rounded">
+                        <span class="text-sm text-slate-500 italic">Collaborator with Duke University Black Men Brain Health Study</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-br from-slate-900 to-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-display font-bold text-white mb-16">More Than An App. A Movement.</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <div class="bg-brand-dark p-6 rounded-xl border border-slate-800 shadow-lg">
+                    <div class="flex text-brand-warm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-300 italic mb-4">"BrainBot explained anxiety in a way that finally made sense. I don't feel crazy anymore, I feel in control."</p>
+                    <p class="font-bold text-white">- Marcus T., Student (19)</p>
+                </div>
+                
+                <div class="bg-brand-dark p-6 rounded-xl border border-slate-800 shadow-lg">
+                    <div class="flex text-brand-warm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-300 italic mb-4">"As a teacher, I use this in my classroom. It gives my students the vocabulary to talk about their mental health."</p>
+                    <p class="font-bold text-white">- Sarah J., Educator</p>
+                </div>
+
+                <div class="bg-brand-dark p-6 rounded-xl border border-slate-800 shadow-lg">
+                    <div class="flex text-brand-warm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-300 italic mb-4">"Rodney is the real deal. This isn't just tech, it's heart. My son has completely changed his outlook."</p>
+                    <p class="font-bold text-white">- David R., Parent</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-brand-accent/10"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">Start Your Transformation Today</h2>
+            <p class="text-xl text-slate-300 mb-10">
+                You have the hardware. We’ll give you the software. <br>
+                Join the community building the future of brain health.
+            </p>
+            
+            <div class="bg-brand-dark p-2 md:p-3 rounded-full inline-flex flex-col md:flex-row gap-2 shadow-2xl border border-slate-700 w-full max-w-lg mx-auto">
+                <input type="email" placeholder="Enter your email address" class="bg-transparent text-white px-6 py-3 w-full focus:outline-none" required>
+                <button class="bg-brand-accent hover:bg-teal-400 text-brand-dark font-bold py-3 px-8 rounded-full transition whitespace-nowrap">
+                    Get BrainBot Free
+                </button>
+            </div>
+            <p class="text-slate-500 text-sm mt-4">Join 5,000+ members. Secure & Private.</p>
+        </div>
+    </section>
+
+    <footer class="bg-brand-dark border-t border-slate-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-brain text-brand-accent text-xl"></i>
+                    <span class="font-display font-bold text-lg text-white">Inner Man Education</span>
+                </div>
+                <div class="flex gap-8 text-slate-400 text-sm">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition">Contact Rod</a>
+                </div>
+                <div class="text-slate-600 text-sm">
+                    &copy; 2024 Inner Man Education. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

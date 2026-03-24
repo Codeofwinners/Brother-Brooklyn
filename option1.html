@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -8,41 +7,134 @@
     <title>Brother Brooklyn - Academy</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
+    <script>
         tailwind.config = {
-            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#308ce8",
-                        "background-light": "#f6f7f8",
-                        "background-dark": "#111921",
+                        brand: {
+                            dark: '#0B1120',
+                            deeper: '#060B16',
+                            primary: '#0F172A',
+                            accent: '#2DD4BF',
+                            warm: '#F59E0B',
+                            surface: '#1E293B',
+                            glow: '#14B8A6',
+                        }
                     },
                     fontFamily: {
-                        "display": ["Lexend", "sans-serif"]
+                        display: ['Syne', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif'],
                     },
-                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
-                },
-            },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px" },
+                }
+            }
         }
     </script>
     <style>
-        video,
-        video:focus,
-        video:active,
-        video:hover,
-        video:focus-visible,
-        video:focus-within {
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #0B1120;
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(45, 212, 191, 0.08), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(99, 102, 241, 0.05), transparent);
+        }
+
+        /* Glass morphism */
+        .glass {
+            background: rgba(30, 41, 59, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-strong {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Gradient text */
+        .text-gradient {
+            background: linear-gradient(135deg, #2DD4BF 0%, #60A5FA 50%, #A78BFA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .text-gradient-warm {
+            background: linear-gradient(135deg, #F59E0B 0%, #F97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero glow */
+        .hero-glow {
+            background: radial-gradient(ellipse 70% 50% at 50% 30%, rgba(45, 212, 191, 0.12) 0%, transparent 70%);
+        }
+
+        /* Subtle noise texture overlay */
+        .noise::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Animated border glow on hover */
+        .card-glow {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-glow:hover {
+            box-shadow: 0 0 40px -10px rgba(45, 212, 191, 0.15), 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .float { animation: float 6s ease-in-out infinite; }
+
+        /* Pulse ring */
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.8); opacity: 0; }
+        }
+        .pulse-ring::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid rgba(45, 212, 191, 0.4);
+            animation: pulse-ring 2s ease-out infinite;
+        }
+
+        /* Staggered entry */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up {
+            animation: fadeUp 0.7s ease-out both;
+        }
+        .fade-up-1 { animation-delay: 0.1s; }
+        .fade-up-2 { animation-delay: 0.2s; }
+        .fade-up-3 { animation-delay: 0.3s; }
+        .fade-up-4 { animation-delay: 0.4s; }
+
+        /* Video resets */
+        video, video:focus, video:active, video:hover, video:focus-visible, video:focus-within {
             outline: none !important;
             border: none !important;
             box-shadow: none !important;
@@ -50,622 +142,675 @@
             -webkit-appearance: none !important;
             appearance: none !important;
         }
-
-        video::-webkit-media-controls,
-        video::-webkit-media-controls-enclosure,
-        video::-webkit-media-controls-panel {
+        video::-webkit-media-controls, video::-webkit-media-controls-enclosure, video::-webkit-media-controls-panel {
             outline: none !important;
             border: none !important;
             box-shadow: none !important;
         }
-
         video::-webkit-media-controls-enclosure {
-            border-radius: 0.5rem !important;
+            border-radius: 0.75rem !important;
             overflow: hidden !important;
+        }
+
+        /* Scroll-triggered animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 
-<body
-    class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-white font-display antialiased min-h-screen flex flex-col md:flex-row">
-    <!-- Mobile Overlay -->
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden" onclick="toggleSidebar()"></div>
-    <!-- Sidebar Navigation -->
-    <aside id="sidebar"
-        class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col transition-transform duration-300 -translate-x-full md:translate-x-0 md:static md:h-screen md:sticky md:top-0">
-        <div class="p-6 flex items-center gap-3">
-            <div
-                class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">
-                B
-            </div>
-            <div>
-                <h1 class="font-bold text-lg leading-tight">Brother<br />Brooklyn</h1>
+<body class="text-slate-300 font-body antialiased selection:bg-brand-accent selection:text-brand-dark min-h-screen">
+
+    <!-- Fixed Navigation -->
+    <nav class="fixed w-full z-50 bg-brand-dark/80 backdrop-blur-xl border-b border-white/[0.06]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-accent to-teal-600 flex items-center justify-center text-white font-display font-bold text-xl shadow-lg shadow-brand-accent/20">
+                        B
+                    </div>
+                    <div>
+                        <span class="font-display font-bold text-lg text-white tracking-tight leading-none">Bro<span class="text-brand-accent">bot</span></span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#learn" class="text-slate-400 hover:text-brand-accent transition-colors duration-300">Learning Paths</a>
+                    <a href="#events" class="text-slate-400 hover:text-brand-accent transition-colors duration-300">Events</a>
+                    <a href="#mission" class="text-slate-400 hover:text-brand-accent transition-colors duration-300">Mission</a>
+                    <a href="#newsletter" class="text-slate-400 hover:text-brand-accent transition-colors duration-300">Join</a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <a href="https://www.amazon.com/Lessons-School-Hardknocks-Brother-Brooklyn/dp/1662845413" target="_blank"
+                        class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-300 border border-slate-700 rounded-full hover:border-brand-accent/50 hover:text-white transition-all duration-300">
+                        <span class="material-icons-outlined text-base">menu_book</span>
+                        The Book
+                    </a>
+                    <!-- Mobile hamburger -->
+                    <button onclick="toggleMobileNav()" class="md:hidden p-2 text-slate-400 hover:text-white transition-colors">
+                        <span id="nav-icon" class="material-icons-outlined text-2xl">menu</span>
+                    </button>
+                </div>
             </div>
         </div>
-        <nav class="flex-1 px-4 space-y-2 mt-4 overflow-y-auto">
-            <a class="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary font-medium rounded-lg" href="#">
-                <span class="material-icons-outlined">dashboard</span>
-                Dashboard
-            </a>
-            <div class="pt-4 pb-2 px-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                Learn
+
+        <!-- Mobile Menu -->
+        <div id="mobile-nav" class="hidden md:hidden border-t border-white/[0.06] bg-brand-dark/95 backdrop-blur-xl">
+            <div class="px-6 py-6 space-y-4">
+                <a href="#learn" onclick="toggleMobileNav()" class="block text-slate-300 hover:text-brand-accent font-medium transition-colors">Learning Paths</a>
+                <a href="#events" onclick="toggleMobileNav()" class="block text-slate-300 hover:text-brand-accent font-medium transition-colors">Events</a>
+                <a href="#mission" onclick="toggleMobileNav()" class="block text-slate-300 hover:text-brand-accent font-medium transition-colors">Mission</a>
+                <a href="#newsletter" onclick="toggleMobileNav()" class="block text-slate-300 hover:text-brand-accent font-medium transition-colors">Join the Movement</a>
+                <a href="https://www.amazon.com/Lessons-School-Hardknocks-Brother-Brooklyn/dp/1662845413" target="_blank" class="block text-slate-300 hover:text-brand-accent font-medium transition-colors">The Book</a>
             </div>
-            <a class="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg transition-colors"
-                href="#">
-                <span class="material-icons-outlined">school</span>
-                Neuro-Theology
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg transition-colors"
-                href="#">
-                <span class="material-icons-outlined">science</span>
-                STEM &amp; Youth
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg transition-colors"
-                href="#">
-                <span class="material-icons-outlined">psychology</span>
-                Mindset Logic
-            </a>
-            <div class="pt-4 pb-2 px-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                Library
-            </div>
-            <a class="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg transition-colors"
-                href="https://www.amazon.com/Lessons-School-Hardknocks-Brother-Brooklyn/dp/1662845413" target="_blank">
-                <span class="material-icons-outlined">menu_book</span>
-                The Book
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg transition-colors"
-                href="#">
-                <span class="material-icons-outlined">article</span>
-                Articles &amp; Blog
-            </a>
-        </nav>
-        <div class="p-4 border-t border-slate-200 dark:border-slate-800">
-            <a class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
-                href="#">
-                <img alt="Rodney Coley Profile"
-                    class="w-10 h-10 rounded-full object-cover border-2 border-white dark:border-slate-700 shadow-sm"
-                    src="https://bayareaweb.design/brother-brooklyn/onboarding/uploads/2026-02-11_225606/headshots/2BE_383_1124_3316717001_2_2.jpg" />
-                <div class="flex-1 min-w-0">
-                    <p class="text-sm font-medium truncate">Rodney Coley</p>
-                    <p class="text-xs text-slate-500 truncate">Neuro-Theologian</p>
-                </div>
-            </a>
         </div>
-    </aside>
-    <!-- Main Content Area -->
-    <main class="flex-1 overflow-y-auto">
-        <!-- Top Header / Search -->
-        <header
-            class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-40 px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4 w-full max-w-2xl">
-                <button onclick="toggleSidebar()"
-                    class="md:hidden p-2 -ml-2 text-slate-500 hover:text-primary rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                    <span class="material-icons-outlined">menu</span>
-                </button>
-                <div class="relative w-full">
-                    <span
-                        class="material-icons-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
-                    <input
-                        class="w-full pl-10 pr-4 py-2.5 bg-slate-100 dark:bg-slate-800 border-none rounded-lg focus:ring-2 focus:ring-primary/50 text-sm placeholder-slate-400 text-slate-800 dark:text-white transition-shadow"
-                        placeholder="Search for topics, lessons, or concepts..." type="text" />
-                </div>
-            </div>
-            <div class="hidden md:flex items-center gap-4">
-                <button
-                    class="p-2 text-slate-500 hover:text-primary hover:bg-primary/10 rounded-full transition-colors relative">
-                    <span class="material-icons-outlined">notifications</span>
-                    <span
-                        class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
-                </button>
-                <button
-                    class="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors shadow-sm shadow-primary/30">
-                    Donate
+    </nav>
+
+
+    <!-- ==================== HERO ==================== -->
+    <!-- MOBILE: stacked layout (image top, content bottom) -->
+    <!-- DESKTOP: overlay layout (image full, content over bottom-left) -->
+    <header class="relative overflow-hidden noise" style="background:#000;">
+
+        <!-- === MOBILE HERO === -->
+        <div class="lg:hidden relative pt-20" style="background:#000;">
+            <!-- Full image/video area -->
+            <div class="relative w-full" style="height:70vh;">
+                <img id="hero-poster-mobile" src="Gemini_Generated_Image_gcu95bgcu95bgcu9.png" alt="BROBOT"
+                    class="absolute inset-0 w-full h-full object-cover object-top" />
+                <video id="hero-brobot-video-mobile" src="Flow_delpmaspu_.mp4" playsinline
+                    class="absolute inset-0 w-full h-full object-cover object-top hidden"
+                    style="outline:none!important;border:none!important;box-shadow:none!important;"></video>
+                <!-- Play button -->
+                <button onclick="toggleBrobotVideo('mobile')"
+                    class="absolute z-20 top-4 right-4 w-14 h-14 bg-black/30 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-2xl active:scale-95 transition-all cursor-pointer">
+                    <i id="hero-play-icon-mobile" class="fa-solid fa-play text-white text-lg ml-0.5"></i>
                 </button>
             </div>
-        </header>
-        <div class="px-2 py-6 md:p-8 max-w-7xl mx-auto space-y-8">
-            <!-- Welcome Hero -->
-            <section
-                class="bg-white rounded-xl p-4 md:p-10 flex flex-col md:flex-row items-center gap-8 border border-white relative overflow-hidden shadow-2xl shadow-stone-200/50">
-                <!-- Warm Glows (Subtle) -->
-                <div class="absolute -top-24 -right-24 w-96 h-96 bg-orange-200/20 rounded-full blur-3xl animate-pulse">
-                </div>
-                <div
-                    class="absolute -bottom-24 -left-24 w-96 h-96 bg-yellow-200/10 rounded-full blur-3xl animate-pulse delay-1000">
-                </div>
-                <canvas id="hero-neural-canvas"
-                    class="absolute inset-0 w-full h-full z-0 pointer-events-auto opacity-80 mix-blend-multiply"></canvas>
-                <div class="w-full md:w-1/2 relative z-10 space-y-4">
-                    <div
-                        class="inline-flex items-center gap-2 px-3 py-1 bg-white dark:bg-slate-700 rounded-full text-xs font-medium text-primary shadow-sm border border-slate-100 dark:border-slate-600">
-                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                        Neuro-Theology Academy
+
+            <!-- Content overlapping bottom 25% of the image -->
+            <div class="relative z-10 -mt-[18vh] px-6 pb-12">
+                <!-- Gradient overlay that fades from transparent into solid black -->
+                <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 20%, #000 40%);"></div>
+
+                <div class="relative z-10 space-y-5 pt-8">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-semibold">
+                        <span class="w-2 h-2 bg-brand-accent rounded-full animate-pulse"></span>
+                        <span class="text-brand-accent uppercase tracking-wider">Neuro-Theology Academy</span>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">
-                        Hi, I'm <span class="text-slate-900">Brother Brooklyn.</span>
-                    </h2>
-                    <!-- Mobile Video (Below H1) -->
-                    <div class="block md:hidden w-full my-6 relative z-10 group">
-                        <video id="mobile-hero-video" poster="homepage/assets/video-thumb-23s.png"
-                            src="https://cdn.field59.com/WJRT/1664988309-6d31c9c2505b7f059839e3a96a3c30c52f5cdb3a_fl9-720p.mp4"
-                            playsinline class="rounded-lg w-full object-cover aspect-video bg-white"
-                            style="outline: none !important; border: none !important; box-shadow: none !important;"></video>
-                        <button onclick="playHeroVideo('mobile-hero-video', this)"
-                            class="absolute inset-0 flex items-center justify-center bg-black/20 rounded-lg cursor-pointer transition-opacity hover:bg-black/30">
-                            <span class="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
-                                <i class="fa-solid fa-play text-slate-800 text-lg ml-1"></i>
-                            </span>
-                        </button>
-                        <div
-                            class="absolute top-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-1 rounded border border-white/10 pointer-events-none">
-                            Credit: <a
-                                href="https://www.abc12.com/community/good-morning-mid-michigan/wellness-wednesday-brother-brooklyn-shares-journey-to-mental-health-and-life-changes/video_1e2fbfeb-60b7-51ca-99ac-f82814469081.html"
-                                target="_blank" rel="nofollow"
-                                class="hover:text-primary pointer-events-auto underline">ABC12</a>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-2 mb-3">
-                        <span
-                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-50 text-purple-700 rounded-full text-xs font-semibold border border-purple-100">
+
+                    <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white leading-[1.1] tracking-tight">
+                        Hi, I'm <span class="text-gradient">Brobot.</span>
+                    </h1>
+
+                    <div class="flex flex-wrap gap-2.5">
+                        <span class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-purple-500/15 text-purple-200 rounded-full text-xs font-semibold border border-purple-400/20">
                             <i class="fa-solid fa-brain"></i> Neuroscience
                         </span>
-                        <span
-                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-50 text-sky-700 rounded-full text-xs font-semibold border border-sky-100">
+                        <span class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-sky-500/15 text-sky-200 rounded-full text-xs font-semibold border border-sky-400/20">
                             <i class="fa-solid fa-microchip"></i> STEM
                         </span>
-                        <span
-                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-700 rounded-full text-xs font-semibold border border-amber-100">
+                        <span class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-500/15 text-amber-200 rounded-full text-xs font-semibold border border-amber-400/20">
                             <i class="fa-solid fa-hands-praying"></i> Faith
                         </span>
                     </div>
-                    <p class="text-base text-slate-600 max-w-xl leading-relaxed">
-                        <i class="fa-solid fa-quote-left text-primary/30 mr-1"></i>
-                        I help youth and leaders <strong class="text-slate-800">reprogram their minds</strong> to
-                        overcome struggle
-                        and close the <strong class="text-slate-800">Neuro-Economic Gap</strong>.
-                        <i class="fa-solid fa-quote-right text-primary/30 ml-1"></i>
+
+                    <p class="text-[15px] text-slate-300 leading-relaxed max-w-md">
+                        <i class="fa-solid fa-quote-left text-brand-accent/40 mr-1"></i>
+                        I help youth and leaders <strong class="text-white">reprogram their minds</strong> to overcome struggle
+                        and close the <strong class="text-white">Neuro-Economic Gap</strong>.
+                        <i class="fa-solid fa-quote-right text-brand-accent/40 ml-1"></i>
                     </p>
-                    <div class="flex flex-row gap-2 pt-2 w-full">
+
+                    <div class="flex flex-row gap-3 pt-2">
                         <a href="course-superpower.html"
-                            class="flex-1 px-3 py-3 bg-primary text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors shadow-md shadow-primary/20 flex items-center justify-center gap-1.5 text-center">
-                            <span class="material-icons-outlined text-base">school</span>
+                            class="flex-1 py-4 bg-brand-accent text-brand-dark text-sm font-bold rounded-full shadow-lg shadow-brand-accent/25 flex items-center justify-center gap-2">
+                            <span class="material-icons-outlined text-lg">school</span>
                             Free Course
                         </a>
-                        <a href="https://www.amazon.com/Lessons-School-Hardknocks-Brother-Brooklyn/dp/1662845413"
-                            target="_blank"
-                            class="flex-1 px-3 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-medium rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center justify-center gap-1.5 text-center">
+                        <a href="https://www.amazon.com/Lessons-School-Hardknocks-Brother-Brooklyn/dp/1662845413" target="_blank"
+                            class="flex-1 py-4 bg-white/5 border border-white/15 text-white text-sm font-semibold rounded-full flex items-center justify-center gap-2">
                             My Story
                             <span class="material-icons-outlined text-base">arrow_forward</span>
                         </a>
                     </div>
-                </div>
-                <div class="hidden md:block w-full md:w-1/2 relative z-10 group">
-                    <div class="relative rounded-lg overflow-hidden bg-white">
-                        <video id="desktop-hero-video" poster="homepage/assets/video-thumb-23s.png"
-                            src="https://cdn.field59.com/WJRT/1664988309-6d31c9c2505b7f059839e3a96a3c30c52f5cdb3a_fl9-720p.mp4"
-                            class="w-full h-auto"
-                            style="outline: none !important; border: none !important; box-shadow: none !important;"></video>
-                        <button onclick="playHeroVideo('desktop-hero-video', this)"
-                            class="absolute inset-0 flex items-center justify-center bg-black/20 rounded-lg cursor-pointer transition-opacity hover:bg-black/30">
-                            <span class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
-                                <i class="fa-solid fa-play text-slate-800 text-xl ml-1"></i>
-                            </span>
-                        </button>
-                        <div
-                            class="absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white text-xs px-2.5 py-1.5 rounded border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                            Credit: <a
-                                href="https://www.abc12.com/community/good-morning-mid-michigan/wellness-wednesday-brother-brooklyn-shares-journey-to-mental-health-and-life-changes/video_1e2fbfeb-60b7-51ca-99ac-f82814469081.html"
-                                target="_blank" rel="nofollow"
-                                class="hover:text-primary underline pointer-events-auto">ABC12</a>
+
+                    <div class="pt-5 flex flex-wrap gap-x-6 gap-y-2">
+                        <div class="flex items-center gap-1.5 text-white/40">
+                            <i class="fa-solid fa-flask text-brand-accent/50 text-xs"></i>
+                            <span class="text-xs font-medium">Duke University Collab</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-white/40">
+                            <i class="fa-solid fa-shield-halved text-brand-accent/50 text-xs"></i>
+                            <span class="text-xs font-medium">Veteran Founded</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-white/40">
+                            <i class="fa-solid fa-users text-brand-accent/50 text-xs"></i>
+                            <span class="text-xs font-medium">Community Focused</span>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- Learning Paths Grid -->
-            <section>
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-2">
-                        <span class="material-icons-outlined text-primary">alt_route</span>
-                        Learning Paths
-                    </h3>
-                    <a class="text-primary text-sm font-medium hover:underline" href="#">View All Courses</a>
-                </div>
-                <!-- Premium Holographic Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 group/grid">
+            </div>
+        </div>
 
-                    <!-- Path Card 1: Neuro-Theology (Cyan/Blue Theme) -->
-                    <article
-                        class="relative group rounded-2xl bg-slate-900 border border-slate-700 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-1">
-                        <!-- Animated Gradient Background -->
-                        <div
-                            class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <!-- === DESKTOP HERO (overlay) === -->
+        <div class="hidden lg:block min-h-screen relative">
+            <div id="hero-media" class="absolute inset-0 z-0 bg-black">
+                <img id="hero-poster-desktop" src="Gemini_Generated_Image_gcu95bgcu95bgcu9.png" alt="BROBOT"
+                    class="absolute inset-0 w-full h-full object-cover object-center" />
+                <video id="hero-brobot-video-desktop" src="Flow_delpmaspu_.mp4" playsinline
+                    class="absolute inset-0 w-full h-full object-cover object-center hidden"
+                    style="outline:none!important;border:none!important;box-shadow:none!important;"></video>
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+
+            <canvas id="hero-neural-canvas" class="absolute inset-0 w-full h-full z-[1] pointer-events-none opacity-20"></canvas>
+
+            <!-- Play button desktop -->
+            <button onclick="toggleBrobotVideo('desktop')"
+                class="absolute z-[60] top-28 right-10 w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-2xl hover:scale-110 hover:bg-white/20 transition-all duration-300 cursor-pointer group">
+                <i id="hero-play-icon-desktop" class="fa-solid fa-play text-white text-2xl ml-1 group-hover:text-brand-accent transition-colors"></i>
+            </button>
+
+            <!-- Content bottom-left -->
+            <div class="absolute bottom-0 left-0 right-0 z-10 pb-16 pt-32">
+                <div class="max-w-7xl mx-auto px-8">
+                    <div class="max-w-2xl space-y-5">
+                        <div class="fade-up fade-up-1 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-xs font-semibold">
+                            <span class="w-2 h-2 bg-brand-accent rounded-full animate-pulse relative pulse-ring"></span>
+                            <span class="text-brand-accent uppercase tracking-wider">Neuro-Theology Academy</span>
                         </div>
-                        <div
-                            class="absolute -top-24 -right-24 w-48 h-48 bg-cyan-500/20 rounded-full blur-[60px] group-hover:bg-cyan-500/30 transition-all duration-500">
+                        <h1 class="fade-up fade-up-2 text-6xl xl:text-7xl font-display font-extrabold text-white leading-[1.05] tracking-tight drop-shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+                            Hi, I'm <span class="text-gradient">Brobot.</span>
+                        </h1>
+                        <div class="fade-up fade-up-3 flex flex-wrap gap-2">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-500/20 text-purple-200 rounded-full text-xs font-semibold border border-purple-400/20 backdrop-blur-sm">
+                                <i class="fa-solid fa-brain"></i> Neuroscience
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-500/20 text-sky-200 rounded-full text-xs font-semibold border border-sky-400/20 backdrop-blur-sm">
+                                <i class="fa-solid fa-microchip"></i> STEM
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/20 text-amber-200 rounded-full text-xs font-semibold border border-amber-400/20 backdrop-blur-sm">
+                                <i class="fa-solid fa-hands-praying"></i> Faith
+                            </span>
                         </div>
-
-                        <!-- Content -->
-                        <div class="relative p-6 md:p-8 h-full flex flex-col z-10">
-                            <div class="flex items-start justify-between mb-6">
-                                <div
-                                    class="w-14 h-14 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-cyan-400 group-hover:scale-110 group-hover:border-cyan-500/30 transition-all shadow-lg shadow-black/20">
-                                    <span class="material-icons-outlined text-3xl">psychology</span>
-                                </div>
-                                <span
-                                    class="text-[10px] font-mono text-cyan-500/60 border border-cyan-500/20 px-2 py-1 rounded bg-cyan-950/30">SYS.CORE</span>
-                            </div>
-
-                            <h4
-                                class="text-xl font-display font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
-                                Neuro-Theology 101</h4>
-                            <p
-                                class="text-slate-400 text-sm leading-relaxed mb-8 border-l-2 border-slate-700 pl-4 group-hover:border-cyan-500/50 transition-colors">
-                                Decoding the <span class="text-cyan-200">God-Brain connection</span>. Reprogram fear
-                                responses and unlock cognitive potential through faith-based neuroscience.
-                            </p>
-
-                            <!-- Tech Specs / Progress -->
-                            <div class="mt-auto space-y-4">
-                                <div class="flex items-center gap-2 text-xs font-mono text-slate-500">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse"></span>
-                                    <span>STATUS: ONLINE</span>
-                                    <span class="ml-auto text-cyan-400">4 MODULES</span>
-                                </div>
-                                <div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-gradient-to-r from-cyan-600 to-blue-500 w-1/3"></div>
-                                </div>
-                                <a href="course-superpower.html"
-                                    class="block w-full py-3 bg-slate-800 hover:bg-cyan-600 border border-slate-700 hover:border-cyan-500 text-slate-200 hover:text-white font-medium rounded-lg text-center transition-all duration-300 uppercase text-xs tracking-widest">
-                                    Initialize Course
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Path Card 2: STEM (Purple/Pink Theme) -->
-                    <article
-                        class="relative group rounded-2xl bg-slate-900 border border-slate-700 hover:border-purple-500/50 transition-all duration-500 overflow-hidden hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-1">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-pink-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
-                        <div
-                            class="absolute -bottom-24 -left-24 w-48 h-48 bg-purple-500/20 rounded-full blur-[60px] group-hover:bg-purple-500/30 transition-all duration-500">
-                        </div>
-
-                        <div class="relative p-6 md:p-8 h-full flex flex-col z-10">
-                            <div class="flex items-start justify-between mb-6">
-                                <div
-                                    class="w-14 h-14 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-purple-400 group-hover:scale-110 group-hover:border-purple-500/30 transition-all shadow-lg shadow-black/20">
-                                    <span class="material-icons-outlined text-3xl">science</span>
-                                </div>
-                                <span
-                                    class="text-[10px] font-mono text-purple-500/60 border border-purple-500/20 px-2 py-1 rounded bg-purple-950/30">SYS.DEV</span>
-                            </div>
-
-                            <h4
-                                class="text-xl font-display font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
-                                STEM for Youth</h4>
-                            <p
-                                class="text-slate-400 text-sm leading-relaxed mb-8 border-l-2 border-slate-700 pl-4 group-hover:border-purple-500/50 transition-colors">
-                                Building the next generation of <span class="text-purple-200">Architects</span>. Logic,
-                                mathematics, and scientific inquiry for future leaders.
-                            </p>
-
-                            <div class="mt-auto space-y-4">
-                                <div class="flex items-center gap-2 text-xs font-mono text-slate-500">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
-                                    <span>STATUS: STANDBY</span>
-                                    <span class="ml-auto text-purple-400">6 MODULES</span>
-                                </div>
-                                <div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-slate-700 w-0"></div> <!-- Empty progress -->
-                                </div>
-                                <button
-                                    class="block w-full py-3 bg-slate-800 hover:bg-purple-600 border border-slate-700 hover:border-purple-500 text-slate-200 hover:text-white font-medium rounded-lg text-center transition-all duration-300 uppercase text-xs tracking-widest">
-                                    Access Modules
-                                </button>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Path Card 3: The Book (Gold/Amber Theme) - Featured -->
-                    <article
-                        class="relative group rounded-2xl bg-black border border-amber-900/30 hover:border-amber-500/50 transition-all duration-500 overflow-hidden hover:shadow-2xl hover:shadow-amber-500/10 hover:-translate-y-1 md:row-span-1 lg:col-span-1">
-                        <!-- Shining Effect -->
-                        <div
-                            class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10">
-                        </div>
-                        <div
-                            class="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-b from-amber-500/10 to-transparent rotate-12 blur-2xl group-hover:opacity-100 opacity-50 transition-opacity">
-                        </div>
-
-                        <div class="relative p-6 md:p-8 h-full flex flex-col z-10">
-                            <div class="flex items-center justify-between mb-6">
-                                <span
-                                    class="bg-amber-500/10 text-amber-500 text-[10px] font-bold px-3 py-1 rounded-full border border-amber-500/20 backdrop-blur-sm tracking-widest">FEATURED
-                                    ARTIFACT</span>
-                                <span class="material-icons-outlined text-amber-500/50 animate-pulse">bookmark</span>
-                            </div>
-
-                            <div class="flex gap-5 mb-6">
-                                <img alt="Book Cover"
-                                    class="w-24 h-32 object-cover rounded-lg shadow-2xl border border-white/10 group-hover:scale-105 transition-transform duration-500"
-                                    src="homepage/assets/book-cover.jpg" />
-                                <div>
-                                    <h4 class="text-xl font-display font-bold text-white mb-1">School of<br>Hard Knocks
-                                    </h4>
-                                    <p class="text-slate-400 text-xs mb-3 italic">By Rodney Coley</p>
-                                    <div class="flex text-amber-400 text-xs gap-0.5">
-                                        <span class="material-icons-outlined text-sm">star</span>
-                                        <span class="material-icons-outlined text-sm">star</span>
-                                        <span class="material-icons-outlined text-sm">star</span>
-                                        <span class="material-icons-outlined text-sm">star</span>
-                                        <span class="material-icons-outlined text-sm">star</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <p class="text-slate-400 text-xs leading-relaxed mb-6 flex-1">
-                                Manual for reprogramming the brain to overcome struggle. The definitive guide to closing
-                                the Neuro-Economic Gap.
-                            </p>
-
-                            <a href="https://www.amazon.com/Lessons-School-Hardknocks-Brother-Brooklyn/dp/1662845413"
-                                target="_blank"
-                                class="w-full py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-lg transition-all shadow-lg shadow-amber-900/50 flex items-center justify-center gap-2 uppercase tracking-widest group-hover:shadow-amber-500/20">
-                                <span class="material-icons-outlined text-sm">shopping_bag</span>
-                                Acquire Item
+                        <p class="fade-up fade-up-3 text-lg text-slate-300 max-w-xl leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]">
+                            <i class="fa-solid fa-quote-left text-brand-accent/40 mr-1"></i>
+                            I help youth and leaders <strong class="text-white">reprogram their minds</strong> to overcome struggle
+                            and close the <strong class="text-white">Neuro-Economic Gap</strong>.
+                            <i class="fa-solid fa-quote-right text-brand-accent/40 ml-1"></i>
+                        </p>
+                        <div class="fade-up fade-up-4 flex flex-row gap-3 pt-2">
+                            <a href="course-superpower.html"
+                                class="px-7 py-3.5 bg-brand-accent hover:bg-teal-400 text-brand-dark text-sm font-bold rounded-full transition-all duration-300 shadow-xl shadow-brand-accent/25 flex items-center justify-center gap-2 hover:-translate-y-0.5">
+                                <span class="material-icons-outlined text-lg">school</span>
+                                Free Course
+                            </a>
+                            <a href="https://www.amazon.com/Lessons-School-Hardknocks-Brother-Brooklyn/dp/1662845413" target="_blank"
+                                class="px-7 py-3.5 bg-black/40 backdrop-blur-md border border-white/15 text-white text-sm font-semibold rounded-full transition-all duration-300 flex items-center justify-center gap-2 hover:bg-white/10 hover:-translate-y-0.5">
+                                My Story
+                                <span class="material-icons-outlined text-base">arrow_forward</span>
                             </a>
                         </div>
-                    </article>
-                </div>
-            </section>
-            <!-- Upcoming Events -->
-            <section>
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-2">
-                        <span class="material-icons-outlined text-primary">event_available</span>
-                        Upcoming Appearances
-                    </h3>
-                    <button class="text-primary text-sm font-medium hover:underline">Request Booking</button>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Event 1 -->
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 flex items-center gap-5 shadow-sm hover:shadow-md transition-shadow">
-                        <div
-                            class="flex-shrink-0 bg-primary/10 text-primary rounded-lg px-4 py-3 text-center min-w-[80px]">
-                            <span class="block text-xs font-bold uppercase tracking-wider opacity-70">FEB</span>
-                            <span class="block text-2xl font-bold">08</span>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">Black Tech Conference</h4>
-                            <div class="flex items-center gap-4 text-xs text-slate-500 mt-1">
-                                <span class="flex items-center gap-1">
-                                    <span class="material-icons-outlined text-sm">location_on</span>
-                                    Detroit, MI
-                                </span>
-                                <span class="flex items-center gap-1">
-                                    <span class="material-icons-outlined text-sm">mic</span>
-                                    Keynote Speaker
-                                </span>
+                        <div class="fade-up fade-up-4 pt-6 flex flex-wrap gap-6">
+                            <div class="flex items-center gap-2 text-white/50">
+                                <i class="fa-solid fa-flask text-brand-accent/60 text-xs"></i>
+                                <span class="text-xs font-medium">Duke University Collab</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-white/50">
+                                <i class="fa-solid fa-shield-halved text-brand-accent/60 text-xs"></i>
+                                <span class="text-xs font-medium">Veteran Founded</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-white/50">
+                                <i class="fa-solid fa-users text-brand-accent/60 text-xs"></i>
+                                <span class="text-xs font-medium">Community Focused</span>
                             </div>
                         </div>
-                        <button class="ml-auto p-2 text-slate-400 hover:text-primary transition-colors">
-                            <span class="material-icons-outlined">arrow_forward_ios</span>
-                        </button>
-                    </div>
-                    <!-- Event 2 -->
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 flex items-center gap-5 shadow-sm hover:shadow-md transition-shadow">
-                        <div
-                            class="flex-shrink-0 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-lg px-4 py-3 text-center min-w-[80px]">
-                            <span class="block text-xs font-bold uppercase tracking-wider opacity-70">MAR</span>
-                            <span class="block text-2xl font-bold">15</span>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 dark:text-white text-lg">Boys & Girls Club STEM</h4>
-                            <div class="flex items-center gap-4 text-xs text-slate-500 mt-1">
-                                <span class="flex items-center gap-1">
-                                    <span class="material-icons-outlined text-sm">location_on</span>
-                                    Community Center
-                                </span>
-                                <span class="flex items-center gap-1">
-                                    <span class="material-icons-outlined text-sm">school</span>
-                                    Guest Teacher
-                                </span>
-                            </div>
-                        </div>
-                        <button class="ml-auto p-2 text-slate-400 hover:text-primary transition-colors">
-                            <span class="material-icons-outlined">arrow_forward_ios</span>
-                        </button>
                     </div>
                 </div>
-            </section>
-            <!-- Resources & Recent Activity Two Column -->
-            <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Recent Activity (2/3 width) -->
-                <div class="lg:col-span-2 space-y-4">
-                    <h3 class="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-2">
-                        <span class="material-icons-outlined text-slate-400">rocket_launch</span>
-                        Mission & Impact
-                    </h3>
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-                        <div class="divide-y divide-slate-100 dark:divide-slate-800">
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== VIDEO FEATURE ==================== -->
+    <section class="py-16 lg:py-20 relative border-t border-white/[0.04]">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10 reveal">
+                <span class="inline-block text-brand-accent text-xs font-bold uppercase tracking-[0.2em] mb-3">As Seen On</span>
+                <h2 class="text-2xl md:text-3xl font-display font-extrabold text-white">Watch the Story</h2>
+            </div>
+            <div class="reveal relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/40 max-w-3xl mx-auto group">
+                <!-- Desktop/Universal Video -->
+                <video id="desktop-hero-video" poster="homepage/assets/video-thumb-23s.png"
+                    src="https://cdn.field59.com/WJRT/1664988309-6d31c9c2505b7f059839e3a96a3c30c52f5cdb3a_fl9-720p.mp4"
+                    playsinline class="w-full h-auto aspect-video bg-brand-dark"
+                    style="outline: none !important; border: none !important; box-shadow: none !important;"></video>
+                <button onclick="playHeroVideo('desktop-hero-video', this)"
+                    class="absolute inset-0 flex items-center justify-center bg-black/25 rounded-2xl cursor-pointer transition-all hover:bg-black/15">
+                    <span class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-2xl group-hover:scale-110 transition-transform duration-500">
+                        <i class="fa-solid fa-play text-white text-2xl ml-1"></i>
+                    </span>
+                </button>
+                <div class="absolute top-3 left-3 bg-black/50 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-lg border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    Credit: <a href="https://www.abc12.com/community/good-morning-mid-michigan/wellness-wednesday-brother-brooklyn-shares-journey-to-mental-health-and-life-changes/video_1e2fbfeb-60b7-51ca-99ac-f82814469081.html"
+                        target="_blank" rel="nofollow" class="hover:text-brand-accent underline pointer-events-auto">ABC12</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================== LEARNING PATHS ==================== -->
+    <section id="learn" class="py-20 lg:py-28 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14 reveal">
+                <span class="inline-block text-brand-accent text-xs font-bold uppercase tracking-[0.2em] mb-4">Explore & Learn</span>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-extrabold text-white">Learning Paths</h2>
+                <p class="mt-4 text-slate-400 text-lg max-w-xl mx-auto">Choose your journey. Master your mind.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+                <!-- Path Card 1: Neuro-Theology -->
+                <article class="reveal glass card-glow rounded-2xl overflow-hidden group hover:-translate-y-1 transition-all duration-500 relative">
+                    <div class="absolute -top-24 -right-24 w-48 h-48 bg-cyan-500/10 rounded-full blur-[80px] group-hover:bg-cyan-500/20 transition-all duration-700"></div>
+                    <div class="relative p-7 md:p-8 h-full flex flex-col z-10">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-14 h-14 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform duration-500">
+                                <span class="material-icons-outlined text-3xl">psychology</span>
+                            </div>
+                            <span class="text-[10px] font-mono text-cyan-500/60 border border-cyan-500/20 px-2 py-1 rounded bg-cyan-950/30">SYS.CORE</span>
+                        </div>
+
+                        <h4 class="text-xl font-display font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                            Neuro-Theology 101</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-8 border-l-2 border-slate-700 pl-4 group-hover:border-cyan-500/50 transition-colors">
+                            Decoding the <span class="text-cyan-200">God-Brain connection</span>. Reprogram fear responses and unlock cognitive potential through faith-based neuroscience.
+                        </p>
+
+                        <div class="mt-auto space-y-4">
+                            <div class="flex items-center gap-2 text-xs font-mono text-slate-500">
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse"></span>
+                                <span>STATUS: ONLINE</span>
+                                <span class="ml-auto text-cyan-400">4 MODULES</span>
+                            </div>
+                            <div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyan-600 to-blue-500 w-1/3"></div>
+                            </div>
+                            <a href="course-superpower.html"
+                                class="block w-full py-3 bg-brand-surface/50 hover:bg-cyan-600 border border-slate-700 hover:border-cyan-500 text-slate-200 hover:text-white font-semibold rounded-xl text-center transition-all duration-300 uppercase text-xs tracking-widest">
+                                Initialize Course
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Path Card 2: STEM -->
+                <article class="reveal glass card-glow rounded-2xl overflow-hidden group hover:-translate-y-1 transition-all duration-500 relative">
+                    <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-purple-500/10 rounded-full blur-[80px] group-hover:bg-purple-500/20 transition-all duration-700"></div>
+                    <div class="relative p-7 md:p-8 h-full flex flex-col z-10">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-14 h-14 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform duration-500">
+                                <span class="material-icons-outlined text-3xl">science</span>
+                            </div>
+                            <span class="text-[10px] font-mono text-purple-500/60 border border-purple-500/20 px-2 py-1 rounded bg-purple-950/30">SYS.DEV</span>
+                        </div>
+
+                        <h4 class="text-xl font-display font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                            STEM for Youth</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-8 border-l-2 border-slate-700 pl-4 group-hover:border-purple-500/50 transition-colors">
+                            Building the next generation of <span class="text-purple-200">Architects</span>. Logic, mathematics, and scientific inquiry for future leaders.
+                        </p>
+
+                        <div class="mt-auto space-y-4">
+                            <div class="flex items-center gap-2 text-xs font-mono text-slate-500">
+                                <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+                                <span>STATUS: STANDBY</span>
+                                <span class="ml-auto text-purple-400">6 MODULES</span>
+                            </div>
+                            <div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-slate-700 w-0"></div>
+                            </div>
+                            <button class="block w-full py-3 bg-brand-surface/50 hover:bg-purple-600 border border-slate-700 hover:border-purple-500 text-slate-200 hover:text-white font-semibold rounded-xl text-center transition-all duration-300 uppercase text-xs tracking-widest">
+                                Access Modules
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Path Card 3: The Book -->
+                <article class="reveal glass card-glow rounded-2xl overflow-hidden group hover:-translate-y-1 transition-all duration-500 relative border-amber-900/20">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5"></div>
+                    <div class="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-b from-amber-500/10 to-transparent rotate-12 blur-2xl group-hover:opacity-100 opacity-50 transition-opacity duration-700"></div>
+
+                    <div class="relative p-7 md:p-8 h-full flex flex-col z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="bg-amber-500/10 text-amber-500 text-[10px] font-bold px-3 py-1 rounded-full border border-amber-500/20 tracking-widest">FEATURED ARTIFACT</span>
+                            <span class="material-icons-outlined text-amber-500/50 animate-pulse">bookmark</span>
+                        </div>
+
+                        <div class="flex gap-5 mb-6">
+                            <img alt="Book Cover"
+                                class="w-24 h-32 object-cover rounded-xl shadow-2xl border border-white/10 group-hover:scale-105 transition-transform duration-500"
+                                src="homepage/assets/book-cover.jpg" />
+                            <div>
+                                <h4 class="text-xl font-display font-bold text-white mb-1">School of<br>Hard Knocks</h4>
+                                <p class="text-slate-400 text-xs mb-3 italic">By Rodney Coley</p>
+                                <div class="flex text-amber-400 text-xs gap-0.5">
+                                    <span class="material-icons-outlined text-sm">star</span>
+                                    <span class="material-icons-outlined text-sm">star</span>
+                                    <span class="material-icons-outlined text-sm">star</span>
+                                    <span class="material-icons-outlined text-sm">star</span>
+                                    <span class="material-icons-outlined text-sm">star</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-400 text-xs leading-relaxed mb-6 flex-1">
+                            Manual for reprogramming the brain to overcome struggle. The definitive guide to closing the Neuro-Economic Gap.
+                        </p>
+
+                        <a href="https://www.amazon.com/Lessons-School-Hardknocks-Brother-Brooklyn/dp/1662845413" target="_blank"
+                            class="w-full py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-xl transition-all duration-300 shadow-lg shadow-amber-900/40 flex items-center justify-center gap-2 uppercase tracking-widest group-hover:shadow-amber-500/20">
+                            <span class="material-icons-outlined text-sm">shopping_bag</span>
+                            Acquire Item
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================== UPCOMING EVENTS ==================== -->
+    <section id="events" class="py-20 lg:py-24 relative border-t border-white/[0.04]">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-primary/50 to-transparent pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex items-center justify-between mb-10 reveal">
+                <div>
+                    <span class="text-brand-accent text-xs font-bold uppercase tracking-[0.2em]">Schedule</span>
+                    <h2 class="text-3xl md:text-4xl font-display font-extrabold text-white mt-2">Upcoming Appearances</h2>
+                </div>
+                <button class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-brand-accent border border-brand-accent/30 rounded-full hover:bg-brand-accent/10 transition-all duration-300">
+                    Request Booking
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Event 1 -->
+                <div class="reveal glass card-glow rounded-2xl p-6 flex items-center gap-5 group hover:-translate-y-0.5 transition-all duration-300">
+                    <div class="flex-shrink-0 bg-brand-accent/10 text-brand-accent rounded-xl px-5 py-4 text-center min-w-[85px] border border-brand-accent/20">
+                        <span class="block text-[10px] font-bold uppercase tracking-wider opacity-70">FEB</span>
+                        <span class="block text-3xl font-display font-bold">08</span>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-display font-bold text-white text-lg group-hover:text-brand-accent transition-colors">Black Tech Conference</h4>
+                        <div class="flex items-center gap-4 text-xs text-slate-500 mt-1.5">
+                            <span class="flex items-center gap-1">
+                                <span class="material-icons-outlined text-sm">location_on</span>
+                                Detroit, MI
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <span class="material-icons-outlined text-sm">mic</span>
+                                Keynote Speaker
+                            </span>
+                        </div>
+                    </div>
+                    <button class="p-2 text-slate-600 group-hover:text-brand-accent transition-colors">
+                        <span class="material-icons-outlined">arrow_forward_ios</span>
+                    </button>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="reveal glass card-glow rounded-2xl p-6 flex items-center gap-5 group hover:-translate-y-0.5 transition-all duration-300">
+                    <div class="flex-shrink-0 bg-purple-500/10 text-purple-400 rounded-xl px-5 py-4 text-center min-w-[85px] border border-purple-500/20">
+                        <span class="block text-[10px] font-bold uppercase tracking-wider opacity-70">MAR</span>
+                        <span class="block text-3xl font-display font-bold">15</span>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-display font-bold text-white text-lg group-hover:text-purple-300 transition-colors">Boys &amp; Girls Club STEM</h4>
+                        <div class="flex items-center gap-4 text-xs text-slate-500 mt-1.5">
+                            <span class="flex items-center gap-1">
+                                <span class="material-icons-outlined text-sm">location_on</span>
+                                Community Center
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <span class="material-icons-outlined text-sm">school</span>
+                                Guest Teacher
+                            </span>
+                        </div>
+                    </div>
+                    <button class="p-2 text-slate-600 group-hover:text-purple-400 transition-colors">
+                        <span class="material-icons-outlined">arrow_forward_ios</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================== MISSION & DAILY INSIGHT ==================== -->
+    <section id="mission" class="py-20 lg:py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Mission & Impact (2/3) -->
+                <div class="lg:col-span-2 space-y-6 reveal">
+                    <div>
+                        <span class="text-brand-accent text-xs font-bold uppercase tracking-[0.2em]">Purpose</span>
+                        <h2 class="text-3xl md:text-4xl font-display font-extrabold text-white mt-2">Mission &amp; Impact</h2>
+                    </div>
+                    <div class="glass rounded-2xl overflow-hidden">
+                        <div class="divide-y divide-white/[0.06]">
                             <!-- Item 1 -->
-                            <div
-                                class="p-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center flex-shrink-0">
+                            <div class="p-5 flex items-center gap-4 hover:bg-white/[0.03] transition-colors cursor-pointer group">
+                                <div class="w-11 h-11 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                                     <span class="material-icons-outlined text-lg">public</span>
                                 </div>
                                 <div class="flex-1">
-                                    <h5 class="text-sm font-semibold text-slate-900 dark:text-white">Empowering 10
-                                        Million Youth</h5>
-                                    <p class="text-xs text-slate-500">Mission Goal • Ongoing</p>
+                                    <h5 class="text-sm font-semibold text-white group-hover:text-brand-accent transition-colors">Empowering 10 Million Youth</h5>
+                                    <p class="text-xs text-slate-500">Mission Goal &bull; Ongoing</p>
                                 </div>
                             </div>
                             <!-- Item 2 -->
-                            <div
-                                class="p-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 text-primary flex items-center justify-center flex-shrink-0">
+                            <div class="p-5 flex items-center gap-4 hover:bg-white/[0.03] transition-colors cursor-pointer group">
+                                <div class="w-11 h-11 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                                     <span class="material-icons-outlined text-lg">mic</span>
                                 </div>
                                 <div class="flex-1">
-                                    <h5 class="text-sm font-semibold text-slate-900 dark:text-white">Bridging Faith &
-                                        Science</h5>
-                                    <p class="text-xs text-slate-500">Keynote Speaking • International</p>
+                                    <h5 class="text-sm font-semibold text-white group-hover:text-brand-accent transition-colors">Bridging Faith &amp; Science</h5>
+                                    <p class="text-xs text-slate-500">Keynote Speaking &bull; International</p>
                                 </div>
                             </div>
                             <!-- Item 3 -->
-                            <div
-                                class="p-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center flex-shrink-0">
+                            <div class="p-5 flex items-center gap-4 hover:bg-white/[0.03] transition-colors cursor-pointer group">
+                                <div class="w-11 h-11 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                                     <span class="material-icons-outlined text-lg">emoji_events</span>
                                 </div>
                                 <div class="flex-1">
-                                    <h5 class="text-sm font-semibold text-slate-900 dark:text-white">Author: School of
-                                        Hard Knocks</h5>
-                                    <p class="text-xs text-slate-500">Publication • Best Seller</p>
+                                    <h5 class="text-sm font-semibold text-white group-hover:text-brand-accent transition-colors">Author: School of Hard Knocks</h5>
+                                    <p class="text-xs text-slate-500">Publication &bull; Best Seller</p>
                                 </div>
                             </div>
                             <!-- Item 4 -->
-                            <div
-                                class="p-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center flex-shrink-0">
+                            <div class="p-5 flex items-center gap-4 hover:bg-white/[0.03] transition-colors cursor-pointer group">
+                                <div class="w-11 h-11 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                                     <span class="material-icons-outlined text-lg">military_tech</span>
                                 </div>
                                 <div class="flex-1">
-                                    <h5 class="text-sm font-semibold text-slate-900 dark:text-white">U.S. Veteran &
-                                        Retired Robotic Engineer</h5>
-                                    <p class="text-xs text-slate-500">Alcoa Howmet • Mindset Education 501(c)(3)</p>
+                                    <h5 class="text-sm font-semibold text-white group-hover:text-brand-accent transition-colors">U.S. Veteran &amp; Retired Robotic Engineer</h5>
+                                    <p class="text-xs text-slate-500">Alcoa Howmet &bull; Mindset Education 501(c)(3)</p>
                                 </div>
                             </div>
                         </div>
-                        <div
-                            class="p-3 bg-slate-50 dark:bg-slate-800/50 text-center border-t border-slate-100 dark:border-slate-800">
-                            <button
-                                class="text-xs font-bold text-slate-500 hover:text-primary uppercase tracking-wide">Read
-                                My Full Bio</button>
+                        <div class="p-4 bg-white/[0.02] text-center border-t border-white/[0.06]">
+                            <button class="text-xs font-bold text-slate-500 hover:text-brand-accent uppercase tracking-widest transition-colors">Read My Full Bio</button>
                         </div>
                     </div>
                 </div>
-                <!-- Daily Challenge / Widget (1/3 width) -->
-                <div class="space-y-4">
-                    <h3 class="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-2">
-                        <span class="material-icons-outlined text-slate-400">lightbulb</span>
-                        Daily Insight
-                    </h3>
-                    <div
-                        class="bg-gradient-to-br from-primary to-blue-600 rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
-                        <span
-                            class="material-icons-outlined absolute -bottom-4 -right-4 text-9xl text-white opacity-10 rotate-12">format_quote</span>
-                        <p class="text-sm font-medium opacity-80 mb-4 uppercase tracking-wider">Thought of the day</p>
-                        <blockquote class="text-lg font-medium italic mb-6 leading-relaxed">
-                            "The brain is the hardware of the soul. Understanding how it works is the first step to
-                            mastering your spiritual walk."
-                        </blockquote>
-                        <div class="flex items-center gap-3">
-                            <img alt="Rodney Coley" class="w-8 h-8 rounded-full border border-white/30"
-                                src="https://bayareaweb.design/brother-brooklyn/onboarding/uploads/2026-02-11_225606/headshots/2BE_383_1124_3316717001_2_2.jpg" />
-                            <span class="text-sm font-semibold">Brother Brooklyn</span>
+
+                <!-- Daily Insight (1/3) -->
+                <div class="space-y-6 reveal">
+                    <div>
+                        <span class="text-brand-warm text-xs font-bold uppercase tracking-[0.2em]">Wisdom</span>
+                        <h2 class="text-3xl font-display font-extrabold text-white mt-2">Daily Insight</h2>
+                    </div>
+
+                    <!-- Quote Card -->
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-accent via-teal-600 to-blue-600"></div>
+                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+                        <div class="relative p-7 text-white">
+                            <span class="material-icons-outlined absolute -bottom-3 -right-3 text-8xl text-white opacity-10 rotate-12">format_quote</span>
+                            <p class="text-xs font-bold opacity-60 mb-5 uppercase tracking-[0.2em]">Thought of the day</p>
+                            <blockquote class="text-lg font-medium italic mb-6 leading-relaxed">
+                                "The brain is the hardware of the soul. Understanding how it works is the first step to mastering your spiritual walk."
+                            </blockquote>
+                            <div class="flex items-center gap-3">
+                                <img alt="Rodney Coley" class="w-9 h-9 rounded-full border-2 border-white/30"
+                                    src="https://bayareaweb.design/brother-brooklyn/onboarding/uploads/2026-02-11_225606/headshots/2BE_383_1124_3316717001_2_2.jpg" />
+                                <span class="text-sm font-bold">Brother Brooklyn</span>
+                            </div>
                         </div>
                     </div>
-                    <!-- Small Support Card -->
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5">
-                        <h4 class="font-bold text-slate-900 dark:text-white mb-2">Need Help?</h4>
-                        <p class="text-xs text-slate-500 mb-4">Join our community Discord for live discussions and study
-                            groups.</p>
-                        <button
-                            class="w-full py-2 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-600 dark:text-slate-300 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+
+                    <!-- Community Card -->
+                    <div class="glass rounded-2xl p-6">
+                        <h4 class="font-display font-bold text-white mb-2">Need Help?</h4>
+                        <p class="text-xs text-slate-400 mb-4">Join our community Discord for live discussions and study groups.</p>
+                        <button class="w-full py-2.5 glass hover:bg-white/[0.06] rounded-xl text-slate-300 text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2">
                             <span class="material-icons-outlined text-base">forum</span>
                             Join Community
                         </button>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
+    </section>
 
-        <!-- Newsletter Section -->
-        <section class="px-6 md:px-8 pb-12 max-w-7xl mx-auto">
-            <div class="bg-slate-900 rounded-2xl p-8 md:p-12 relative overflow-hidden shadow-2xl text-center">
+
+    <!-- ==================== NEWSLETTER CTA ==================== -->
+    <section id="newsletter" class="py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto relative reveal">
+            <div class="glass-strong rounded-3xl p-10 md:p-16 relative overflow-hidden text-center">
                 <!-- Decorative Glows -->
-                <div
-                    class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-blue-900/20 to-transparent">
-                </div>
-                <div class="absolute -top-24 -left-24 w-64 h-64 bg-primary/20 rounded-full blur-[80px]"></div>
-                <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-purple-600/20 rounded-full blur-[80px]"></div>
+                <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-brand-accent/10 rounded-full blur-[100px] pointer-events-none"></div>
+                <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-600/10 rounded-full blur-[80px] pointer-events-none"></div>
+                <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-purple-600/10 rounded-full blur-[80px] pointer-events-none"></div>
+
                 <div class="relative z-10 space-y-6">
-                    <div
-                        class="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto text-white border border-white/10 shadow-lg">
+                    <div class="w-16 h-16 bg-brand-accent/10 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto text-brand-accent border border-brand-accent/20 shadow-lg float">
                         <span class="material-icons-outlined text-3xl">mail_outline</span>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-display font-bold text-white">
-                        Join the <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Movement.</span>
+                    <h2 class="text-3xl md:text-5xl font-display font-extrabold text-white">
+                        Join the <span class="text-gradient">Movement.</span>
                     </h2>
                     <p class="text-slate-400 max-w-lg mx-auto text-lg">
-                        Get weekly insights on Neuro-Theology, STEM education, and unlocking your brain's hidden
-                        potential.
+                        Get weekly insights on Neuro-Theology, STEM education, and unlocking your brain's hidden potential.
                     </p>
-                    <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 pt-2"
-                        onsubmit="event.preventDefault()">
+                    <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 pt-2" onsubmit="event.preventDefault()">
                         <input type="email" placeholder="Enter your email address"
-                            class="flex-1 bg-white/5 border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all" />
+                            class="flex-1 bg-white/5 border border-white/10 rounded-full px-6 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent/50 transition-all" />
                         <button type="submit"
-                            class="px-8 py-3.5 bg-primary hover:bg-blue-600 text-white font-bold rounded-xl transition-all shadow-lg hover:-translate-y-1">
+                            class="px-8 py-3.5 bg-brand-accent hover:bg-teal-400 text-brand-dark font-bold rounded-full transition-all duration-300 shadow-xl shadow-brand-accent/20 hover:-translate-y-0.5 whitespace-nowrap">
                             Subscribe
                         </button>
                     </form>
-                    <p class="text-slate-600 text-xs mt-4">Join 10,000+ others. No spam, just growth.</p>
+                    <p class="text-slate-600 text-xs">Join 10,000+ others. No spam, just growth.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Minimal Footer -->
-        <footer
-            class="mt-12 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-8 px-6 md:px-12">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="text-center md:text-left">
-                    <p class="font-bold text-slate-900 dark:text-white text-sm">Brother Brooklyn Academy</p>
-                    <p class="text-slate-500 text-xs mt-1">© 2026 Brother Brooklyn (Rodney Coley). All rights reserved.
-                    </p>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="border-t border-white/[0.06] py-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-accent to-teal-600 flex items-center justify-center text-white font-display font-bold text-sm shadow-md shadow-brand-accent/20">
+                    B
                 </div>
-                <div class="flex gap-6 text-sm text-slate-500">
-                    <a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
-                    <a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
-                    <a class="hover:text-primary transition-colors" href="#">Contact</a>
-                </div>
-                <div class="flex gap-4">
-                    <a class="w-8 h-8 rounded bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-colors"
-                        href="#">
-                        <span class="material-icons-outlined text-sm">facebook</span>
-                    </a>
-                    <a class="w-8 h-8 rounded bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-primary/10 transition-colors"
-                        href="#">
-                        <span class="material-icons-outlined text-sm">share</span>
-                    </a>
+                <div>
+                    <p class="font-display font-bold text-white text-sm leading-none">Brother Brooklyn Academy</p>
+                    <p class="text-slate-600 text-xs mt-1">&copy; 2026 Brother Brooklyn (Rodney Coley). All rights reserved.</p>
                 </div>
             </div>
-        </footer>
-    </main>
+            <div class="flex gap-6 text-sm text-slate-500">
+                <a class="hover:text-brand-accent transition-colors duration-300" href="#">Privacy Policy</a>
+                <a class="hover:text-brand-accent transition-colors duration-300" href="#">Terms of Service</a>
+                <a class="hover:text-brand-accent transition-colors duration-300" href="#">Contact</a>
+            </div>
+            <div class="flex gap-3">
+                <a class="w-9 h-9 rounded-xl glass flex items-center justify-center text-slate-500 hover:text-brand-accent hover:border-brand-accent/30 transition-all duration-300" href="#">
+                    <i class="fa-brands fa-facebook-f text-sm"></i>
+                </a>
+                <a class="w-9 h-9 rounded-xl glass flex items-center justify-center text-slate-500 hover:text-brand-accent hover:border-brand-accent/30 transition-all duration-300" href="#">
+                    <i class="fa-brands fa-instagram text-sm"></i>
+                </a>
+                <a class="w-9 h-9 rounded-xl glass flex items-center justify-center text-slate-500 hover:text-brand-accent hover:border-brand-accent/30 transition-all duration-300" href="#">
+                    <i class="fa-brands fa-youtube text-sm"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ==================== SCRIPTS ==================== -->
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            if (sidebar.classList.contains('-translate-x-full')) {
-                sidebar.classList.remove('-translate-x-full');
-                overlay.classList.remove('hidden');
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobile-nav');
+            const icon = document.getElementById('nav-icon');
+            nav.classList.toggle('hidden');
+            icon.textContent = nav.classList.contains('hidden') ? 'menu' : 'close';
+        }
+
+        function toggleBrobotVideo(variant) {
+            const video = document.getElementById('hero-brobot-video-' + variant);
+            const poster = document.getElementById('hero-poster-' + variant);
+            const icon = document.getElementById('hero-play-icon-' + variant);
+
+            if (video.classList.contains('hidden')) {
+                video.classList.remove('hidden');
+                poster.style.opacity = '0';
+                video.currentTime = 0;
+                video.play();
+                icon.classList.remove('fa-play', 'ml-0.5', 'ml-1');
+                icon.classList.add('fa-pause');
             } else {
-                sidebar.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
+                video.pause();
+                video.classList.add('hidden');
+                poster.style.opacity = '1';
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+                if (variant === 'desktop') icon.classList.add('ml-1');
+                else icon.classList.add('ml-0.5');
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            ['mobile', 'desktop'].forEach(function(v) {
+                var video = document.getElementById('hero-brobot-video-' + v);
+                if (!video) return;
+                video.addEventListener('ended', function() {
+                    video.classList.add('hidden');
+                    document.getElementById('hero-poster-' + v).style.opacity = '1';
+                    var icon = document.getElementById('hero-play-icon-' + v);
+                    icon.classList.remove('fa-pause');
+                    icon.classList.add('fa-play');
+                    if (v === 'desktop') icon.classList.add('ml-1');
+                    else icon.classList.add('ml-0.5');
+                });
+            });
+        });
     </script>
     <script>
         function playHeroVideo(videoId, btn) {
@@ -676,6 +821,18 @@
                 btn.style.display = 'none';
             }
         }
+    </script>
+    <!-- Scroll reveal -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
     <script src="homepage/js/section-neural-canvas.js?v=colorful_cream"></script>
 </body>
