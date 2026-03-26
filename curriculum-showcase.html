@@ -110,6 +110,10 @@
         /* Timeline */
         .timeline-line { position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #2DD4BF, #8B5CF6); }
 
+        /* Hide scrollbar on mobile card row */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
         /* Grade band card hover lift */
         .band-card { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease; }
         .band-card:hover { transform: translateY(-4px) !important; box-shadow: 0 12px 40px rgba(0,0,0,0.10); }
@@ -240,10 +244,56 @@
                 </div>
 
                 <!-- Right Column: Grade Band Preview Cards -->
+
+                <!-- MOBILE: horizontal scroll row -->
+                <div class="reveal-section md:hidden w-full mt-4 -mx-6 px-6">
+                    <div class="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar" style="-webkit-overflow-scrolling: touch;">
+                        <div class="band-card flex-shrink-0 w-56 snap-start rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-prek">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #FF6B6B15; color: #FF6B6B;">PreK</span>
+                                <span class="text-xl">🧒</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Wimee's Brain City</h4>
+                            <p class="text-xs text-slate-400 mt-1">PBS-partnered emotional foundations</p>
+                        </div>
+                        <div class="band-card flex-shrink-0 w-56 snap-start rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-k2">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #FFD93D15; color: #D4A017;">K-2</span>
+                                <span class="text-xl">🌟</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Emotion Explorers</h4>
+                            <p class="text-xs text-slate-400 mt-1">Brain-body mapping and self-regulation</p>
+                        </div>
+                        <div class="band-card flex-shrink-0 w-56 snap-start rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-35">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #2DD4BF15; color: #14B8A6;">3-5</span>
+                                <span class="text-xl">🧠</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Neuro-Navigators</h4>
+                            <p class="text-xs text-slate-400 mt-1">Systems thinking and neural pathways</p>
+                        </div>
+                        <div class="band-card flex-shrink-0 w-56 snap-start rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-68">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #60A5FA15; color: #3B82F6;">6-8</span>
+                                <span class="text-xl">🔬</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Identity Architects</h4>
+                            <p class="text-xs text-slate-400 mt-1">Neuroscience and cultural identity</p>
+                        </div>
+                        <div class="band-card flex-shrink-0 w-56 snap-start rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-912">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #6442EF15; color: #6442EF;">9-12</span>
+                                <span class="text-xl">🚀</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Legacy Builders</h4>
+                            <p class="text-xs text-slate-400 mt-1">Leadership, STEM-Botics, and purpose</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DESKTOP: stacked overlapping cards -->
                 <div class="reveal-section flex-shrink-0 hidden md:block">
                     <div class="relative" style="width: 280px; height: 520px;">
-
-                        <!-- Card 1: PreK -->
                         <div class="band-card absolute top-0 left-0 w-64 rounded-2xl p-5 bg-white shadow-md border-l-4 border-band-prek transform rotate-1" style="z-index: 5;">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wide" style="background: #FF6B6B15; color: #FF6B6B;">PreK</span>
@@ -252,8 +302,6 @@
                             <h4 class="font-display font-bold text-slate-800 text-sm">Wimee's Brain City</h4>
                             <p class="text-xs text-slate-400 mt-1">PBS-partnered emotional foundations</p>
                         </div>
-
-                        <!-- Card 2: K-2 -->
                         <div class="band-card absolute top-24 left-3 w-64 rounded-2xl p-5 bg-white shadow-md border-l-4 border-band-k2 transform -rotate-1" style="z-index: 4;">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wide" style="background: #FFD93D15; color: #D4A017;">K-2</span>
@@ -262,8 +310,6 @@
                             <h4 class="font-display font-bold text-slate-800 text-sm">Emotion Explorers</h4>
                             <p class="text-xs text-slate-400 mt-1">Brain-body mapping and self-regulation</p>
                         </div>
-
-                        <!-- Card 3: 3-5 -->
                         <div class="band-card absolute top-48 left-1 w-64 rounded-2xl p-5 bg-white shadow-md border-l-4 border-band-35 transform rotate-2" style="z-index: 3;">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wide" style="background: #2DD4BF15; color: #14B8A6;">3-5</span>
@@ -272,8 +318,6 @@
                             <h4 class="font-display font-bold text-slate-800 text-sm">Neuro-Navigators</h4>
                             <p class="text-xs text-slate-400 mt-1">Systems thinking and neural pathways</p>
                         </div>
-
-                        <!-- Card 4: 6-8 -->
                         <div class="band-card absolute top-72 left-4 w-64 rounded-2xl p-5 bg-white shadow-md border-l-4 border-band-68 transform -rotate-1" style="z-index: 2;">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wide" style="background: #60A5FA15; color: #3B82F6;">6-8</span>
@@ -282,8 +326,6 @@
                             <h4 class="font-display font-bold text-slate-800 text-sm">Identity Architects</h4>
                             <p class="text-xs text-slate-400 mt-1">Neuroscience and cultural identity</p>
                         </div>
-
-                        <!-- Card 5: 9-12 -->
                         <div class="band-card absolute top-96 left-2 w-64 rounded-2xl p-5 bg-white shadow-md border-l-4 border-band-912 transform rotate-1" style="z-index: 1;">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wide" style="background: #6442EF15; color: #6442EF;">9-12</span>
@@ -292,7 +334,6 @@
                             <h4 class="font-display font-bold text-slate-800 text-sm">Legacy Builders</h4>
                             <p class="text-xs text-slate-400 mt-1">Leadership, STEM-Botics, and purpose</p>
                         </div>
-
                     </div>
                 </div>
 
