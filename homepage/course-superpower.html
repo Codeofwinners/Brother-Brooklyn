@@ -35,22 +35,27 @@
         body { background-color: #FFFFFF; color: #212529; overflow-x: hidden; font-family: 'Outfit', sans-serif; }
 
         /* Ahead App Asymmetry */
-        .card-ahead { border-radius: 44px; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; position: relative; }
-        .card-ahead:hover { transform: translateY(-12px) scale(1.02) rotate(-1.5deg); z-index: 50; }
+        .card-ahead { border-radius: 28px; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; position: relative; overflow: hidden; }
+        .card-ahead:hover { transform: translateY(-8px) scale(1.02); z-index: 50; }
 
-        /* Journey Picker Grid - Custom Shifting */
-        .journey-grid > div:nth-child(1) { transform: translate(0, -10px) rotate(-1deg); }
-        .journey-grid > div:nth-child(2) { transform: translate(15px, 20px) rotate(1deg); }
-        .journey-grid > div:nth-child(3) { transform: translate(-10px, -20px) rotate(-2deg); }
-        .journey-grid > div:nth-child(4) { transform: translate(20px, 0) rotate(2deg); }
-        .journey-grid > div:nth-child(5) { transform: translate(-15px, 30px) rotate(-1deg); }
-        .journey-grid > div:nth-child(6) { transform: translate(10px, -15px) rotate(1deg); }
+        /* Journey Picker Grid - Custom Shifting (DESKTOP ONLY) */
+        @media (min-width: 768px) {
+            .card-ahead { border-radius: 44px; }
+            .card-ahead:hover { transform: translateY(-12px) scale(1.02) rotate(-1.5deg); }
+            .journey-grid > div:nth-child(1) { transform: translate(0, -10px) rotate(-1deg); }
+            .journey-grid > div:nth-child(2) { transform: translate(15px, 20px) rotate(1deg); }
+            .journey-grid > div:nth-child(3) { transform: translate(-10px, -20px) rotate(-2deg); }
+            .journey-grid > div:nth-child(4) { transform: translate(20px, 0) rotate(2deg); }
+            .journey-grid > div:nth-child(5) { transform: translate(-15px, 30px) rotate(-1deg); }
+            .journey-grid > div:nth-child(6) { transform: translate(10px, -15px) rotate(1deg); }
+        }
 
         .btn-ahead { background: #6442EF; color: white; border-radius: 100px; font-weight: 800; transition: all 0.4s ease; }
         .btn-ahead:hover { transform: scale(1.06) translateY(-5px); box-shadow: 0 20px 40px rgba(100,66,239,0.3); }
 
-        /* Character Sticker Logic */
-        .char-sticker { width: 120px; height: 120px; background-image: url('assets/ahead-chars.png'); background-size: 300% 300%; border-radius: 50%; display: inline-block; }
+        /* Character Sticker Logic — smaller on mobile */
+        .char-sticker { width: 60px; height: 60px; background-image: url('assets/ahead-chars.png'); background-size: 300% 300%; border-radius: 50%; display: inline-block; }
+        @media (min-width: 768px) { .char-sticker { width: 120px; height: 120px; } }
         .sticker-angry { background-position: 0% 0%; }
         .sticker-happy { background-position: 50% 0%; }
         .sticker-anxious { background-position: 100% 0%; }
@@ -79,125 +84,124 @@
 <body class="antialiased min-h-screen relative overflow-x-hidden">
 
     <!-- Sticky Navigation -->
-    <nav class="sticky top-0 z-[100] bg-white/70 backdrop-blur-xl px-10 py-8 flex justify-between items-center border-b border-gray-50">
-        <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-ahead-purple rounded-3xl flex items-center justify-center text-white font-black text-2xl shadow-ahead">B</div>
-            <span class="font-black text-xl tracking-tight uppercase">Brother Brooklyn</span>
+    <nav class="sticky top-0 z-[100] bg-white/70 backdrop-blur-xl px-4 md:px-10 py-4 md:py-6 flex justify-between items-center border-b border-gray-50">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 md:w-12 md:h-12 bg-ahead-purple rounded-2xl md:rounded-3xl flex items-center justify-center text-white font-black text-xl md:text-2xl shadow-ahead">B</div>
+            <span class="font-black text-sm md:text-xl tracking-tight uppercase hidden sm:block">Brother Brooklyn</span>
         </div>
-        <div class="flex items-center gap-6">
-            <button onclick="location.reload()" class="font-extrabold text-sm text-gray-400 hover:text-ahead-purple transition-colors uppercase tracking-widest">Restart</button>
-            <a href="index.html" class="px-8 py-3 bg-ahead-purple text-white rounded-full font-black text-sm shadow-ahead-lg hover:scale-105 transition-all">Hub</a>
+        <div class="flex items-center gap-3 md:gap-6">
+            <button onclick="location.reload()" class="font-extrabold text-xs md:text-sm text-gray-400 hover:text-ahead-purple transition-colors uppercase tracking-widest">Restart</button>
+            <a href="index.html" class="px-5 md:px-8 py-2 md:py-3 bg-ahead-purple text-white rounded-full font-black text-xs md:text-sm shadow-ahead-lg hover:scale-105 transition-all">Hub</a>
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-8 py-20">
+    <main class="max-w-6xl mx-auto px-4 md:px-8 py-8 md:py-20">
 
         <!-- STEP 0: THE ASYMMETRIC JOURNEY PICKER -->
         <div id="step-0" class="step active w-full">
-            <header class="text-left mb-24 max-w-3xl">
-                <div class="tag-bb mb-8 inline-block">Personal Growth Interactive</div>
-                <h1 class="text-7xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85] text-ahead-text">
+            <header class="text-left mb-10 md:mb-24 max-w-3xl">
+                <div class="tag-bb mb-4 md:mb-8 inline-block text-[9px] md:text-[11px]">Personal Growth Interactive</div>
+                <h1 class="text-4xl sm:text-5xl md:text-8xl font-black mb-6 md:mb-10 tracking-tighter leading-[0.9] md:leading-[0.85] text-ahead-text">
                     Start your <br> <span class="text-ahead-purple">personal <br> journey</span> today
                 </h1>
-                <p class="text-gray-300 font-extrabold text-xl flex items-center gap-6">
-                    <span class="w-20 h-[3px] bg-gray-100"></span> Select your current vibe
+                <p class="text-gray-300 font-extrabold text-sm md:text-xl flex items-center gap-4 md:gap-6">
+                    <span class="w-10 md:w-20 h-[2px] md:h-[3px] bg-gray-100"></span> Select your current vibe
                 </p>
             </header>
 
-            <div class="journey-grid grid grid-cols-2 md:grid-cols-3 gap-12 relative pb-40">
+            <div class="journey-grid grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-12 relative pb-20 md:pb-40">
                 <!-- Overlapping blocks with shifting -->
-                <div onclick="startCourse()" class="card-ahead p-12 bg-ahead-coral text-white shadow-ahead">
-                    <div class="char-sticker sticker-angry absolute -right-6 -top-6 scale-90 border-4 border-white shadow-xl"></div>
-                    <div class="text-6xl font-black mb-12 opacity-30">>_<</div>
-                    <h3 class="text-3xl font-black">Anger</h3>
-                    <p class="mt-4 font-extrabold text-white/50">Unstoppable fire</p>
+                <div onclick="startCourse()" class="card-ahead p-6 md:p-12 bg-ahead-coral text-white shadow-ahead">
+                    <div class="char-sticker sticker-angry absolute -right-2 -top-2 md:-right-6 md:-top-6 border-2 md:border-4 border-white shadow-xl"></div>
+                    <div class="text-3xl md:text-6xl font-black mb-4 md:mb-12 opacity-30">>_<</div>
+                    <h3 class="text-xl md:text-3xl font-black">Anger</h3>
+                    <p class="mt-2 md:mt-4 font-extrabold text-white/50 text-xs md:text-base">Unstoppable fire</p>
                 </div>
-                <div onclick="startCourse()" class="card-ahead p-12 bg-ahead-yellow text-ahead-text shadow-ahead h-96">
-                    <div class="char-sticker sticker-happy absolute -left-6 -bottom-6 scale-90 border-4 border-white shadow-xl"></div>
-                    <div class="text-6xl font-black mb-12 opacity-10">^u^</div>
-                    <h3 class="text-3xl font-black">Confidence</h3>
-                    <p class="mt-4 font-extrabold text-black/20">The hidden light</p>
+                <div onclick="startCourse()" class="card-ahead p-6 md:p-12 bg-ahead-yellow text-ahead-text shadow-ahead md:h-96">
+                    <div class="char-sticker sticker-happy absolute -left-2 -bottom-2 md:-left-6 md:-bottom-6 border-2 md:border-4 border-white shadow-xl"></div>
+                    <div class="text-3xl md:text-6xl font-black mb-4 md:mb-12 opacity-10">^u^</div>
+                    <h3 class="text-xl md:text-3xl font-black">Confidence</h3>
+                    <p class="mt-2 md:mt-4 font-extrabold text-black/20 text-xs md:text-base">The hidden light</p>
                 </div>
-                <div onclick="startCourse()" class="card-ahead p-12 bg-ahead-emerald text-white shadow-ahead">
-                    <div class="char-sticker sticker-anxious absolute -right-10 bottom-10 scale-90 border-4 border-white shadow-xl"></div>
-                    <div class="text-6xl font-black mb-12 opacity-30">o_o</div>
-                    <h3 class="text-3xl font-black">Anxiety</h3>
-                    <p class="mt-4 font-extrabold text-white/40">Find your center</p>
+                <div onclick="startCourse()" class="card-ahead p-6 md:p-12 bg-ahead-emerald text-white shadow-ahead">
+                    <div class="char-sticker sticker-anxious absolute -right-2 bottom-4 md:-right-10 md:bottom-10 border-2 md:border-4 border-white shadow-xl"></div>
+                    <div class="text-3xl md:text-6xl font-black mb-4 md:mb-12 opacity-30">o_o</div>
+                    <h3 class="text-xl md:text-3xl font-black">Anxiety</h3>
+                    <p class="mt-2 md:mt-4 font-extrabold text-white/40 text-xs md:text-base">Find your center</p>
                 </div>
-                <div onclick="startCourse()" class="card-ahead p-12 bg-ahead-blue text-white shadow-ahead">
-                    <div class="text-6xl font-black mb-12 opacity-30">- _-</div>
-                    <h3 class="text-3xl font-black">Laziness</h3>
-                    <p class="mt-4 font-extrabold text-white/40">Focus shift</p>
+                <div onclick="startCourse()" class="card-ahead p-6 md:p-12 bg-ahead-blue text-white shadow-ahead">
+                    <div class="text-3xl md:text-6xl font-black mb-4 md:mb-12 opacity-30">- _-</div>
+                    <h3 class="text-xl md:text-3xl font-black">Laziness</h3>
+                    <p class="mt-2 md:mt-4 font-extrabold text-white/40 text-xs md:text-base">Focus shift</p>
                 </div>
-                <div onclick="startCourse()" class="card-ahead p-12 bg-ahead-purple text-white shadow-ahead h-80">
-                    <div class="char-sticker sticker-ghost absolute right-1/2 -bottom-10 translate-x-1/2 border-4 border-white shadow-2xl"></div>
-                    <div class="text-6xl font-black mb-12 opacity-30">;)</div>
-                    <h3 class="text-3xl font-black text-center">Flow</h3>
-                    <p class="mt-4 font-extrabold text-white/30 text-center">Peak Performance</p>
+                <div onclick="startCourse()" class="card-ahead p-6 md:p-12 bg-ahead-purple text-white shadow-ahead md:h-80">
+                    <div class="char-sticker sticker-ghost absolute right-1/2 -bottom-4 md:-bottom-10 translate-x-1/2 border-2 md:border-4 border-white shadow-2xl"></div>
+                    <div class="text-3xl md:text-6xl font-black mb-4 md:mb-12 opacity-30">;)</div>
+                    <h3 class="text-xl md:text-3xl font-black text-center">Flow</h3>
+                    <p class="mt-2 md:mt-4 font-extrabold text-white/30 text-center text-xs md:text-base">Peak Performance</p>
                 </div>
-                <div onclick="startCourse()" class="card-ahead p-12 bg-ahead-pink text-white shadow-ahead">
-                    <div class="char-sticker sticker-heart absolute -left-8 top-1/2 -translate-y-1/2 scale-75 border-4 border-white shadow-xl"></div>
-                    <div class="text-6xl font-black mb-12 opacity-30">u_u</div>
-                    <h3 class="text-3xl font-black">Heal</h3>
-                    <p class="mt-4 font-extrabold text-white/40">Soft energy</p>
+                <div onclick="startCourse()" class="card-ahead p-6 md:p-12 bg-ahead-pink text-white shadow-ahead">
+                    <div class="char-sticker sticker-heart absolute -left-2 top-1/2 -translate-y-1/2 border-2 md:border-4 border-white shadow-xl"></div>
+                    <div class="text-3xl md:text-6xl font-black mb-4 md:mb-12 opacity-30">u_u</div>
+                    <h3 class="text-xl md:text-3xl font-black">Heal</h3>
+                    <p class="mt-2 md:mt-4 font-extrabold text-white/40 text-xs md:text-base">Soft energy</p>
                 </div>
             </div>
 
-            <div class="mt-20">
-                <img src="assets/ahead-brobot.png" class="w-64 h-64 object-contain mx-auto float-fast drop-shadow-ahead-lg" alt="Brobot">
-                <p class="text-center text-gray-200 font-extrabold uppercase tracking-[0.5em] text-sm mt-12">Presented by Brother Brooklyn</p>
+            <div class="mt-10 md:mt-20">
+                <img src="assets/ahead-brobot.png" class="w-36 h-36 md:w-64 md:h-64 object-contain mx-auto float-fast drop-shadow-ahead-lg" alt="Brobot">
+                <p class="text-center text-gray-200 font-extrabold uppercase tracking-[0.2em] md:tracking-[0.5em] text-[10px] md:text-sm mt-6 md:mt-12">Presented by Brother Brooklyn</p>
             </div>
         </div>
 
         <!-- STEP 1: LAYERED LESSON SCENE -->
-        <div id="step-1" class="step w-full max-w-5xl mx-auto py-20">
-            <div class="flex flex-col lg:flex-row items-center gap-24">
+        <div id="step-1" class="step w-full max-w-5xl mx-auto py-8 md:py-20">
+            <div class="flex flex-col lg:flex-row items-center gap-10 md:gap-24">
                 <!-- Narrator Side -->
-                <div class="flex-1 space-y-10 order-2 lg:order-1">
-                    <div class="tag-bb">The Biology of You</div>
-                    <h2 class="text-6xl md:text-7xl font-black leading-[0.9] text-ahead-text">Your brain <br> has a <br> <span class="text-ahead-purple">smoke alarm.</span></h2>
-                    <p class="text-gray-400 font-extrabold text-2xl leading-relaxed">It's called the **Amygdala**. It pulls the alarm whenever it feels 'threatened' by stress or fear.</p>
-                    <button onclick="nextStep()" class="btn-ahead px-14 py-6 text-2xl shadow-ahead-lg">Teach me more ➜</button>
+                <div class="flex-1 space-y-6 md:space-y-10 order-2 lg:order-1">
+                    <div class="tag-bb text-[9px] md:text-[11px]">The Biology of You</div>
+                    <h2 class="text-3xl sm:text-4xl md:text-7xl font-black leading-[0.9] text-ahead-text">Your brain <br> has a <br> <span class="text-ahead-purple">smoke alarm.</span></h2>
+                    <p class="text-gray-400 font-extrabold text-base md:text-2xl leading-relaxed">It's called the <strong>Amygdala</strong>. It pulls the alarm whenever it feels 'threatened' by stress or fear.</p>
+                    <button onclick="nextStep()" class="btn-ahead px-8 md:px-14 py-4 md:py-6 text-lg md:text-2xl shadow-ahead-lg w-full md:w-auto">Teach me more ➜</button>
                 </div>
                 <!-- Interactive Stacks -->
                 <div class="flex-1 relative order-1 lg:order-2">
-                    <div class="stack-base bg-ahead-mint p-14 rounded-[4rem] shadow-ahead border-4 border-white relative z-20">
-                        <div class="char-sticker sticker-angry absolute -right-4 -top-8 border-4 border-white shadow-xl scale-110"></div>
-                        <div class="flex items-center gap-6 mb-10">
-                            <span class="text-6xl">🚨</span>
-                            <span class="font-black text-2xl text-emerald-900 uppercase tracking-widest">Survival mode</span>
+                    <div class="stack-base bg-ahead-mint p-6 md:p-14 rounded-[2rem] md:rounded-[4rem] shadow-ahead border-2 md:border-4 border-white relative z-20">
+                        <div class="char-sticker sticker-angry absolute -right-2 -top-4 md:-right-4 md:-top-8 border-2 md:border-4 border-white shadow-xl md:scale-110"></div>
+                        <div class="flex items-center gap-3 md:gap-6 mb-4 md:mb-10">
+                            <span class="text-3xl md:text-6xl">🚨</span>
+                            <span class="font-black text-sm md:text-2xl text-emerald-900 uppercase tracking-wider md:tracking-widest">Survival mode</span>
                         </div>
-                        <p class="text-emerald-900/60 font-black text-xl leading-relaxed">When the alarm goes off, your brain shuts out logical thinking. You're now in FIGHT, FLIGHT, or FREEZE. It's primitive, and it's built-in.</p>
+                        <p class="text-emerald-900/60 font-black text-sm md:text-xl leading-relaxed">When the alarm goes off, your brain shuts out logical thinking. You're now in FIGHT, FLIGHT, or FREEZE.</p>
                     </div>
                     <!-- Shifted Layers for Depth -->
-                    <div class="absolute -right-8 -bottom-8 w-full h-full bg-ahead-lavender rounded-[4rem] -z-10 rotate-[2deg] shadow-lg"></div>
-                    <div class="absolute -left-8 -top-8 w-full h-full bg-ahead-yellow/30 rounded-[4rem] -z-20 -rotate-[3deg]"></div>
+                    <div class="absolute -right-4 -bottom-4 md:-right-8 md:-bottom-8 w-full h-full bg-ahead-lavender rounded-[2rem] md:rounded-[4rem] -z-10 rotate-[2deg] shadow-lg"></div>
+                    <div class="hidden md:block absolute -left-8 -top-8 w-full h-full bg-ahead-yellow/30 rounded-[4rem] -z-20 -rotate-[3deg]"></div>
                 </div>
             </div>
         </div>
 
         <!-- STEP 4: ASYMMETRIC QUIZ -->
-        <div id="step-4" class="step w-full max-w-3xl mx-auto py-20">
-            <div class="text-center mb-24 relative">
-                <div class="tag-bb mb-10 inline-block">The Vibe Check</div>
-                <h2 id="quiz-question" class="text-5xl md:text-6xl font-black text-ahead-text leading-tight tracking-tighter">...</h2>
-                <div class="char-sticker sticker-ghost absolute -right-20 top-0 scale-50 opacity-20"></div>
+        <div id="step-4" class="step w-full max-w-3xl mx-auto py-8 md:py-20">
+            <div class="text-center mb-10 md:mb-24 relative">
+                <div class="tag-bb mb-4 md:mb-10 inline-block text-[9px] md:text-[11px]">The Vibe Check</div>
+                <h2 id="quiz-question" class="text-2xl sm:text-3xl md:text-6xl font-black text-ahead-text leading-tight tracking-tighter">...</h2>
+                <div class="char-sticker sticker-ghost absolute -right-10 md:-right-20 top-0 scale-50 opacity-20 hidden md:block"></div>
             </div>
             <!-- Individual character cards as options -->
-            <div id="quiz-options" class="space-y-8"></div>
+            <div id="quiz-options" class="space-y-4 md:space-y-8"></div>
         </div>
 
         <!-- STEP 5: SUCCESS -->
-        <div id="step-5" class="step w-full max-w-2xl mx-auto text-center py-20">
-            <div class="relative mb-16 inline-block">
-                <div class="w-40 h-40 bg-ahead-emerald rounded-[3.5rem] flex items-center justify-center text-7xl shadow-ahead-lg relative z-10">🥇</div>
-                <div class="char-sticker sticker-happy absolute -right-12 -top-12 border-4 border-white shadow-2xl"></div>
-                <!-- Animated background rays -->
+        <div id="step-5" class="step w-full max-w-2xl mx-auto text-center py-8 md:py-20">
+            <div class="relative mb-8 md:mb-16 inline-block">
+                <div class="w-24 h-24 md:w-40 md:h-40 bg-ahead-emerald rounded-[2rem] md:rounded-[3.5rem] flex items-center justify-center text-4xl md:text-7xl shadow-ahead-lg relative z-10">🥇</div>
+                <div class="char-sticker sticker-happy absolute -right-6 -top-6 md:-right-12 md:-top-12 border-2 md:border-4 border-white shadow-2xl"></div>
                 <div class="absolute inset-0 bg-ahead-yellow/20 rounded-full scale-150 blur-3xl -z-10 animate-pulse"></div>
             </div>
-            <h1 class="text-7xl font-black mb-8 tracking-tighter">You're Untouchable!</h1>
-            <p class="text-gray-400 font-black text-2xl mb-16 px-10">You've unlocked the first level of Neuro-Mastery. <br> Final Vibe: <span id="final-score" class="text-ahead-purple">5 / 5 Correct</span></p>
-            <button onclick="location.reload()" class="btn-ahead w-full py-8 text-3xl shadow-ahead-lg">Master Another Vibe</button>
+            <h1 class="text-4xl md:text-7xl font-black mb-4 md:mb-8 tracking-tighter">You're Untouchable!</h1>
+            <p class="text-gray-400 font-black text-base md:text-2xl mb-8 md:mb-16 px-4 md:px-10">You've unlocked the first level of Neuro-Mastery. <br> Final Vibe: <span id="final-score" class="text-ahead-purple">5 / 5 Correct</span></p>
+            <button onclick="location.reload()" class="btn-ahead w-full py-5 md:py-8 text-xl md:text-3xl shadow-ahead-lg">Master Another Vibe</button>
         </div>
 
     </main>
