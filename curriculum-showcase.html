@@ -117,6 +117,18 @@
         /* Grade band card hover lift */
         .band-card { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease; }
         .band-card:hover { transform: translateY(-4px) !important; box-shadow: 0 12px 40px rgba(0,0,0,0.10); }
+
+        /* Infinite marquee scroll for mobile grade band cards */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee-track {
+            animation: marquee 25s linear infinite;
+        }
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
     </style>
 </head>
 
@@ -245,10 +257,11 @@
 
                 <!-- Right Column: Grade Band Preview Cards -->
 
-                <!-- MOBILE: horizontal scroll row -->
-                <div class="reveal-section md:hidden w-full mt-4 -mx-6 px-6">
-                    <div class="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar" style="-webkit-overflow-scrolling: touch;">
-                        <div class="band-card flex-shrink-0 w-56 snap-start rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-prek">
+                <!-- MOBILE: infinite marquee scroll row -->
+                <div class="reveal-section md:hidden w-full mt-4 -mx-6 px-6 overflow-hidden">
+                    <div class="marquee-track flex gap-3 w-max pb-4">
+                        <!-- Original 5 cards -->
+                        <div class="band-card flex-shrink-0 w-56 rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-prek">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #FF6B6B15; color: #FF6B6B;">PreK</span>
                                 <span class="text-xl">🧒</span>
@@ -256,7 +269,7 @@
                             <h4 class="font-display font-bold text-slate-800 text-sm">Wimee's Brain City</h4>
                             <p class="text-xs text-slate-400 mt-1">PBS-partnered emotional foundations</p>
                         </div>
-                        <div class="band-card flex-shrink-0 w-56 snap-start rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-k2">
+                        <div class="band-card flex-shrink-0 w-56 rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-k2">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #FFD93D15; color: #D4A017;">K-2</span>
                                 <span class="text-xl">🌟</span>
@@ -264,7 +277,7 @@
                             <h4 class="font-display font-bold text-slate-800 text-sm">Emotion Explorers</h4>
                             <p class="text-xs text-slate-400 mt-1">Brain-body mapping and self-regulation</p>
                         </div>
-                        <div class="band-card flex-shrink-0 w-56 snap-start rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-35">
+                        <div class="band-card flex-shrink-0 w-56 rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-35">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #2DD4BF15; color: #14B8A6;">3-5</span>
                                 <span class="text-xl">🧠</span>
@@ -272,7 +285,7 @@
                             <h4 class="font-display font-bold text-slate-800 text-sm">Neuro-Navigators</h4>
                             <p class="text-xs text-slate-400 mt-1">Systems thinking and neural pathways</p>
                         </div>
-                        <div class="band-card flex-shrink-0 w-56 snap-start rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-68">
+                        <div class="band-card flex-shrink-0 w-56 rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-68">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #60A5FA15; color: #3B82F6;">6-8</span>
                                 <span class="text-xl">🔬</span>
@@ -280,7 +293,48 @@
                             <h4 class="font-display font-bold text-slate-800 text-sm">Identity Architects</h4>
                             <p class="text-xs text-slate-400 mt-1">Neuroscience and cultural identity</p>
                         </div>
-                        <div class="band-card flex-shrink-0 w-56 snap-start rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-912">
+                        <div class="band-card flex-shrink-0 w-56 rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-912">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #6442EF15; color: #6442EF;">9-12</span>
+                                <span class="text-xl">🚀</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Legacy Builders</h4>
+                            <p class="text-xs text-slate-400 mt-1">Leadership, STEM-Botics, and purpose</p>
+                        </div>
+                        <!-- Duplicate 5 cards for seamless loop -->
+                        <div class="band-card flex-shrink-0 w-56 rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-prek" aria-hidden="true">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #FF6B6B15; color: #FF6B6B;">PreK</span>
+                                <span class="text-xl">🧒</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Wimee's Brain City</h4>
+                            <p class="text-xs text-slate-400 mt-1">PBS-partnered emotional foundations</p>
+                        </div>
+                        <div class="band-card flex-shrink-0 w-56 rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-k2" aria-hidden="true">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #FFD93D15; color: #D4A017;">K-2</span>
+                                <span class="text-xl">🌟</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Emotion Explorers</h4>
+                            <p class="text-xs text-slate-400 mt-1">Brain-body mapping and self-regulation</p>
+                        </div>
+                        <div class="band-card flex-shrink-0 w-56 rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-35" aria-hidden="true">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #2DD4BF15; color: #14B8A6;">3-5</span>
+                                <span class="text-xl">🧠</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Neuro-Navigators</h4>
+                            <p class="text-xs text-slate-400 mt-1">Systems thinking and neural pathways</p>
+                        </div>
+                        <div class="band-card flex-shrink-0 w-56 rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-68" aria-hidden="true">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #60A5FA15; color: #3B82F6;">6-8</span>
+                                <span class="text-xl">🔬</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Identity Architects</h4>
+                            <p class="text-xs text-slate-400 mt-1">Neuroscience and cultural identity</p>
+                        </div>
+                        <div class="band-card flex-shrink-0 w-56 rounded-2xl p-4 bg-white shadow-md border-l-4 border-band-912" aria-hidden="true">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="inline-flex px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide" style="background: #6442EF15; color: #6442EF;">9-12</span>
                                 <span class="text-xl">🚀</span>

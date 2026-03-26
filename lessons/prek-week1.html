@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PreK Week 1: Welcome to Brain City with Wimee | InnerMan Education</title>
+    <meta name="description" content="PreK Week 1 Lesson Plan — Welcome to Brain City with Wimee. A 5-day daily lesson plan focusing on the Prefrontal Cortex and the PFC Planner tool.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0B1120',
+                            primary: '#0F172A',
+                            accent: '#2DD4BF',
+                            warm: '#F59E0B',
+                            surface: '#1E293B',
+                            glow: '#14B8A6',
+                        },
+                        band: {
+                            prek: '#FF6B6B',
+                            k2: '#FFD93D',
+                            '35': '#2DD4BF',
+                            '68': '#60A5FA',
+                            '912': '#6442EF',
+                        },
+                        quarter: {
+                            q1: '#2DD4BF',
+                            q2: '#F59E0B',
+                            q3: '#60A5FA',
+                            q4: '#8B5CF6',
+                        },
+                        day: {
+                            mon: '#3B82F6',
+                            tue: '#22C55E',
+                            wed: '#EF4444',
+                            thu: '#F59E0B',
+                            fri: '#8B5CF6',
+                        },
+                    },
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                        serif: ['Instrument Serif', 'serif'],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #FAFBFC;
+        }
+
+        /* Scroll reveal */
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .stagger > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .stagger.visible > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(2) { transition-delay: 0.12s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(3) { transition-delay: 0.19s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(4) { transition-delay: 0.26s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(5) { transition-delay: 0.33s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(6) { transition-delay: 0.40s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(7) { transition-delay: 0.47s; opacity: 1; transform: none; }
+
+        /* Collapsible */
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+        }
+        .collapsible-content.open {
+            max-height: 600px;
+        }
+
+        /* Day tab */
+        .day-tab {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            position: relative;
+        }
+        .day-tab::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 80%;
+            height: 3px;
+            border-radius: 3px;
+            transition: transform 0.3s ease;
+        }
+        .day-tab.active::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+        .day-tab:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Timeline connector */
+        .timeline-step {
+            position: relative;
+            padding-left: 56px;
+        }
+        .timeline-step::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            bottom: -16px;
+            width: 2px;
+            background: linear-gradient(to bottom, #e2e8f0, #cbd5e1);
+        }
+        .timeline-step:last-child::before {
+            display: none;
+        }
+
+        /* Print styles */
+        @media print {
+            nav, .no-print, .day-tabs-container { display: none !important; }
+            .day-panel { display: block !important; }
+            .day-panel + .day-panel { page-break-before: always; }
+            .reveal-section { opacity: 1 !important; transform: none !important; }
+            .stagger > * { opacity: 1 !important; transform: none !important; }
+            .collapsible-content { max-height: none !important; }
+            body { background: white !important; }
+            .print-day-label { display: block !important; }
+        }
+
+        /* Subtle grain */
+        .grain::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-slate-700 bg-[#FAFBFC]">
+
+    <!-- ==================== FIXED NAVIGATION ==================== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200/60" style="height: 72px;">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-full flex items-center justify-between">
+            <!-- Left: Back + Logo -->
+            <div class="flex items-center gap-3">
+                <a href="../curriculum-showcase.html" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors" aria-label="Back to curriculum">
+                    <span class="material-icons-outlined text-slate-500 text-xl">arrow_back</span>
+                </a>
+                <a href="../curriculum-showcase.html" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-brand-accent to-teal-600 flex items-center justify-center shadow-sm">
+                        <span class="text-white font-display font-bold text-lg leading-none">B</span>
+                    </div>
+                    <span class="font-display font-bold text-slate-800 text-base tracking-tight hidden sm:inline">InnerMan Education</span>
+                </a>
+            </div>
+
+            <!-- Right: PreK Badge + Print -->
+            <div class="flex items-center gap-3">
+                <button onclick="window.print()" class="no-print hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border border-slate-200 text-slate-500 hover:text-slate-700 hover:border-slate-300 text-sm font-medium transition-all">
+                    <span class="material-icons-outlined text-lg">print</span>
+                    Print Lesson Plan
+                </button>
+                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-band-prek/10 text-band-prek font-display font-semibold text-sm">
+                    <span class="w-2 h-2 rounded-full bg-band-prek"></span>
+                    PreK Curriculum
+                </span>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ==================== LESSON HEADER ==================== -->
+    <section class="relative grain pt-28 pb-12 lg:pt-32 lg:pb-16 overflow-hidden">
+        <!-- Ambient blurs -->
+        <div class="absolute -top-20 -right-32 w-96 h-96 rounded-full bg-band-prek/[0.07] blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-32 w-80 h-80 rounded-full bg-brand-warm/[0.05] blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="reveal-section">
+                <!-- Breadcrumb -->
+                <nav class="flex items-center gap-2 text-sm mb-6">
+                    <a href="../curriculum-showcase.html" class="text-slate-400 hover:text-brand-glow transition-colors">PreK</a>
+                    <span class="material-icons-outlined text-slate-300 text-sm">chevron_right</span>
+                    <span class="text-slate-400">Quarter 1</span>
+                    <span class="material-icons-outlined text-slate-300 text-sm">chevron_right</span>
+                    <span class="text-band-prek font-medium">Week 1</span>
+                </nav>
+
+                <!-- Title -->
+                <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight leading-[1.1]">
+                    Welcome to Brain City<br class="hidden sm:inline"> with Wimee
+                </h1>
+
+                <!-- Subtitle Badges -->
+                <div class="mt-5 flex flex-wrap gap-3">
+                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-band-prek/10 text-band-prek text-sm font-semibold">
+                        <span class="material-icons-outlined text-base">bookmark</span>
+                        Lesson 1 of 36
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-brand-accent/10 text-brand-glow text-sm font-semibold">
+                        <span class="material-icons-outlined text-base">psychology</span>
+                        Quarter 1: Know Your Brain
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-500 text-sm font-semibold">
+                        <span class="material-icons-outlined text-base">school</span>
+                        PreK
+                    </span>
+                </div>
+
+                <!-- Print button mobile -->
+                <button onclick="window.print()" class="no-print sm:hidden mt-5 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-500 text-sm font-medium transition-all hover:border-slate-300">
+                    <span class="material-icons-outlined text-lg">print</span>
+                    Print Lesson Plan
+                </button>
+            </div>
+
+            <!-- Meta Info Grid -->
+            <div class="reveal-section mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 stagger">
+                <!-- Focus -->
+                <div class="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-8 h-8 rounded-lg bg-band-prek/10 flex items-center justify-center">
+                            <span class="material-icons-outlined text-band-prek text-lg">psychology</span>
+                        </span>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Focus</span>
+                    </div>
+                    <p class="text-slate-800 font-semibold">Prefrontal Cortex</p>
+                    <p class="text-slate-500 text-sm">(The Thinker Brain)</p>
+                </div>
+
+                <!-- InnerMan Tool -->
+                <div class="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-8 h-8 rounded-lg bg-brand-warm/10 flex items-center justify-center">
+                            <span class="material-icons-outlined text-brand-warm text-lg">build</span>
+                        </span>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">InnerMan Tool</span>
+                    </div>
+                    <p class="text-slate-800 font-semibold">PFC Planner</p>
+                    <p class="text-slate-500 text-sm">Stop, Think, Choose</p>
+                </div>
+
+                <!-- SEL Competency -->
+                <div class="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-8 h-8 rounded-lg bg-brand-accent/10 flex items-center justify-center">
+                            <span class="material-icons-outlined text-brand-glow text-lg">favorite</span>
+                        </span>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">SEL Competency</span>
+                    </div>
+                    <p class="text-slate-800 font-semibold">Self-Awareness</p>
+                    <p class="text-slate-500 text-sm">(Naming feelings)</p>
+                </div>
+
+                <!-- Standards -->
+                <div class="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center">
+                            <span class="material-icons-outlined text-purple-500 text-lg">verified</span>
+                        </span>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Standards</span>
+                    </div>
+                    <p class="text-slate-800 font-semibold text-sm">MDE SEL, ECSQ B-K, MCL 380.1502</p>
+                </div>
+
+                <!-- Tech Integration -->
+                <div class="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
+                            <span class="material-icons-outlined text-blue-500 text-lg">smart_toy</span>
+                        </span>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Tech Integration</span>
+                    </div>
+                    <p class="text-slate-800 font-semibold text-sm">Wimee Robot, BroBot QR Prompts</p>
+                </div>
+
+                <!-- Duration -->
+                <div class="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center">
+                            <span class="material-icons-outlined text-green-500 text-lg">schedule</span>
+                        </span>
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Duration</span>
+                    </div>
+                    <p class="text-slate-800 font-semibold">30-40 min/day</p>
+                    <p class="text-slate-500 text-sm">5 days</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================== WIMEE INTRO SCRIPT ==================== -->
+    <section class="max-w-7xl mx-auto px-6 lg:px-12 py-8">
+        <div class="reveal-section">
+            <div class="rounded-2xl border-2 border-band-prek/30 bg-band-prek/[0.03] overflow-hidden">
+                <!-- Header (clickable) -->
+                <button onclick="toggleCollapsible('wimee-script')" class="w-full flex items-center justify-between p-5 sm:p-6 text-left group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-band-prek/10 flex items-center justify-center flex-shrink-0">
+                            <span class="material-icons-outlined text-band-prek text-2xl">smart_toy</span>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-slate-800 text-lg">Wimee Intro Script</h3>
+                            <p class="text-slate-500 text-sm mt-0.5">Teacher reads aloud to class</p>
+                        </div>
+                    </div>
+                    <span id="wimee-script-icon" class="material-icons-outlined text-slate-400 group-hover:text-band-prek transition-colors text-2xl">expand_more</span>
+                </button>
+
+                <!-- Collapsible Content -->
+                <div id="wimee-script" class="collapsible-content">
+                    <div class="px-5 sm:px-6 pb-6">
+                        <div class="bg-white rounded-xl p-5 sm:p-6 border border-band-prek/10">
+                            <p class="text-slate-700 text-lg leading-relaxed italic font-serif">
+                                "Hi friends, Wimee here! Your brain is AMAZING! Inside your head is a whole city — your very own Brain City! Every time you breathe, talk, listen, or play... your brain builds new roads. This week we will learn how to make our brain roads strong!"
+                            </p>
+                        </div>
+                        <div class="mt-4 flex items-start gap-3 px-1">
+                            <span class="material-icons-outlined text-brand-warm text-lg mt-0.5 flex-shrink-0">movie</span>
+                            <p class="text-sm text-slate-500"><strong class="text-slate-600">Animation Cue:</strong> Wimee waves, points to head screen, shows glowing city map. Teachers can mimic with hand gestures.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================== 5-DAY LESSON PLAN ==================== -->
+    <section class="max-w-7xl mx-auto px-6 lg:px-12 pb-16">
+
+        <!-- Section Header -->
+        <div class="reveal-section mb-8">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="w-10 h-10 rounded-xl bg-band-prek/10 flex items-center justify-center">
+                    <span class="material-icons-outlined text-band-prek text-xl">calendar_month</span>
+                </span>
+                <h2 class="font-serif text-3xl sm:text-4xl text-slate-900">5-Day Lesson Plan</h2>
+            </div>
+            <p class="text-slate-500 ml-[52px]">Click each day to view the full lesson.</p>
+        </div>
+
+        <!-- Day Tabs -->
+        <div class="reveal-section day-tabs-container mb-8 overflow-x-auto pb-2 -mx-2 px-2">
+            <div class="flex gap-2 sm:gap-3 min-w-max">
+                <!-- Monday -->
+                <button onclick="switchDay(0)" class="day-tab active flex items-center gap-2 px-4 sm:px-5 py-3 rounded-xl font-display font-semibold text-sm transition-all bg-day-mon text-white shadow-lg shadow-day-mon/25" data-color="day-mon" id="tab-0">
+                    <span class="material-icons-outlined text-lg">looks_one</span>
+                    <span class="hidden sm:inline">Monday</span>
+                    <span class="sm:hidden">Mon</span>
+                </button>
+                <!-- Tuesday -->
+                <button onclick="switchDay(1)" class="day-tab flex items-center gap-2 px-4 sm:px-5 py-3 rounded-xl font-display font-semibold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200" data-color="day-tue" id="tab-1">
+                    <span class="material-icons-outlined text-lg">looks_two</span>
+                    <span class="hidden sm:inline">Tuesday</span>
+                    <span class="sm:hidden">Tue</span>
+                </button>
+                <!-- Wednesday -->
+                <button onclick="switchDay(2)" class="day-tab flex items-center gap-2 px-4 sm:px-5 py-3 rounded-xl font-display font-semibold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200" data-color="day-wed" id="tab-2">
+                    <span class="material-icons-outlined text-lg">looks_3</span>
+                    <span class="hidden sm:inline">Wednesday</span>
+                    <span class="sm:hidden">Wed</span>
+                </button>
+                <!-- Thursday -->
+                <button onclick="switchDay(3)" class="day-tab flex items-center gap-2 px-4 sm:px-5 py-3 rounded-xl font-display font-semibold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200" data-color="day-thu" id="tab-3">
+                    <span class="material-icons-outlined text-lg">looks_4</span>
+                    <span class="hidden sm:inline">Thursday</span>
+                    <span class="sm:hidden">Thu</span>
+                </button>
+                <!-- Friday -->
+                <button onclick="switchDay(4)" class="day-tab flex items-center gap-2 px-4 sm:px-5 py-3 rounded-xl font-display font-semibold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200" data-color="day-fri" id="tab-4">
+                    <span class="material-icons-outlined text-lg">looks_5</span>
+                    <span class="hidden sm:inline">Friday</span>
+                    <span class="sm:hidden">Fri</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main content area: lessons + sidebar -->
+        <div class="flex flex-col lg:flex-row gap-8">
+
+            <!-- Day Panels (main column) -->
+            <div class="flex-1 min-w-0">
+
+                <!-- ===== DAY 1 — MONDAY ===== -->
+                <div id="panel-0" class="day-panel">
+                    <!-- Day header -->
+                    <div class="hidden print-day-label font-display font-bold text-2xl text-day-mon mb-4">Day 1 — Monday</div>
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                        <!-- Color bar -->
+                        <div class="h-1.5 bg-day-mon"></div>
+
+                        <div class="p-6 sm:p-8">
+                            <!-- Day title -->
+                            <div class="flex items-center gap-3 mb-1">
+                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-day-mon/10 text-day-mon font-display font-bold text-lg">1</span>
+                                <span class="text-xs font-semibold text-day-mon uppercase tracking-widest">Monday</span>
+                            </div>
+                            <h3 class="font-serif text-2xl sm:text-3xl text-slate-900 mt-2 mb-6">"Meet Your Thinker Brain!"</h3>
+
+                            <!-- Student Objectives -->
+                            <div class="mb-6">
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-3">
+                                    <span class="material-icons-outlined text-day-mon text-lg">flag</span>
+                                    Student Objectives
+                                </h4>
+                                <ul class="space-y-2 ml-1">
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-icons-outlined text-green-500 text-lg mt-0.5 flex-shrink-0">check_circle</span>
+                                        <span class="text-slate-600">Identify the front part of the brain (PFC)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-icons-outlined text-green-500 text-lg mt-0.5 flex-shrink-0">check_circle</span>
+                                        <span class="text-slate-600">Participate in the "Wake Up Thinker Brain" routine</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Teacher Neuroscience Note (collapsible) -->
+                            <div class="mb-6">
+                                <button onclick="toggleCollapsible('neuro-1')" class="w-full flex items-center justify-between p-4 rounded-xl bg-purple-50/60 border border-purple-100/60 group text-left">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-icons-outlined text-purple-500 text-xl">neurology</span>
+                                        <span class="font-display font-semibold text-sm text-purple-700">Teacher Neuroscience Note</span>
+                                    </div>
+                                    <span id="neuro-1-icon" class="material-icons-outlined text-purple-400 group-hover:text-purple-600 transition-colors">expand_more</span>
+                                </button>
+                                <div id="neuro-1" class="collapsible-content">
+                                    <div class="px-4 pt-3 pb-1">
+                                        <p class="text-slate-600 text-sm leading-relaxed italic">"The PFC is the center for focus, choices, and impulse control. Pre-K kids must often 'borrow' the adult's PFC."</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Materials Needed -->
+                            <div class="mb-8">
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-3">
+                                    <span class="material-icons-outlined text-brand-warm text-lg">inventory_2</span>
+                                    Materials Needed
+                                </h4>
+                                <div class="grid sm:grid-cols-2 gap-2 ml-1">
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Wimee Brain City intro video
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Hand mirror for each student
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Color dot sticker (for "Thinker Brain")
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Printed outline of a head
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lesson Flow -->
+                            <div>
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-6">
+                                    <span class="material-icons-outlined text-band-prek text-lg">route</span>
+                                    Lesson Flow
+                                </h4>
+                                <div class="space-y-5">
+                                    <!-- Step 1 -->
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-mon text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-mon/20">1</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Greeting Ritual</h5>
+                                            <p class="text-slate-500 text-sm mt-1">"Hi friends, Wimee here! Your brain is AMAZING!"</p>
+                                        </div>
+                                    </div>
+                                    <!-- Step 2 -->
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-mon text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-mon/20">2</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Brain Activation</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Tap forehead: "Wake up, Thinker Brain!"</p>
+                                        </div>
+                                    </div>
+                                    <!-- Step 3 -->
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-mon text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-mon/20">3</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Mini-Lesson</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Teacher shows mirror: "Point to where your brain helps you make choices."</p>
+                                        </div>
+                                    </div>
+                                    <!-- Step 4 -->
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-mon text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-mon/20">4</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Video</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Wimee Brain City Intro (45 sec)</p>
+                                        </div>
+                                    </div>
+                                    <!-- Step 5 -->
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-mon text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-mon/20">5</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Hands-On</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Students place the sticker on the PFC on a head outline</p>
+                                        </div>
+                                    </div>
+                                    <!-- Step 6 -->
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-mon text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-mon/20">6</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">SEL Check-In</h5>
+                                            <p class="text-slate-500 text-sm mt-1">"Is your Thinker Brain calm, excited, or sleepy today?"</p>
+                                        </div>
+                                    </div>
+                                    <!-- Step 7 -->
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center shadow-md shadow-green-500/20">
+                                            <span class="material-icons-outlined text-lg">assignment_turned_in</span>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-green-700 text-sm">Assessment</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Student points to PFC</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== DAY 2 — TUESDAY ===== -->
+                <div id="panel-1" class="day-panel hidden">
+                    <div class="hidden print-day-label font-display font-bold text-2xl text-day-tue mb-4">Day 2 — Tuesday</div>
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                        <div class="h-1.5 bg-day-tue"></div>
+                        <div class="p-6 sm:p-8">
+                            <div class="flex items-center gap-3 mb-1">
+                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-day-tue/10 text-day-tue font-display font-bold text-lg">2</span>
+                                <span class="text-xs font-semibold text-day-tue uppercase tracking-widest">Tuesday</span>
+                            </div>
+                            <h3 class="font-serif text-2xl sm:text-3xl text-slate-900 mt-2 mb-6">"Stop, Think, Choose!"</h3>
+
+                            <!-- Student Objectives -->
+                            <div class="mb-6">
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-3">
+                                    <span class="material-icons-outlined text-day-tue text-lg">flag</span>
+                                    Student Objectives
+                                </h4>
+                                <ul class="space-y-2 ml-1">
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-icons-outlined text-green-500 text-lg mt-0.5 flex-shrink-0">check_circle</span>
+                                        <span class="text-slate-600">Practice using the three-step Thinker Brain plan</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-icons-outlined text-green-500 text-lg mt-0.5 flex-shrink-0">check_circle</span>
+                                        <span class="text-slate-600">Understand "stopping" before doing</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Teacher Neuroscience Note -->
+                            <div class="mb-6">
+                                <button onclick="toggleCollapsible('neuro-2')" class="w-full flex items-center justify-between p-4 rounded-xl bg-purple-50/60 border border-purple-100/60 group text-left">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-icons-outlined text-purple-500 text-xl">neurology</span>
+                                        <span class="font-display font-semibold text-sm text-purple-700">Teacher Neuroscience Note</span>
+                                    </div>
+                                    <span id="neuro-2-icon" class="material-icons-outlined text-purple-400 group-hover:text-purple-600 transition-colors">expand_more</span>
+                                </button>
+                                <div id="neuro-2" class="collapsible-content">
+                                    <div class="px-4 pt-3 pb-1">
+                                        <p class="text-slate-600 text-sm leading-relaxed italic">"Teach PFC sequencing (stop &rarr; think &rarr; choose) to strengthen neural pathways. Use slow modeling; children copy your pacing."</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Materials Needed -->
+                            <div class="mb-8">
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-3">
+                                    <span class="material-icons-outlined text-brand-warm text-lg">inventory_2</span>
+                                    Materials Needed
+                                </h4>
+                                <div class="grid sm:grid-cols-2 gap-2 ml-1">
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        3 large cards: STOP / THINK / CHOOSE
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Red, yellow, green circles
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Classroom scenario pictures
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lesson Flow -->
+                            <div>
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-6">
+                                    <span class="material-icons-outlined text-band-prek text-lg">route</span>
+                                    Lesson Flow
+                                </h4>
+                                <div class="space-y-5">
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-tue text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-tue/20">1</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Wimee Greeting</h5>
+                                            <p class="text-slate-500 text-sm mt-1">"Let's use our Thinker Brain to plan our day!"</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-tue text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-tue/20">2</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Brain Ritual</h5>
+                                            <p class="text-slate-500 text-sm mt-1">"Tap 1-2-3: Stop, Think, Choose!"</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-tue text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-tue/20">3</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Mini-Lesson</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Teacher holds cards and models: "STOP... (pause) THINK... (pause) CHOOSE calm hands."</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-tue text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-tue/20">4</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Scenario Activity</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Students sort pictures into what Wimee would STOP, THINK, or CHOOSE</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-tue text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-tue/20">5</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Movement Game</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Red circle = Freeze, Yellow = Slow motion, Green = Gentle go</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center shadow-md shadow-green-500/20">
+                                            <span class="material-icons-outlined text-lg">assignment_turned_in</span>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-green-700 text-sm">Assessment</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Students perform a full STC sequence on their own</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== DAY 3 — WEDNESDAY ===== -->
+                <div id="panel-2" class="day-panel hidden">
+                    <div class="hidden print-day-label font-display font-bold text-2xl text-day-wed mb-4">Day 3 — Wednesday</div>
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                        <div class="h-1.5 bg-day-wed"></div>
+                        <div class="p-6 sm:p-8">
+                            <div class="flex items-center gap-3 mb-1">
+                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-day-wed/10 text-day-wed font-display font-bold text-lg">3</span>
+                                <span class="text-xs font-semibold text-day-wed uppercase tracking-widest">Wednesday</span>
+                            </div>
+                            <h3 class="font-serif text-2xl sm:text-3xl text-slate-900 mt-2 mb-6">"My Feelings and My Brain"</h3>
+
+                            <!-- Student Objectives -->
+                            <div class="mb-6">
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-3">
+                                    <span class="material-icons-outlined text-day-wed text-lg">flag</span>
+                                    Student Objectives
+                                </h4>
+                                <ul class="space-y-2 ml-1">
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-icons-outlined text-green-500 text-lg mt-0.5 flex-shrink-0">check_circle</span>
+                                        <span class="text-slate-600">Identify feelings using simple body cues</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-icons-outlined text-green-500 text-lg mt-0.5 flex-shrink-0">check_circle</span>
+                                        <span class="text-slate-600">Understand the PFC helps calm big feelings</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Teacher Neuroscience Note -->
+                            <div class="mb-6">
+                                <button onclick="toggleCollapsible('neuro-3')" class="w-full flex items-center justify-between p-4 rounded-xl bg-purple-50/60 border border-purple-100/60 group text-left">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-icons-outlined text-purple-500 text-xl">neurology</span>
+                                        <span class="font-display font-semibold text-sm text-purple-700">Teacher Neuroscience Note</span>
+                                    </div>
+                                    <span id="neuro-3-icon" class="material-icons-outlined text-purple-400 group-hover:text-purple-600 transition-colors">expand_more</span>
+                                </button>
+                                <div id="neuro-3" class="collapsible-content">
+                                    <div class="px-4 pt-3 pb-1">
+                                        <p class="text-slate-600 text-sm leading-relaxed italic">"You are teaching interoception (body awareness). Naming feelings reduces amygdala activation."</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Materials Needed -->
+                            <div class="mb-8">
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-3">
+                                    <span class="material-icons-outlined text-brand-warm text-lg">inventory_2</span>
+                                    Materials Needed
+                                </h4>
+                                <div class="grid sm:grid-cols-2 gap-2 ml-1">
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Feeling face cards
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        "Where I feel feelings in my body" handouts
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Calm-down glitter jar or snow globe
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lesson Flow -->
+                            <div>
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-6">
+                                    <span class="material-icons-outlined text-band-prek text-lg">route</span>
+                                    Lesson Flow
+                                </h4>
+                                <div class="space-y-5">
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-wed text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-wed/20">1</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Wimee Greeting</h5>
+                                            <p class="text-slate-500 text-sm mt-1">"Your feelings are messages!"</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-wed text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-wed/20">2</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Brain Ritual</h5>
+                                            <p class="text-slate-500 text-sm mt-1">"Hand on heart, hand on belly... breathe."</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-wed text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-wed/20">3</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Mini-Lesson</h5>
+                                            <p class="text-slate-500 text-sm mt-1">"When your feelings are BIG, your Thinker Brain needs help."</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-wed text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-wed/20">4</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Body Scan Activity</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Point to belly for nervous, chest for excited, head for calm</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-wed text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-wed/20">5</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Calm-Down Demonstration</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Shake glitter jar; watch it settle. "This is your brain settling."</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center shadow-md shadow-green-500/20">
+                                            <span class="material-icons-outlined text-lg">assignment_turned_in</span>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-green-700 text-sm">Assessment</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Students point to where they feel calm</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== DAY 4 — THURSDAY ===== -->
+                <div id="panel-3" class="day-panel hidden">
+                    <div class="hidden print-day-label font-display font-bold text-2xl text-day-thu mb-4">Day 4 — Thursday</div>
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                        <div class="h-1.5 bg-day-thu"></div>
+                        <div class="p-6 sm:p-8">
+                            <div class="flex items-center gap-3 mb-1">
+                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-day-thu/10 text-day-thu font-display font-bold text-lg">4</span>
+                                <span class="text-xs font-semibold text-day-thu uppercase tracking-widest">Thursday</span>
+                            </div>
+                            <h3 class="font-serif text-2xl sm:text-3xl text-slate-900 mt-2 mb-6">"Brain City Safety Helpers"</h3>
+
+                            <!-- Student Objectives -->
+                            <div class="mb-6">
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-3">
+                                    <span class="material-icons-outlined text-day-thu text-lg">flag</span>
+                                    Student Objectives
+                                </h4>
+                                <ul class="space-y-2 ml-1">
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-icons-outlined text-green-500 text-lg mt-0.5 flex-shrink-0">check_circle</span>
+                                        <span class="text-slate-600">Apply the "Thinker Brain" to classroom safety</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-icons-outlined text-green-500 text-lg mt-0.5 flex-shrink-0">check_circle</span>
+                                        <span class="text-slate-600">Understand the connection between choices and safety</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Teacher Neuroscience Note -->
+                            <div class="mb-6">
+                                <button onclick="toggleCollapsible('neuro-4')" class="w-full flex items-center justify-between p-4 rounded-xl bg-purple-50/60 border border-purple-100/60 group text-left">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-icons-outlined text-purple-500 text-xl">neurology</span>
+                                        <span class="font-display font-semibold text-sm text-purple-700">Teacher Neuroscience Note</span>
+                                    </div>
+                                    <span id="neuro-4-icon" class="material-icons-outlined text-purple-400 group-hover:text-purple-600 transition-colors">expand_more</span>
+                                </button>
+                                <div id="neuro-4" class="collapsible-content">
+                                    <div class="px-4 pt-3 pb-1">
+                                        <p class="text-slate-600 text-sm leading-relaxed italic">"Today teaches executive function + situational awareness. Children learn safety by imitation first, reasoning second."</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Materials Needed -->
+                            <div class="mb-8">
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-3">
+                                    <span class="material-icons-outlined text-brand-warm text-lg">inventory_2</span>
+                                    Materials Needed
+                                </h4>
+                                <div class="grid sm:grid-cols-2 gap-2 ml-1">
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Classroom Safety Picture Cards
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Floor dots / tape
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Wimee "Safety Helper" printable badge
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lesson Flow -->
+                            <div>
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-6">
+                                    <span class="material-icons-outlined text-band-prek text-lg">route</span>
+                                    Lesson Flow
+                                </h4>
+                                <div class="space-y-5">
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-thu text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-thu/20">1</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Wimee Greeting</h5>
+                                            <p class="text-slate-500 text-sm mt-1">"Let's use your Thinker Brain to stay safe!"</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-thu text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-thu/20">2</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">PFC Ritual</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Forehead tap + affirmation: "I can choose safety."</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-thu text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-thu/20">3</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Mini-Lesson</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Compare "fast running brain" vs "Thinker Brain walking feet."</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-thu text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-thu/20">4</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Safety Stations</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Walking path practice, Safe hands practice, Listening ears practice</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-thu text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-thu/20">5</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Safety Helper Badges</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Students earn temporary badges for showing safe choices</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center shadow-md shadow-green-500/20">
+                                            <span class="material-icons-outlined text-lg">assignment_turned_in</span>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-green-700 text-sm">Assessment</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Students model 3 safe choices</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== DAY 5 — FRIDAY ===== -->
+                <div id="panel-4" class="day-panel hidden">
+                    <div class="hidden print-day-label font-display font-bold text-2xl text-day-fri mb-4">Day 5 — Friday</div>
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                        <div class="h-1.5 bg-day-fri"></div>
+                        <div class="p-6 sm:p-8">
+                            <div class="flex items-center gap-3 mb-1">
+                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-day-fri/10 text-day-fri font-display font-bold text-lg">5</span>
+                                <span class="text-xs font-semibold text-day-fri uppercase tracking-widest">Friday</span>
+                            </div>
+                            <h3 class="font-serif text-2xl sm:text-3xl text-slate-900 mt-2 mb-6">"Wimee's Thinker Brain Celebration!"</h3>
+
+                            <!-- Student Objectives -->
+                            <div class="mb-6">
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-3">
+                                    <span class="material-icons-outlined text-day-fri text-lg">flag</span>
+                                    Student Objectives
+                                </h4>
+                                <ul class="space-y-2 ml-1">
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-icons-outlined text-green-500 text-lg mt-0.5 flex-shrink-0">check_circle</span>
+                                        <span class="text-slate-600">Review everything learned about the PFC</span>
+                                    </li>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="material-icons-outlined text-green-500 text-lg mt-0.5 flex-shrink-0">check_circle</span>
+                                        <span class="text-slate-600">Demonstrate using their Thinker Brain in a group</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Teacher Neuroscience Note -->
+                            <div class="mb-6">
+                                <button onclick="toggleCollapsible('neuro-5')" class="w-full flex items-center justify-between p-4 rounded-xl bg-purple-50/60 border border-purple-100/60 group text-left">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-icons-outlined text-purple-500 text-xl">neurology</span>
+                                        <span class="font-display font-semibold text-sm text-purple-700">Teacher Neuroscience Note</span>
+                                    </div>
+                                    <span id="neuro-5-icon" class="material-icons-outlined text-purple-400 group-hover:text-purple-600 transition-colors">expand_more</span>
+                                </button>
+                                <div id="neuro-5" class="collapsible-content">
+                                    <div class="px-4 pt-3 pb-1">
+                                        <p class="text-slate-600 text-sm leading-relaxed italic">"Reinforcement builds myelination. Repetition = stronger neural pathways."</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Materials Needed -->
+                            <div class="mb-8">
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-3">
+                                    <span class="material-icons-outlined text-brand-warm text-lg">inventory_2</span>
+                                    Materials Needed
+                                </h4>
+                                <div class="grid sm:grid-cols-2 gap-2 ml-1">
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Wimee celebration song video
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Brain City coloring page
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Stickers & stamps
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-slate-600 text-sm">
+                                        <span class="material-icons-outlined text-slate-400 text-base">check_box_outline_blank</span>
+                                        Thinker Brain reflection sheet
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lesson Flow -->
+                            <div>
+                                <h4 class="flex items-center gap-2 font-display font-bold text-sm text-slate-800 uppercase tracking-wider mb-6">
+                                    <span class="material-icons-outlined text-band-prek text-lg">route</span>
+                                    Lesson Flow
+                                </h4>
+                                <div class="space-y-5">
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-fri text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-fri/20">1</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Wimee Greeting</h5>
+                                            <p class="text-slate-500 text-sm mt-1">"We are Thinker Brain Experts!"</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-fri text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-fri/20">2</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Brain Ritual Combo</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Tap forehead, deep breath, say affirmation</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-fri text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-fri/20">3</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Mini Lesson</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Review the week using 5 picture cards</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-fri text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-fri/20">4</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Thinker Brain Showcase</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Students share 1 time they "Stopped, Thought, Chose"</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-day-fri text-white flex items-center justify-center font-display font-bold text-sm shadow-md shadow-day-fri/20">5</div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-slate-800 text-sm">Art Activity</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Color Brain City, add a star sticker on the PFC</p>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-step">
+                                        <div class="absolute left-0 top-0 w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center shadow-md shadow-green-500/20">
+                                            <span class="material-icons-outlined text-lg">assignment_turned_in</span>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-display font-bold text-green-700 text-sm">Assessment</h5>
+                                            <p class="text-slate-500 text-sm mt-1">Students complete: "My Thinker Brain helped me ________."</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end main column -->
+
+
+            <!-- ==================== TEACHER TOOLKIT SIDEBAR ==================== -->
+            <aside class="lg:w-[340px] flex-shrink-0">
+                <div class="reveal-section lg:sticky lg:top-[96px]">
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                        <!-- Sidebar header -->
+                        <div class="bg-gradient-to-r from-band-prek/10 to-brand-warm/10 px-6 py-5 border-b border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <span class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center">
+                                    <span class="material-icons-outlined text-band-prek text-xl">backpack</span>
+                                </span>
+                                <div>
+                                    <h3 class="font-display font-bold text-slate-800">Teacher Toolkit</h3>
+                                    <p class="text-xs text-slate-500">Weekly essentials</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 space-y-6">
+                            <!-- Opening Ritual -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-outlined text-band-prek text-lg">wb_twilight</span>
+                                    <h4 class="font-display font-bold text-sm text-slate-800">Opening Ritual</h4>
+                                </div>
+                                <p class="text-sm text-slate-600 italic leading-relaxed bg-slate-50 rounded-lg p-3 border border-slate-100">"My brain grows when I try. My future gets built today."</p>
+                            </div>
+
+                            <!-- Brain Tool of the Week -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-outlined text-brand-warm text-lg">front_hand</span>
+                                    <h4 class="font-display font-bold text-sm text-slate-800">Brain Tool of the Week</h4>
+                                </div>
+                                <div class="bg-brand-warm/5 rounded-lg p-3 border border-brand-warm/10">
+                                    <p class="font-semibold text-sm text-slate-800 mb-1">The Wise Boss Salute</p>
+                                    <p class="text-sm text-slate-500">Touch forehead, stand tall, say "I think first!"</p>
+                                </div>
+                            </div>
+
+                            <!-- Culturally Responsive Focus -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-outlined text-brand-glow text-lg">diversity_3</span>
+                                    <h4 class="font-display font-bold text-sm text-slate-800">Culturally Responsive Focus</h4>
+                                </div>
+                                <p class="text-sm text-slate-600 leading-relaxed">Wimee story about wanting to build a tower but needing to ask for blocks first.</p>
+                            </div>
+
+                            <!-- Future-Self Connection -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-outlined text-purple-500 text-lg">auto_awesome</span>
+                                    <h4 class="font-display font-bold text-sm text-slate-800">Future-Self Connection</h4>
+                                </div>
+                                <p class="text-sm text-slate-600 italic leading-relaxed bg-purple-50/50 rounded-lg p-3 border border-purple-100/50">"When you listen to your Wise Boss today, how does that help Future You in Kindergarten?"</p>
+                            </div>
+
+                            <!-- BroBot QR Prompt -->
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-outlined text-blue-500 text-lg">qr_code_2</span>
+                                    <h4 class="font-display font-bold text-sm text-slate-800">BroBot QR Prompt</h4>
+                                </div>
+                                <div class="bg-blue-50/50 rounded-lg p-3 border border-blue-100/50">
+                                    <p class="text-sm text-slate-600 italic">"Name one time you helped your Thinker Brain today."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </div><!-- end flex row -->
+    </section>
+
+
+    <!-- ==================== STANDARDS ALIGNMENT FOOTER ==================== -->
+    <section class="max-w-7xl mx-auto px-6 lg:px-12 pb-12">
+        <div class="reveal-section">
+            <div class="bg-slate-50 rounded-2xl border border-slate-100 p-6 sm:p-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
+                        <span class="material-icons-outlined text-purple-500 text-xl">verified</span>
+                    </span>
+                    <h3 class="font-display font-bold text-slate-800 text-lg">Standards Alignment</h3>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger">
+                    <div class="bg-white rounded-xl p-4 border border-slate-100">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">ECSQ B-K</p>
+                        <p class="text-sm text-slate-700 font-medium">Approaches to Learning, Social-Emotional Development</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 border border-slate-100">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">MDE SEL</p>
+                        <p class="text-sm text-slate-700 font-medium">Self-Awareness, Self-Management</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 border border-slate-100">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">MCL 380.1502</p>
+                        <p class="text-sm text-slate-700 font-medium">Health & Physical Education</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 border border-slate-100">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">CASEL</p>
+                        <p class="text-sm text-slate-700 font-medium">Self-Awareness</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================== NAVIGATION FOOTER ==================== -->
+    <section class="max-w-7xl mx-auto px-6 lg:px-12 pb-16">
+        <div class="reveal-section">
+            <div class="flex items-center justify-between gap-4">
+                <!-- Previous (disabled) -->
+                <div class="flex items-center gap-3 px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 opacity-40 cursor-not-allowed select-none">
+                    <span class="material-icons-outlined text-slate-400 text-xl">arrow_back</span>
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium">Previous</p>
+                        <p class="text-sm text-slate-500 font-semibold">No previous lesson</p>
+                    </div>
+                </div>
+
+                <!-- Next -->
+                <a href="#" class="group flex items-center gap-3 px-5 py-4 rounded-2xl bg-white border border-slate-200 hover:border-brand-accent/40 hover:shadow-md transition-all">
+                    <div class="text-right">
+                        <p class="text-xs text-slate-400 font-medium">Next</p>
+                        <p class="text-sm text-slate-700 font-semibold group-hover:text-brand-glow transition-colors">Week 2: Meet the Wise Boss (PFC)</p>
+                    </div>
+                    <span class="material-icons-outlined text-slate-400 group-hover:text-brand-glow text-xl transition-colors">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================== SITE FOOTER ==================== -->
+    <footer class="border-t border-slate-200 bg-white py-8">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-accent to-teal-600 flex items-center justify-center">
+                    <span class="text-white font-display font-bold text-sm leading-none">B</span>
+                </div>
+                <span class="text-sm text-slate-400">InnerMan Education &middot; PreK-12 Neuroeducation Curriculum</span>
+            </div>
+            <p class="text-sm text-slate-400">Brother Brooklyn &copy; 2026</p>
+        </div>
+    </footer>
+
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // ---- Day Tab Switching ----
+        const tabColors = {
+            0: { bg: 'bg-day-mon', shadow: 'shadow-day-mon/25' },
+            1: { bg: 'bg-day-tue', shadow: 'shadow-day-tue/25' },
+            2: { bg: 'bg-day-wed', shadow: 'shadow-day-wed/25' },
+            3: { bg: 'bg-day-thu', shadow: 'shadow-day-thu/25' },
+            4: { bg: 'bg-day-fri', shadow: 'shadow-day-fri/25' },
+        };
+
+        function switchDay(index) {
+            // Hide all panels
+            document.querySelectorAll('.day-panel').forEach(p => p.classList.add('hidden'));
+            // Show selected panel
+            document.getElementById('panel-' + index).classList.remove('hidden');
+
+            // Reset all tabs
+            document.querySelectorAll('.day-tab').forEach((tab, i) => {
+                tab.classList.remove('active', 'text-white', 'shadow-lg');
+                // Remove all color classes
+                Object.values(tabColors).forEach(c => {
+                    tab.classList.remove(c.bg, c.shadow);
+                });
+                tab.classList.add('bg-slate-100', 'text-slate-500');
+            });
+
+            // Activate selected tab
+            const activeTab = document.getElementById('tab-' + index);
+            activeTab.classList.remove('bg-slate-100', 'text-slate-500');
+            activeTab.classList.add('active', 'text-white', 'shadow-lg', tabColors[index].bg, tabColors[index].shadow);
+        }
+
+
+        // ---- Collapsible Sections ----
+        function toggleCollapsible(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(id + '-icon');
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                if (icon) icon.textContent = 'expand_more';
+            } else {
+                content.classList.add('open');
+                if (icon) icon.textContent = 'expand_less';
+            }
+        }
+
+
+        // ---- Scroll Reveal Observer ----
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.08,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.reveal-section, .stagger').forEach(el => {
+            revealObserver.observe(el);
+        });
+    </script>
+
+</body>
+</html>
