@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3rd Grade Week 1: The Architect's Eye | Magic Box Curriculum v2</title>
+    <meta name="description" content="3rd Grade Week 1 — The Architect's Eye: Systematic Observation. A 5-day operations plan for Q1: The Precision Eye. Magic Box Curriculum v2.0.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0B1120',
+                            primary: '#0F172A',
+                            accent: '#2DD4BF',
+                            warm: '#F59E0B',
+                            surface: '#1E293B',
+                            glow: '#14B8A6',
+                        },
+                        band: { '35': '#2DD4BF' },
+                        day: {
+                            1: '#3B82F6',
+                            2: '#22C55E',
+                            3: '#F59E0B',
+                            4: '#EF4444',
+                            5: '#8B5CF6',
+                        },
+                    },
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #0B1120;
+            color: #CBD5E1;
+        }
+
+        /* Blueprint grid background */
+        .blueprint-grid {
+            background-image:
+                linear-gradient(rgba(45, 212, 191, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(45, 212, 191, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .blueprint-grid-dense {
+            background-image:
+                linear-gradient(rgba(45, 212, 191, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(45, 212, 191, 0.06) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Glass morphism dark */
+        .glass-dark {
+            background: rgba(30, 41, 59, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(45, 212, 191, 0.12);
+        }
+
+        .glass-dark-solid {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(45, 212, 191, 0.15);
+        }
+
+        /* Terminal block */
+        .terminal-block {
+            background: rgba(11, 17, 32, 0.9);
+            border: 1px solid rgba(45, 212, 191, 0.25);
+            border-left: 3px solid #2DD4BF;
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+        }
+
+        .terminal-block::before {
+            content: '>';
+            position: absolute;
+            left: 12px;
+            top: 16px;
+            color: #2DD4BF;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* Blinking cursor */
+        .cursor-blink::after {
+            content: '|';
+            color: #2DD4BF;
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Glow effects */
+        .glow-teal {
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.15), 0 0 60px rgba(45, 212, 191, 0.05);
+        }
+
+        .glow-teal-strong {
+            box-shadow: 0 0 30px rgba(45, 212, 191, 0.25), 0 0 80px rgba(45, 212, 191, 0.08);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(45, 212, 191, 0.4);
+        }
+
+        /* Day sidebar navigation */
+        .day-nav-item {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .day-nav-item:hover {
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        .day-nav-item.active {
+            background: rgba(30, 41, 59, 0.7);
+        }
+
+        .day-nav-item.active::after {
+            content: '';
+            position: absolute;
+            right: -1px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: currentColor;
+        }
+
+        /* Scroll reveal */
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .stagger > * {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .stagger.visible > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(2) { transition-delay: 0.10s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(3) { transition-delay: 0.15s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(4) { transition-delay: 0.20s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(5) { transition-delay: 0.25s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(6) { transition-delay: 0.30s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(7) { transition-delay: 0.35s; opacity: 1; transform: none; }
+
+        /* Day content panels */
+        .day-panel {
+            display: none;
+            animation: panelFadeIn 0.4s ease forwards;
+        }
+        .day-panel.active {
+            display: block;
+        }
+
+        @keyframes panelFadeIn {
+            from { opacity: 0; transform: translateX(12px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Collapsible */
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .collapsible-content.open {
+            max-height: 2000px;
+        }
+
+        /* Scanline overlay */
+        .scanline-overlay {
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(45, 212, 191, 0.015) 2px,
+                rgba(45, 212, 191, 0.015) 4px
+            );
+            pointer-events: none;
+        }
+
+        /* Step number badges */
+        .step-badge {
+            width: 28px;
+            height: 28px;
+            min-width: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Output card */
+        .output-card {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.08), rgba(20, 184, 166, 0.04));
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-left: 4px solid #2DD4BF;
+        }
+
+        /* Print styles */
+        @media print {
+            body { background: white !important; color: #1a1a1a !important; }
+            .glass-dark, .glass-dark-solid { background: #f8f8f8 !important; border: 1px solid #ddd !important; backdrop-filter: none !important; }
+            .terminal-block { background: #f0f0f0 !important; border-color: #999 !important; color: #1a1a1a !important; }
+            .no-print { display: none !important; }
+            .blueprint-grid, .blueprint-grid-dense { background-image: none !important; }
+            .scanline-overlay { display: none !important; }
+            .day-panel { display: block !important; page-break-inside: avoid; }
+            .day-sidebar { display: none !important; }
+            header { position: relative !important; }
+            .glow-teal, .glow-teal-strong { box-shadow: none !important; }
+            .text-glow { text-shadow: none !important; }
+            .output-card { background: #e8faf7 !important; }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0B1120; }
+        ::-webkit-scrollbar-thumb { background: rgba(45, 212, 191, 0.3); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(45, 212, 191, 0.5); }
+
+        /* Horizontal day nav (mobile) */
+        @media (max-width: 1023px) {
+            .day-nav-item {
+                border-left: none;
+                border-bottom: 3px solid transparent;
+            }
+            .day-nav-item.active::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="blueprint-grid min-h-screen">
+    <!-- Scanline overlay -->
+    <div class="scanline-overlay fixed inset-0 z-[1]"></div>
+
+    <!-- ===================== HEADER BAR ===================== -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-dark-solid border-b border-brand-accent/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-14">
+                <!-- Left: terminal dot + title -->
+                <div class="flex items-center gap-3">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-50"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-accent"></span>
+                    </span>
+                    <span class="font-mono text-sm text-brand-accent/80">3rd Grade</span>
+                    <span class="text-slate-600 font-mono text-xs">|</span>
+                    <span class="font-body text-sm text-slate-400">Magic Box Curriculum</span>
+                </div>
+
+                <!-- Right: version badge + print -->
+                <div class="flex items-center gap-3">
+                    <span class="font-mono text-[10px] tracking-wider px-2 py-1 rounded bg-brand-accent/10 text-brand-accent border border-brand-accent/20">v2.0</span>
+                    <button onclick="window.print()" class="no-print flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono text-slate-400 hover:text-brand-accent hover:bg-brand-accent/5 transition-all border border-slate-700 hover:border-brand-accent/30">
+                        <span class="material-icons-outlined text-[16px]">print</span>
+                        Print
+                    </button>
+                </div>
+            </div>
+
+            <!-- Breadcrumb -->
+            <div class="flex items-center gap-2 pb-2 -mt-1 font-mono text-[11px]">
+                <span class="text-slate-600">Grade 3</span>
+                <span class="text-slate-700">/</span>
+                <span class="text-brand-accent/60">Q1: The Precision Eye</span>
+                <span class="text-slate-700">/</span>
+                <span class="text-slate-400">Week 1</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-20">
+
+        <!-- ===================== MISSION BRIEFING (HERO) ===================== -->
+        <section class="reveal-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+            <!-- Title block -->
+            <div class="mb-8">
+                <p class="font-mono text-xs text-brand-accent/50 tracking-[0.3em] uppercase mb-3">// mission_brief.init()</p>
+                <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-800 text-white leading-tight mb-4 text-glow">
+                    The Architect's Eye:<br>
+                    <span class="text-brand-accent">Systematic Observation</span>
+                </h1>
+                <p class="font-body text-lg text-brand-accent/70 italic">Week 1 &mdash; The Observation Launch</p>
+            </div>
+
+            <!-- Mission brief card -->
+            <div class="glass-dark glow-teal rounded-xl p-6 sm:p-8 max-w-4xl">
+                <div class="flex items-center gap-2 mb-5">
+                    <span class="material-icons-outlined text-brand-accent text-lg">description</span>
+                    <span class="font-mono text-xs tracking-widest text-brand-accent uppercase">Mission Parameters</span>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-x-8 gap-y-4 stagger">
+                    <div>
+                        <p class="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-1">Theme</p>
+                        <p class="text-sm text-slate-200">Systematic Observation and Identity Installation</p>
+                    </div>
+                    <div>
+                        <p class="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-1">Quarter</p>
+                        <p class="text-sm text-slate-200">Q1 &mdash; The Precision Eye</p>
+                    </div>
+                    <div>
+                        <p class="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-1">Technical Focus</p>
+                        <p class="text-sm text-slate-200">Force, Motion &amp; Balanced Loads</p>
+                    </div>
+                    <div>
+                        <p class="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-1">Inner Man OS Focus</p>
+                        <p class="text-sm text-slate-200">Sovereign Observation &mdash; Truth vs. Noise</p>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <p class="font-mono text-[10px] text-slate-500 uppercase tracking-wider mb-1">Standards Alignment</p>
+                        <div class="flex flex-wrap gap-2 mt-1">
+                            <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-day-1/10 text-day-1 border border-day-1/20">3-PS2-1</span>
+                            <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-day-2/10 text-day-2 border border-day-2/20">CCSS.Math.Practice.MP7</span>
+                            <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-day-3/10 text-day-3 border border-day-3/20">ELA.RI.3.1</span>
+                            <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-day-5/10 text-day-5 border border-day-5/20">SEL: Self-Awareness</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== 5-DAY OPERATIONS PANEL ===================== -->
+        <section class="reveal-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="material-icons-outlined text-brand-accent">calendar_month</span>
+                <h2 class="font-display text-2xl font-700 text-white">5-Day Operations Panel</h2>
+                <div class="flex-1 h-px bg-gradient-to-r from-brand-accent/20 to-transparent ml-4"></div>
+            </div>
+
+            <div class="lg:flex lg:gap-6">
+                <!-- Vertical sidebar nav (desktop) / Horizontal nav (mobile) -->
+                <nav class="day-sidebar flex lg:flex-col gap-1 lg:w-56 lg:min-w-[224px] mb-6 lg:mb-0 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 no-print">
+
+                    <!-- Day 1 -->
+                    <button onclick="switchDay(1)" data-day="1"
+                        class="day-nav-item active flex items-center gap-3 px-4 py-3 rounded-lg lg:rounded-r-none text-left w-full whitespace-nowrap border-l-day-1 text-day-1"
+                        style="border-left-color: #3B82F6;">
+                        <span class="font-mono text-lg font-700">01</span>
+                        <div class="hidden lg:block">
+                            <p class="text-xs font-semibold text-slate-200">Monday</p>
+                            <p class="text-[11px] text-slate-500">The Viewfinder Lab</p>
+                        </div>
+                        <span class="lg:hidden text-xs font-medium text-slate-300">Mon</span>
+                    </button>
+
+                    <!-- Day 2 -->
+                    <button onclick="switchDay(2)" data-day="2"
+                        class="day-nav-item flex items-center gap-3 px-4 py-3 rounded-lg lg:rounded-r-none text-left w-full whitespace-nowrap"
+                        style="border-left-color: #22C55E; color: #22C55E;">
+                        <span class="font-mono text-lg font-700">02</span>
+                        <div class="hidden lg:block">
+                            <p class="text-xs font-semibold text-slate-200">Tuesday</p>
+                            <p class="text-[11px] text-slate-500">The Hallway Scan</p>
+                        </div>
+                        <span class="lg:hidden text-xs font-medium text-slate-300">Tue</span>
+                    </button>
+
+                    <!-- Day 3 -->
+                    <button onclick="switchDay(3)" data-day="3"
+                        class="day-nav-item flex items-center gap-3 px-4 py-3 rounded-lg lg:rounded-r-none text-left w-full whitespace-nowrap"
+                        style="border-left-color: #F59E0B; color: #F59E0B;">
+                        <span class="font-mono text-lg font-700">03</span>
+                        <div class="hidden lg:block">
+                            <p class="text-xs font-semibold text-slate-200">Wednesday</p>
+                            <p class="text-[11px] text-slate-500">Decoding the Blueprint</p>
+                        </div>
+                        <span class="lg:hidden text-xs font-medium text-slate-300">Wed</span>
+                    </button>
+
+                    <!-- Day 4 -->
+                    <button onclick="switchDay(4)" data-day="4"
+                        class="day-nav-item flex items-center gap-3 px-4 py-3 rounded-lg lg:rounded-r-none text-left w-full whitespace-nowrap"
+                        style="border-left-color: #EF4444; color: #EF4444;">
+                        <span class="font-mono text-lg font-700">04</span>
+                        <div class="hidden lg:block">
+                            <p class="text-xs font-semibold text-slate-200">Thursday</p>
+                            <p class="text-[11px] text-slate-500">The Texture Lab</p>
+                        </div>
+                        <span class="lg:hidden text-xs font-medium text-slate-300">Thu</span>
+                    </button>
+
+                    <!-- Day 5 -->
+                    <button onclick="switchDay(5)" data-day="5"
+                        class="day-nav-item flex items-center gap-3 px-4 py-3 rounded-lg lg:rounded-r-none text-left w-full whitespace-nowrap"
+                        style="border-left-color: #8B5CF6; color: #8B5CF6;">
+                        <span class="font-mono text-lg font-700">05</span>
+                        <div class="hidden lg:block">
+                            <p class="text-xs font-semibold text-slate-200">Friday</p>
+                            <p class="text-[11px] text-slate-500">The Tiger Sync</p>
+                        </div>
+                        <span class="lg:hidden text-xs font-medium text-slate-300">Fri</span>
+                    </button>
+                </nav>
+
+                <!-- Day content area -->
+                <div class="flex-1 min-w-0">
+
+                    <!-- ========== DAY 1 ========== -->
+                    <div id="day-1" class="day-panel active">
+                        <div class="glass-dark rounded-xl p-6 sm:p-8">
+                            <!-- Day header -->
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 rounded-lg bg-day-1/15 border border-day-1/25 flex items-center justify-center">
+                                    <span class="font-mono text-sm font-700 text-day-1">D1</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-display text-xl font-700 text-white">The Viewfinder Lab</h3>
+                                    <p class="font-mono text-[11px] text-day-1/70">MONDAY // Observation Protocol</p>
+                                </div>
+                            </div>
+
+                            <!-- Neuro-Hook -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="material-icons-outlined text-brand-accent text-base">terminal</span>
+                                    <span class="font-mono text-[11px] text-brand-accent tracking-widest uppercase">Neuro-Hook // Inner Man Script</span>
+                                </div>
+                                <div class="terminal-block rounded-lg p-4 pl-8">
+                                    <p class="text-sm text-brand-accent leading-relaxed cursor-blink">
+                                        "Heights, look at me. Most people see a mess. An Architect sees a System. Today, we are installing your 'Architect Lens.' You aren't just looking; you are Scanning."
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Technical Task -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="material-icons-outlined text-slate-400 text-base">build</span>
+                                    <span class="font-mono text-[11px] text-slate-400 tracking-widest uppercase">Technical Task</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-1/15 text-day-1 border border-day-1/25">01</span>
+                                        <p class="text-sm text-slate-300 pt-0.5">Students construct a "Viewfinder" (2x2 square cut from cardstock)</p>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-1/15 text-day-1 border border-day-1/25">02</span>
+                                        <p class="text-sm text-slate-300 pt-0.5">Focus on one 2-inch area of desk, list every Variable (scratches, dust, color, texture)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Standard -->
+                            <div class="flex items-center gap-2 mb-6 font-mono text-xs">
+                                <span class="text-slate-600">STD:</span>
+                                <span class="px-2 py-0.5 rounded bg-day-1/10 text-day-1 border border-day-1/20">3-PS2-1</span>
+                                <span class="text-slate-500 italic">Observation of Patterns</span>
+                            </div>
+
+                            <!-- Magic Box Output -->
+                            <div class="output-card rounded-lg p-4 mb-6">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-outlined text-brand-accent text-base">download</span>
+                                    <span class="font-mono text-[11px] text-brand-accent tracking-widest uppercase">Magic Box Output</span>
+                                </div>
+                                <p class="text-sm text-slate-200 font-medium">The Focus Log &mdash; Students list 10 details they never noticed before</p>
+                            </div>
+
+                            <!-- Identity Goal -->
+                            <div class="flex items-center gap-3 p-3 rounded-lg bg-brand-accent/5 border border-brand-accent/10">
+                                <span class="material-icons-outlined text-brand-accent text-base">psychology</span>
+                                <div>
+                                    <span class="font-mono text-[10px] text-brand-accent/60 tracking-wider uppercase">Identity Goal</span>
+                                    <p class="text-sm text-slate-300 italic">"Teaching the brain that 'Details are Data.'"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ========== DAY 2 ========== -->
+                    <div id="day-2" class="day-panel">
+                        <div class="glass-dark rounded-xl p-6 sm:p-8">
+                            <!-- Day header -->
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 rounded-lg bg-day-2/15 border border-day-2/25 flex items-center justify-center">
+                                    <span class="font-mono text-sm font-700 text-day-2">D2</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-display text-xl font-700 text-white">The Hallway Scan</h3>
+                                    <p class="font-mono text-[11px] text-day-2/70">TUESDAY // Pattern Recognition</p>
+                                </div>
+                            </div>
+
+                            <!-- Neuro-Hook -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="material-icons-outlined text-brand-accent text-base">terminal</span>
+                                    <span class="font-mono text-[11px] text-brand-accent tracking-widest uppercase">Neuro-Hook // Inner Man Script</span>
+                                </div>
+                                <div class="terminal-block rounded-lg p-4 pl-8">
+                                    <p class="text-sm text-brand-accent leading-relaxed cursor-blink">
+                                        "Your brain is a pattern-recognition supercomputer. If you see the pattern, you can predict the future. Let's go find the code in the hallway."
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Technical Task -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="material-icons-outlined text-slate-400 text-base">build</span>
+                                    <span class="font-mono text-[11px] text-slate-400 tracking-widest uppercase">Technical Task</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-2/15 text-day-2 border border-day-2/25">01</span>
+                                        <p class="text-sm text-slate-300 pt-0.5">Walk hallway in "Silent Scan Mode"</p>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-2/15 text-day-2 border border-day-2/25">02</span>
+                                        <p class="text-sm text-slate-300 pt-0.5">Identify three repeating patterns (floor tiles, locker numbers, ceiling lights)</p>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-2/15 text-day-2 border border-day-2/25">03</span>
+                                        <div class="pt-0.5">
+                                            <p class="text-sm text-slate-300"><span class="text-day-2 font-semibold">The Debugger:</span> Find one "Break" in the pattern (missing tile, crooked poster)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Standard -->
+                            <div class="flex items-center gap-2 mb-6 font-mono text-xs">
+                                <span class="text-slate-600">STD:</span>
+                                <span class="px-2 py-0.5 rounded bg-day-2/10 text-day-2 border border-day-2/20">CCSS.Math.Practice.MP7</span>
+                                <span class="text-slate-500 italic">Look for and make use of structure</span>
+                            </div>
+
+                            <!-- Magic Box Output -->
+                            <div class="output-card rounded-lg p-4 mb-6">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-outlined text-brand-accent text-base">download</span>
+                                    <span class="font-mono text-[11px] text-brand-accent tracking-widest uppercase">Magic Box Output</span>
+                                </div>
+                                <p class="text-sm text-slate-200 font-medium">Pattern Map &mdash; A drawing of one identified sequence (A-B-A-B)</p>
+                            </div>
+
+                            <!-- Identity Goal -->
+                            <div class="flex items-center gap-3 p-3 rounded-lg bg-brand-accent/5 border border-brand-accent/10">
+                                <span class="material-icons-outlined text-brand-accent text-base">psychology</span>
+                                <div>
+                                    <span class="font-mono text-[10px] text-brand-accent/60 tracking-wider uppercase">Identity Goal</span>
+                                    <p class="text-sm text-slate-300 italic">"Training the mind to detect signals in the noise."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ========== DAY 3 ========== -->
+                    <div id="day-3" class="day-panel">
+                        <div class="glass-dark rounded-xl p-6 sm:p-8">
+                            <!-- Day header -->
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 rounded-lg bg-day-3/15 border border-day-3/25 flex items-center justify-center">
+                                    <span class="font-mono text-sm font-700 text-day-3">D3</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-display text-xl font-700 text-white">Decoding the Blueprint</h3>
+                                    <p class="font-mono text-[11px] text-day-3/70">WEDNESDAY // Evidence Analysis</p>
+                                </div>
+                            </div>
+
+                            <!-- Neuro-Hook -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="material-icons-outlined text-brand-accent text-base">terminal</span>
+                                    <span class="font-mono text-[11px] text-brand-accent tracking-widest uppercase">Neuro-Hook // Inner Man Script</span>
+                                </div>
+                                <div class="terminal-block rounded-lg p-4 pl-8">
+                                    <p class="text-sm text-brand-accent leading-relaxed cursor-blink">
+                                        "A blueprint is just a map of someone's thoughts. If you can read the blueprint, you can build the world. Today, we decode Wimee's World."
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Technical Task -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="material-icons-outlined text-slate-400 text-base">build</span>
+                                    <span class="font-mono text-[11px] text-slate-400 tracking-widest uppercase">Technical Task</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-3/15 text-day-3 border border-day-3/25">01</span>
+                                        <p class="text-sm text-slate-300 pt-0.5">Provide basic schematic of Wimee's Robot Arm</p>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-3/15 text-day-3 border border-day-3/25">02</span>
+                                        <p class="text-sm text-slate-300 pt-0.5">Students circle and label "Evidence" of movement (joints and motors)</p>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-3/15 text-day-3 border border-day-3/25">03</span>
+                                        <div class="pt-0.5">
+                                            <p class="text-sm text-slate-300"><span class="text-day-3 font-semibold">Vocabulary Load:</span> Schematic, Component, Evidence</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Standard -->
+                            <div class="flex items-center gap-2 mb-6 font-mono text-xs">
+                                <span class="text-slate-600">STD:</span>
+                                <span class="px-2 py-0.5 rounded bg-day-3/10 text-day-3 border border-day-3/20">ELA.RI.3.1</span>
+                                <span class="text-slate-500 italic">Ask and answer questions to demonstrate understanding</span>
+                            </div>
+
+                            <!-- Magic Box Output -->
+                            <div class="output-card rounded-lg p-4 mb-6">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-outlined text-brand-accent text-base">download</span>
+                                    <span class="font-mono text-[11px] text-brand-accent tracking-widest uppercase">Magic Box Output</span>
+                                </div>
+                                <p class="text-sm text-slate-200 font-medium">The Labeled Schematic &mdash; Evidence-based labels on the robot drawing</p>
+                            </div>
+
+                            <!-- Identity Goal -->
+                            <div class="flex items-center gap-3 p-3 rounded-lg bg-brand-accent/5 border border-brand-accent/10">
+                                <span class="material-icons-outlined text-brand-accent text-base">psychology</span>
+                                <div>
+                                    <span class="font-mono text-[10px] text-brand-accent/60 tracking-wider uppercase">Identity Goal</span>
+                                    <p class="text-sm text-slate-300 italic">"Learning to read the language of systems."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ========== DAY 4 ========== -->
+                    <div id="day-4" class="day-panel">
+                        <div class="glass-dark rounded-xl p-6 sm:p-8">
+                            <!-- Day header -->
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 rounded-lg bg-day-4/15 border border-day-4/25 flex items-center justify-center">
+                                    <span class="font-mono text-sm font-700 text-day-4">D4</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-display text-xl font-700 text-white">The Texture Lab</h3>
+                                    <p class="font-mono text-[11px] text-day-4/70">THURSDAY // Force &amp; Friction</p>
+                                </div>
+                            </div>
+
+                            <!-- Neuro-Hook -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="material-icons-outlined text-brand-accent text-base">terminal</span>
+                                    <span class="font-mono text-[11px] text-brand-accent tracking-widest uppercase">Neuro-Hook // Inner Man Script</span>
+                                </div>
+                                <div class="terminal-block rounded-lg p-4 pl-8">
+                                    <p class="text-sm text-brand-accent leading-relaxed cursor-blink">
+                                        "In life, you're going to hit resistance. In science, we call that Friction. We don't get mad at friction; we measure it and adjust our power."
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Technical Task -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="material-icons-outlined text-slate-400 text-base">build</span>
+                                    <span class="font-mono text-[11px] text-slate-400 tracking-widest uppercase">Technical Task</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-4/15 text-day-4 border border-day-4/25">01</span>
+                                        <p class="text-sm text-slate-300 pt-0.5">Roll toy car down ramp onto 3 surfaces: Carpet, Tile, Sandpaper</p>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-4/15 text-day-4 border border-day-4/25">02</span>
+                                        <p class="text-sm text-slate-300 pt-0.5">Measure distance for each surface</p>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-4/15 text-day-4 border border-day-4/25">03</span>
+                                        <div class="pt-0.5">
+                                            <p class="text-sm text-slate-300"><span class="text-day-4 font-semibold">The Logic:</span> Why did sandpaper stop the car? (High Friction)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Standard -->
+                            <div class="flex items-center gap-2 mb-6 font-mono text-xs">
+                                <span class="text-slate-600">STD:</span>
+                                <span class="px-2 py-0.5 rounded bg-day-4/10 text-day-4 border border-day-4/20">3-PS2-1</span>
+                                <span class="text-slate-500 italic">Effects of balanced and unbalanced forces</span>
+                            </div>
+
+                            <!-- Magic Box Output -->
+                            <div class="output-card rounded-lg p-4 mb-6">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-outlined text-brand-accent text-base">download</span>
+                                    <span class="font-mono text-[11px] text-brand-accent tracking-widest uppercase">Magic Box Output</span>
+                                </div>
+                                <p class="text-sm text-slate-200 font-medium">The Friction Table &mdash; Data recording distance vs. surface type</p>
+                            </div>
+
+                            <!-- Identity Goal -->
+                            <div class="flex items-center gap-3 p-3 rounded-lg bg-brand-accent/5 border border-brand-accent/10">
+                                <span class="material-icons-outlined text-brand-accent text-base">psychology</span>
+                                <div>
+                                    <span class="font-mono text-[10px] text-brand-accent/60 tracking-wider uppercase">Identity Goal</span>
+                                    <p class="text-sm text-slate-300 italic">"Resistance is data, not defeat."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ========== DAY 5 ========== -->
+                    <div id="day-5" class="day-panel">
+                        <div class="glass-dark rounded-xl p-6 sm:p-8">
+                            <!-- Day header -->
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 rounded-lg bg-day-5/15 border border-day-5/25 flex items-center justify-center">
+                                    <span class="font-mono text-sm font-700 text-day-5">D5</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-display text-xl font-700 text-white">The Tiger Sync</h3>
+                                    <p class="font-mono text-[11px] text-day-5/70">FRIDAY // Identity Upload</p>
+                                </div>
+                            </div>
+
+                            <!-- Neuro-Hook -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="material-icons-outlined text-brand-accent text-base">terminal</span>
+                                    <span class="font-mono text-[11px] text-brand-accent tracking-widest uppercase">Neuro-Hook // Inner Man Script</span>
+                                </div>
+                                <div class="terminal-block rounded-lg p-4 pl-8">
+                                    <p class="text-sm text-brand-accent leading-relaxed cursor-blink">
+                                        "It's Friday. Time to save our work. We are going to 'Pre-Load' your 2035 self. If you are a Senior Engineer in 2035, what does your desk look like today?"
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Technical Task -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="material-icons-outlined text-slate-400 text-base">build</span>
+                                    <span class="font-mono text-[11px] text-slate-400 tracking-widest uppercase">Technical Task</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-5/15 text-day-5 border border-day-5/25">01</span>
+                                        <p class="text-sm text-slate-300 pt-0.5">Open Tiger Edition Discovery Log</p>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-5/15 text-day-5 border border-day-5/25">02</span>
+                                        <div class="pt-0.5">
+                                            <p class="text-sm text-slate-300"><span class="text-day-5 font-semibold">GPS Coordinate:</span> "I am in 3rd Grade, but my internal GPS is set to [Career Choice]"</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 rounded-lg bg-brand-primary/50 border border-slate-700/50">
+                                        <span class="step-badge bg-day-5/15 text-day-5 border border-day-5/25">03</span>
+                                        <div class="pt-0.5">
+                                            <p class="text-sm text-slate-300"><span class="text-day-5 font-semibold">Visualization:</span> Draw one tool you will use in future job</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Standard -->
+                            <div class="flex items-center gap-2 mb-6 font-mono text-xs">
+                                <span class="text-slate-600">STD:</span>
+                                <span class="px-2 py-0.5 rounded bg-day-5/10 text-day-5 border border-day-5/20">SEL.Competency.Self-Awareness</span>
+                                <span class="text-slate-500 italic">Identity and Strengths</span>
+                            </div>
+
+                            <!-- Magic Box Output -->
+                            <div class="output-card rounded-lg p-4 mb-6">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="material-icons-outlined text-brand-accent text-base">download</span>
+                                    <span class="font-mono text-[11px] text-brand-accent tracking-widest uppercase">Magic Box Output</span>
+                                </div>
+                                <p class="text-sm text-slate-200 font-medium">The 2035 Blueprint &mdash; A high-definition vision entry for the MDE Digital Portfolio</p>
+                            </div>
+
+                            <!-- Identity Goal -->
+                            <div class="flex items-center gap-3 p-3 rounded-lg bg-brand-accent/5 border border-brand-accent/10">
+                                <span class="material-icons-outlined text-brand-accent text-base">psychology</span>
+                                <div>
+                                    <span class="font-mono text-[10px] text-brand-accent/60 tracking-wider uppercase">Identity Goal</span>
+                                    <p class="text-sm text-slate-300 italic">"You are not becoming. You are pre-loading."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /flex-1 -->
+            </div><!-- /lg:flex -->
+        </section>
+
+        <!-- ===================== STUDENT DISCOVERY LOG PREVIEW ===================== -->
+        <section class="reveal-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="material-icons-outlined text-brand-accent">flight_takeoff</span>
+                <h2 class="font-display text-2xl font-700 text-white">Student Discovery Log</h2>
+                <div class="flex-1 h-px bg-gradient-to-r from-brand-accent/20 to-transparent ml-4"></div>
+            </div>
+
+            <div class="glass-dark glow-teal rounded-xl overflow-hidden">
+                <!-- Black box header -->
+                <div class="bg-brand-dark border-b border-brand-accent/10 px-6 py-4 flex items-center gap-3">
+                    <div class="flex gap-1.5">
+                        <span class="w-3 h-3 rounded-full bg-red-500/70"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500/70"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500/70"></span>
+                    </div>
+                    <span class="font-mono text-xs text-slate-500 ml-2">black_box_recorder.log // Tiger Edition</span>
+                </div>
+
+                <div class="p-6 sm:p-8 blueprint-grid-dense space-y-6">
+                    <!-- Day 1 Log -->
+                    <div class="flex items-start gap-4">
+                        <span class="font-mono text-xs text-day-1 bg-day-1/10 px-2 py-1 rounded border border-day-1/20 min-w-[40px] text-center">D1</span>
+                        <div class="flex-1">
+                            <p class="text-sm text-slate-300 mb-2">"What did you detect that others missed?"</p>
+                            <div class="border-b border-dashed border-slate-700 pb-1 mb-1"><span class="font-mono text-xs text-slate-600">________________________________________________________________________________</span></div>
+                            <div class="border-b border-dashed border-slate-700 pb-1"><span class="font-mono text-xs text-slate-600">________________________________________________________________________________</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Day 2 Log -->
+                    <div class="flex items-start gap-4">
+                        <span class="font-mono text-xs text-day-2 bg-day-2/10 px-2 py-1 rounded border border-day-2/20 min-w-[40px] text-center">D2</span>
+                        <div class="flex-1">
+                            <p class="text-sm text-slate-300 mb-2">"Draw the pattern:"</p>
+                            <div class="flex items-center gap-3 font-mono text-sm text-slate-400">
+                                <span class="w-10 h-10 border border-dashed border-slate-600 rounded flex items-center justify-center text-slate-500">[A]</span>
+                                <span class="text-brand-accent">&rarr;</span>
+                                <span class="w-10 h-10 border border-dashed border-slate-600 rounded flex items-center justify-center text-slate-500">[B]</span>
+                                <span class="text-brand-accent">&rarr;</span>
+                                <span class="w-10 h-10 border border-dashed border-slate-600 rounded flex items-center justify-center text-slate-500">[A]</span>
+                                <span class="text-brand-accent">&rarr;</span>
+                                <span class="w-10 h-10 border border-dashed border-slate-600 rounded flex items-center justify-center text-slate-500">[B]</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inner Man Code -->
+                    <div class="border-t border-brand-accent/10 pt-6">
+                        <p class="font-mono text-[11px] text-brand-accent/60 tracking-widest uppercase mb-4">Inner Man Code // Weekly Quotes</p>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                            <div class="terminal-block rounded-lg p-3 pl-7 text-xs">
+                                <p class="text-brand-accent/80"><span class="text-slate-500">D1:</span> "Details are Data."</p>
+                            </div>
+                            <div class="terminal-block rounded-lg p-3 pl-7 text-xs">
+                                <p class="text-brand-accent/80"><span class="text-slate-500">D2:</span> "See the code."</p>
+                            </div>
+                            <div class="terminal-block rounded-lg p-3 pl-7 text-xs">
+                                <p class="text-brand-accent/80"><span class="text-slate-500">D3:</span> "Read the blueprint."</p>
+                            </div>
+                            <div class="terminal-block rounded-lg p-3 pl-7 text-xs">
+                                <p class="text-brand-accent/80"><span class="text-slate-500">D4:</span> "Measure, don't react."</p>
+                            </div>
+                            <div class="terminal-block rounded-lg p-3 pl-7 text-xs">
+                                <p class="text-brand-accent/80"><span class="text-slate-500">D5:</span> "Pre-load the future."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Status -->
+                    <div class="border-t border-brand-accent/10 pt-6 flex items-center gap-6 font-mono text-sm">
+                        <span class="text-slate-500">System Status:</span>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 rounded border-slate-600 bg-brand-primary text-brand-accent focus:ring-brand-accent/30">
+                            <span class="text-slate-400">Calibrated</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 rounded border-slate-600 bg-brand-primary text-brand-accent focus:ring-brand-accent/30">
+                            <span class="text-slate-400">Needs Update</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== MAGIC BOX DIGITAL COMPLIANCE PANEL ===================== -->
+        <section class="reveal-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="material-icons-outlined text-brand-accent">verified</span>
+                <h2 class="font-display text-2xl font-700 text-white">Digital Compliance Panel</h2>
+                <div class="flex-1 h-px bg-gradient-to-r from-brand-accent/20 to-transparent ml-4"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4 stagger">
+                <!-- Output 01 -->
+                <div class="glass-dark rounded-xl p-6 relative overflow-hidden group hover:border-day-1/30 transition-colors">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-day-1/5 rounded-bl-[60px]"></div>
+                    <span class="font-mono text-[10px] text-day-1 tracking-widest uppercase">Output 01</span>
+                    <h4 class="font-display text-lg font-700 text-white mt-2 mb-2">Literacy</h4>
+                    <p class="text-sm text-slate-400">Technical Vocabulary Fluency Score</p>
+                    <div class="mt-4 pt-4 border-t border-slate-700/50">
+                        <div class="flex items-center gap-2">
+                            <span class="material-icons-outlined text-day-1 text-base">menu_book</span>
+                            <span class="font-mono text-xs text-slate-500">Schematic, Component, Evidence, Variable, Friction</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Output 02 -->
+                <div class="glass-dark rounded-xl p-6 relative overflow-hidden group hover:border-day-2/30 transition-colors">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-day-2/5 rounded-bl-[60px]"></div>
+                    <span class="font-mono text-[10px] text-day-2 tracking-widest uppercase">Output 02</span>
+                    <h4 class="font-display text-lg font-700 text-white mt-2 mb-2">Science</h4>
+                    <p class="text-sm text-slate-400">Force/Motion Lab Validation</p>
+                    <div class="mt-4 pt-4 border-t border-slate-700/50">
+                        <div class="flex items-center gap-2">
+                            <span class="material-icons-outlined text-day-2 text-base">science</span>
+                            <span class="font-mono text-xs text-slate-500">Friction Table, Focus Log, Pattern Map</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Output 03 -->
+                <div class="glass-dark rounded-xl p-6 relative overflow-hidden group hover:border-day-5/30 transition-colors">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-day-5/5 rounded-bl-[60px]"></div>
+                    <span class="font-mono text-[10px] text-day-5 tracking-widest uppercase">Output 03</span>
+                    <h4 class="font-display text-lg font-700 text-white mt-2 mb-2">Inner Man</h4>
+                    <p class="text-sm text-slate-400">Sovereignty Self-Audit (The Discovery Log)</p>
+                    <div class="mt-4 pt-4 border-t border-slate-700/50">
+                        <div class="flex items-center gap-2">
+                            <span class="material-icons-outlined text-day-5 text-base">person</span>
+                            <span class="font-mono text-xs text-slate-500">2035 Blueprint, GPS Coordinate, Identity Score</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== TEACHER SUPPORT SIDEBAR ===================== -->
+        <section class="reveal-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="material-icons-outlined text-brand-warm">support_agent</span>
+                <h2 class="font-display text-2xl font-700 text-white">Teacher Support Panel</h2>
+                <div class="flex-1 h-px bg-gradient-to-r from-brand-warm/20 to-transparent ml-4"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-6">
+                <!-- Left column: Tips and Tone -->
+                <div class="space-y-4">
+                    <!-- The Magic Box Tip -->
+                    <div class="collapsible-trigger cursor-pointer" onclick="toggleCollapsible(this)">
+                        <div class="glass-dark rounded-xl p-5 hover:border-brand-warm/20 transition-colors">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-icons-outlined text-brand-warm">lightbulb</span>
+                                    <h4 class="font-display text-base font-600 text-white">The Magic Box Tip</h4>
+                                </div>
+                                <span class="material-icons-outlined text-slate-500 transition-transform collapsible-icon">expand_more</span>
+                            </div>
+                            <div class="collapsible-content mt-0">
+                                <div class="pt-4">
+                                    <p class="text-sm text-slate-300 leading-relaxed">
+                                        Don't grade on correctness yet. Grade on <span class="text-brand-warm font-semibold">Data Integrity</span>. Did the student record what they actually saw, or what they thought they should see?
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The Tone -->
+                    <div class="collapsible-trigger cursor-pointer" onclick="toggleCollapsible(this)">
+                        <div class="glass-dark rounded-xl p-5 hover:border-brand-warm/20 transition-colors">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-icons-outlined text-brand-warm">record_voice_over</span>
+                                    <h4 class="font-display text-base font-600 text-white">The Tone</h4>
+                                </div>
+                                <span class="material-icons-outlined text-slate-500 transition-transform collapsible-icon">expand_more</span>
+                            </div>
+                            <div class="collapsible-content mt-0">
+                                <div class="pt-4">
+                                    <p class="text-sm text-slate-300 leading-relaxed mb-3">
+                                        Keep it high-expectations. We don't say <span class="text-slate-500 line-through">"Good job."</span>
+                                    </p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="font-mono text-xs px-3 py-1.5 rounded-lg bg-brand-accent/10 text-brand-accent border border-brand-accent/20">"System Validated"</span>
+                                        <span class="font-mono text-xs px-3 py-1.5 rounded-lg bg-brand-accent/10 text-brand-accent border border-brand-accent/20">"Data Confirmed"</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right column: Quick-Fix Dashboard -->
+                <div class="collapsible-trigger cursor-pointer" onclick="toggleCollapsible(this)">
+                    <div class="glass-dark rounded-xl p-5 h-full hover:border-brand-warm/20 transition-colors">
+                        <div class="flex items-center justify-between mb-0">
+                            <div class="flex items-center gap-3">
+                                <span class="material-icons-outlined text-brand-warm">healing</span>
+                                <h4 class="font-display text-base font-600 text-white">Quick-Fix Dashboard</h4>
+                            </div>
+                            <span class="material-icons-outlined text-slate-500 transition-transform collapsible-icon">expand_more</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <div class="pt-5 space-y-4">
+                                <!-- Confused -->
+                                <div class="flex items-start gap-3 p-3 rounded-lg bg-day-4/5 border border-day-4/10">
+                                    <span class="material-icons-outlined text-day-4 text-lg mt-0.5">error_outline</span>
+                                    <div>
+                                        <p class="text-xs font-mono text-day-4 mb-1">If you feel confused:</p>
+                                        <p class="text-sm text-slate-300">Say <span class="font-mono text-brand-accent">"404 Error"</span> and ask your Senior Engineer (Teacher) for a System Update.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Bored -->
+                                <div class="flex items-start gap-3 p-3 rounded-lg bg-day-3/5 border border-day-3/10">
+                                    <span class="material-icons-outlined text-day-3 text-lg mt-0.5">visibility</span>
+                                    <div>
+                                        <p class="text-xs font-mono text-day-3 mb-1">If you feel bored:</p>
+                                        <p class="text-sm text-slate-300">Increase your <span class="font-mono text-brand-accent">Resolution</span>. Look closer at the details.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Tired -->
+                                <div class="flex items-start gap-3 p-3 rounded-lg bg-day-5/5 border border-day-5/10">
+                                    <span class="material-icons-outlined text-day-5 text-lg mt-0.5">battery_alert</span>
+                                    <div>
+                                        <p class="text-xs font-mono text-day-5 mb-1">If you feel tired:</p>
+                                        <p class="text-sm text-slate-300">Run a <span class="font-mono text-brand-accent">Background Check</span>. Did you get enough sleep (Power) last night?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== NAVIGATION FOOTER ===================== -->
+        <footer class="border-t border-brand-accent/10 mt-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="flex items-center justify-between">
+                    <!-- Previous -->
+                    <div class="text-slate-600 font-mono text-sm flex items-center gap-2 cursor-not-allowed">
+                        <span class="material-icons-outlined text-base">chevron_left</span>
+                        <span>Previous: N/A</span>
+                    </div>
+
+                    <!-- Center: back to showcase -->
+                    <a href="/course-superpower.html" class="no-print font-mono text-xs text-brand-accent/50 hover:text-brand-accent transition-colors hidden sm:block">
+                        // curriculum_showcase.return()
+                    </a>
+
+                    <!-- Next -->
+                    <a href="#" class="font-mono text-sm text-brand-accent hover:text-brand-glow transition-colors flex items-center gap-2 group">
+                        <span>Next: Week 2 &mdash; The Loop</span>
+                        <span class="material-icons-outlined text-base group-hover:translate-x-1 transition-transform">chevron_right</span>
+                    </a>
+                </div>
+
+                <!-- Build info -->
+                <div class="mt-8 pt-6 border-t border-slate-800 text-center">
+                    <p class="font-mono text-[10px] text-slate-700 tracking-wider">
+                        MAGIC BOX CURRICULUM // 3RD GRADE // Q1W1 // BUILD v2.0 // BROTHER BROOKLYN EDUCATION SYSTEMS
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ===================== JAVASCRIPT ===================== -->
+    <script>
+        // === Day Switcher ===
+        function switchDay(dayNum) {
+            // Deactivate all nav items
+            document.querySelectorAll('.day-nav-item').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Activate clicked nav item
+            const activeBtn = document.querySelector(`.day-nav-item[data-day="${dayNum}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            // Hide all panels
+            document.querySelectorAll('.day-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+
+            // Show target panel
+            const targetPanel = document.getElementById(`day-${dayNum}`);
+            if (targetPanel) {
+                targetPanel.classList.remove('active');
+                // Force reflow for animation
+                void targetPanel.offsetWidth;
+                targetPanel.classList.add('active');
+            }
+        }
+
+        // === Collapsible Toggle ===
+        function toggleCollapsible(trigger) {
+            const content = trigger.querySelector('.collapsible-content');
+            const icon = trigger.querySelector('.collapsible-icon');
+
+            if (content) {
+                content.classList.toggle('open');
+            }
+            if (icon) {
+                icon.style.transform = content && content.classList.contains('open')
+                    ? 'rotate(180deg)'
+                    : 'rotate(0deg)';
+            }
+        }
+
+        // === Scroll Reveal ===
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.08,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            document.querySelectorAll('.reveal-section, .stagger').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // === Keyboard Navigation for Days ===
+        document.addEventListener('keydown', (e) => {
+            const currentActive = document.querySelector('.day-nav-item.active');
+            if (!currentActive) return;
+            const currentDay = parseInt(currentActive.dataset.day);
+
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                const next = Math.min(currentDay + 1, 5);
+                switchDay(next);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prev = Math.max(currentDay - 1, 1);
+                switchDay(prev);
+            }
+        });
+
+        // === Init ===
+        document.addEventListener('DOMContentLoaded', () => {
+            initScrollReveal();
+
+            // Auto-open first collapsible after a short delay
+            setTimeout(() => {
+                const firstTrigger = document.querySelector('.collapsible-trigger');
+                if (firstTrigger) {
+                    const content = firstTrigger.querySelector('.collapsible-content');
+                    const icon = firstTrigger.querySelector('.collapsible-icon');
+                    if (content) content.classList.add('open');
+                    if (icon) icon.style.transform = 'rotate(180deg)';
+                }
+            }, 800);
+        });
+    </script>
+</body>
+</html>
