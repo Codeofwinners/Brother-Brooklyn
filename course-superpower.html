@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Defense Wins Championships — Brother Brooklyn Academy</title>
+    <title>Brain Academy — Brother Brooklyn</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
@@ -91,10 +91,29 @@
         aside::-webkit-scrollbar { width: 4px; }
         aside::-webkit-scrollbar-track { background: transparent; }
         aside::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 9999px; }
+
+        /* Course picker card */
+        .course-pick { cursor: pointer; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+        .course-pick:hover { transform: translateY(-6px) scale(1.02); }
+
+        /* Coming soon toast */
+        .toast-overlay {
+            position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); opacity: 0;
+            z-index: 999; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none;
+        }
+        .toast-overlay.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     </style>
 </head>
 
 <body class="text-gray-600 font-body antialiased min-h-screen">
+
+    <!-- Coming Soon Toast -->
+    <div id="coming-soon-toast" class="toast-overlay">
+        <div class="px-6 py-4 bg-gray-900 text-white rounded-2xl shadow-2xl flex items-center gap-3">
+            <span class="material-icons-outlined text-amber-400">schedule</span>
+            <span class="font-semibold text-sm">Coming Soon — Stay Tuned!</span>
+        </div>
+    </div>
 
     <!-- Top Bar — WHITE -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
@@ -103,7 +122,7 @@
                 <div class="flex items-center gap-3">
                     <a href="index.html" class="w-9 h-9 rounded-2xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-display font-bold text-lg shadow-md shadow-teal-500/20">B</a>
                     <div class="hidden sm:block h-5 w-px bg-gray-200"></div>
-                    <span class="hidden sm:block text-sm font-semibold text-gray-900">Defense Wins Championships</span>
+                    <span class="hidden sm:block text-sm font-semibold text-gray-900">Brain Academy</span>
                 </div>
                 <div class="flex-1 max-w-xs mx-6 hidden sm:block">
                     <div class="flex items-center gap-3">
@@ -124,8 +143,8 @@
         <aside class="hidden lg:flex flex-col w-80 bg-white fixed top-16 bottom-0 left-0 overflow-y-auto shadow-[4px_0_15px_-3px_rgba(0,0,0,0.05)]">
             <div class="p-6">
                 <span class="inline-block px-3 py-1.5 bg-teal-50 rounded-2xl text-teal-600 text-[10px] font-bold tracking-widest uppercase mb-3">Free Course</span>
-                <h2 class="text-lg font-display font-bold text-gray-900 mb-2">Defense Wins Championships</h2>
-                <p class="text-sm text-gray-500 leading-relaxed">A tactical guide for parents to stop violence by understanding brain science.</p>
+                <h2 class="text-lg font-display font-bold text-gray-900 mb-2">Your Brain on Stress</h2>
+                <p class="text-sm text-gray-500 leading-relaxed">Learn why your brain freaks out and how to take back control. Ages 10-14.</p>
                 <div class="mt-4 flex items-center gap-3">
                     <img src="https://bayareaweb.design/brother-brooklyn/onboarding/uploads/2026-02-11_225606/headshots/2BE_383_1124_3316717001_2_2.jpg" class="w-8 h-8 rounded-full" alt="RC">
                     <div><p class="text-xs text-gray-900 font-medium">Rodney Coley</p><p class="text-[10px] text-gray-400">Brother Brooklyn</p></div>
@@ -135,28 +154,24 @@
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 px-2">Curriculum</p>
                 <div class="space-y-1.5" id="sidebar-lessons">
                     <button onclick="goToStep(0)" class="lesson-item active w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 transition-all hover:bg-gray-50">
-                        <div class="sidebar-dot check-ring w-9 h-9 rounded-xl bg-gradient-to-br from-teal-400 to-teal-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 shadow-md shadow-teal-400/20"><span class="material-icons-outlined text-sm">play_arrow</span></div>
-                        <div><p class="text-sm font-medium text-gray-900">Introduction</p><p class="text-[10px] text-gray-400">Course overview</p></div>
+                        <div class="sidebar-dot check-ring w-9 h-9 rounded-xl bg-gradient-to-br from-teal-400 to-teal-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 shadow-md shadow-teal-400/20"><span class="material-icons-outlined text-sm">apps</span></div>
+                        <div><p class="text-sm font-medium text-gray-900">Course Picker</p><p class="text-[10px] text-gray-400">Choose your path</p></div>
                     </button>
                     <button onclick="goToStep(1)" class="lesson-item locked w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 transition-all hover:bg-gray-50">
                         <div class="sidebar-dot check-ring w-9 h-9 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xs font-bold flex-shrink-0">01</div>
-                        <div><p class="text-sm font-medium text-gray-900">The Survival Home</p><p class="text-[10px] text-gray-400">Cortisol & hypervigilance</p></div>
+                        <div><p class="text-sm font-medium text-gray-900">Why Does My Brain Bug Out?</p><p class="text-[10px] text-gray-400">Stress & the amygdala</p></div>
                     </button>
                     <button onclick="goToStep(2)" class="lesson-item locked w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 transition-all hover:bg-gray-50">
                         <div class="sidebar-dot check-ring w-9 h-9 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-xs font-bold flex-shrink-0">02</div>
-                        <div><p class="text-sm font-medium text-gray-900">The Mirror Effect</p><p class="text-[10px] text-gray-400">Mirror neurons & modeling</p></div>
+                        <div><p class="text-sm font-medium text-gray-900">The Copycat Effect</p><p class="text-[10px] text-gray-400">Mirror neurons & influence</p></div>
                     </button>
                     <button onclick="goToStep(3)" class="lesson-item locked w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 transition-all hover:bg-gray-50">
                         <div class="sidebar-dot check-ring w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xs font-bold flex-shrink-0">03</div>
-                        <div><p class="text-sm font-medium text-gray-900">Feeding the Superpower</p><p class="text-[10px] text-gray-400">Brain chemistry basics</p></div>
+                        <div><p class="text-sm font-medium text-gray-900">Hack Your Brain Chemistry</p><p class="text-[10px] text-gray-400">Dopamine, serotonin & more</p></div>
                     </button>
                     <button onclick="goToStep(4)" class="lesson-item locked w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 transition-all hover:bg-gray-50">
-                        <div class="sidebar-dot check-ring w-9 h-9 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center text-xs font-bold flex-shrink-0">04</div>
-                        <div><p class="text-sm font-medium text-gray-900">The New Language</p><p class="text-[10px] text-gray-400">Family pledge & scripts</p></div>
-                    </button>
-                    <button onclick="goToStep(5)" class="lesson-item locked w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 transition-all hover:bg-gray-50">
                         <div class="sidebar-dot check-ring w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold flex-shrink-0"><span class="material-icons-outlined text-sm">quiz</span></div>
-                        <div><p class="text-sm font-medium text-gray-900">Knowledge Check</p><p class="text-[10px] text-gray-400">5 questions quiz</p></div>
+                        <div><p class="text-sm font-medium text-gray-900">Test Your Knowledge</p><p class="text-[10px] text-gray-400">5 question quiz</p></div>
                     </button>
                 </div>
             </div>
@@ -172,9 +187,9 @@
         <!-- Content -->
         <main class="flex-1 lg:ml-80 pb-24 lg:pb-0 w-full min-h-screen">
 
-            <!-- STEP 0: HERO -->
+            <!-- STEP 0: COURSE PICKER -->
             <div id="step-0" class="step-container active">
-                <!-- Purple gradient hero banner -->
+                <!-- Hero banner -->
                 <div class="relative overflow-hidden" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)">
                     <div class="absolute top-[-30%] right-[-10%] w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[100px]"></div>
                     <div class="absolute bottom-[-20%] left-[-10%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[80px]"></div>
@@ -187,93 +202,104 @@
 
                         <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur-sm rounded-xl text-teal-300 text-xs font-bold tracking-widest uppercase mb-8">
                             <span class="w-2 h-2 bg-teal-300 rounded-full animate-pulse"></span>
-                            Free Course
+                            Free Courses
                         </div>
 
                         <h1 class="text-4xl sm:text-5xl md:text-7xl font-display font-extrabold text-white mb-6 leading-[1.05]">
-                            Defense Wins<br><span class="text-teal-300">Championships.</span>
+                            Level Up<br><span class="text-teal-300">Your Brain.</span>
                         </h1>
 
-                        <p class="text-base sm:text-lg md:text-xl text-slate-300 max-w-lg mx-auto mb-10 sm:mb-12 leading-relaxed">
-                            A tactical guide for parents to stop violence by understanding brain science. Learn to decode "Survival Mode" in 15 minutes.
+                        <p class="text-base sm:text-lg md:text-xl text-slate-300 max-w-lg mx-auto mb-6 leading-relaxed">
+                            Real brain science. No boring lectures. Pick your path and learn how to take control of your mind.
                         </p>
-
-                        <button onclick="nextStep()" class="group px-10 sm:px-12 py-4 sm:py-5 bg-teal-400 hover:bg-teal-300 text-gray-900 font-extrabold rounded-2xl shadow-2xl shadow-teal-400/30 transition-all text-base sm:text-lg inline-flex items-center gap-3 hover:-translate-y-1">
-                            Start Learning
-                            <span class="material-icons-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                        </button>
                     </div>
                 </div>
 
-                <!-- Content below hero on off-white -->
+                <!-- Course Picker Grid -->
                 <div class="max-w-2xl mx-auto px-5 sm:px-6 py-12 sm:py-16">
-                    <!-- Animated stats — white cards -->
+                    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6 flex items-center gap-2">
+                        <span class="w-8 h-[2px] bg-teal-400"></span> Pick Your Course
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-12 sm:mb-16">
+                        <!-- Course 1: Your Brain on Stress (ACTIVE) -->
+                        <div onclick="startCourse(1)" class="course-pick rounded-3xl bg-gradient-to-br from-red-400 to-rose-500 p-6 sm:p-7 relative overflow-hidden shadow-xl shadow-red-400/15">
+                            <div class="absolute top-[-30%] right-[-30%] w-32 h-32 bg-white/10 rounded-full"></div>
+                            <div class="relative">
+                                <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-4 float">
+                                    <span class="material-icons-outlined text-3xl">psychology</span>
+                                </div>
+                                <span class="inline-block px-2.5 py-1 bg-white/20 rounded-lg text-white/90 text-[10px] font-bold tracking-wider uppercase mb-3">Ages 10-14</span>
+                                <h4 class="text-xl font-display font-bold text-white mb-1">Your Brain on Stress</h4>
+                                <p class="text-sm text-white/80 leading-relaxed mb-3">Learn why your brain freaks out and how to take back control</p>
+                                <span class="text-xs text-white/60 font-semibold">3 Lessons + Quiz</span>
+                            </div>
+                        </div>
+                        <!-- Course 2: Level Up Your Mind (COMING SOON) -->
+                        <div onclick="showComingSoon()" class="course-pick rounded-3xl bg-gradient-to-br from-purple-400 to-purple-600 p-6 sm:p-7 relative overflow-hidden shadow-xl shadow-purple-400/15">
+                            <div class="absolute top-[-30%] left-[-30%] w-32 h-32 bg-white/10 rounded-full"></div>
+                            <div class="absolute top-3 right-3 px-2.5 py-1 bg-white/20 backdrop-blur-sm rounded-lg text-white/90 text-[10px] font-bold tracking-wider uppercase">Coming Soon</div>
+                            <div class="relative">
+                                <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-4 float-slow">
+                                    <span class="material-icons-outlined text-3xl">rocket_launch</span>
+                                </div>
+                                <span class="inline-block px-2.5 py-1 bg-white/20 rounded-lg text-white/90 text-[10px] font-bold tracking-wider uppercase mb-3">Ages 13-17</span>
+                                <h4 class="text-xl font-display font-bold text-white mb-1">Level Up Your Mind</h4>
+                                <p class="text-sm text-white/80 leading-relaxed mb-3">Advanced brain hacks for focus, confidence, and leadership</p>
+                                <span class="text-xs text-white/60 font-semibold">4 Lessons + Quiz</span>
+                            </div>
+                        </div>
+                        <!-- Course 3: Street Smart Science (COMING SOON) -->
+                        <div onclick="showComingSoon()" class="course-pick rounded-3xl bg-gradient-to-br from-amber-400 to-amber-500 p-6 sm:p-7 relative overflow-hidden shadow-xl shadow-amber-400/15">
+                            <div class="absolute bottom-[-30%] right-[-30%] w-32 h-32 bg-white/10 rounded-full"></div>
+                            <div class="absolute top-3 right-3 px-2.5 py-1 bg-white/20 backdrop-blur-sm rounded-lg text-white/90 text-[10px] font-bold tracking-wider uppercase">Coming Soon</div>
+                            <div class="relative">
+                                <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-4 float-slower">
+                                    <span class="material-icons-outlined text-3xl">science</span>
+                                </div>
+                                <span class="inline-block px-2.5 py-1 bg-white/20 rounded-lg text-white/90 text-[10px] font-bold tracking-wider uppercase mb-3">Ages 14-18</span>
+                                <h4 class="text-xl font-display font-bold text-white mb-1">Street Smart Science</h4>
+                                <p class="text-sm text-white/80 leading-relaxed mb-3">The neuroscience behind peer pressure, risk, and decision-making</p>
+                                <span class="text-xs text-white/60 font-semibold">3 Lessons + Quiz</span>
+                            </div>
+                        </div>
+                        <!-- Course 4: Faith & The Brain (COMING SOON) -->
+                        <div onclick="showComingSoon()" class="course-pick rounded-3xl bg-gradient-to-br from-teal-400 to-teal-600 p-6 sm:p-7 relative overflow-hidden shadow-xl shadow-teal-400/15">
+                            <div class="absolute top-[-30%] right-[-30%] w-32 h-32 bg-white/10 rounded-full"></div>
+                            <div class="absolute top-3 right-3 px-2.5 py-1 bg-white/20 backdrop-blur-sm rounded-lg text-white/90 text-[10px] font-bold tracking-wider uppercase">Coming Soon</div>
+                            <div class="relative">
+                                <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-4 float">
+                                    <span class="material-icons-outlined text-3xl">auto_awesome</span>
+                                </div>
+                                <span class="inline-block px-2.5 py-1 bg-white/20 rounded-lg text-white/90 text-[10px] font-bold tracking-wider uppercase mb-3">Ages 12-18</span>
+                                <h4 class="text-xl font-display font-bold text-white mb-1">Faith & The Brain</h4>
+                                <p class="text-sm text-white/80 leading-relaxed mb-3">How faith and science work together to build an unbreakable mind</p>
+                                <span class="text-xs text-white/60 font-semibold">3 Lessons + Quiz</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats row -->
                     <div class="grid grid-cols-3 gap-3 sm:gap-4 max-w-md mx-auto mb-12 sm:mb-16">
                         <div class="playful-card rounded-3xl p-4 sm:p-5 text-center bg-white card-shadow cursor-default">
                             <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-2 sm:mb-3 rounded-2xl bg-red-100 flex items-center justify-center float">
                                 <span class="material-icons-outlined text-red-500 text-xl sm:text-2xl">school</span>
                             </div>
-                            <p class="text-gray-900 font-display font-bold text-2xl sm:text-3xl">4</p>
+                            <p class="text-gray-900 font-display font-bold text-2xl sm:text-3xl">12+</p>
                             <p class="text-[10px] text-gray-400 uppercase tracking-wider mt-1 font-semibold">Lessons</p>
                         </div>
                         <div class="playful-card rounded-3xl p-4 sm:p-5 text-center bg-white card-shadow cursor-default">
                             <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-2 sm:mb-3 rounded-2xl bg-purple-100 flex items-center justify-center float-slow">
-                                <span class="material-icons-outlined text-purple-500 text-xl sm:text-2xl">quiz</span>
+                                <span class="material-icons-outlined text-purple-500 text-xl sm:text-2xl">apps</span>
                             </div>
-                            <p class="text-gray-900 font-display font-bold text-2xl sm:text-3xl">5</p>
-                            <p class="text-[10px] text-gray-400 uppercase tracking-wider mt-1 font-semibold">Questions</p>
+                            <p class="text-gray-900 font-display font-bold text-2xl sm:text-3xl">4</p>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-wider mt-1 font-semibold">Courses</p>
                         </div>
                         <div class="playful-card rounded-3xl p-4 sm:p-5 text-center bg-white card-shadow cursor-default">
-                            <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-2 sm:mb-3 rounded-2xl bg-amber-100 flex items-center justify-center float-slower">
-                                <span class="material-icons-outlined text-amber-500 text-xl sm:text-2xl">schedule</span>
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-2 sm:mb-3 rounded-2xl bg-teal-100 flex items-center justify-center float-slower">
+                                <span class="material-icons-outlined text-teal-500 text-xl sm:text-2xl">verified</span>
                             </div>
-                            <p class="text-gray-900 font-display font-bold text-2xl sm:text-3xl">15</p>
-                            <p class="text-[10px] text-gray-400 uppercase tracking-wider mt-1 font-semibold">Minutes</p>
-                        </div>
-                    </div>
-
-                    <!-- What you'll learn -->
-                    <div class="text-left mb-12 sm:mb-14">
-                        <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6 flex items-center gap-2">
-                            <span class="w-8 h-[2px] bg-teal-400"></span> What You'll Learn
-                        </h3>
-                        <div class="space-y-3">
-                            <div class="playful-card flex items-start gap-4 p-5 rounded-3xl bg-white card-shadow">
-                                <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-500 flex items-center justify-center flex-shrink-0">
-                                    <span class="material-icons-outlined text-xl">warning</span>
-                                </div>
-                                <div>
-                                    <p class="text-base font-bold text-gray-900 mb-0.5">The Survival Home</p>
-                                    <p class="text-sm text-gray-500">Why cortisol makes families fight — and how to recognize the signs</p>
-                                </div>
-                            </div>
-                            <div class="playful-card flex items-start gap-4 p-5 rounded-3xl bg-white card-shadow">
-                                <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-500 flex items-center justify-center flex-shrink-0">
-                                    <span class="material-icons-outlined text-xl">people</span>
-                                </div>
-                                <div>
-                                    <p class="text-base font-bold text-gray-900 mb-0.5">The Mirror Effect</p>
-                                    <p class="text-sm text-gray-500">How mirror neurons make children copy your stress responses</p>
-                                </div>
-                            </div>
-                            <div class="playful-card flex items-start gap-4 p-5 rounded-3xl bg-white card-shadow">
-                                <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-500 flex items-center justify-center flex-shrink-0">
-                                    <span class="material-icons-outlined text-xl">bolt</span>
-                                </div>
-                                <div>
-                                    <p class="text-base font-bold text-gray-900 mb-0.5">Brain Chemistry Basics</p>
-                                    <p class="text-sm text-gray-500">Serotonin, Oxytocin, Dopamine — your family's secret weapons</p>
-                                </div>
-                            </div>
-                            <div class="playful-card flex items-start gap-4 p-5 rounded-3xl bg-white card-shadow">
-                                <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-500 flex items-center justify-center flex-shrink-0">
-                                    <span class="material-icons-outlined text-xl">record_voice_over</span>
-                                </div>
-                                <div>
-                                    <p class="text-base font-bold text-gray-900 mb-0.5">The Family Pledge</p>
-                                    <p class="text-sm text-gray-500">Scripts and language to protect your home's peace</p>
-                                </div>
-                            </div>
+                            <p class="text-gray-900 font-display font-bold text-2xl sm:text-3xl">Free</p>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-wider mt-1 font-semibold">Always</p>
                         </div>
                     </div>
 
@@ -289,14 +315,14 @@
                 </div>
             </div>
 
-            <!-- STEP 1: LESSON 1 — Coral/Red -->
+            <!-- STEP 1: LESSON 1 — "Why Does My Brain Bug Out?" (Coral/Red) -->
             <div id="step-1" class="step-container">
                 <div class="relative max-w-3xl mx-auto px-5 sm:px-6 py-12 sm:py-16 md:py-24">
                     <div class="flex items-center gap-3 mb-2">
                         <span class="w-11 h-11 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-sm font-bold">01</span>
                         <span class="text-red-500 text-xs font-bold uppercase tracking-widest">Lesson 1</span>
                     </div>
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-gray-900 mb-10 sm:mb-12 leading-tight">The Survival Home</h2>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-gray-900 mb-10 sm:mb-12 leading-tight">Why Does My Brain Bug Out?</h2>
 
                     <!-- Visual: Big expressive icon card -->
                     <div class="flex justify-center mb-10 sm:mb-12">
@@ -307,15 +333,16 @@
                         </div>
                     </div>
 
-                    <!-- The Symptom — white card -->
+                    <!-- Your Brain's Alarm System — white card -->
                     <div class="rounded-3xl bg-white p-6 sm:p-8 card-shadow mb-6">
                         <div class="flex items-start gap-4">
                             <div class="w-14 h-14 rounded-2xl bg-red-100 text-red-500 flex items-center justify-center shrink-0">
                                 <span class="material-icons-outlined text-3xl">warning</span>
                             </div>
                             <div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">The Symptom</h3>
-                                <p class="text-gray-600 leading-relaxed text-base">Living in high-pressure environments means the whole family might be soaked in <strong class="text-red-500 font-bold">Cortisol</strong>. This looks like short tempers, constant arguing, or shutting down (the Freeze).</p>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Your Brain Has a Smoke Alarm</h3>
+                                <p class="text-gray-600 leading-relaxed text-base">Deep inside your brain there's a tiny part called the <strong class="text-red-500 font-bold">Amygdala</strong>. Think of it like a smoke alarm. Its job? To keep you safe. When it senses danger — real or imagined — it pulls the alarm and floods your body with a stress chemical called <strong class="text-red-500 font-bold">Cortisol</strong>.</p>
+                                <p class="text-gray-600 leading-relaxed text-base mt-3">That's why your heart races before a test, your stomach drops when someone yells, or you freeze up when you get called on in class. <strong class="text-gray-900">It's not your fault.</strong> It's your brain trying to protect you.</p>
                             </div>
                         </div>
                     </div>
@@ -329,12 +356,23 @@
                                 <div class="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center">
                                     <span class="material-icons-outlined text-white text-xl">psychology</span>
                                 </div>
-                                <span class="text-white/80 font-bold uppercase text-xs tracking-wider">Neuro-Truth</span>
+                                <span class="text-white/80 font-bold uppercase text-xs tracking-wider">Fight, Flight, or Freeze</span>
                             </div>
-                            <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white mb-4">It's not attitude.<br>It's Hypervigilance.</h3>
-                            <p class="text-white/85 leading-relaxed text-base sm:text-lg">
-                                When the brain feels unsafe outside, it struggles to turn the "Alarm" (the <strong class="text-white">Amygdala</strong>) off inside. Don't take it personally — it's a chemical spike.
-                            </p>
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white mb-4">Which One Are You?</h3>
+                            <div class="space-y-3">
+                                <div class="bg-white/15 backdrop-blur-sm rounded-2xl p-4 flex items-start gap-3">
+                                    <span class="text-2xl">&#x1F94A;</span>
+                                    <div><p class="text-white font-bold text-base mb-0.5">Fight</p><p class="text-white/80 text-sm">You get angry, argue, or lash out. An argument with a friend and you're ready to go off.</p></div>
+                                </div>
+                                <div class="bg-white/15 backdrop-blur-sm rounded-2xl p-4 flex items-start gap-3">
+                                    <span class="text-2xl">&#x1F3C3;</span>
+                                    <div><p class="text-white font-bold text-base mb-0.5">Flight</p><p class="text-white/80 text-sm">You want to escape — skip class, put your hood up, zone out on your phone.</p></div>
+                                </div>
+                                <div class="bg-white/15 backdrop-blur-sm rounded-2xl p-4 flex items-start gap-3">
+                                    <span class="text-2xl">&#x1F9CA;</span>
+                                    <div><p class="text-white font-bold text-base mb-0.5">Freeze</p><p class="text-white/80 text-sm">You shut down. Teacher calls on you and your mind goes blank. You can't move, can't speak.</p></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -345,8 +383,8 @@
                                 <span class="material-icons-outlined text-xl">lightbulb</span>
                             </div>
                             <div>
-                                <p class="text-base font-bold text-gray-900 mb-1">Key Takeaway</p>
-                                <p class="text-sm text-gray-600 leading-relaxed">Your child's defiance might actually be their brain stuck in survival mode. Recognizing the chemical response is the first step to changing it.</p>
+                                <p class="text-base font-bold text-gray-900 mb-1">The Big Idea</p>
+                                <p class="text-sm text-gray-600 leading-relaxed">Your brain isn't broken — it's just stuck in survival mode. Once you understand that, you can learn to control it. Walking through a rough neighborhood, getting into it with a friend, presenting in front of class — your alarm goes off every time. But here's the thing: <strong class="text-gray-900">you can learn to turn it down.</strong></p>
                             </div>
                         </div>
                     </div>
@@ -360,14 +398,14 @@
                 </div>
             </div>
 
-            <!-- STEP 2: LESSON 2 — Purple -->
+            <!-- STEP 2: LESSON 2 — "The Copycat Effect" (Purple) -->
             <div id="step-2" class="step-container">
                 <div class="relative max-w-3xl mx-auto px-5 sm:px-6 py-12 sm:py-16 md:py-24">
                     <div class="flex items-center gap-3 mb-2">
                         <span class="w-11 h-11 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-sm font-bold">02</span>
                         <span class="text-purple-500 text-xs font-bold uppercase tracking-widest">Lesson 2</span>
                     </div>
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-gray-900 mb-10 sm:mb-12 leading-tight">The Mirror Effect</h2>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-gray-900 mb-10 sm:mb-12 leading-tight">The Copycat Effect</h2>
 
                     <!-- Visual: Big icon card -->
                     <div class="flex justify-center mb-10 sm:mb-12">
@@ -385,20 +423,24 @@
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-5 sm:gap-6 mb-8">
-                        <!-- Biological Mirrors — white card -->
+                        <!-- Mirror Neurons — white card -->
                         <div class="rounded-3xl bg-white p-6 sm:p-8 card-shadow">
-                            <h3 class="text-xl font-bold text-gray-900 mb-4">Biological Mirrors</h3>
-                            <p class="text-gray-600 leading-relaxed mb-6">
-                                Children have <strong class="text-purple-500 font-bold">Mirror Neurons</strong> that are always watching. They don't do what you say; they do what you <strong class="text-purple-500 font-bold">do</strong>.
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Your Brain is a Copycat</h3>
+                            <p class="text-gray-600 leading-relaxed mb-4">
+                                Your brain has something called <strong class="text-purple-500 font-bold">Mirror Neurons</strong>. They're always watching, always copying. If everyone around you is stressed, angry, or giving up — your brain starts copying that energy.
                             </p>
-                            <div class="bg-emerald-50 rounded-2xl p-5">
-                                <span class="block text-emerald-600 text-xs font-bold uppercase mb-2">Try The "Circuit Breaker"</span>
-                                <p class="text-emerald-700/80 italic font-medium text-sm leading-relaxed">"I'm feeling a Cortisol spike. I'm going to take my 4-4-4 breaths so my 'Common Sense' can stay in charge."</p>
+                            <p class="text-gray-600 leading-relaxed mb-5">
+                                But here's the flip side: <strong class="text-purple-500 font-bold">it works BOTH ways</strong>. Surround yourself with people who are growing, learning, and staying calm — and your brain copies THAT instead.
+                            </p>
+                            <div class="bg-purple-50 rounded-2xl p-5">
+                                <span class="block text-purple-600 text-xs font-bold uppercase mb-2">Real Talk</span>
+                                <p class="text-purple-700/80 italic font-medium text-sm leading-relaxed">"You become the average of the 5 people you spend the most time with — neurologically. Your brain literally rewires itself based on who's around you."</p>
                             </div>
                         </div>
                         <!-- 4-4-4 Breathing — purple tinted card -->
                         <div class="rounded-3xl bg-purple-50 p-6 sm:p-8 card-shadow">
-                            <h3 class="text-sm font-bold text-gray-700 uppercase tracking-wider mb-6">4-4-4 Breathing</h3>
+                            <h3 class="text-sm font-bold text-gray-700 uppercase tracking-wider mb-3">The Circuit Breaker</h3>
+                            <p class="text-sm text-gray-500 mb-5">When your brain starts copying bad energy, break the circuit with 4-4-4 breathing:</p>
                             <div class="space-y-4">
                                 <div class="playful-card text-center p-4 sm:p-5 bg-teal-500 rounded-3xl shadow-lg shadow-teal-500/15">
                                     <div class="w-14 sm:w-16 h-14 sm:h-16 mx-auto mb-3 rounded-full bg-white/20 flex items-center justify-center float">
@@ -422,6 +464,19 @@
                         </div>
                     </div>
 
+                    <!-- Key takeaway -->
+                    <div class="rounded-3xl bg-amber-50 p-6 card-shadow">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-500 flex items-center justify-center flex-shrink-0">
+                                <span class="material-icons-outlined text-xl">lightbulb</span>
+                            </div>
+                            <div>
+                                <p class="text-base font-bold text-gray-900 mb-1">The Big Idea</p>
+                                <p class="text-sm text-gray-600 leading-relaxed">Your mirror neurons don't have a filter — they copy everything. The good news? You get to choose what you feed them. Change your circle, change your brain.</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="mt-12 sm:mt-14 flex justify-between items-center">
                         <button onclick="prevStep()" class="text-gray-400 hover:text-gray-900 font-medium text-sm flex items-center gap-1 transition-all hover:-translate-x-1"><span class="material-icons-outlined text-sm">arrow_back</span> Back</button>
                         <button onclick="nextStep()" class="group px-7 sm:px-8 py-3.5 sm:py-4 bg-teal-500 hover:bg-teal-600 text-white font-bold rounded-xl transition-all flex items-center gap-2 hover:-translate-y-1 shadow-lg shadow-teal-500/20 hover:shadow-teal-600/30">
@@ -431,136 +486,106 @@
                 </div>
             </div>
 
-            <!-- STEP 3: LESSON 3 — Amber/Gold -->
+            <!-- STEP 3: LESSON 3 — "Hack Your Brain Chemistry" (Amber) -->
             <div id="step-3" class="step-container">
                 <div class="relative max-w-3xl mx-auto px-5 sm:px-6 py-12 sm:py-16 md:py-24">
                     <div class="flex items-center gap-3 mb-2">
                         <span class="w-11 h-11 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-sm font-bold">03</span>
                         <span class="text-amber-500 text-xs font-bold uppercase tracking-widest">Lesson 3</span>
                     </div>
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-gray-900 mb-3 leading-tight">Feeding the Superpower</h2>
-                    <p class="text-gray-500 mb-10 sm:mb-12 text-base sm:text-lg">How to balance brain chemistry without a doctor's visit.</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-gray-900 mb-3 leading-tight">Hack Your Brain Chemistry</h2>
+                    <p class="text-gray-500 mb-10 sm:mb-12 text-base sm:text-lg">You are the pharmacist of your own brain. Here's your prescription.</p>
 
-                    <!-- Three chemical cards — bold colored -->
-                    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 mb-10">
-                        <div class="playful-card rounded-3xl bg-gradient-to-br from-amber-400 to-amber-500 p-6 sm:p-7 relative overflow-hidden shadow-xl shadow-amber-400/15">
+                    <!-- Four chemical cards — bold colored -->
+                    <div class="grid sm:grid-cols-2 gap-4 sm:gap-5 mb-10">
+                        <div class="playful-card rounded-3xl bg-gradient-to-br from-sky-400 to-sky-500 p-6 sm:p-7 relative overflow-hidden shadow-xl shadow-sky-400/15">
                             <div class="absolute top-[-30%] right-[-30%] w-32 h-32 bg-white/10 rounded-full"></div>
                             <div class="relative">
                                 <div class="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-5 float">
-                                    <span class="material-icons-outlined text-3xl sm:text-4xl">emoji_events</span>
-                                </div>
-                                <h4 class="text-xl sm:text-2xl font-display font-bold text-white mb-1">Serotonin</h4>
-                                <span class="text-xs text-white/60 font-semibold uppercase tracking-wider block mb-3">Status & Belonging</span>
-                                <p class="text-sm text-white/85 leading-relaxed">Praise their <strong class="text-white">effort</strong>, not just results. Make them feel like a VIP in the Family Tribe.</p>
-                            </div>
-                        </div>
-                        <div class="playful-card rounded-3xl bg-gradient-to-br from-pink-400 to-pink-500 p-6 sm:p-7 relative overflow-hidden shadow-xl shadow-pink-400/15">
-                            <div class="absolute bottom-[-30%] left-[-30%] w-32 h-32 bg-white/10 rounded-full"></div>
-                            <div class="relative">
-                                <div class="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-5 float-slow">
-                                    <span class="material-icons-outlined text-3xl sm:text-4xl">favorite</span>
-                                </div>
-                                <h4 class="text-xl sm:text-2xl font-display font-bold text-white mb-1">Oxytocin</h4>
-                                <span class="text-xs text-white/60 font-semibold uppercase tracking-wider block mb-3">Bonding & Safety</span>
-                                <p class="text-sm text-white/85 leading-relaxed">A 5-minute <strong class="text-white">"no-judgment" chat</strong> flushes out a day's worth of accumulated cortisol.</p>
-                            </div>
-                        </div>
-                        <div class="playful-card rounded-3xl bg-gradient-to-br from-sky-400 to-sky-500 p-6 sm:p-7 relative overflow-hidden shadow-xl shadow-sky-400/15 sm:col-span-2 md:col-span-1">
-                            <div class="absolute top-[-30%] left-[-30%] w-32 h-32 bg-white/10 rounded-full"></div>
-                            <div class="relative">
-                                <div class="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-5 float-slower">
                                     <span class="material-icons-outlined text-3xl sm:text-4xl">bolt</span>
                                 </div>
                                 <h4 class="text-xl sm:text-2xl font-display font-bold text-white mb-1">Dopamine</h4>
-                                <span class="text-xs text-white/60 font-semibold uppercase tracking-wider block mb-3">Motivation</span>
-                                <p class="text-sm text-white/85 leading-relaxed">Celebrate <strong class="text-white">Micro-Wins</strong>. Walking away from a fight is a championship win for their brain.</p>
+                                <span class="text-xs text-white/60 font-semibold uppercase tracking-wider block mb-3">The Reward Chemical</span>
+                                <p class="text-sm text-white/85 leading-relaxed">Celebrate small wins. Finished your homework? That counts. Walked away from drama? <strong class="text-white">Championship move.</strong> Your brain gives you a hit of dopamine every time you win — even small ones.</p>
+                            </div>
+                        </div>
+                        <div class="playful-card rounded-3xl bg-gradient-to-br from-amber-400 to-amber-500 p-6 sm:p-7 relative overflow-hidden shadow-xl shadow-amber-400/15">
+                            <div class="absolute bottom-[-30%] left-[-30%] w-32 h-32 bg-white/10 rounded-full"></div>
+                            <div class="relative">
+                                <div class="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-5 float-slow">
+                                    <span class="material-icons-outlined text-3xl sm:text-4xl">emoji_events</span>
+                                </div>
+                                <h4 class="text-xl sm:text-2xl font-display font-bold text-white mb-1">Serotonin</h4>
+                                <span class="text-xs text-white/60 font-semibold uppercase tracking-wider block mb-3">The Confidence Chemical</span>
+                                <p class="text-sm text-white/85 leading-relaxed">Help someone out. Stand tall — literally. <strong class="text-white">Your body language changes your brain chemistry.</strong> When you help a classmate or hold the door, serotonin flows.</p>
+                            </div>
+                        </div>
+                        <div class="playful-card rounded-3xl bg-gradient-to-br from-pink-400 to-pink-500 p-6 sm:p-7 relative overflow-hidden shadow-xl shadow-pink-400/15">
+                            <div class="absolute top-[-30%] left-[-30%] w-32 h-32 bg-white/10 rounded-full"></div>
+                            <div class="relative">
+                                <div class="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-5 float-slower">
+                                    <span class="material-icons-outlined text-3xl sm:text-4xl">favorite</span>
+                                </div>
+                                <h4 class="text-xl sm:text-2xl font-display font-bold text-white mb-1">Oxytocin</h4>
+                                <span class="text-xs text-white/60 font-semibold uppercase tracking-wider block mb-3">The Trust Chemical</span>
+                                <p class="text-sm text-white/85 leading-relaxed">Real connections beat social media likes every time. A genuine conversation, a real laugh with your crew — that's <strong class="text-white">oxytocin</strong>. Your brain craves real bonds, not notifications.</p>
+                            </div>
+                        </div>
+                        <div class="playful-card rounded-3xl bg-gradient-to-br from-emerald-400 to-emerald-500 p-6 sm:p-7 relative overflow-hidden shadow-xl shadow-emerald-400/15">
+                            <div class="absolute bottom-[-30%] right-[-30%] w-32 h-32 bg-white/10 rounded-full"></div>
+                            <div class="relative">
+                                <div class="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-5 float">
+                                    <span class="material-icons-outlined text-3xl sm:text-4xl">directions_run</span>
+                                </div>
+                                <h4 class="text-xl sm:text-2xl font-display font-bold text-white mb-1">Endorphins</h4>
+                                <span class="text-xs text-white/60 font-semibold uppercase tracking-wider block mb-3">The Painkiller</span>
+                                <p class="text-sm text-white/85 leading-relaxed">Exercise, laugh, create something. Draw, play ball, make music. <strong class="text-white">Endorphins are your brain's natural painkiller</strong> — and they're free.</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Quick reference — white cards -->
+                    <!-- The Prescription — quick reference -->
                     <div>
                         <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-5 flex items-center gap-2">
-                            <span class="w-8 h-[2px] bg-teal-400"></span> Quick Reference
+                            <span class="w-8 h-[2px] bg-teal-400"></span> Your Daily Prescription
                         </h3>
                         <div class="space-y-3">
+                            <div class="playful-card flex items-center gap-4 p-5 bg-white rounded-3xl card-shadow">
+                                <div class="w-12 h-12 rounded-2xl bg-sky-100 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-xl font-display font-bold text-sky-500">D</span>
+                                </div>
+                                <p class="text-base text-gray-600"><strong class="text-gray-900">Celebrate one small win</strong> today — even getting out of bed counts</p>
+                            </div>
                             <div class="playful-card flex items-center gap-4 p-5 bg-white rounded-3xl card-shadow">
                                 <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center flex-shrink-0">
                                     <span class="text-xl font-display font-bold text-amber-500">S</span>
                                 </div>
-                                <p class="text-base text-gray-600"><strong class="text-gray-900">Praise effort</strong> to build belonging</p>
+                                <p class="text-base text-gray-600"><strong class="text-gray-900">Help one person</strong> — hold the door, share notes, say something kind</p>
                             </div>
                             <div class="playful-card flex items-center gap-4 p-5 bg-white rounded-3xl card-shadow">
                                 <div class="w-12 h-12 rounded-2xl bg-pink-100 flex items-center justify-center flex-shrink-0">
                                     <span class="text-xl font-display font-bold text-pink-500">O</span>
                                 </div>
-                                <p class="text-base text-gray-600"><strong class="text-gray-900">5-min no-judgment talks</strong> to lower stress</p>
+                                <p class="text-base text-gray-600"><strong class="text-gray-900">Have one real conversation</strong> — put the phone down, look someone in the eye</p>
                             </div>
                             <div class="playful-card flex items-center gap-4 p-5 bg-white rounded-3xl card-shadow">
-                                <div class="w-12 h-12 rounded-2xl bg-sky-100 flex items-center justify-center flex-shrink-0">
-                                    <span class="text-xl font-display font-bold text-sky-500">D</span>
+                                <div class="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-xl font-display font-bold text-emerald-500">E</span>
                                 </div>
-                                <p class="text-base text-gray-600"><strong class="text-gray-900">Celebrate micro-wins</strong> to drive motivation</p>
+                                <p class="text-base text-gray-600"><strong class="text-gray-900">Move your body</strong> — walk, run, dance, shoot hoops. Even 10 minutes works.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-12 sm:mt-14 flex justify-between items-center">
-                        <button onclick="prevStep()" class="text-gray-400 hover:text-gray-900 font-medium text-sm flex items-center gap-1 transition-all hover:-translate-x-1"><span class="material-icons-outlined text-sm">arrow_back</span> Back</button>
-                        <button onclick="nextStep()" class="group px-7 sm:px-8 py-3.5 sm:py-4 bg-teal-500 hover:bg-teal-600 text-white font-bold rounded-xl transition-all flex items-center gap-2 hover:-translate-y-1 shadow-lg shadow-teal-500/20 hover:shadow-teal-600/30">
-                            Next Lesson <span class="material-icons-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STEP 4: LESSON 4 — Teal -->
-            <div id="step-4" class="step-container">
-                <div class="relative max-w-3xl mx-auto px-5 sm:px-6 py-12 sm:py-16 md:py-24">
-                    <div class="flex items-center gap-3 mb-2">
-                        <span class="w-11 h-11 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center text-sm font-bold">04</span>
-                        <span class="text-teal-500 text-xs font-bold uppercase tracking-widest">Lesson 4</span>
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-gray-900 mb-10 sm:mb-12 leading-tight">The New Language</h2>
-
-                    <!-- Script cards — white with colored icons -->
-                    <div class="space-y-3 mb-10">
-                        <div class="playful-card flex items-center gap-4 p-5 sm:p-6 rounded-3xl bg-white card-shadow">
-                            <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-500 flex items-center justify-center flex-shrink-0">
-                                <span class="material-icons-outlined text-xl">chat_bubble</span>
+                    <!-- Key takeaway -->
+                    <div class="rounded-3xl bg-amber-50 p-6 card-shadow mt-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-500 flex items-center justify-center flex-shrink-0">
+                                <span class="material-icons-outlined text-xl">lightbulb</span>
                             </div>
-                            <p class="text-gray-700 font-medium text-base">"Is your <strong class="text-teal-600">Lizard Brain</strong> talking, or is it <strong class="text-teal-600">YOU</strong>?"</p>
-                        </div>
-                        <div class="playful-card flex items-center gap-4 p-5 sm:p-6 rounded-3xl bg-white card-shadow">
-                            <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-500 flex items-center justify-center flex-shrink-0">
-                                <span class="material-icons-outlined text-xl">chat_bubble</span>
-                            </div>
-                            <p class="text-gray-700 font-medium text-base">"Do you need a minute to <strong class="text-purple-600">flush the Cortisol</strong>?"</p>
-                        </div>
-                        <div class="playful-card flex items-center gap-4 p-5 sm:p-6 rounded-3xl bg-white card-shadow">
-                            <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-500 flex items-center justify-center flex-shrink-0">
-                                <span class="material-icons-outlined text-xl">chat_bubble</span>
-                            </div>
-                            <p class="text-gray-700 font-medium text-base">"Let's take a <strong class="text-sky-600">4-4-4</strong> together before we talk about this."</p>
-                        </div>
-                    </div>
-
-                    <!-- Pledge — vibrant gradient card -->
-                    <div class="rounded-[2rem] overflow-hidden shadow-2xl relative">
-                        <div class="bg-gradient-to-br from-teal-400 via-teal-500 to-emerald-500 p-8 sm:p-10 md:p-14 text-center relative overflow-hidden">
-                            <div class="absolute top-[-30%] left-[-20%] w-[300px] h-[300px] bg-white/10 rounded-full blur-[60px]"></div>
-                            <div class="absolute bottom-[-30%] right-[-20%] w-[300px] h-[300px] bg-white/5 rounded-full blur-[60px]"></div>
-                            <div class="absolute top-0 left-0 right-0 h-1 bg-white/20"></div>
-                            <div class="relative z-10">
-                                <span class="material-icons-outlined text-white/30 text-6xl sm:text-7xl mb-6">fingerprint</span>
-                                <h3 class="text-lg sm:text-xl md:text-2xl font-display font-semibold text-white leading-relaxed mb-6">
-                                    "In this house, we don't let the outside world run our biology. We protect our peace, we practice our breathing, and we support each other's Superpower."
-                                </h3>
-                                <div class="inline-flex items-center gap-3 text-white/70 text-sm font-bold tracking-widest uppercase">
-                                    <span class="w-10 h-[2px] bg-white/40"></span>
-                                    The Family Pledge
-                                    <span class="w-10 h-[2px] bg-white/40"></span>
-                                </div>
+                            <div>
+                                <p class="text-base font-bold text-gray-900 mb-1">The Big Idea</p>
+                                <p class="text-sm text-gray-600 leading-relaxed"><strong class="text-gray-900">You are the pharmacist of your own brain.</strong> You don't need a prescription — you need a plan. Every day you get to choose which chemicals you release. That's your superpower.</p>
                             </div>
                         </div>
                     </div>
@@ -574,15 +599,15 @@
                 </div>
             </div>
 
-            <!-- STEP 5: QUIZ -->
-            <div id="step-5" class="step-container">
+            <!-- STEP 4: QUIZ -->
+            <div id="step-4" class="step-container">
                 <div class="relative max-w-2xl mx-auto px-5 sm:px-6 py-12 sm:py-16 md:py-24">
                     <div id="quiz-inner"></div>
                 </div>
             </div>
 
-            <!-- STEP 6: COMPLETE -->
-            <div id="step-6" class="step-container">
+            <!-- STEP 5: COMPLETE -->
+            <div id="step-5" class="step-container">
                 <div class="relative min-h-[90vh] flex items-center justify-center px-5 sm:px-6 overflow-hidden">
                     <!-- Celebration floating shapes -->
                     <div class="absolute top-8 left-[10%] w-10 h-10 rounded-full bg-amber-400 float rotate-12 opacity-40"></div>
@@ -596,29 +621,45 @@
                         <div class="w-28 sm:w-32 h-28 sm:h-32 bg-emerald-500 text-white rounded-[2rem] flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-emerald-500/20 pulse-soft">
                             <span class="material-icons-outlined text-6xl sm:text-7xl">verified</span>
                         </div>
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-gray-900 mb-3">Course Complete!</h2>
-                        <p class="text-gray-500 mb-10 sm:mb-12 text-base sm:text-lg">You've upgraded your understanding of Neuro-Theology.</p>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-gray-900 mb-3">You Just Leveled Up Your Brain!</h2>
+                        <p class="text-gray-500 mb-10 sm:mb-12 text-base sm:text-lg">You now know more about brain science than most adults. That's real power.</p>
 
                         <!-- Score card — white -->
                         <div class="rounded-[2rem] bg-white p-8 sm:p-10 mb-10 card-shadow">
-                            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-3">Final Score</p>
+                            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-3">Your Score</p>
                             <p class="text-6xl sm:text-7xl font-display font-bold text-gray-900 mb-3" id="final-score-display">0/5</p>
                             <div class="inline-block px-5 py-2 bg-emerald-100 rounded-full">
-                                <p class="text-emerald-600 text-sm font-bold">Excellent work, Champion.</p>
+                                <p class="text-emerald-600 text-sm font-bold" id="score-message">Great job, brain scientist.</p>
+                            </div>
+                        </div>
+
+                        <!-- Share prompt -->
+                        <div class="rounded-3xl bg-gradient-to-br from-teal-400 via-teal-500 to-emerald-500 p-6 sm:p-8 shadow-2xl shadow-teal-500/15 mb-10 relative overflow-hidden text-left">
+                            <div class="absolute top-[-30%] right-[-20%] w-[200px] h-[200px] bg-white/10 rounded-full blur-[40px]"></div>
+                            <div class="relative">
+                                <h3 class="text-lg font-display font-bold text-white mb-2">Share What You Learned</h3>
+                                <p class="text-white/85 text-sm leading-relaxed">Tell a friend one thing you learned today. Teaching someone else is the best way to lock knowledge into your brain — that's neuroscience too.</p>
                             </div>
                         </div>
 
                         <!-- Next steps — white cards -->
                         <div class="text-left mb-10">
                             <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4 flex items-center gap-2">
-                                <span class="w-8 h-[2px] bg-teal-400"></span> Next Steps
+                                <span class="w-8 h-[2px] bg-teal-400"></span> What's Next
                             </h3>
                             <div class="space-y-3">
+                                <div onclick="showComingSoon()" class="playful-card flex items-center gap-4 p-5 bg-white rounded-3xl card-shadow cursor-pointer">
+                                    <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-500 flex items-center justify-center flex-shrink-0">
+                                        <span class="material-icons-outlined text-xl">rocket_launch</span>
+                                    </div>
+                                    <div><p class="text-base font-bold text-gray-900">Try Another Course</p><p class="text-sm text-gray-500">More courses dropping soon</p></div>
+                                    <span class="ml-auto text-xs font-bold text-purple-400 uppercase tracking-wider">Soon</span>
+                                </div>
                                 <a href="https://www.amazon.com/Lessons-School-Hardknocks-Brother-Brooklyn/dp/1662845413" target="_blank" class="playful-card flex items-center gap-4 p-5 bg-white rounded-3xl card-shadow block">
                                     <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-500 flex items-center justify-center flex-shrink-0">
                                         <span class="material-icons-outlined text-xl">menu_book</span>
                                     </div>
-                                    <div><p class="text-base font-bold text-gray-900">Get the Full Book</p><p class="text-sm text-gray-500">Lessons from the School of Hard Knocks</p></div>
+                                    <div><p class="text-base font-bold text-gray-900">Get the Book</p><p class="text-sm text-gray-500">Lessons from the School of Hard Knocks</p></div>
                                 </a>
                                 <a href="https://www.instagram.com/brotherbrooklyn_/" target="_blank" class="playful-card flex items-center gap-4 p-5 bg-white rounded-3xl card-shadow block">
                                     <div class="w-12 h-12 rounded-2xl bg-pink-100 text-pink-500 flex items-center justify-center flex-shrink-0">
@@ -631,7 +672,7 @@
 
                         <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
                             <a href="index.html" class="px-8 py-4 bg-teal-500 hover:bg-teal-600 text-white font-bold rounded-xl transition-all hover:-translate-y-1 shadow-lg shadow-teal-500/20 text-center">Back to Academy</a>
-                            <button onclick="location.reload()" class="px-8 py-4 bg-white text-gray-700 font-medium rounded-xl hover:bg-gray-50 transition-all card-shadow">Retake</button>
+                            <button onclick="location.reload()" class="px-8 py-4 bg-white text-gray-700 font-medium rounded-xl hover:bg-gray-50 transition-all card-shadow">Retake Course</button>
                         </div>
                     </div>
                 </div>
@@ -654,10 +695,11 @@
     </div>
 
     <script>
+        const totalSteps = 5; // 0=picker, 1-3=lessons, 4=quiz, 5=complete
         let currentStep = 0, maxReached = 0;
 
         function updateProgress() {
-            const pct = Math.round((currentStep / 6) * 100);
+            const pct = Math.round((currentStep / totalSteps) * 100);
             document.getElementById('global-progress').style.width = pct + '%';
             document.getElementById('progress-label').textContent = pct + '%';
             document.getElementById('mobile-progress').style.width = pct + '%';
@@ -670,9 +712,9 @@
             });
 
             const mp = document.getElementById('mob-prev'), mn = document.getElementById('mob-next'), mn2 = document.getElementById('mobile-bottom-nav');
-            if (mp) mp.style.visibility = currentStep > 0 && currentStep < 6 ? 'visible' : 'hidden';
-            if (mn) mn.style.visibility = currentStep < 4 ? 'visible' : 'hidden';
-            if (mn2) mn2.style.display = currentStep >= 5 ? 'none' : '';
+            if (mp) mp.style.visibility = currentStep > 0 && currentStep < totalSteps ? 'visible' : 'hidden';
+            if (mn) mn.style.visibility = currentStep < 3 ? 'visible' : 'hidden';
+            if (mn2) mn2.style.display = currentStep >= 4 ? 'none' : '';
         }
 
         function showStep(idx) {
@@ -685,17 +727,35 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function nextStep() { if (currentStep < 6) showStep(currentStep + 1); }
+        function nextStep() { if (currentStep < totalSteps) showStep(currentStep + 1); }
         function prevStep() { if (currentStep > 0) showStep(currentStep - 1); }
         function goToStep(idx) { if (idx <= maxReached + 1) showStep(idx); }
 
+        // Course picker
+        function startCourse(courseNum) {
+            if (courseNum === 1) {
+                showStep(1);
+            } else {
+                showComingSoon();
+            }
+        }
+
+        // Coming Soon toast
+        let toastTimeout;
+        function showComingSoon() {
+            const toast = document.getElementById('coming-soon-toast');
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 2500);
+        }
+
         // Quiz
         const quizData = [
-            { q: "What chemical floods the body in a high-stress 'Survival Home'?", opts: ["Dopamine", "Cortisol", "Serotonin"], ans: 1 },
-            { q: "What acts as the brain's 'Alarm'?", opts: ["Prefrontal Cortex", "Hippocampus", "Amygdala"], ans: 2 },
-            { q: "Children are 'Biological Mirrors'. This means:", opts: ["They ignore you", "They copy what you DO", "They sleep a lot"], ans: 1 },
-            { q: "Celebrate 'Micro-Wins' to boost:", opts: ["Cortisol", "Dopamine", "Melatonin"], ans: 1 },
-            { q: "What is the 'Circuit Breaker'?", opts: ["4-4-4 Breathing", "Yelling louder", "Walking away"], ans: 0 }
+            { q: "When you feel your heart racing before a test, what chemical is flooding your body?", opts: ["Dopamine", "Cortisol", "Serotonin"], ans: 1 },
+            { q: "The part of your brain that acts like a smoke alarm is called the...", opts: ["Amygdala", "Hippocampus", "Cerebellum"], ans: 0 },
+            { q: "Mirror Neurons make you...", opts: ["Forget things", "Copy behaviors you see", "Sleep better"], ans: 1 },
+            { q: "You just helped a classmate with their homework. What chemical did your brain release?", opts: ["Cortisol", "Serotonin", "Adrenaline"], ans: 1 },
+            { q: "The 4-4-4 technique is...", opts: ["A math formula", "A breathing exercise", "A video game cheat code"], ans: 1 }
         ];
         let quizQIndex = 0, score = 0;
 
@@ -705,7 +765,7 @@
         const quizLetterText = ['text-teal-600', 'text-purple-600', 'text-amber-600'];
         const quizLetters = ['A', 'B', 'C'];
 
-        function startQuiz() { quizQIndex = 0; score = 0; showStep(5); renderQuestion(); }
+        function startQuiz() { quizQIndex = 0; score = 0; showStep(4); renderQuestion(); }
 
         function renderQuestion() {
             const q = quizData[quizQIndex];
@@ -758,7 +818,14 @@
             }
             setTimeout(() => {
                 if (quizQIndex < quizData.length - 1) { quizQIndex++; renderQuestion(); }
-                else { document.getElementById('final-score-display').textContent = score + '/' + quizData.length; showStep(6); }
+                else {
+                    document.getElementById('final-score-display').textContent = score + '/' + quizData.length;
+                    const msg = document.getElementById('score-message');
+                    if (score === 5) msg.textContent = "Perfect score! You're a brain scientist now.";
+                    else if (score >= 3) msg.textContent = "Great job! You really leveled up.";
+                    else msg.textContent = "Keep learning — retake and try again!";
+                    showStep(5);
+                }
             }, 1200);
         }
 
