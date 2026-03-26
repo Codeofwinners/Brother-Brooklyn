@@ -8,19 +8,28 @@
     <!-- Ahead App Styling: 1:1 Asymmetric & Narrative UI -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com" rel="icon" type="image/png" href="assets/ahead-brobot.png" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Outfit', 'sans-serif'] },
+                    fontFamily: { 
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                        body: ['Outfit', 'sans-serif'],
+                    },
                     colors: {
                         ahead: {
                             purple: '#6442EF', lavender: '#EEEAFD', text: '#212529', bg: '#FFFFFF',
                             mint: '#E6F4F1', coral: '#FF6B6B', yellow: '#FFD93D', pink: '#F472B6',
                             blue: '#60A5FA', emerald: '#2DD4BF',
+                        },
+                        brand: {
+                            dark: '#0B1120', accent: '#2DD4BF', deep: '#060B16'
                         }
                     },
                     boxShadow: {
@@ -37,6 +46,20 @@
         /* Ahead App Asymmetry */
         .card-ahead { border-radius: 28px; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; position: relative; overflow: hidden; }
         .card-ahead:hover { transform: translateY(-8px) scale(1.02); z-index: 50; }
+
+        /* Glass morphism */
+        .glass {
+            background: rgba(30, 41, 59, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #2DD4BF 0%, #60A5FA 50%, #A78BFA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
         /* Journey Picker Grid - Custom Shifting (DESKTOP ONLY) */
         @media (min-width: 768px) {
@@ -84,16 +107,51 @@
 <body class="antialiased min-h-screen relative overflow-x-hidden">
 
     <!-- Sticky Navigation -->
-    <nav class="sticky top-0 z-[100] bg-white/70 backdrop-blur-xl px-4 md:px-10 py-4 md:py-6 flex justify-between items-center border-b border-gray-50">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 md:w-12 md:h-12 bg-ahead-purple rounded-2xl md:rounded-3xl flex items-center justify-center text-white font-black text-xl md:text-2xl shadow-ahead">B</div>
-            <span class="font-black text-sm md:text-xl tracking-tight uppercase hidden sm:block">Brother Brooklyn</span>
+    <!-- Navigation Balanced for Academy -->
+    <nav class="fixed w-full z-[100] bg-brand-dark/80 backdrop-blur-xl border-b border-white/[0.06]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-accent to-teal-600 flex items-center justify-center text-white font-display font-bold text-xl shadow-lg shadow-brand-accent/20">
+                        B
+                    </div>
+                    <div>
+                        <span class="font-display font-bold text-lg text-white tracking-tight leading-none">Bro<span class="text-brand-accent">bot</span></span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="/" class="text-slate-400 hover:text-brand-accent transition-colors duration-300">Home</a>
+                    <a href="/#learn" class="text-slate-400 hover:text-brand-accent transition-colors duration-300">Learning Paths</a>
+                    <a href="https://www.amazon.com/Lessons-School-Hardknocks-Brother-Brooklyn/dp/1662845413" target="_blank" class="text-slate-400 hover:text-brand-accent transition-colors duration-300">The Book</a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button onclick="location.reload()" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-slate-400 border border-slate-700 rounded-xl hover:border-brand-accent/50 hover:text-white transition-all duration-300 uppercase tracking-widest">
+                        Restart
+                    </button>
+                    <a href="/" class="px-5 py-2.5 bg-brand-accent text-brand-dark rounded-xl font-bold text-sm shadow-lg shadow-brand-accent/20 hover:scale-105 transition-all">Hub</a>
+                    <!-- Mobile hamburger -->
+                    <button onclick="toggleMobileNav()" class="md:hidden p-2 text-slate-400 hover:text-white transition-colors">
+                        <span id="nav-icon" class="material-icons-outlined text-2xl">menu</span>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="flex items-center gap-3 md:gap-6">
-            <button onclick="location.reload()" class="font-extrabold text-xs md:text-sm text-gray-400 hover:text-ahead-purple transition-colors uppercase tracking-widest">Restart</button>
-            <a href="index.html" class="px-5 md:px-8 py-2 md:py-3 bg-ahead-purple text-white rounded-full font-black text-xs md:text-sm shadow-ahead-lg hover:scale-105 transition-all">Hub</a>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-nav" class="hidden md:hidden border-t border-white/[0.06] bg-brand-dark/95 backdrop-blur-xl">
+            <div class="px-6 py-6 space-y-4">
+                <a href="/" class="block text-slate-300 hover:text-brand-accent font-medium transition-colors">Home</a>
+                <a href="/#learn" class="block text-slate-300 hover:text-brand-accent font-medium transition-colors">Learning Paths</a>
+                <a href="https://www.amazon.com/Lessons-School-Hardknocks-Brother-Brooklyn/dp/1662845413" target="_blank" class="block text-slate-300 hover:text-brand-accent font-medium transition-colors">The Book</a>
+                <button onclick="location.reload()" class="block w-full text-left text-slate-400 hover:text-brand-accent font-medium transition-colors uppercase tracking-widest text-xs">Restart Journey</button>
+            </div>
         </div>
     </nav>
+
+    <div class="h-20"></div> <!-- Spacer for fixed nav -->
 
     <main class="max-w-6xl mx-auto px-4 md:px-8 py-8 md:py-20">
 
@@ -379,6 +437,13 @@
                     showStep('success');
                 }, 300);
             }
+        }
+
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobile-nav');
+            const icon = document.getElementById('nav-icon');
+            nav.classList.toggle('hidden');
+            icon.innerText = nav.classList.contains('hidden') ? 'menu' : 'close';
         }
     </script>
 </body>
