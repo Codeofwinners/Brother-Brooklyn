@@ -50,8 +50,9 @@
         .wiggle { animation: wiggle 2s ease-in-out infinite; }
 
         /* Smooth step transitions */
-        .step-container { opacity: 0; transform: translateY(20px); transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.4,0,0.2,1); pointer-events: none; position: absolute; width: 100%; }
-        .step-container.active { opacity: 1; transform: translateY(0); pointer-events: auto; position: relative; }
+        .step-container { display: none; }
+        .step-container.active { display: block; animation: fadeUp 0.5s ease-out both; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Quiz — colorful styles */
         .quiz-opt { transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
@@ -81,7 +82,7 @@
         .playful-card:hover { transform: translateY(-6px) scale(1.02); }
 
         /* Premium card shadow */
-        .card-shadow { box-shadow: 0 2px 15px -3px rgba(0,0,0,0.07), 0 1px 6px -1px rgba(0,0,0,0.04); }
+        .card-shadow { box-shadow: 0 4px 20px -4px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.03); }
 
         /* Confetti burst for completion */
         @keyframes confetti-fall { 0%{ transform: translateY(-100vh) rotate(0deg); opacity:1; } 100%{ transform: translateY(100vh) rotate(720deg); opacity:0; } }
@@ -174,19 +175,18 @@
             <!-- STEP 0: HERO -->
             <div id="step-0" class="step-container active">
                 <!-- Purple gradient hero banner -->
-                <div class="relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-purple-700">
-                    <div class="absolute top-[-30%] right-[-10%] w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px]"></div>
-                    <div class="absolute bottom-[-20%] left-[-10%] w-[400px] h-[400px] bg-purple-400/20 rounded-full blur-[80px]"></div>
+                <div class="relative overflow-hidden" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)">
+                    <div class="absolute top-[-30%] right-[-10%] w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[100px]"></div>
+                    <div class="absolute bottom-[-20%] left-[-10%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[80px]"></div>
 
                     <div class="relative z-10 max-w-2xl mx-auto px-5 sm:px-6 text-center py-16 sm:py-24">
                         <!-- Floating decorative shapes -->
-                        <div class="absolute top-12 left-8 w-16 h-16 rounded-3xl bg-white/10 float rotate-12 hidden md:block"></div>
-                        <div class="absolute top-24 right-12 w-12 h-12 rounded-full bg-teal-400/30 float-slow hidden md:block"></div>
-                        <div class="absolute bottom-32 left-16 w-10 h-10 rounded-2xl bg-amber-400/25 float-slower hidden md:block"></div>
-                        <div class="absolute bottom-48 right-20 w-8 h-8 rounded-full bg-white/15 float hidden md:block"></div>
+                        <div class="absolute top-12 left-8 w-14 h-14 rounded-2xl bg-teal-400/15 float rotate-12 hidden md:block"></div>
+                        <div class="absolute top-24 right-12 w-10 h-10 rounded-full bg-teal-300/20 float-slow hidden md:block"></div>
+                        <div class="absolute bottom-32 left-16 w-8 h-8 rounded-xl bg-amber-400/15 float-slower hidden md:block"></div>
 
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/15 backdrop-blur-sm rounded-full text-white text-xs font-bold tracking-widest uppercase mb-8">
-                            <span class="w-2.5 h-2.5 bg-teal-300 rounded-full animate-pulse"></span>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur-sm rounded-xl text-teal-300 text-xs font-bold tracking-widest uppercase mb-8">
+                            <span class="w-2 h-2 bg-teal-300 rounded-full animate-pulse"></span>
                             Free Course
                         </div>
 
@@ -194,11 +194,11 @@
                             Defense Wins<br><span class="text-teal-300">Championships.</span>
                         </h1>
 
-                        <p class="text-base sm:text-lg md:text-xl text-purple-100 max-w-lg mx-auto mb-10 sm:mb-12 leading-relaxed">
+                        <p class="text-base sm:text-lg md:text-xl text-slate-300 max-w-lg mx-auto mb-10 sm:mb-12 leading-relaxed">
                             A tactical guide for parents to stop violence by understanding brain science. Learn to decode "Survival Mode" in 15 minutes.
                         </p>
 
-                        <button onclick="nextStep()" class="group px-8 sm:px-10 py-4 sm:py-5 bg-white hover:bg-gray-50 text-purple-700 font-bold rounded-full shadow-2xl shadow-black/10 transition-all text-base sm:text-lg inline-flex items-center gap-3 hover:-translate-y-1 hover:scale-105">
+                        <button onclick="nextStep()" class="group px-10 sm:px-12 py-4 sm:py-5 bg-teal-400 hover:bg-teal-300 text-gray-900 font-extrabold rounded-2xl shadow-2xl shadow-teal-400/30 transition-all text-base sm:text-lg inline-flex items-center gap-3 hover:-translate-y-1">
                             Start Learning
                             <span class="material-icons-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
                         </button>
