@@ -111,36 +111,36 @@
 
             <div class="journey-grid grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-12 relative pb-20 md:pb-40">
                 <!-- Overlapping blocks with shifting -->
-                <div onclick="startCourse()" class="card-ahead p-6 md:p-12 bg-ahead-coral text-white shadow-ahead">
+                <div onclick="startCourse('anger')" class="card-ahead p-6 md:p-12 bg-ahead-coral text-white shadow-ahead">
                     <div class="char-sticker sticker-angry absolute -right-2 -top-2 md:-right-6 md:-top-6 border-2 md:border-4 border-white shadow-xl"></div>
                     <div class="text-3xl md:text-6xl font-black mb-4 md:mb-12 opacity-30">>_<</div>
                     <h3 class="text-xl md:text-3xl font-black">Anger</h3>
                     <p class="mt-2 md:mt-4 font-extrabold text-white/50 text-xs md:text-base">Unstoppable fire</p>
                 </div>
-                <div onclick="startCourse()" class="card-ahead p-6 md:p-12 bg-ahead-yellow text-ahead-text shadow-ahead md:h-96">
+                <div onclick="startCourse('confidence')" class="card-ahead p-6 md:p-12 bg-ahead-yellow text-ahead-text shadow-ahead md:h-96">
                     <div class="char-sticker sticker-happy absolute -left-2 -bottom-2 md:-left-6 md:-bottom-6 border-2 md:border-4 border-white shadow-xl"></div>
                     <div class="text-3xl md:text-6xl font-black mb-4 md:mb-12 opacity-10">^u^</div>
                     <h3 class="text-xl md:text-3xl font-black">Confidence</h3>
                     <p class="mt-2 md:mt-4 font-extrabold text-black/20 text-xs md:text-base">The hidden light</p>
                 </div>
-                <div onclick="startCourse()" class="card-ahead p-6 md:p-12 bg-ahead-emerald text-white shadow-ahead">
+                <div onclick="startCourse('anxiety')" class="card-ahead p-6 md:p-12 bg-ahead-emerald text-white shadow-ahead">
                     <div class="char-sticker sticker-anxious absolute -right-2 bottom-4 md:-right-10 md:bottom-10 border-2 md:border-4 border-white shadow-xl"></div>
                     <div class="text-3xl md:text-6xl font-black mb-4 md:mb-12 opacity-30">o_o</div>
                     <h3 class="text-xl md:text-3xl font-black">Anxiety</h3>
                     <p class="mt-2 md:mt-4 font-extrabold text-white/40 text-xs md:text-base">Find your center</p>
                 </div>
-                <div onclick="startCourse()" class="card-ahead p-6 md:p-12 bg-ahead-blue text-white shadow-ahead">
+                <div onclick="startCourse('laziness')" class="card-ahead p-6 md:p-12 bg-ahead-blue text-white shadow-ahead">
                     <div class="text-3xl md:text-6xl font-black mb-4 md:mb-12 opacity-30">- _-</div>
                     <h3 class="text-xl md:text-3xl font-black">Laziness</h3>
                     <p class="mt-2 md:mt-4 font-extrabold text-white/40 text-xs md:text-base">Focus shift</p>
                 </div>
-                <div onclick="startCourse()" class="card-ahead p-6 md:p-12 bg-ahead-purple text-white shadow-ahead md:h-80">
+                <div onclick="startCourse('flow')" class="card-ahead p-6 md:p-12 bg-ahead-purple text-white shadow-ahead md:h-80">
                     <div class="char-sticker sticker-ghost absolute right-1/2 -bottom-4 md:-bottom-10 translate-x-1/2 border-2 md:border-4 border-white shadow-2xl"></div>
                     <div class="text-3xl md:text-6xl font-black mb-4 md:mb-12 opacity-30">;)</div>
                     <h3 class="text-xl md:text-3xl font-black text-center">Flow</h3>
                     <p class="mt-2 md:mt-4 font-extrabold text-white/30 text-center text-xs md:text-base">Peak Performance</p>
                 </div>
-                <div onclick="startCourse()" class="card-ahead p-6 md:p-12 bg-ahead-pink text-white shadow-ahead">
+                <div onclick="startCourse('heal')" class="card-ahead p-6 md:p-12 bg-ahead-pink text-white shadow-ahead">
                     <div class="char-sticker sticker-heart absolute -left-2 top-1/2 -translate-y-1/2 border-2 md:border-4 border-white shadow-xl"></div>
                     <div class="text-3xl md:text-6xl font-black mb-4 md:mb-12 opacity-30">u_u</div>
                     <h3 class="text-xl md:text-3xl font-black">Heal</h3>
@@ -158,22 +158,22 @@
         <div id="step-1" class="step w-full max-w-5xl mx-auto py-8 md:py-20">
             <div class="flex flex-col lg:flex-row items-center gap-10 md:gap-24">
                 <div class="flex-1 space-y-6 md:space-y-10 order-2 lg:order-1">
-                    <div class="tag-bb text-[9px] md:text-[11px]">The Biology of You</div>
-                    <h2 class="text-3xl sm:text-4xl md:text-7xl font-black leading-[0.9] text-ahead-text">Your brain <br> has a <br> <span class="text-ahead-purple">smoke alarm.</span></h2>
-                    <p class="text-gray-400 font-extrabold text-base md:text-2xl leading-relaxed">It's called the <strong>Amygdala</strong>. It pulls the alarm whenever it feels 'threatened' by stress or fear. Your brain shuts out logical thinking.</p>
+                    <div class="tag-bb text-[9px] md:text-[11px]" id="step1-tag">The Biology of You</div>
+                    <h2 class="text-3xl sm:text-4xl md:text-7xl font-black leading-[0.9] text-ahead-text" id="step1-title">Your brain <br> has a <br> <span class="text-ahead-purple">smoke alarm.</span></h2>
+                    <p class="text-gray-400 font-extrabold text-base md:text-2xl leading-relaxed" id="step1-desc">It's called the <strong>Amygdala</strong>. It pulls the alarm whenever it feels 'threatened' by stress or fear. Your brain shuts out logical thinking.</p>
                     <button onclick="showStep(2)" class="btn-ahead px-8 md:px-14 py-4 md:py-6 text-lg md:text-2xl shadow-ahead-lg w-full md:w-auto">Teach me more ➜</button>
                 </div>
                 <div class="flex-1 relative order-1 lg:order-2">
-                    <div class="stack-base bg-ahead-mint p-6 md:p-14 rounded-[2rem] md:rounded-[4rem] shadow-ahead border-2 md:border-4 border-white relative z-20">
-                        <div class="char-sticker sticker-angry absolute -right-2 -top-4 md:-right-4 md:-top-8 border-2 md:border-4 border-white shadow-xl md:scale-110"></div>
+                    <div id="step1-card" class="stack-base bg-ahead-mint p-6 md:p-14 rounded-[2rem] md:rounded-[4rem] shadow-ahead border-2 md:border-4 border-white relative z-20">
+                        <div id="step1-sticker" class="char-sticker sticker-angry absolute -right-2 -top-4 md:-right-4 md:-top-8 border-2 md:border-4 border-white shadow-xl md:scale-110"></div>
                         <div class="flex items-center gap-3 md:gap-6 mb-4 md:mb-10">
-                            <span class="text-3xl md:text-6xl">🚨</span>
-                            <span class="font-black text-sm md:text-2xl text-emerald-900 uppercase tracking-wider md:tracking-widest">Survival mode</span>
+                            <span class="text-3xl md:text-6xl" id="step1-icon">🚨</span>
+                            <span class="font-black text-sm md:text-2xl text-emerald-900 uppercase tracking-wider md:tracking-widest" id="step1-subtitle">Survival mode</span>
                         </div>
-                        <p class="text-emerald-900/60 font-black text-sm md:text-xl leading-relaxed">When the alarm goes off, you're in FIGHT, FLIGHT, or FREEZE. It's primitive, and it's built-in.</p>
+                        <p class="text-emerald-900/60 font-black text-sm md:text-xl leading-relaxed" id="step1-card-desc">When the alarm goes off, you're in FIGHT, FLIGHT, or FREEZE. It's primitive, and it's built-in.</p>
                     </div>
-                    <div class="absolute -right-4 -bottom-4 md:-right-8 md:-bottom-8 w-full h-full bg-ahead-lavender rounded-[2rem] md:rounded-[4rem] -z-10 rotate-[2deg] shadow-lg"></div>
-                    <div class="hidden md:block absolute -left-8 -top-8 w-full h-full bg-ahead-yellow/30 rounded-[4rem] -z-20 -rotate-[3deg]"></div>
+                    <div id="step1-layer1" class="absolute -right-4 -bottom-4 md:-right-8 md:-bottom-8 w-full h-full bg-ahead-lavender rounded-[2rem] md:rounded-[4rem] -z-10 rotate-[2deg] shadow-lg"></div>
+                    <div id="step1-layer2" class="hidden md:block absolute -left-8 -top-8 w-full h-full bg-ahead-yellow/30 rounded-[4rem] -z-20 -rotate-[3deg]"></div>
                 </div>
             </div>
         </div>
@@ -252,6 +252,51 @@
     </main>
 
     <script>
+        const vibeData = {
+            anger: {
+                title: "Your brain <br> has a <br> <span class='text-ahead-purple'>smoke alarm.</span>",
+                desc: "It's called the <strong>Amygdala</strong>. When Anger hits, it pulls the alarm and shuts out logical thinking.",
+                cardBg: "bg-ahead-mint", cardText: "text-emerald-900", icon: "🚨", subtitle: "Survival mode",
+                cardDesc: "When the alarm goes off, you're in FIGHT, FLIGHT, or FREEZE. It's built-in.",
+                sticker: "sticker-angry", bg1: "bg-ahead-lavender", bg2: "bg-ahead-yellow/30"
+            },
+            confidence: {
+                title: "Your brain <br> has a <br> <span class='text-ahead-yellow'>hidden light.</span>",
+                desc: "It's called the <strong>Prefrontal Cortex</strong>. Confidence isn't luck; it's a high-functioning neural network you can strengthen.",
+                cardBg: "bg-ahead-yellow", cardText: "text-amber-900", icon: "✨", subtitle: "Logic Power",
+                cardDesc: "When you feel confident, your logical brain is leading the way. No alarms, just focus.",
+                sticker: "sticker-happy", bg1: "bg-ahead-pink/20", bg2: "bg-ahead-blue/20"
+            },
+            anxiety: {
+                title: "Your brain <br> is a <br> <span class='text-ahead-coral'>time traveler.</span>",
+                desc: "Anxiety happens when your mind leaves the present. Your <strong>Amygdala</strong> starts worrying about 'what if' instead of 'what is'.",
+                cardBg: "bg-ahead-lavender", cardText: "text-ahead-purple", icon: "🌀", subtitle: "Grounding",
+                cardDesc: "The fix? Bring your brain back to the body. Calm the storm by activating the Logic Center.",
+                sticker: "sticker-anxious", bg1: "bg-ahead-mint/50", bg2: "bg-ahead-coral/20"
+            },
+            laziness: {
+                title: "Your brain <br> is in <br> <span class='text-ahead-blue'>save mode.</span>",
+                desc: "Sometimes 'laziness' is just your brain protecting its energy. We need to flip the switch from dopamine-scarcity to healthy flow.",
+                cardBg: "bg-ahead-blue", cardText: "text-white", icon: "🔋", subtitle: "Energy Shift",
+                cardDesc: "You aren't lazy; you're just under-stimulated. Let's reprogram the reward circuit.",
+                sticker: "sticker-ghost", bg1: "bg-ahead-lavender", bg2: "bg-ahead-pink/20"
+            },
+            flow: {
+                title: "Your brain <br> is at <br> <span class='text-ahead-emerald'>peak power.</span>",
+                desc: "Flow is the 'Superpower' state where your <strong>Logic Center</strong> and <strong>Creativity</strong> work in perfect harmony.",
+                cardBg: "bg-ahead-emerald", cardText: "text-white", icon: "🚀", subtitle: "Peak Vibe",
+                cardDesc: "Your brain is frictionless. Minutes feel like seconds. You're in the deep zone.",
+                sticker: "sticker-happy", bg1: "bg-ahead-yellow/40", bg2: "bg-ahead-purple/20"
+            },
+            heal: {
+                title: "Your brain <br> needs <br> <span class='text-ahead-pink'>soft energy.</span>",
+                desc: "Healing starts when the <strong>Parasympathetic System</strong> takes over. It's the 'Rest & Digest' mode of Neuro-Mastery.",
+                cardBg: "bg-ahead-pink", cardText: "text-white", icon: "🌿", subtitle: "Restoration",
+                cardDesc: "Lower the cortisol, raise the GABA. Your brain is physically rebuilding itself.",
+                sticker: "sticker-heart", bg1: "bg-ahead-lavender", bg2: "bg-ahead-mint/30"
+            }
+        };
+
         const quizData = [
             { q: "Heart racing? Which chemical causes the stress response?", opts: ["Dopamine (Rewards)", "Cortisol (Stress)", "Serotonin (Happy)"], ans: 1, sticker: "sticker-angry" },
             { q: "When you pause and breathe, you activate the...", opts: ["Amygdala (Fear)", "Prefrontal Cortex (Logic)", "Occipital Lobe (Vision)"], ans: 1, sticker: "sticker-anxious" },
@@ -275,7 +320,24 @@
             cStep = idx;
         }
 
-        function startCourse() { showStep(1); }
+        function startCourse(vibe) { 
+            const d = vibeData[vibe] || vibeData.anger;
+            
+            // Update Step 1 Content
+            document.getElementById('step1-title').innerHTML = d.title;
+            document.getElementById('step1-desc').innerHTML = d.desc;
+            document.getElementById('step1-card').className = `stack-base ${d.cardBg} p-6 md:p-14 rounded-[2rem] md:rounded-[4rem] shadow-ahead border-2 md:border-4 border-white relative z-20`;
+            document.getElementById('step1-sticker').className = `char-sticker ${d.sticker} absolute -right-2 -top-4 md:-right-4 md:-top-8 border-2 md:border-4 border-white shadow-xl md:scale-110`;
+            document.getElementById('step1-icon').innerText = d.icon;
+            document.getElementById('step1-subtitle').innerText = d.subtitle;
+            document.getElementById('step1-subtitle').className = `font-black text-sm md:text-2xl ${d.cardText} uppercase tracking-wider md:tracking-widest`;
+            document.getElementById('step1-card-desc').innerText = d.cardDesc;
+            document.getElementById('step1-card-desc').className = `${d.cardText}/60 font-black text-sm md:text-xl leading-relaxed`;
+            document.getElementById('step1-layer1').className = `absolute -right-4 -bottom-4 md:-right-8 md:-bottom-8 w-full h-full ${d.bg1} rounded-[2rem] md:rounded-[4rem] -z-10 rotate-[2deg] shadow-lg`;
+            document.getElementById('step1-layer2').className = `hidden md:block absolute -left-8 -top-8 w-full h-full ${d.bg2} rounded-[4rem] -z-20 -rotate-[3deg]`;
+
+            showStep(1); 
+        }
 
         function startQuiz() { 
             qIdx = 0; 
