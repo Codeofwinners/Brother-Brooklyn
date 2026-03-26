@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Brother Brooklyn - Understand Your Emotions</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0B1120',
+                            primary: '#0F172A',
+                            accent: '#2DD4BF',
+                            warm: '#F59E0B',
+                            surface: '#1E293B',
+                            glow: '#14B8A6',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                        serif: ['Instrument Serif', 'Georgia', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Floating keyframes with varied timing */
+        @keyframes floatA {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(3px, -6px); }
+            50% { transform: translate(-2px, -10px); }
+            75% { transform: translate(4px, -4px); }
+        }
+        @keyframes floatB {
+            0%, 100% { transform: translate(0, 0); }
+            30% { transform: translate(-4px, -8px); }
+            60% { transform: translate(2px, -12px); }
+            80% { transform: translate(-3px, -5px); }
+        }
+        @keyframes floatC {
+            0%, 100% { transform: translate(0, 0); }
+            20% { transform: translate(5px, -4px); }
+            50% { transform: translate(-3px, -9px); }
+            70% { transform: translate(2px, -6px); }
+        }
+
+        .bubble-float-a { animation: floatA 7s ease-in-out infinite; }
+        .bubble-float-b { animation: floatB 8s ease-in-out infinite; }
+        .bubble-float-c { animation: floatC 6s ease-in-out infinite; }
+
+        /* Bubble base */
+        .emotion-bubble {
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: absolute;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .emotion-bubble:hover {
+            transform: scale(1.05) !important;
+            box-shadow: 0 8px 32px rgba(45, 212, 191, 0.18);
+        }
+
+        /* Phone mockup */
+        .phone-frame {
+            width: 320px;
+            height: 580px;
+            border-radius: 36px;
+            background: #fff;
+            box-shadow:
+                0 2px 8px rgba(0,0,0,0.04),
+                0 8px 24px rgba(0,0,0,0.06),
+                0 32px 64px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: visible;
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        /* Check button */
+        .check-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .check-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Scroll reveal */
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .stagger > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .stagger.visible > *:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(2) { transition-delay: 0.25s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(3) { transition-delay: 0.4s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(4) { transition-delay: 0.55s; opacity: 1; transform: none; }
+
+        /* Subtle grain */
+        .grain::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<body class="bg-[#FAFBFC] font-body antialiased min-h-screen">
+
+    <!-- ========== EMOTION MAP SECTION ========== -->
+    <section class="relative grain overflow-hidden">
+        <!-- Soft ambient blurs -->
+        <div class="absolute top-20 -left-32 w-96 h-96 bg-brand-accent/[0.04] rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 right-0 w-80 h-80 bg-amber-300/[0.03] rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-24 sm:py-32 lg:py-40">
+            <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+
+                <!-- LEFT: Phone Mockup with Emotion Bubbles -->
+                <div class="reveal-section relative flex-shrink-0" style="width: 420px; height: 620px;">
+
+                    <!-- Phone Frame -->
+                    <div class="phone-frame absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <!-- Status bar area -->
+                        <div class="flex items-center justify-between px-6 pt-5 pb-3">
+                            <div class="flex items-center gap-3">
+                                <span class="material-icons-outlined text-slate-400" style="font-size:20px;">tune</span>
+                                <span class="material-icons-outlined text-slate-400" style="font-size:20px;">home</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 bg-brand-accent/10 text-brand-glow px-3 py-1 rounded-full">
+                                <span class="w-5 h-5 rounded-full bg-brand-accent flex items-center justify-center">
+                                    <span class="text-white text-[10px] font-bold">2</span>
+                                </span>
+                                <span class="text-xs font-semibold tracking-wide">Done</span>
+                            </div>
+                        </div>
+
+                        <!-- Bubble field inside phone -->
+                        <div class="relative w-full" style="height: 500px;">
+
+                            <!-- Bubble: Shutting down -->
+                            <div class="emotion-bubble bubble-float-a"
+                                 style="width: 160px; height: 160px; background: rgba(45, 212, 191, 0.12); top: 10px; left: 8px;">
+                                <span class="font-display font-bold text-[13px] text-slate-800 leading-tight">Shutting<br>down</span>
+                                <span class="text-[10px] text-slate-500 mt-1 px-3 leading-tight">going quiet, pulling away</span>
+                                <div class="flex items-center gap-2 mt-2.5">
+                                    <div class="check-btn bg-brand-accent shadow-md shadow-brand-accent/30">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </div>
+                                    <div class="check-btn bg-white border border-slate-200">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bubble: Masking feelings -->
+                            <div class="emotion-bubble bubble-float-c"
+                                 style="width: 120px; height: 120px; background: rgba(45, 212, 191, 0.10); top: 8px; left: 170px;">
+                                <span class="font-display font-bold text-[11px] text-slate-800 leading-tight">Masking<br>feelings</span>
+                            </div>
+
+                            <!-- Bubble: Questioning myself -->
+                            <div class="emotion-bubble bubble-float-b"
+                                 style="width: 115px; height: 115px; background: rgba(45, 212, 191, 0.14); top: 105px; left: 195px;">
+                                <span class="font-display font-bold text-[11px] text-slate-800 leading-tight">Questioning<br>myself</span>
+                            </div>
+
+                            <!-- Bubble: Taking more space -->
+                            <div class="emotion-bubble bubble-float-a"
+                                 style="width: 130px; height: 130px; background: rgba(45, 212, 191, 0.11); top: 175px; left: 110px; animation-delay: -2s;">
+                                <span class="font-display font-bold text-[11px] text-slate-800 leading-tight">Taking more<br>space</span>
+                            </div>
+
+                            <!-- Bubble: Bottling it up -->
+                            <div class="emotion-bubble bubble-float-b"
+                                 style="width: 140px; height: 140px; background: rgba(45, 212, 191, 0.09); top: 240px; left: -5px; animation-delay: -3s;">
+                                <span class="font-display font-bold text-[12px] text-slate-800 leading-tight">Bottling<br>it up</span>
+                            </div>
+
+                            <!-- Bubble: People-pleasing (spills out of phone) -->
+                            <div class="emotion-bubble bubble-float-c"
+                                 style="width: 105px; height: 105px; background: rgba(45, 212, 191, 0.08); top: 200px; left: -30px; animation-delay: -1s;">
+                                <span class="font-display font-bold text-[10px] text-slate-500 leading-tight">People-<br>pleasing</span>
+                            </div>
+
+                            <!-- Bubble: Distorting the truth -->
+                            <div class="emotion-bubble bubble-float-a"
+                                 style="width: 145px; height: 145px; background: rgba(45, 212, 191, 0.13); top: 310px; left: 115px; animation-delay: -4s;">
+                                <span class="font-display font-bold text-[12px] text-slate-800 leading-tight">Distorting the<br>truth</span>
+                                <span class="text-[10px] text-slate-500 mt-1 px-4 leading-tight">bending facts to protect ego</span>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <div class="check-btn bg-brand-accent shadow-md shadow-brand-accent/30">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </div>
+                                    <div class="check-btn bg-white border border-slate-200">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bubble: Lashing out -->
+                            <div class="emotion-bubble bubble-float-b"
+                                 style="width: 118px; height: 118px; background: rgba(45, 212, 191, 0.10); top: 385px; left: 10px; animation-delay: -2.5s;">
+                                <span class="font-display font-bold text-[11px] text-slate-800 leading-tight">Lashing<br>out</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Text Content -->
+                <div class="stagger reveal-section flex-1 max-w-xl text-center lg:text-left">
+                    <div>
+                        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-accent/[0.08] text-brand-glow text-xs font-semibold tracking-widest uppercase mb-6">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
+                            Emotional Awareness
+                        </span>
+                    </div>
+                    <h2 class="font-serif text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.12] text-slate-900 tracking-tight">
+                        Understand the <em class="italic text-brand-glow">WHY</em> behind your emotions better.
+                    </h2>
+                    <p class="mt-6 text-lg sm:text-xl text-slate-500 leading-relaxed font-light max-w-md mx-auto lg:mx-0">
+                        Understand your behavioural patterns and learn to spot your emotions before they take control.
+                    </p>
+                    <div class="mt-10 flex flex-col sm:flex-row items-center lg:items-start gap-4">
+                        <a href="#" class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-brand-dark text-white font-display font-semibold text-sm rounded-2xl shadow-lg shadow-brand-dark/20 hover:shadow-xl hover:shadow-brand-dark/30 hover:-translate-y-0.5 transition-all duration-300">
+                            <span class="material-icons-outlined text-brand-accent" style="font-size:20px;">explore</span>
+                            Start Your Journey
+                        </a>
+                        <a href="#" class="inline-flex items-center gap-2 px-6 py-3.5 text-slate-600 font-medium text-sm rounded-2xl border border-slate-200 hover:border-brand-accent/40 hover:text-brand-glow transition-all duration-300">
+                            Learn More
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll reveal observer -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal-section').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

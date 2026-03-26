@@ -1,0 +1,2071 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnerMan Neuro-STEM PreK-12 Curriculum | InnerMan Education</title>
+    <meta name="description" content="A complete PreK-12 neuroeducation and social-emotional learning curriculum integrating brain science, culturally responsive teaching, and STEM-Botics.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0B1120',
+                            primary: '#0F172A',
+                            accent: '#2DD4BF',
+                            warm: '#F59E0B',
+                            surface: '#1E293B',
+                            glow: '#14B8A6',
+                        },
+                        band: {
+                            prek: '#FF6B6B',
+                            k2: '#FFD93D',
+                            '35': '#2DD4BF',
+                            '68': '#60A5FA',
+                            '912': '#6442EF',
+                        },
+                        quarter: {
+                            q1: '#2DD4BF',
+                            q2: '#F59E0B',
+                            q3: '#60A5FA',
+                            q4: '#8B5CF6',
+                        },
+                    },
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                        serif: ['Instrument Serif', 'serif'],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #FAFBFC;
+        }
+
+        /* Floating bubble animations */
+        @keyframes floatA { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(3px, -6px); } 50% { transform: translate(-2px, -10px); } 75% { transform: translate(4px, -4px); } }
+        @keyframes floatB { 0%, 100% { transform: translate(0, 0); } 30% { transform: translate(-4px, -8px); } 60% { transform: translate(2px, -12px); } 80% { transform: translate(-3px, -5px); } }
+        @keyframes floatC { 0%, 100% { transform: translate(0, 0); } 20% { transform: translate(5px, -4px); } 50% { transform: translate(-3px, -9px); } 70% { transform: translate(2px, -6px); } }
+        .bubble-float-a { animation: floatA 7s ease-in-out infinite; }
+        .bubble-float-b { animation: floatB 8s ease-in-out infinite; }
+        .bubble-float-c { animation: floatC 6s ease-in-out infinite; }
+
+        /* Emotion bubble */
+        .emotion-bubble { border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: absolute; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .emotion-bubble:hover { transform: scale(1.05) !important; box-shadow: 0 8px 32px rgba(45, 212, 191, 0.18); }
+
+        /* Phone mockup */
+        .phone-frame { width: 320px; height: 580px; border-radius: 36px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06), 0 32px 64px rgba(0,0,0,0.08); position: relative; overflow: visible; border: 1px solid rgba(0,0,0,0.06); }
+
+        /* Check button */
+        .check-btn { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; }
+        .check-btn:hover { transform: scale(1.1); }
+
+        /* Scroll reveal */
+        .reveal-section { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-section.visible { opacity: 1; transform: translateY(0); }
+
+        /* Stagger children */
+        .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .stagger.visible > *:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(2) { transition-delay: 0.25s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(3) { transition-delay: 0.4s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(4) { transition-delay: 0.55s; opacity: 1; transform: none; }
+        .stagger.visible > *:nth-child(5) { transition-delay: 0.7s; opacity: 1; transform: none; }
+
+        /* Subtle grain */
+        .grain::after { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+
+        /* Noise overlay for dark sections */
+        .noise::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+
+        /* Tab active states */
+        .band-tab { transition: all 0.3s ease; }
+        .band-tab.active { transform: translateY(-2px); }
+
+        /* Accordion */
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .accordion-content.open { max-height: 800px; }
+
+        /* Timeline */
+        .timeline-line { position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #2DD4BF, #8B5CF6); }
+
+        /* Grade band card hover lift */
+        .band-card { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease; }
+        .band-card:hover { transform: translateY(-4px) !important; box-shadow: 0 12px 40px rgba(0,0,0,0.10); }
+    </style>
+</head>
+
+<body class="font-body antialiased text-slate-700 bg-[#FAFBFC]">
+
+    <!-- ==================== FIXED NAVIGATION ==================== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200/60" style="height: 72px;">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-full flex items-center justify-between">
+
+            <!-- Left: Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-brand-accent to-teal-600 flex items-center justify-center shadow-sm">
+                    <span class="text-white font-display font-bold text-lg leading-none">B</span>
+                </div>
+                <span class="font-display font-bold text-slate-800 text-base tracking-tight">InnerMan Education</span>
+            </a>
+
+            <!-- Center: Desktop Nav Links -->
+            <div class="hidden lg:flex items-center gap-1">
+                <a href="#pillars" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-3 py-2 rounded-lg hover:bg-brand-accent/[0.04] transition-colors">Pillars</a>
+                <a href="#grades" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-3 py-2 rounded-lg hover:bg-brand-accent/[0.04] transition-colors">Grades</a>
+                <a href="#curriculum" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-3 py-2 rounded-lg hover:bg-brand-accent/[0.04] transition-colors">Curriculum</a>
+                <a href="#toolkit" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-3 py-2 rounded-lg hover:bg-brand-accent/[0.04] transition-colors">Toolkit</a>
+                <a href="#technology" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-3 py-2 rounded-lg hover:bg-brand-accent/[0.04] transition-colors">Technology</a>
+                <a href="#standards" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-3 py-2 rounded-lg hover:bg-brand-accent/[0.04] transition-colors">Standards</a>
+                <a href="#timeline" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-3 py-2 rounded-lg hover:bg-brand-accent/[0.04] transition-colors">Timeline</a>
+            </div>
+
+            <!-- Right: CTA + Mobile Hamburger -->
+            <div class="flex items-center gap-3">
+                <a href="#contact" class="hidden sm:inline-flex px-5 py-2.5 bg-brand-accent text-white font-display font-semibold text-sm rounded-xl shadow-md shadow-brand-accent/20 hover:shadow-lg hover:shadow-brand-accent/30 hover:-translate-y-0.5 transition-all duration-200">
+                    Request Partnership
+                </a>
+                <button onclick="toggleMobileNav()" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl hover:bg-slate-100 transition-colors" aria-label="Toggle navigation menu">
+                    <span id="nav-icon" class="material-icons-outlined text-slate-600 text-2xl">menu</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Dropdown -->
+        <div id="mobile-nav" class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-b border-slate-200/60 shadow-lg">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-1">
+                <a href="#pillars" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-4 py-3 rounded-xl hover:bg-brand-accent/[0.04] transition-colors">Pillars</a>
+                <a href="#grades" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-4 py-3 rounded-xl hover:bg-brand-accent/[0.04] transition-colors">Grade Bands</a>
+                <a href="#curriculum" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-4 py-3 rounded-xl hover:bg-brand-accent/[0.04] transition-colors">Curriculum Map</a>
+                <a href="#toolkit" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-4 py-3 rounded-xl hover:bg-brand-accent/[0.04] transition-colors">Teacher Toolkit</a>
+                <a href="#technology" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-4 py-3 rounded-xl hover:bg-brand-accent/[0.04] transition-colors">Technology</a>
+                <a href="#standards" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-4 py-3 rounded-xl hover:bg-brand-accent/[0.04] transition-colors">Standards</a>
+                <a href="#timeline" class="nav-link text-sm font-medium text-slate-500 hover:text-brand-glow px-4 py-3 rounded-xl hover:bg-brand-accent/[0.04] transition-colors">Timeline</a>
+                <div class="pt-2 border-t border-slate-100 mt-2">
+                    <a href="#contact" class="inline-flex w-full justify-center px-5 py-3 bg-brand-accent text-white font-display font-semibold text-sm rounded-xl shadow-md">
+                        Request Partnership
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="hero" class="relative grain pt-24 lg:pt-32 pb-20 lg:pb-28 overflow-hidden">
+
+        <!-- Ambient blurs -->
+        <div class="absolute -top-20 -left-32 w-96 h-96 rounded-full bg-brand-accent/[0.07] blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-32 w-96 h-96 rounded-full bg-brand-warm/[0.06] blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+
+                <!-- Left Column: Content -->
+                <div class="reveal-section flex-1 max-w-2xl">
+
+                    <!-- Pill Badge -->
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-accent/[0.08] mb-8">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-glow animate-pulse"></span>
+                        <span class="text-brand-glow text-xs font-semibold tracking-widest uppercase">Neuro-STEM PreK-12 Curriculum</span>
+                    </div>
+
+                    <!-- Headline -->
+                    <h1 class="font-serif text-5xl lg:text-6xl text-slate-900 tracking-tight leading-[1.1]">
+                        The InnerMan<br>Curriculum System
+                    </h1>
+
+                    <!-- Subline -->
+                    <p class="font-serif italic text-2xl text-brand-glow mt-2 leading-snug">
+                        468 Lessons. 13 Grade Levels. One Transformative Framework.
+                    </p>
+
+                    <!-- Paragraph -->
+                    <p class="mt-6 text-lg text-slate-500 leading-relaxed max-w-xl">
+                        A complete PreK-12 neuroeducation and social-emotional learning curriculum integrating brain science, culturally responsive teaching, and STEM-Botics — built for Michigan schools and scalable nationwide.
+                    </p>
+
+                    <!-- Stats Row -->
+                    <div class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 stagger">
+                        <div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm text-center">
+                            <div class="font-display font-bold text-3xl text-brand-accent">36</div>
+                            <div class="text-xs text-slate-400 uppercase tracking-wide mt-1">Lessons Per Grade</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm text-center">
+                            <div class="font-display font-bold text-3xl text-brand-accent">13</div>
+                            <div class="text-xs text-slate-400 uppercase tracking-wide mt-1">Grade Levels</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm text-center">
+                            <div class="font-display font-bold text-3xl text-brand-accent">4</div>
+                            <div class="text-xs text-slate-400 uppercase tracking-wide mt-1">Pillars</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm text-center">
+                            <div class="font-display font-bold text-3xl text-brand-accent">5</div>
+                            <div class="text-xs text-slate-400 uppercase tracking-wide mt-1">Grade Bands</div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Row -->
+                    <div class="mt-10 flex flex-wrap gap-4">
+                        <a href="#contact" class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-brand-dark text-white font-display font-semibold text-sm rounded-2xl shadow-lg shadow-brand-dark/20 hover:-translate-y-0.5 hover:shadow-xl transition-all duration-200">
+                            <span class="material-icons-outlined text-lg">download</span>
+                            Download Overview
+                        </a>
+                        <a href="#contact" class="inline-flex items-center gap-2.5 px-6 py-3.5 border border-slate-200 text-slate-600 font-medium text-sm rounded-2xl hover:border-brand-accent/40 hover:text-brand-glow transition-all duration-200">
+                            Schedule Walkthrough
+                            <span class="material-icons-outlined text-lg">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Grade Band Preview Cards -->
+                <div class="reveal-section flex-shrink-0 hidden md:block">
+                    <div class="relative" style="width: 280px; height: 520px;">
+
+                        <!-- Card 1: PreK -->
+                        <div class="band-card absolute top-0 left-0 w-64 rounded-2xl p-5 bg-white shadow-md border-l-4 border-band-prek transform rotate-1" style="z-index: 5;">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wide" style="background: #FF6B6B15; color: #FF6B6B;">PreK</span>
+                                <span class="text-2xl">🧒</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Wimee's Brain City</h4>
+                            <p class="text-xs text-slate-400 mt-1">PBS-partnered emotional foundations</p>
+                        </div>
+
+                        <!-- Card 2: K-2 -->
+                        <div class="band-card absolute top-24 left-3 w-64 rounded-2xl p-5 bg-white shadow-md border-l-4 border-band-k2 transform -rotate-1" style="z-index: 4;">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wide" style="background: #FFD93D15; color: #D4A017;">K-2</span>
+                                <span class="text-2xl">🌟</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Emotion Explorers</h4>
+                            <p class="text-xs text-slate-400 mt-1">Brain-body mapping and self-regulation</p>
+                        </div>
+
+                        <!-- Card 3: 3-5 -->
+                        <div class="band-card absolute top-48 left-1 w-64 rounded-2xl p-5 bg-white shadow-md border-l-4 border-band-35 transform rotate-2" style="z-index: 3;">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wide" style="background: #2DD4BF15; color: #14B8A6;">3-5</span>
+                                <span class="text-2xl">🧠</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Neuro-Navigators</h4>
+                            <p class="text-xs text-slate-400 mt-1">Systems thinking and neural pathways</p>
+                        </div>
+
+                        <!-- Card 4: 6-8 -->
+                        <div class="band-card absolute top-72 left-4 w-64 rounded-2xl p-5 bg-white shadow-md border-l-4 border-band-68 transform -rotate-1" style="z-index: 2;">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wide" style="background: #60A5FA15; color: #3B82F6;">6-8</span>
+                                <span class="text-2xl">🔬</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Identity Architects</h4>
+                            <p class="text-xs text-slate-400 mt-1">Neuroscience and cultural identity</p>
+                        </div>
+
+                        <!-- Card 5: 9-12 -->
+                        <div class="band-card absolute top-96 left-2 w-64 rounded-2xl p-5 bg-white shadow-md border-l-4 border-band-912 transform rotate-1" style="z-index: 1;">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wide" style="background: #6442EF15; color: #6442EF;">9-12</span>
+                                <span class="text-2xl">🚀</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-800 text-sm">Legacy Builders</h4>
+                            <p class="text-xs text-slate-400 mt-1">Leadership, STEM-Botics, and purpose</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+<!-- ==================== SECTION 1: THE 4 PILLARS ==================== -->
+<section id="pillars" class="bg-slate-50/80 py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+        <!-- Section Header -->
+        <div class="reveal-section text-center max-w-2xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-accent/[0.08] mb-6">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-glow animate-pulse"></span>
+                <span class="text-brand-glow text-xs font-semibold tracking-widest uppercase">The Framework</span>
+            </div>
+            <h2 class="font-serif text-4xl lg:text-5xl text-slate-900 tracking-tight leading-[1.12]">
+                Built on Four Non-Negotiable Pillars
+            </h2>
+            <p class="mt-4 text-lg text-slate-500 leading-relaxed">
+                Every lesson, every grade level, every week — grounded in the same evidence-based structure.
+            </p>
+        </div>
+
+        <!-- 4 Pillar Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-14">
+
+            <!-- Pillar 1: Neuroeducation -->
+            <div class="reveal-section bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="w-12 h-1 rounded-full mb-6" style="background: #2DD4BF;"></div>
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: rgba(45, 212, 191, 0.10);">
+                    <span class="material-icons-outlined" style="color: #2DD4BF; font-size: 24px;">psychology</span>
+                </div>
+                <h3 class="font-display font-bold text-lg text-slate-900 mb-3">Neuroeducation</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    Students learn HOW their brain works — prefrontal cortex, amygdala, dopamine pathways, RAS — and use that knowledge to regulate behavior and optimize learning.
+                </p>
+            </div>
+
+            <!-- Pillar 2: Social-Emotional Learning -->
+            <div class="reveal-section bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="w-12 h-1 rounded-full mb-6" style="background: #F59E0B;"></div>
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: rgba(245, 158, 11, 0.10);">
+                    <span class="material-icons-outlined" style="color: #F59E0B; font-size: 24px;">favorite</span>
+                </div>
+                <h3 class="font-display font-bold text-lg text-slate-900 mb-3">SEL (CASEL-Aligned)</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    All five CASEL competencies woven into every lesson: Self-Awareness, Self-Management, Social Awareness, Relationship Skills, and Responsible Decision-Making.
+                </p>
+            </div>
+
+            <!-- Pillar 3: Culturally Grounded -->
+            <div class="reveal-section bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="w-12 h-1 rounded-full mb-6" style="background: #8B5CF6;"></div>
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: rgba(139, 92, 246, 0.10);">
+                    <span class="material-icons-outlined" style="color: #8B5CF6; font-size: 24px;">diversity_3</span>
+                </div>
+                <h3 class="font-display font-bold text-lg text-slate-900 mb-3">Culturally Grounded</h3>
+                <span class="inline-block text-xs italic text-slate-400 -mt-1 mb-3">"Take It to the Block Data"</span>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    Every scenario connects brain science to students' real neighborhoods, families, and lived experiences — making learning personally relevant and deeply engaging.
+                </p>
+            </div>
+
+            <!-- Pillar 4: Future-Self Mindset -->
+            <div class="reveal-section bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div class="w-12 h-1 rounded-full mb-6" style="background: #60A5FA;"></div>
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: rgba(96, 165, 250, 0.10);">
+                    <span class="material-icons-outlined" style="color: #60A5FA; font-size: 24px;">rocket_launch</span>
+                </div>
+                <h3 class="font-display font-bold text-lg text-slate-900 mb-3">Future-Self Mindset</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    Students build identity as future engineers, leaders, and problem-solvers. Three major Future-Self projects per year: Identity, Personal Vision, and 5-Year Design.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 1: Grade Band Explorer
+     ============================================================ -->
+<section id="grades" class="bg-white py-20 lg:py-28 reveal-section">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <!-- Section Header -->
+    <div class="text-center max-w-2xl mx-auto">
+      <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-accent/10 text-brand-accent mb-6">5 Grade Bands</span>
+      <h2 class="font-display font-bold text-4xl lg:text-5xl text-slate-900 leading-tight">Every Age. Every Stage.</h2>
+      <p class="mt-4 text-lg text-slate-500 font-body">A developmentally sequenced curriculum that meets students exactly where they are — from playful brain exploration in PreK to workforce-ready engineering in high school.</p>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="flex flex-wrap justify-center gap-3 mt-12">
+      <button class="band-tab px-5 py-3 rounded-xl font-display font-semibold text-sm border-2 cursor-pointer transition-all duration-300" data-band="prek" data-color="#FF6B6B" onclick="switchBand('prek')" style="background-color: #FF6B6B; color: #fff; border-color: #FF6B6B;">PreK</button>
+      <button class="band-tab px-5 py-3 rounded-xl font-display font-semibold text-sm border-2 cursor-pointer transition-all duration-300 border-slate-200 text-slate-500 bg-white" data-band="k2" data-color="#FFD93D" onclick="switchBand('k2')">K-2</button>
+      <button class="band-tab px-5 py-3 rounded-xl font-display font-semibold text-sm border-2 cursor-pointer transition-all duration-300 border-slate-200 text-slate-500 bg-white" data-band="35" data-color="#2DD4BF" onclick="switchBand('35')">3-5</button>
+      <button class="band-tab px-5 py-3 rounded-xl font-display font-semibold text-sm border-2 cursor-pointer transition-all duration-300 border-slate-200 text-slate-500 bg-white" data-band="68" data-color="#60A5FA" onclick="switchBand('68')">6-8</button>
+      <button class="band-tab px-5 py-3 rounded-xl font-display font-semibold text-sm border-2 cursor-pointer transition-all duration-300 border-slate-200 text-slate-500 bg-white" data-band="912" data-color="#6442EF" onclick="switchBand('912')">9-12</button>
+    </div>
+
+    <!-- Tab Content Area -->
+    <div class="mt-12">
+
+      <!-- ==================== PreK ==================== -->
+      <div class="band-content" id="band-prek">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+
+          <!-- Left Column: Info Card -->
+          <div class="flex-1 max-w-xl">
+            <div class="rounded-2xl border border-slate-100 shadow-sm p-8 bg-white">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="w-3 h-3 rounded-full bg-band-prek inline-block"></span>
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-band-prek/15 text-band-prek">PreK</span>
+              </div>
+              <h3 class="font-display font-bold text-2xl text-slate-900">Wimee's Brain City</h3>
+              <p class="mt-3 text-slate-500 font-body leading-relaxed">Students explore their brain as a living city, guided by Wimee the Robot. Through play, movement, and imagination, PreK learners discover that their brain helps them think, feel, remember, and make choices.</p>
+
+              <p class="font-display font-semibold text-sm uppercase tracking-wider text-slate-400 mt-6 mb-3">Brain Tools</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-prek/10 text-band-prek">The Wise Boss (PFC)</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-prek/10 text-band-prek">The Alarm (Amygdala)</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-prek/10 text-band-prek">The Librarian (Hippocampus)</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-prek/10 text-band-prek">The Flashlight (RAS)</span>
+              </div>
+
+              <p class="font-display font-semibold text-sm uppercase tracking-wider text-slate-400 mt-6 mb-3">Tech</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">Wimee Robot</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">Simple Coding Tiles</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">BroBot QR Prompts</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Lesson Flow -->
+          <div class="flex-1 max-w-lg">
+            <div class="rounded-2xl bg-slate-50 border border-slate-100 p-8">
+              <h4 class="font-display font-semibold text-lg text-slate-800 mb-6">Sample Lesson Structure</h4>
+              <div class="space-y-0">
+                <!-- Step 1 -->
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-brand-accent flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Opening Ritual</p>
+                    <span class="text-xs text-brand-accent font-semibold">3 min</span>
+                  </div>
+                </div>
+                <!-- Step 2 -->
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-brand-accent flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Brain Science Mini-Lesson</p>
+                    <span class="text-xs text-brand-accent font-semibold">5 min</span>
+                  </div>
+                </div>
+                <!-- Step 3 -->
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-amber-400 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Culturally Responsive Scenario</p>
+                    <span class="text-xs text-amber-500 font-semibold">5-10 min</span>
+                  </div>
+                </div>
+                <!-- Step 4 -->
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-blue-400 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Hands-On Activity</p>
+                    <span class="text-xs text-blue-400 font-semibold">10-15 min</span>
+                  </div>
+                </div>
+                <!-- Step 5 -->
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-purple-500 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Reflection & Future-Self</p>
+                    <span class="text-xs text-purple-500 font-semibold">5 min</span>
+                  </div>
+                </div>
+                <!-- Step 6 -->
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-slate-400 flex-shrink-0 mt-1"></div>
+                  </div>
+                  <div>
+                    <p class="font-medium text-sm text-slate-700">BroBot AI Integration</p>
+                    <span class="text-xs text-slate-400 font-semibold">varies</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== K-2 ==================== -->
+      <div class="band-content hidden" id="band-k2">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+
+          <!-- Left Column: Info Card -->
+          <div class="flex-1 max-w-xl">
+            <div class="rounded-2xl border border-slate-100 shadow-sm p-8 bg-white">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="w-3 h-3 rounded-full bg-band-k2 inline-block"></span>
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-band-k2/15 text-band-k2">K-2</span>
+              </div>
+              <h3 class="font-display font-bold text-2xl text-slate-900">Brain Builders: My Choices Build My Future</h3>
+              <p class="mt-3 text-slate-500 font-body leading-relaxed">Students learn that every choice builds a "brain road." They develop emotional vocabulary, practice attention skills, and begin simple coding logic — all connected to how their brain grows stronger with practice.</p>
+
+              <p class="font-display font-semibold text-sm uppercase tracking-wider text-slate-400 mt-6 mb-3">Brain Tools</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-k2/10 text-band-k2">The Wise Boss</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-k2/10 text-band-k2">The Alarm</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-k2/10 text-band-k2">The Happy Juice Machine (Dopamine)</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-k2/10 text-band-k2">The Flashlight</span>
+              </div>
+
+              <p class="font-display font-semibold text-sm uppercase tracking-wider text-slate-400 mt-6 mb-3">Tech</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">Wimee Robot</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">Coding Tiles (KUBO-like)</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">BroBot Audio Reflections</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Lesson Flow -->
+          <div class="flex-1 max-w-lg">
+            <div class="rounded-2xl bg-slate-50 border border-slate-100 p-8">
+              <h4 class="font-display font-semibold text-lg text-slate-800 mb-6">Sample Lesson Structure</h4>
+              <div class="space-y-0">
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-brand-accent flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Opening Ritual</p>
+                    <span class="text-xs text-brand-accent font-semibold">3 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-brand-accent flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Brain Science Mini-Lesson</p>
+                    <span class="text-xs text-brand-accent font-semibold">5 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-amber-400 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Culturally Responsive Scenario</p>
+                    <span class="text-xs text-amber-500 font-semibold">5-10 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-blue-400 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Hands-On Activity</p>
+                    <span class="text-xs text-blue-400 font-semibold">10-15 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-purple-500 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Reflection & Future-Self</p>
+                    <span class="text-xs text-purple-500 font-semibold">5 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-slate-400 flex-shrink-0 mt-1"></div>
+                  </div>
+                  <div>
+                    <p class="font-medium text-sm text-slate-700">BroBot AI Integration</p>
+                    <span class="text-xs text-slate-400 font-semibold">varies</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== 3-5 ==================== -->
+      <div class="band-content hidden" id="band-35">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+
+          <!-- Left Column: Info Card -->
+          <div class="flex-1 max-w-xl">
+            <div class="rounded-2xl border border-slate-100 shadow-sm p-8 bg-white">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="w-3 h-3 rounded-full bg-brand-accent inline-block"></span>
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand-accent/15 text-brand-accent">3-5</span>
+              </div>
+              <h3 class="font-display font-bold text-2xl text-slate-900">Mind Mechanics: Training the Future-Ready Brain</h3>
+              <p class="mt-3 text-slate-500 font-body leading-relaxed">Students become brain engineers, learning about myelination, dopamine reward systems, and neural pathways. STEM challenges, coding cards, and real-world problem-solving make brain science tangible and actionable.</p>
+
+              <p class="font-display font-semibold text-sm uppercase tracking-wider text-slate-400 mt-6 mb-3">Brain Tools</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-brand-accent/10 text-brand-accent">PFC Planner</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-brand-accent/10 text-brand-accent">Amygdala Shield</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-brand-accent/10 text-brand-accent">Dopamine Diverter</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-brand-accent/10 text-brand-accent">RAS Focus Mode</span>
+              </div>
+
+              <p class="font-display font-semibold text-sm uppercase tracking-wider text-slate-400 mt-6 mb-3">Tech</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">Coding Cards</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">Real-World STEM Problems</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">BroBot Micro-Assessments</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Lesson Flow -->
+          <div class="flex-1 max-w-lg">
+            <div class="rounded-2xl bg-slate-50 border border-slate-100 p-8">
+              <h4 class="font-display font-semibold text-lg text-slate-800 mb-6">Sample Lesson Structure</h4>
+              <div class="space-y-0">
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-brand-accent flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Opening Ritual</p>
+                    <span class="text-xs text-brand-accent font-semibold">3 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-brand-accent flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Brain Science Mini-Lesson</p>
+                    <span class="text-xs text-brand-accent font-semibold">5 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-amber-400 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Culturally Responsive Scenario</p>
+                    <span class="text-xs text-amber-500 font-semibold">5-10 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-blue-400 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Hands-On Activity</p>
+                    <span class="text-xs text-blue-400 font-semibold">10-15 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-purple-500 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Reflection & Future-Self</p>
+                    <span class="text-xs text-purple-500 font-semibold">5 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-slate-400 flex-shrink-0 mt-1"></div>
+                  </div>
+                  <div>
+                    <p class="font-medium text-sm text-slate-700">BroBot AI Integration</p>
+                    <span class="text-xs text-slate-400 font-semibold">varies</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== 6-8 ==================== -->
+      <div class="band-content hidden" id="band-68">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+
+          <!-- Left Column: Info Card -->
+          <div class="flex-1 max-w-xl">
+            <div class="rounded-2xl border border-slate-100 shadow-sm p-8 bg-white">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="w-3 h-3 rounded-full bg-band-68 inline-block"></span>
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-band-68/15 text-band-68">6-8</span>
+              </div>
+              <h3 class="font-display font-bold text-2xl text-slate-900">Cognitive Coders: My Brain, My Logic</h3>
+              <p class="mt-3 text-slate-500 font-body leading-relaxed">Students master habit formation, emotional regulation, and consequence-based thinking. STEM-Botics logic challenges and teen-centered scenarios bridge brain science with real adolescent life.</p>
+
+              <p class="font-display font-semibold text-sm uppercase tracking-wider text-slate-400 mt-6 mb-3">Brain Tools</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-68/10 text-band-68">PFC Planner</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-68/10 text-band-68">Amygdala Shield</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-68/10 text-band-68">Dopamine Diverter</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-68/10 text-band-68">System 1 vs System 2</span>
+              </div>
+
+              <p class="font-display font-semibold text-sm uppercase tracking-wider text-slate-400 mt-6 mb-3">Tech</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">STEM-Botics Logic</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">Robotics Intro</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">BroBot AI Decision Trees</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Lesson Flow -->
+          <div class="flex-1 max-w-lg">
+            <div class="rounded-2xl bg-slate-50 border border-slate-100 p-8">
+              <h4 class="font-display font-semibold text-lg text-slate-800 mb-6">Sample Lesson Structure</h4>
+              <div class="space-y-0">
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-brand-accent flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Opening Ritual</p>
+                    <span class="text-xs text-brand-accent font-semibold">3 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-brand-accent flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Brain Science Mini-Lesson</p>
+                    <span class="text-xs text-brand-accent font-semibold">5 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-amber-400 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Culturally Responsive Scenario</p>
+                    <span class="text-xs text-amber-500 font-semibold">5-10 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-blue-400 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Hands-On Activity</p>
+                    <span class="text-xs text-blue-400 font-semibold">10-15 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-purple-500 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Reflection & Future-Self</p>
+                    <span class="text-xs text-purple-500 font-semibold">5 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-slate-400 flex-shrink-0 mt-1"></div>
+                  </div>
+                  <div>
+                    <p class="font-medium text-sm text-slate-700">BroBot AI Integration</p>
+                    <span class="text-xs text-slate-400 font-semibold">varies</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== 9-12 ==================== -->
+      <div class="band-content hidden" id="band-912">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+
+          <!-- Left Column: Info Card -->
+          <div class="flex-1 max-w-xl">
+            <div class="rounded-2xl border border-slate-100 shadow-sm p-8 bg-white">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="w-3 h-3 rounded-full bg-band-912 inline-block"></span>
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-band-912/15 text-band-912">9-12</span>
+              </div>
+              <h3 class="font-display font-bold text-2xl text-slate-900">Future-Self Engineers: Build the Life You Want</h3>
+              <p class="mt-3 text-slate-500 font-body leading-relaxed">Students apply neuroplasticity, executive function, and RAS-based goal setting to design their future. Robotics coding, AI decision trees, financial literacy, and workforce preparation create career-ready graduates.</p>
+
+              <p class="font-display font-semibold text-sm uppercase tracking-wider text-slate-400 mt-6 mb-3">Brain Tools</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-912/10 text-band-912">PFC Planner</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-912/10 text-band-912">Amygdala Shield</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-912/10 text-band-912">Dopamine Diverter</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-band-912/10 text-band-912">Neuroplasticity Engineering</span>
+              </div>
+
+              <p class="font-display font-semibold text-sm uppercase tracking-wider text-slate-400 mt-6 mb-3">Tech</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">Robotics Coding</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">AI Decision Trees</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">Digital Portfolios</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">BroBot Workforce Readiness</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Lesson Flow -->
+          <div class="flex-1 max-w-lg">
+            <div class="rounded-2xl bg-slate-50 border border-slate-100 p-8">
+              <h4 class="font-display font-semibold text-lg text-slate-800 mb-6">Sample Lesson Structure</h4>
+              <div class="space-y-0">
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-brand-accent flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Opening Ritual</p>
+                    <span class="text-xs text-brand-accent font-semibold">3 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-brand-accent flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Brain Science Mini-Lesson</p>
+                    <span class="text-xs text-brand-accent font-semibold">5 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-amber-400 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Culturally Responsive Scenario</p>
+                    <span class="text-xs text-amber-500 font-semibold">5-10 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-blue-400 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Hands-On Activity</p>
+                    <span class="text-xs text-blue-400 font-semibold">10-15 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-purple-500 flex-shrink-0 mt-1"></div>
+                    <div class="w-px h-10 bg-slate-200"></div>
+                  </div>
+                  <div class="pb-4">
+                    <p class="font-medium text-sm text-slate-700">Reflection & Future-Self</p>
+                    <span class="text-xs text-purple-500 font-semibold">5 min</span>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-3 h-3 rounded-full bg-slate-400 flex-shrink-0 mt-1"></div>
+                  </div>
+                  <div>
+                    <p class="font-medium text-sm text-slate-700">BroBot AI Integration</p>
+                    <span class="text-xs text-slate-400 font-semibold">varies</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- end tab content area -->
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2: 36-Lesson Curriculum Map
+     ============================================================ -->
+<section id="curriculum" class="bg-slate-50/80 py-20 lg:py-28 reveal-section">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <!-- Section Header -->
+    <div class="text-center max-w-2xl mx-auto">
+      <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-accent/10 text-brand-accent mb-6">36 Weeks</span>
+      <h2 class="font-display font-bold text-4xl lg:text-5xl text-slate-900 leading-tight">The Complete Curriculum Map</h2>
+      <p class="mt-4 text-lg text-slate-500 font-body">Four quarters. Nine lessons each. A systematic journey from brain awareness to life mastery.</p>
+    </div>
+
+    <!-- Accordion -->
+    <div class="mt-12 space-y-4">
+
+      <!-- ==================== Q1 ==================== -->
+      <div>
+        <button onclick="toggleQuarter('quarter-1')" class="w-full flex items-center justify-between p-6 rounded-2xl bg-white border border-slate-100 shadow-sm cursor-pointer hover:shadow-md transition-all">
+          <div class="flex items-center gap-3">
+            <span class="w-3 h-3 rounded-full bg-brand-accent flex-shrink-0"></span>
+            <span class="font-display font-semibold text-lg text-slate-800">Q1: Know Your Brain</span>
+            <span class="text-xs text-slate-400 ml-1">Lessons 1-9</span>
+          </div>
+          <span class="material-icons-outlined accordion-icon transition-transform duration-300 text-slate-400">expand_more</span>
+        </button>
+        <div class="accordion-content open" id="quarter-1">
+          <div class="p-6 pt-0">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-4">
+              <!-- Lesson 1 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-accent flex items-center justify-center text-sm font-bold flex-shrink-0">1</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Brain City Introduction</p>
+                  <p class="text-xs text-slate-400">Whole Brain</p>
+                </div>
+              </div>
+              <!-- Lesson 2 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-accent flex items-center justify-center text-sm font-bold flex-shrink-0">2</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">The Prefrontal Cortex</p>
+                  <p class="text-xs text-slate-400">PFC</p>
+                </div>
+              </div>
+              <!-- Lesson 3 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-accent flex items-center justify-center text-sm font-bold flex-shrink-0">3</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">The Amygdala</p>
+                  <p class="text-xs text-slate-400">Emotional Brain</p>
+                </div>
+              </div>
+              <!-- Lesson 4 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-accent flex items-center justify-center text-sm font-bold flex-shrink-0">4</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">The Hippocampus</p>
+                  <p class="text-xs text-slate-400">Memory Center</p>
+                </div>
+              </div>
+              <!-- Lesson 5 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-accent flex items-center justify-center text-sm font-bold flex-shrink-0">5</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">RAS Filters</p>
+                  <p class="text-xs text-slate-400">Attention System</p>
+                </div>
+              </div>
+              <!-- Lesson 6 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-accent flex items-center justify-center text-sm font-bold flex-shrink-0">6</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Neural Pathways</p>
+                  <p class="text-xs text-slate-400">Brain Connections</p>
+                </div>
+              </div>
+              <!-- Lesson 7 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-accent flex items-center justify-center text-sm font-bold flex-shrink-0">7</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Dopamine & Motivation</p>
+                  <p class="text-xs text-slate-400">Reward System</p>
+                </div>
+              </div>
+              <!-- Lesson 8 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-accent flex items-center justify-center text-sm font-bold flex-shrink-0">8</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Stress & the Brain</p>
+                  <p class="text-xs text-slate-400">Cortisol Response</p>
+                </div>
+              </div>
+              <!-- Lesson 9 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-accent flex items-center justify-center text-sm font-bold flex-shrink-0">9</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Future Self Part 1: Identity</p>
+                  <p class="text-xs text-slate-400">Self-Awareness</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== Q2 ==================== -->
+      <div>
+        <button onclick="toggleQuarter('quarter-2')" class="w-full flex items-center justify-between p-6 rounded-2xl bg-white border border-slate-100 shadow-sm cursor-pointer hover:shadow-md transition-all">
+          <div class="flex items-center gap-3">
+            <span class="w-3 h-3 rounded-full bg-amber-400 flex-shrink-0"></span>
+            <span class="font-display font-semibold text-lg text-slate-800">Q2: Control Your Choices</span>
+            <span class="text-xs text-slate-400 ml-1">Lessons 10-18</span>
+          </div>
+          <span class="material-icons-outlined accordion-icon transition-transform duration-300 text-slate-400">expand_more</span>
+        </button>
+        <div class="accordion-content" id="quarter-2">
+          <div class="p-6 pt-0">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-4">
+              <!-- Lesson 10 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-amber-400/10 text-amber-500 flex items-center justify-center text-sm font-bold flex-shrink-0">10</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Impulse Control</p>
+                  <p class="text-xs text-slate-400">PFC Practice</p>
+                </div>
+              </div>
+              <!-- Lesson 11 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-amber-400/10 text-amber-500 flex items-center justify-center text-sm font-bold flex-shrink-0">11</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Emotional Regulation</p>
+                  <p class="text-xs text-slate-400">Amygdala Shield</p>
+                </div>
+              </div>
+              <!-- Lesson 12 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-amber-400/10 text-amber-500 flex items-center justify-center text-sm font-bold flex-shrink-0">12</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Planning & Organization</p>
+                  <p class="text-xs text-slate-400">Executive Function</p>
+                </div>
+              </div>
+              <!-- Lesson 13 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-amber-400/10 text-amber-500 flex items-center justify-center text-sm font-bold flex-shrink-0">13</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">The Path of Least Resistance</p>
+                  <p class="text-xs text-slate-400">Habit Loops</p>
+                </div>
+              </div>
+              <!-- Lesson 14 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-amber-400/10 text-amber-500 flex items-center justify-center text-sm font-bold flex-shrink-0">14</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Focus & Distraction</p>
+                  <p class="text-xs text-slate-400">RAS Training</p>
+                </div>
+              </div>
+              <!-- Lesson 15 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-amber-400/10 text-amber-500 flex items-center justify-center text-sm font-bold flex-shrink-0">15</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Habit Formation</p>
+                  <p class="text-xs text-slate-400">Myelination</p>
+                </div>
+              </div>
+              <!-- Lesson 16 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-amber-400/10 text-amber-500 flex items-center justify-center text-sm font-bold flex-shrink-0">16</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Conflict Resolution</p>
+                  <p class="text-xs text-slate-400">Social Brain</p>
+                </div>
+              </div>
+              <!-- Lesson 17 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-amber-400/10 text-amber-500 flex items-center justify-center text-sm font-bold flex-shrink-0">17</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Problem Solving</p>
+                  <p class="text-xs text-slate-400">Critical Thinking</p>
+                </div>
+              </div>
+              <!-- Lesson 18 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-amber-400/10 text-amber-500 flex items-center justify-center text-sm font-bold flex-shrink-0">18</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Future Self Part 2: My Personal Vision</p>
+                  <p class="text-xs text-slate-400">Self-Awareness</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== Q3 ==================== -->
+      <div>
+        <button onclick="toggleQuarter('quarter-3')" class="w-full flex items-center justify-between p-6 rounded-2xl bg-white border border-slate-100 shadow-sm cursor-pointer hover:shadow-md transition-all">
+          <div class="flex items-center gap-3">
+            <span class="w-3 h-3 rounded-full bg-blue-400 flex-shrink-0"></span>
+            <span class="font-display font-semibold text-lg text-slate-800">Q3: Train Your Thinking</span>
+            <span class="text-xs text-slate-400 ml-1">Lessons 19-27</span>
+          </div>
+          <span class="material-icons-outlined accordion-icon transition-transform duration-300 text-slate-400">expand_more</span>
+        </button>
+        <div class="accordion-content" id="quarter-3">
+          <div class="p-6 pt-0">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-4">
+              <!-- Lesson 19 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-blue-400/10 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">19</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Cognitive Dissonance</p>
+                  <p class="text-xs text-slate-400">Mental Models</p>
+                </div>
+              </div>
+              <!-- Lesson 20 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-blue-400/10 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">20</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Short-Term vs Long-Term Decisions</p>
+                  <p class="text-xs text-slate-400">PFC Planning</p>
+                </div>
+              </div>
+              <!-- Lesson 21 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-blue-400/10 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">21</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Consequences</p>
+                  <p class="text-xs text-slate-400">Cause & Effect</p>
+                </div>
+              </div>
+              <!-- Lesson 22 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-blue-400/10 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">22</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Mindfulness for the Brain</p>
+                  <p class="text-xs text-slate-400">Calm Focus</p>
+                </div>
+              </div>
+              <!-- Lesson 23 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-blue-400/10 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">23</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Meta-cognition</p>
+                  <p class="text-xs text-slate-400">Thinking About Thinking</p>
+                </div>
+              </div>
+              <!-- Lesson 24 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-blue-400/10 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">24</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Growth Mindset</p>
+                  <p class="text-xs text-slate-400">Neuroplasticity</p>
+                </div>
+              </div>
+              <!-- Lesson 25 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-blue-400/10 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">25</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Teamwork</p>
+                  <p class="text-xs text-slate-400">Social Cognition</p>
+                </div>
+              </div>
+              <!-- Lesson 26 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-blue-400/10 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">26</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Leadership Principles</p>
+                  <p class="text-xs text-slate-400">Executive Skills</p>
+                </div>
+              </div>
+              <!-- Lesson 27 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-blue-400/10 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">27</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Future Self Part 3: My 5-Year Design</p>
+                  <p class="text-xs text-slate-400">Self-Awareness</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== Q4 ==================== -->
+      <div>
+        <button onclick="toggleQuarter('quarter-4')" class="w-full flex items-center justify-between p-6 rounded-2xl bg-white border border-slate-100 shadow-sm cursor-pointer hover:shadow-md transition-all">
+          <div class="flex items-center gap-3">
+            <span class="w-3 h-3 rounded-full bg-purple-500 flex-shrink-0"></span>
+            <span class="font-display font-semibold text-lg text-slate-800">Q4: Build Your Life System</span>
+            <span class="text-xs text-slate-400 ml-1">Lessons 28-36</span>
+          </div>
+          <span class="material-icons-outlined accordion-icon transition-transform duration-300 text-slate-400">expand_more</span>
+        </button>
+        <div class="accordion-content" id="quarter-4">
+          <div class="p-6 pt-0">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-4">
+              <!-- Lesson 28 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center text-sm font-bold flex-shrink-0">28</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Executive Function Mastery</p>
+                  <p class="text-xs text-slate-400">Full Integration</p>
+                </div>
+              </div>
+              <!-- Lesson 29 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center text-sm font-bold flex-shrink-0">29</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Self-Management</p>
+                  <p class="text-xs text-slate-400">Daily Systems</p>
+                </div>
+              </div>
+              <!-- Lesson 30 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center text-sm font-bold flex-shrink-0">30</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Grit & Perseverance</p>
+                  <p class="text-xs text-slate-400">Resilience</p>
+                </div>
+              </div>
+              <!-- Lesson 31 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center text-sm font-bold flex-shrink-0">31</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Stress Recovery</p>
+                  <p class="text-xs text-slate-400">Cortisol Management</p>
+                </div>
+              </div>
+              <!-- Lesson 32 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center text-sm font-bold flex-shrink-0">32</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Wise Decision Path</p>
+                  <p class="text-xs text-slate-400">Decision Framework</p>
+                </div>
+              </div>
+              <!-- Lesson 33 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center text-sm font-bold flex-shrink-0">33</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Innovation & Creativity</p>
+                  <p class="text-xs text-slate-400">Creative Brain</p>
+                </div>
+              </div>
+              <!-- Lesson 34 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center text-sm font-bold flex-shrink-0">34</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Community Impact</p>
+                  <p class="text-xs text-slate-400">Social Leadership</p>
+                </div>
+              </div>
+              <!-- Lesson 35 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center text-sm font-bold flex-shrink-0">35</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Career Path Exploration</p>
+                  <p class="text-xs text-slate-400">Workforce Ready</p>
+                </div>
+              </div>
+              <!-- Lesson 36 -->
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center text-sm font-bold flex-shrink-0">36</div>
+                <div>
+                  <p class="font-medium text-sm text-slate-700">Final Project & Future Self Graduation</p>
+                  <p class="text-xs text-slate-400">Capstone</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end accordion -->
+  </div>
+</section>
+
+
+<!-- ==================== SECTION 2: EMOTION BUBBLES ==================== -->
+<section id="emotions" class="relative grain overflow-hidden bg-[#FAFBFC] py-20 lg:py-28">
+
+    <!-- Ambient blurs -->
+    <div class="absolute top-20 -left-32 w-96 h-96 bg-brand-accent/[0.04] rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-10 right-0 w-80 h-80 bg-amber-300/[0.03] rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+
+            <!-- LEFT: Phone Mockup with Emotion Bubbles -->
+            <div class="reveal-section relative flex-shrink-0" style="width: 420px; height: 620px;">
+
+                <!-- Phone Frame -->
+                <div class="phone-frame absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <!-- Status bar area -->
+                    <div class="flex items-center justify-between px-6 pt-5 pb-3">
+                        <div class="flex items-center gap-3">
+                            <span class="material-icons-outlined text-slate-400" style="font-size:20px;">tune</span>
+                            <span class="material-icons-outlined text-slate-400" style="font-size:20px;">home</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 bg-brand-accent/10 text-brand-glow px-3 py-1 rounded-full">
+                            <span class="w-5 h-5 rounded-full bg-brand-accent flex items-center justify-center">
+                                <span class="text-white text-[10px] font-bold">2</span>
+                            </span>
+                            <span class="text-xs font-semibold tracking-wide">Done</span>
+                        </div>
+                    </div>
+
+                    <!-- Bubble field inside phone -->
+                    <div class="relative w-full" style="height: 500px;">
+
+                        <!-- Bubble 1: Shutting down -->
+                        <div class="emotion-bubble bubble-float-a"
+                             style="width: 160px; height: 160px; background: rgba(45, 212, 191, 0.12); top: 10px; left: 8px;">
+                            <span class="font-display font-bold text-[13px] text-slate-800 leading-tight">Shutting<br>down</span>
+                            <span class="text-[10px] text-slate-500 mt-1 px-3 leading-tight">going quiet, pulling away</span>
+                            <div class="flex items-center gap-2 mt-2.5">
+                                <div class="check-btn bg-brand-accent shadow-md shadow-brand-accent/30">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </div>
+                                <div class="check-btn bg-white border border-slate-200">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bubble 2: Masking feelings -->
+                        <div class="emotion-bubble bubble-float-c"
+                             style="width: 120px; height: 120px; background: rgba(45, 212, 191, 0.10); top: 8px; left: 170px;">
+                            <span class="font-display font-bold text-[11px] text-slate-800 leading-tight">Masking<br>feelings</span>
+                        </div>
+
+                        <!-- Bubble 3: Questioning myself -->
+                        <div class="emotion-bubble bubble-float-b"
+                             style="width: 115px; height: 115px; background: rgba(45, 212, 191, 0.14); top: 105px; left: 195px;">
+                            <span class="font-display font-bold text-[11px] text-slate-800 leading-tight">Questioning<br>myself</span>
+                        </div>
+
+                        <!-- Bubble 4: Taking more space -->
+                        <div class="emotion-bubble bubble-float-a"
+                             style="width: 130px; height: 130px; background: rgba(45, 212, 191, 0.11); top: 175px; left: 110px; animation-delay: -2s;">
+                            <span class="font-display font-bold text-[11px] text-slate-800 leading-tight">Taking more<br>space</span>
+                        </div>
+
+                        <!-- Bubble 5: Bottling it up -->
+                        <div class="emotion-bubble bubble-float-b"
+                             style="width: 140px; height: 140px; background: rgba(45, 212, 191, 0.09); top: 240px; left: -5px; animation-delay: -3s;">
+                            <span class="font-display font-bold text-[12px] text-slate-800 leading-tight">Bottling<br>it up</span>
+                        </div>
+
+                        <!-- Bubble 6: People-pleasing -->
+                        <div class="emotion-bubble bubble-float-c"
+                             style="width: 105px; height: 105px; background: rgba(45, 212, 191, 0.08); top: 200px; left: -30px; animation-delay: -1s;">
+                            <span class="font-display font-bold text-[10px] text-slate-500 leading-tight">People-<br>pleasing</span>
+                        </div>
+
+                        <!-- Bubble 7: Distorting the truth -->
+                        <div class="emotion-bubble bubble-float-a"
+                             style="width: 145px; height: 145px; background: rgba(45, 212, 191, 0.13); top: 310px; left: 115px; animation-delay: -4s;">
+                            <span class="font-display font-bold text-[12px] text-slate-800 leading-tight">Distorting the<br>truth</span>
+                            <span class="text-[10px] text-slate-500 mt-1 px-4 leading-tight">bending facts to protect ego</span>
+                            <div class="flex items-center gap-2 mt-2">
+                                <div class="check-btn bg-brand-accent shadow-md shadow-brand-accent/30">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </div>
+                                <div class="check-btn bg-white border border-slate-200">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bubble 8: Lashing out -->
+                        <div class="emotion-bubble bubble-float-b"
+                             style="width: 118px; height: 118px; background: rgba(45, 212, 191, 0.10); top: 385px; left: 10px; animation-delay: -2.5s;">
+                            <span class="font-display font-bold text-[11px] text-slate-800 leading-tight">Lashing<br>out</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Text Content -->
+            <div class="stagger reveal-section flex-1 max-w-xl text-center lg:text-left">
+                <div>
+                    <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-accent/[0.08] text-brand-glow text-xs font-semibold tracking-widest uppercase mb-6">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
+                        Emotional Awareness Engine
+                    </span>
+                </div>
+                <h2 class="font-serif text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.12] text-slate-900 tracking-tight">
+                    Understand the <em class="italic text-brand-glow">WHY</em> behind your emotions better.
+                </h2>
+                <p class="mt-6 text-lg text-slate-500 leading-relaxed font-light max-w-md mx-auto lg:mx-0">
+                    From PreK's 'Alarm' to 12th grade's 'Amygdala Shield,' students learn to identify, name, and regulate emotions using real brain science — at every grade level.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ==================== SECTION 3: DAY 1 TEACHER TOOLKIT ==================== -->
+<section id="toolkit" class="bg-white py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+        <!-- Section Header -->
+        <div class="reveal-section text-center max-w-2xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-accent/[0.08] mb-6">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-glow animate-pulse"></span>
+                <span class="text-brand-glow text-xs font-semibold tracking-widest uppercase">Teacher Support</span>
+            </div>
+            <h2 class="font-serif text-4xl lg:text-5xl text-slate-900 tracking-tight leading-[1.12]">
+                Day 1 Teacher Toolkit
+            </h2>
+            <p class="mt-4 text-lg text-slate-500 leading-relaxed">
+                Every teacher receives a complete, ready-to-use toolkit for their first day. No guesswork. No gaps.
+            </p>
+        </div>
+
+        <!-- Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-14">
+
+            <!-- 1. Welcome Script (spans 2 cols) -->
+            <div class="reveal-section group lg:col-span-2 rounded-2xl p-6 lg:p-8 border border-slate-100 bg-white hover:shadow-lg hover:border-brand-accent/20 transition-all duration-300">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-glow flex items-center justify-center text-sm font-bold">1</div>
+                <h3 class="font-display font-bold text-base text-slate-900 mt-4 mb-2">Welcome Script</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    A ready-to-read opening script that sets classroom tone, introduces brain science framing, and creates a safe, exciting first impression. Customized for each grade band — from Wimee's playful voice to BroBot's mentor tone.
+                </p>
+            </div>
+
+            <!-- 2. Visual Anchor -->
+            <div class="reveal-section group rounded-2xl p-6 lg:p-8 border border-slate-100 bg-white hover:shadow-lg hover:border-brand-accent/20 transition-all duration-300">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-glow flex items-center justify-center text-sm font-bold">2</div>
+                <h3 class="font-display font-bold text-base text-slate-900 mt-4 mb-2">Visual Anchor</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    Grade-appropriate brain poster or digital display. PreK-2 gets the Brain City Map; 3-5 gets the Brain Roads poster; 6-12 gets the 'Your Brain Is a Supercomputer' display.
+                </p>
+            </div>
+
+            <!-- 3. Classroom Ritual -->
+            <div class="reveal-section group rounded-2xl p-6 lg:p-8 border border-slate-100 bg-white hover:shadow-lg hover:border-brand-accent/20 transition-all duration-300">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-glow flex items-center justify-center text-sm font-bold">3</div>
+                <h3 class="font-display font-bold text-base text-slate-900 mt-4 mb-2">Classroom Ritual</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    A repeatable 3-minute opening routine: call-and-response affirmation, breathing reset, and the 'Check My Brain' hand signal students use daily.
+                </p>
+            </div>
+
+            <!-- 4. Materials List -->
+            <div class="reveal-section group rounded-2xl p-6 lg:p-8 border border-slate-100 bg-white hover:shadow-lg hover:border-brand-accent/20 transition-all duration-300">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-glow flex items-center justify-center text-sm font-bold">4</div>
+                <h3 class="font-display font-bold text-base text-slate-900 mt-4 mb-2">Materials List</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    Complete supply list for hands-on activities, pre-sorted by quarter. Includes student reflection sheets, brain cards, coding tiles, and BroBot QR codes.
+                </p>
+            </div>
+
+            <!-- 5. Mini-Lesson Script -->
+            <div class="reveal-section group rounded-2xl p-6 lg:p-8 border border-slate-100 bg-white hover:shadow-lg hover:border-brand-accent/20 transition-all duration-300">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-glow flex items-center justify-center text-sm font-bold">5</div>
+                <h3 class="font-display font-bold text-base text-slate-900 mt-4 mb-2">Mini-Lesson Script</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    Word-for-word 5-minute brain science lesson script with discussion prompts. Covers the PFC, RAS filters, and emotional triggers in age-appropriate language.
+                </p>
+            </div>
+
+            <!-- 6. Model Scenario -->
+            <div class="reveal-section group rounded-2xl p-6 lg:p-8 border border-slate-100 bg-white hover:shadow-lg hover:border-brand-accent/20 transition-all duration-300">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-glow flex items-center justify-center text-sm font-bold">6</div>
+                <h3 class="font-display font-bold text-base text-slate-900 mt-4 mb-2">Model Scenario</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    A pre-written culturally responsive scenario for guided practice. Students identify which brain part is active, what emotions show up, and what a wise future-self choice looks like.
+                </p>
+            </div>
+
+            <!-- 7. Day 1 Assignment (spans 2 cols) -->
+            <div class="reveal-section group lg:col-span-2 rounded-2xl p-6 lg:p-8 border border-slate-100 bg-white hover:shadow-lg hover:border-brand-accent/20 transition-all duration-300">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-glow flex items-center justify-center text-sm font-bold">7</div>
+                <h3 class="font-display font-bold text-base text-slate-900 mt-4 mb-2">Day 1 Assignment</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    Structured first activity with differentiation notes for diverse learners: Draw your Brain City, write your 'Future Me' statement, and set one small habit. Includes rubric and family extension activity.
+                </p>
+            </div>
+
+            <!-- 8. Teacher Notes -->
+            <div class="reveal-section group rounded-2xl p-6 lg:p-8 border border-slate-100 bg-white hover:shadow-lg hover:border-brand-accent/20 transition-all duration-300">
+                <div class="w-8 h-8 rounded-full bg-brand-accent/10 text-brand-glow flex items-center justify-center text-sm font-bold">8</div>
+                <h3 class="font-display font-bold text-base text-slate-900 mt-4 mb-2">Teacher Notes</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    Trauma-informed tips, cultural sensitivity guidance, classroom management strategies, and protocols for speaking respectfully to students in crisis. Because Day 1 sets the tone for the entire year.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     SECTION 1: Technology Integration
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<section id="technology" class="bg-white py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+        <!-- Header -->
+        <div class="text-center max-w-3xl mx-auto reveal-section">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-accent/[0.08] mb-8">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"></span>
+                <span class="text-brand-accent text-xs font-semibold tracking-widest uppercase">Technology Integration</span>
+            </div>
+            <h2 class="font-serif text-4xl lg:text-5xl text-slate-900 leading-tight">
+                Powered by Purpose-Built EdTech
+            </h2>
+            <p class="mt-6 text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto">
+                Every lesson includes built-in technology integration — not as an add-on, but as a core part of how students learn and reflect.
+            </p>
+        </div>
+
+        <!-- 3 Feature Cards -->
+        <div class="mt-14 grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Card 1: Wimee Robot -->
+            <div class="reveal-section rounded-2xl p-8 lg:p-10 bg-white border border-slate-100 border-l-4 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300" style="border-left-color: #FF6B6B;">
+                <div class="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center mb-6">
+                    <span class="material-icons-outlined text-red-400" style="font-size:28px;">smart_toy</span>
+                </div>
+                <h3 class="font-display font-bold text-xl text-slate-900">Wimee Robot</h3>
+                <span class="inline-block mt-2 text-xs px-2.5 py-1 rounded-full bg-red-50 text-red-400 font-medium">PreK — 3rd Grade</span>
+                <p class="text-slate-500 text-sm leading-relaxed mt-4">
+                    PBS-featured educational robot companion that introduces brain concepts through play, movement, and guided stories. Wimee delivers Brain Nugget scripts, models emotional tools, and makes neuroscience fun and memorable for early learners.
+                </p>
+                <ul class="mt-6 space-y-3">
+                    <li class="flex items-start gap-3 text-sm text-slate-600">
+                        <span class="material-icons-outlined text-brand-accent flex-shrink-0" style="font-size:18px;">check_circle</span>
+                        Animated Brain Nugget scripts for every lesson
+                    </li>
+                    <li class="flex items-start gap-3 text-sm text-slate-600">
+                        <span class="material-icons-outlined text-brand-accent flex-shrink-0" style="font-size:18px;">check_circle</span>
+                        Movement cues and physical engagement prompts
+                    </li>
+                    <li class="flex items-start gap-3 text-sm text-slate-600">
+                        <span class="material-icons-outlined text-brand-accent flex-shrink-0" style="font-size:18px;">check_circle</span>
+                        Character-driven emotional modeling
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Card 2: BroBot AI -->
+            <div class="reveal-section rounded-2xl p-8 lg:p-10 bg-white border border-slate-100 border-l-4 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300" style="border-left-color: #2DD4BF;">
+                <div class="w-14 h-14 rounded-2xl bg-teal-50 flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-robot text-brand-accent" style="font-size:24px;"></i>
+                </div>
+                <h3 class="font-display font-bold text-xl text-slate-900">BroBot AI</h3>
+                <span class="inline-block mt-2 text-xs px-2.5 py-1 rounded-full bg-teal-50 text-brand-glow font-medium">All Grade Levels</span>
+                <p class="text-slate-500 text-sm leading-relaxed mt-4">
+                    AI-powered brain science mentor integrated into every lesson. BroBot generates personalized QR-code prompts, facilitates audio-based reflections, delivers micro-assessments, and logs student neuro-literacy growth on the teacher dashboard.
+                </p>
+                <ul class="mt-6 space-y-3">
+                    <li class="flex items-start gap-3 text-sm text-slate-600">
+                        <span class="material-icons-outlined text-brand-accent flex-shrink-0" style="font-size:18px;">check_circle</span>
+                        QR-code reflection prompts per lesson
+                    </li>
+                    <li class="flex items-start gap-3 text-sm text-slate-600">
+                        <span class="material-icons-outlined text-brand-accent flex-shrink-0" style="font-size:18px;">check_circle</span>
+                        Audio-based micro-assessments
+                    </li>
+                    <li class="flex items-start gap-3 text-sm text-slate-600">
+                        <span class="material-icons-outlined text-brand-accent flex-shrink-0" style="font-size:18px;">check_circle</span>
+                        Teacher dashboard for tracking growth
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Card 3: STEM-Botics & Coding -->
+            <div class="reveal-section rounded-2xl p-8 lg:p-10 bg-white border border-slate-100 border-l-4 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300" style="border-left-color: #6442EF;">
+                <div class="w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center mb-6">
+                    <span class="material-icons-outlined text-purple-500" style="font-size:28px;">precision_manufacturing</span>
+                </div>
+                <h3 class="font-display font-bold text-xl text-slate-900">STEM-Botics Pipeline</h3>
+                <span class="inline-block mt-2 text-xs px-2.5 py-1 rounded-full bg-purple-50 text-purple-500 font-medium">3rd — 12th Grade</span>
+                <p class="text-slate-500 text-sm leading-relaxed mt-4">
+                    Progressive robotics and coding curriculum where students don't just learn ABOUT the brain — they BUILD systems that mirror neural processes. From simple coding tiles to AI decision trees and workforce robotics.
+                </p>
+                <ul class="mt-6 space-y-3">
+                    <li class="flex items-start gap-3 text-sm text-slate-600">
+                        <span class="material-icons-outlined text-brand-accent flex-shrink-0" style="font-size:18px;">check_circle</span>
+                        PreK-3: Coding Tiles &amp; robot-motion activities
+                    </li>
+                    <li class="flex items-start gap-3 text-sm text-slate-600">
+                        <span class="material-icons-outlined text-brand-accent flex-shrink-0" style="font-size:18px;">check_circle</span>
+                        6-8: Logic Puzzles &amp; Robotics Coding
+                    </li>
+                    <li class="flex items-start gap-3 text-sm text-slate-600">
+                        <span class="material-icons-outlined text-brand-accent flex-shrink-0" style="font-size:18px;">check_circle</span>
+                        9-12: AI Decision Trees &amp; Digital Portfolios
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Integration Points Strip -->
+        <div class="mt-12 rounded-2xl bg-slate-50 border border-slate-100 p-6 lg:p-8 flex flex-wrap justify-center gap-8 lg:gap-12">
+            <div class="flex flex-col items-center gap-2 text-center">
+                <div class="w-10 h-10 rounded-xl bg-brand-accent/10 flex items-center justify-center">
+                    <span class="material-icons-outlined text-brand-accent" style="font-size:22px;">qr_code_2</span>
+                </div>
+                <span class="text-xs font-medium text-slate-500 uppercase tracking-wide mt-1">QR Prompts</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 text-center">
+                <div class="w-10 h-10 rounded-xl bg-brand-accent/10 flex items-center justify-center">
+                    <span class="material-icons-outlined text-brand-accent" style="font-size:22px;">mic</span>
+                </div>
+                <span class="text-xs font-medium text-slate-500 uppercase tracking-wide mt-1">Audio Reflection</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 text-center">
+                <div class="w-10 h-10 rounded-xl bg-brand-accent/10 flex items-center justify-center">
+                    <span class="material-icons-outlined text-brand-accent" style="font-size:22px;">quiz</span>
+                </div>
+                <span class="text-xs font-medium text-slate-500 uppercase tracking-wide mt-1">Micro-Assessment</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 text-center">
+                <div class="w-10 h-10 rounded-xl bg-brand-accent/10 flex items-center justify-center">
+                    <span class="material-icons-outlined text-brand-accent" style="font-size:22px;">dashboard</span>
+                </div>
+                <span class="text-xs font-medium text-slate-500 uppercase tracking-wide mt-1">Data Dashboard</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     SECTION 2: Standards & Compliance
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<section id="standards" class="bg-slate-50/80 py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+        <!-- Header -->
+        <div class="text-center max-w-3xl mx-auto reveal-section">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-accent/[0.08] mb-8">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"></span>
+                <span class="text-brand-accent text-xs font-semibold tracking-widest uppercase">Accountability</span>
+            </div>
+            <h2 class="font-serif text-4xl lg:text-5xl text-slate-900 leading-tight">
+                Standards-Aligned &amp; Compliance-Ready
+            </h2>
+            <p class="mt-6 text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto">
+                Every lesson maps to state and national standards. Every technology meets privacy and accessibility requirements.
+            </p>
+        </div>
+
+        <!-- 4 Standard Badge Cards -->
+        <div class="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <!-- Card 1: Michigan DOE -->
+            <div class="reveal-section bg-white rounded-2xl p-8 border border-slate-100 shadow-sm text-center hover:shadow-md transition-all">
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-teal-50 flex items-center justify-center mb-5">
+                    <span class="material-icons-outlined text-brand-accent" style="font-size:32px;">school</span>
+                </div>
+                <h3 class="font-display font-bold text-base text-slate-900 mb-2">Michigan DOE</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    Aligned to Michigan Department of Education content standards across all 13 grade levels — Science, Health, and Early Childhood benchmarks.
+                </p>
+            </div>
+
+            <!-- Card 2: CASEL SEL -->
+            <div class="reveal-section bg-white rounded-2xl p-8 border border-slate-100 shadow-sm text-center hover:shadow-md transition-all">
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-amber-50 flex items-center justify-center mb-5">
+                    <span class="material-icons-outlined text-amber-500" style="font-size:32px;">volunteer_activism</span>
+                </div>
+                <h3 class="font-display font-bold text-base text-slate-900 mb-2">CASEL SEL</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    All five CASEL competencies systematically addressed: Self-Awareness, Self-Management, Social Awareness, Relationship Skills, Responsible Decision-Making.
+                </p>
+            </div>
+
+            <!-- Card 3: ISTE -->
+            <div class="reveal-section bg-white rounded-2xl p-8 border border-slate-100 shadow-sm text-center hover:shadow-md transition-all">
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-blue-50 flex items-center justify-center mb-5">
+                    <span class="material-icons-outlined text-blue-500" style="font-size:32px;">language</span>
+                </div>
+                <h3 class="font-display font-bold text-base text-slate-900 mb-2">ISTE Standards</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    Digital citizenship standards integrated through BroBot AI interactions, coding projects, and responsible technology use across the curriculum.
+                </p>
+            </div>
+
+            <!-- Card 4: NGSS -->
+            <div class="reveal-section bg-white rounded-2xl p-8 border border-slate-100 shadow-sm text-center hover:shadow-md transition-all">
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-purple-50 flex items-center justify-center mb-5">
+                    <span class="material-icons-outlined text-purple-500" style="font-size:32px;">science</span>
+                </div>
+                <h3 class="font-display font-bold text-base text-slate-900 mb-2">NGSS Science</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    Science practices and crosscutting concepts embedded in brain science lessons, STEM-Botics activities, and inquiry-based learning experiences.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Compliance Strip -->
+        <div class="mt-8 rounded-2xl bg-white border border-slate-100 p-5 lg:p-6">
+            <div class="flex flex-wrap justify-center gap-6 lg:gap-10">
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <span class="text-sm font-medium text-slate-600">FERPA Compliant</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <span class="text-sm font-medium text-slate-600">COPPA Compliant</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <span class="text-sm font-medium text-slate-600">ADA Accessible</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <span class="text-sm font-medium text-slate-600">Data Privacy Protected</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     SECTION 3: Implementation Timeline
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<section id="timeline" class="bg-white py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+        <!-- Header -->
+        <div class="text-center max-w-3xl mx-auto reveal-section">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-accent/[0.08] mb-8">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"></span>
+                <span class="text-brand-accent text-xs font-semibold tracking-widest uppercase">Deployment</span>
+            </div>
+            <h2 class="font-serif text-4xl lg:text-5xl text-slate-900 leading-tight">
+                A Systematic Rollout Plan
+            </h2>
+            <p class="mt-6 text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto">
+                Three phases designed for high-fidelity implementation with built-in teacher support at every stage.
+            </p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="mt-16 max-w-3xl mx-auto relative">
+
+            <!-- Timeline Line -->
+            <div class="absolute left-[23px] top-8 bottom-8 w-[2px]" style="background: linear-gradient(to bottom, #2DD4BF, #60A5FA, #8B5CF6);"></div>
+
+            <div class="space-y-12">
+
+                <!-- Phase 1: Foundation -->
+                <div class="reveal-section flex gap-8 relative">
+                    <!-- Node -->
+                    <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 relative z-10 shadow-lg" style="background: #2DD4BF;">
+                        <span class="font-display font-bold text-lg text-white">1</span>
+                    </div>
+                    <!-- Card -->
+                    <div class="flex-1 bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+                        <span class="inline-block text-xs font-medium px-3 py-1 rounded-full" style="background: rgba(45, 212, 191, 0.1); color: #2DD4BF;">Months 1-3</span>
+                        <h3 class="font-display font-bold text-xl text-slate-900 mt-3">Foundation &amp; Training</h3>
+                        <p class="text-sm text-slate-500 mt-2">
+                            Lay the groundwork with teacher professional development, toolkit deployment, and first quarter lesson rollout.
+                        </p>
+                        <ul class="mt-4 space-y-2">
+                            <li class="flex items-start gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent flex-shrink-0 mt-1.5"></span>
+                                Day 1 Teacher Toolkit deployment for all grade levels
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent flex-shrink-0 mt-1.5"></span>
+                                Professional development: neuroscience, trauma-informed practices, BroBot AI
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent flex-shrink-0 mt-1.5"></span>
+                                Quarter 1 lessons (1-9): Know Your Brain
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent flex-shrink-0 mt-1.5"></span>
+                                BroBot AI pilot setup and classroom testing
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 2: Expansion -->
+                <div class="reveal-section flex gap-8 relative">
+                    <!-- Node -->
+                    <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 relative z-10 shadow-lg" style="background: #60A5FA;">
+                        <span class="font-display font-bold text-lg text-white">2</span>
+                    </div>
+                    <!-- Card -->
+                    <div class="flex-1 bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+                        <span class="inline-block text-xs font-medium px-3 py-1 rounded-full" style="background: rgba(96, 165, 250, 0.1); color: #60A5FA;">Months 4-6</span>
+                        <h3 class="font-display font-bold text-xl text-slate-900 mt-3">Expansion &amp; Integration</h3>
+                        <p class="text-sm text-slate-500 mt-2">
+                            Scale to full curriculum delivery with STEM-Botics lab setup and community engagement.
+                        </p>
+                        <ul class="mt-4 space-y-2">
+                            <li class="flex items-start gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background: #60A5FA;"></span>
+                                Quarter 2-3 lesson deployment (Lessons 10-27)
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background: #60A5FA;"></span>
+                                STEM-Botics lab setup and robotics integration
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background: #60A5FA;"></span>
+                                Wimee Robot integration for PreK-3 classrooms
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background: #60A5FA;"></span>
+                                Parent engagement workshops and community events
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 3: Full System -->
+                <div class="reveal-section flex gap-8 relative">
+                    <!-- Node -->
+                    <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 relative z-10 shadow-lg" style="background: #8B5CF6;">
+                        <span class="font-display font-bold text-lg text-white">3</span>
+                    </div>
+                    <!-- Card -->
+                    <div class="flex-1 bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+                        <span class="inline-block text-xs font-medium px-3 py-1 rounded-full" style="background: rgba(139, 92, 246, 0.1); color: #8B5CF6;">Months 7-12</span>
+                        <h3 class="font-display font-bold text-xl text-slate-900 mt-3">Full System &amp; Assessment</h3>
+                        <p class="text-sm text-slate-500 mt-2">
+                            All 36 lessons operational across every grade level with data-driven refinement and scaling.
+                        </p>
+                        <ul class="mt-4 space-y-2">
+                            <li class="flex items-start gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background: #8B5CF6;"></span>
+                                Quarter 4 lessons and Final Future-Self Graduation projects
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background: #8B5CF6;"></span>
+                                Full data dashboard reporting and growth tracking
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background: #8B5CF6;"></span>
+                                Year-end summative assessment and curriculum refinement
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-slate-600">
+                                <span class="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style="background: #8B5CF6;"></span>
+                                Scaling blueprint for additional schools and districts
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section id="contact" class="bg-brand-dark relative noise overflow-hidden">
+
+        <!-- Ambient teal glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-brand-accent/[0.06] blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto text-center py-24 lg:py-32 px-6">
+
+            <div class="reveal-section">
+                <!-- Pill -->
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-accent/[0.1] mb-8">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"></span>
+                    <span class="text-brand-accent text-xs font-semibold tracking-widest uppercase">Get Started</span>
+                </div>
+
+                <!-- Headline -->
+                <h2 class="font-serif text-4xl lg:text-5xl text-white leading-tight">
+                    Ready to Transform<br>Your District?
+                </h2>
+
+                <!-- Subtitle -->
+                <p class="mt-6 text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto">
+                    Schedule a curriculum walkthrough with InnerMan Education founder Rodney Coley. See how 468 lessons across 13 grade levels can reshape outcomes for every student in your district.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="mt-10 flex flex-wrap justify-center gap-4">
+                    <a href="mailto:innermaneducation@gmail.com?subject=Curriculum%20Walkthrough%20Request" class="inline-flex items-center gap-2.5 px-8 py-4 bg-brand-accent text-white font-display font-semibold text-sm rounded-2xl shadow-lg shadow-brand-accent/20 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand-accent/30 transition-all duration-200">
+                        <span class="material-icons-outlined text-lg">calendar_month</span>
+                        Schedule a Walkthrough
+                    </a>
+                    <a href="#" class="inline-flex items-center gap-2.5 px-7 py-4 border border-white/20 text-white font-display font-semibold text-sm rounded-2xl hover:border-white/40 hover:bg-white/[0.04] transition-all duration-200">
+                        <span class="material-icons-outlined text-lg">picture_as_pdf</span>
+                        Download Curriculum PDF
+                    </a>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="mt-16 flex flex-wrap justify-center gap-x-8 gap-y-4">
+                    <div class="flex items-center gap-2 text-slate-500 text-sm">
+                        <span class="material-icons-outlined text-base text-brand-accent/60">shield</span>
+                        Veteran Founded
+                    </div>
+                    <div class="flex items-center gap-2 text-slate-500 text-sm">
+                        <span class="material-icons-outlined text-base text-brand-accent/60">live_tv</span>
+                        PBS Partner Network
+                    </div>
+                    <div class="flex items-center gap-2 text-slate-500 text-sm">
+                        <span class="material-icons-outlined text-base text-brand-accent/60">school</span>
+                        Duke University Collab
+                    </div>
+                    <div class="flex items-center gap-2 text-slate-500 text-sm">
+                        <span class="material-icons-outlined text-base text-brand-accent/60">volunteer_activism</span>
+                        501(c)(3) Nonprofit
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-brand-dark border-t border-white/[0.06] py-8">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-7 h-7 rounded-md bg-gradient-to-br from-brand-accent to-teal-600 flex items-center justify-center">
+                    <span class="text-white font-display font-bold text-xs leading-none">B</span>
+                </div>
+                <span class="text-sm text-slate-400 font-medium">InnerMan Education &middot; MindSet University</span>
+            </div>
+            <span class="text-sm text-slate-600">&copy; 2026 All rights reserved.</span>
+        </div>
+    </footer>
+
+
+    <!-- ==================== GLOBAL JAVASCRIPT ==================== -->
+    <script>
+        // Scroll reveal observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal-section').forEach(el => observer.observe(el));
+
+        // Also observe stagger containers
+        document.querySelectorAll('.stagger').forEach(el => observer.observe(el));
+
+        // Mobile nav toggle
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobile-nav');
+            const icon = document.getElementById('nav-icon');
+            nav.classList.toggle('hidden');
+            icon.textContent = nav.classList.contains('hidden') ? 'menu' : 'close';
+        }
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+                    // Close mobile nav if open
+                    const mobileNav = document.getElementById('mobile-nav');
+                    if (mobileNav && !mobileNav.classList.contains('hidden')) toggleMobileNav();
+                }
+            });
+        });
+
+        // Active nav highlighting
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('text-brand-glow');
+                        link.classList.add('text-slate-500');
+                    });
+                    const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.remove('text-slate-500');
+                        activeLink.classList.add('text-brand-glow');
+                    }
+                }
+            });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('section[id]').forEach(s => navObserver.observe(s));
+
+        // Grade band tab switcher
+        function switchBand(bandId) {
+            document.querySelectorAll('.band-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.band-tab').forEach(el => {
+                el.classList.remove('active', 'shadow-md');
+                el.style.backgroundColor = '';
+                el.style.color = '';
+                el.style.borderColor = '';
+                el.classList.add('border-slate-200', 'text-slate-500', 'bg-white');
+            });
+            const content = document.getElementById('band-' + bandId);
+            const tab = document.querySelector(`[data-band="${bandId}"]`);
+            if (content) content.classList.remove('hidden');
+            if (tab) {
+                const color = tab.dataset.color;
+                tab.classList.add('active', 'shadow-md');
+                tab.classList.remove('border-slate-200', 'text-slate-500', 'bg-white');
+                tab.style.backgroundColor = color;
+                tab.style.color = '#fff';
+                tab.style.borderColor = color;
+            }
+        }
+
+        // Accordion toggle (for Agent 2's content)
+        function toggleQuarter(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(id + '-icon');
+            const isOpen = content.classList.contains('open');
+            // Close all
+            document.querySelectorAll('.accordion-content').forEach(el => el.classList.remove('open'));
+            document.querySelectorAll('.accordion-icon').forEach(el => el.style.transform = 'rotate(0deg)');
+            // Open clicked if it was closed
+            if (!isOpen) {
+                content.classList.add('open');
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+
+</body>
+</html>
