@@ -229,6 +229,7 @@
                 <video id="hero-brobot-video-mobile" src="BroBot_.mp4" playsinline
                     class="absolute inset-0 w-full h-full object-cover object-top hidden"
                     style="outline:none!important;border:none!important;box-shadow:none!important;"></video>
+                <canvas id="hero-neural-canvas-mobile" class="absolute inset-0 w-full h-full z-[1] pointer-events-none opacity-20"></canvas>
                 <!-- Play button -->
                 <button onclick="toggleBrobotVideo('mobile')"
                     class="absolute z-20 top-4 right-4 w-14 h-14 bg-black/30 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-2xl active:scale-95 transition-all cursor-pointer">
@@ -959,6 +960,55 @@
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
     <script src="homepage/js/section-neural-canvas.js?v=colorful_cream"></script>
+    <script>
+    // Mobile particle canvas
+    (function() {
+        const mc = document.getElementById('hero-neural-canvas-mobile');
+        if (!mc) return;
+        const mctx = mc.getContext('2d');
+        const parent = mc.parentElement;
+        mc.width = parent.clientWidth;
+        mc.height = parent.clientHeight;
+        window.addEventListener('resize', () => { mc.width = parent.clientWidth; mc.height = parent.clientHeight; mInit(); });
+
+        const colors = ['#7c3aed', '#0891b2', '#2563eb', '#d97706'];
+        let mParticles = [];
+
+        class MP {
+            constructor(x, y, dx, dy, s, c) { this.x=x; this.y=y; this.dx=dx; this.dy=dy; this.s=s; this.c=c; this.a=Math.random()*6.2; this.bs=0.005+Math.random()*0.01; }
+            draw() {
+                mctx.beginPath(); mctx.moveTo(this.x, this.y-this.s); mctx.lineTo(this.x+this.s, this.y);
+                mctx.lineTo(this.x, this.y+this.s); mctx.lineTo(this.x-this.s, this.y); mctx.closePath();
+                mctx.globalAlpha = 0.6+Math.sin(this.a)*0.4; mctx.fillStyle=this.c; mctx.fill(); mctx.globalAlpha=1;
+            }
+            update() {
+                if(this.x>mc.width||this.x<0) this.dx=-this.dx;
+                if(this.y>mc.height||this.y<0) this.dy=-this.dy;
+                this.x+=this.dx; this.y+=this.dy; this.a+=this.bs; this.draw();
+            }
+        }
+
+        function mInit() {
+            mParticles = [];
+            let n = (mc.height*mc.width)/8000;
+            for(let i=0;i<n;i++) {
+                mParticles.push(new MP(Math.random()*mc.width, Math.random()*mc.height, (Math.random()*0.4)-0.2, (Math.random()*0.4)-0.2, Math.random()*2.5+1.5, colors[Math.floor(Math.random()*colors.length)]));
+            }
+        }
+
+        function mConnect() {
+            for(let a=0;a<mParticles.length;a++) {
+                for(let b=a;b<mParticles.length;b++) {
+                    let dx=mParticles[a].x-mParticles[b].x, dy=mParticles[a].y-mParticles[b].y, d=dx*dx+dy*dy;
+                    if(d<10000) { mctx.strokeStyle="rgba(0,0,0,"+(1-d/10000)*0.08+")"; mctx.lineWidth=1; mctx.beginPath(); mctx.moveTo(mParticles[a].x,mParticles[a].y); mctx.lineTo(mParticles[b].x,mParticles[b].y); mctx.stroke(); }
+                }
+            }
+        }
+
+        function mAnimate() { requestAnimationFrame(mAnimate); mctx.clearRect(0,0,mc.width,mc.height); for(let i=0;i<mParticles.length;i++) mParticles[i].update(); mConnect(); }
+        mInit(); mAnimate();
+    })();
+    </script>
 </body>
 
 </html>
