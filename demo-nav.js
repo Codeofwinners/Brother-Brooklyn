@@ -1,6 +1,20 @@
-// Sitewide demo navigation bar for brobot.academy
+// Sitewide demo navigation bar + modern scrollbar for brobot.academy
 // Inject this script into any page: <script src="/demo-nav.js"></script>
 (function() {
+  // Modern scrollbar (sitewide)
+  if (!document.getElementById('modern-scrollbar-css')) {
+    const style = document.createElement('style');
+    style.id = 'modern-scrollbar-css';
+    style.textContent = `
+      html { scrollbar-width: thin; scrollbar-color: rgba(45,212,191,0.2) transparent; }
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(45,212,191,0.2); border-radius: 3px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(45,212,191,0.4); }
+    `;
+    document.head.appendChild(style);
+  }
+
   // Don't double-inject
   if (document.getElementById('demo-nav-bar')) return;
 
