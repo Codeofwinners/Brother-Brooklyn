@@ -1,4 +1,8 @@
 .vercel
 .env*.local
 about-me.mp4
-about-me.mp4
+
+# internal/private files — don't commit
+notes.txt
+36 lessons plan per grade with day one teachers tool kits*.pdf
+3rd grade Magic Box.pdf
