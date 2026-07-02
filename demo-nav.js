@@ -15,6 +15,9 @@
     document.head.appendChild(style);
   }
 
+  // Demo nav bar disabled (scrollbar styling above still applies)
+  return;
+
   // Don't double-inject
   if (document.getElementById('demo-nav-bar')) return;
 
